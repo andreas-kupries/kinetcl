@@ -1,0 +1,30 @@
+
+Log of issues found with my installation of OpenNI/NITE
+=======================================================
+Versions:
+	NITE    Linux-x64  v1.5.2.21
+	OpenNI  Linux-x64  v1.5.2.23
+	Sensor  Linux-x64  v5.1.0.41
+
+
+Header conflict
+
+	/usr/include/ni/XnModuleInterface.h:187:3
+	error: redefinition of typedef ‘XnModuleExportedProductionNodeInterface’
+	/usr/include/ni/XnTypes.h          :249:56:
+	note: previous declaration of ‘XnModuleExportedProductionNodeInterface’ was here
+
+	XnTypes contains the forward decl for XnModule....
+	Do not repeat the typedef'd name in XnModule...
+	Fix: Commented out.
+	I.e. instead of
+
+	     typedef struct XnModuleExportedProductionNodeInterface {
+	     	     ...
+	     } XnModuleExportedProductionNodeInterface;
+
+	write
+	     typedef struct XnModuleExportedProductionNodeInterface {
+	     	     ...
+	     } ;
+
