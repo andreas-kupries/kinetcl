@@ -139,6 +139,23 @@ proc _drop {{ldir {}}} {
     }
     return
 }
+proc Hdoc {} { return "\n\t(Re)Generate the embedded documentation." }
+proc _doc {} {
+    cd [file dirname $::me]/doc
+
+    puts "Removing old documentation..."
+    file delete -force ../embedded/man
+    file delete -force ../embedded/www
+
+    puts "Generating man pages..."
+    exec 2>@ stderr >@ stdout dtplite        -o ../embedded/man -ext n nroff .
+    puts "Generating 1st html..."
+    exec 2>@ stderr >@ stdout dtplite -merge -o ../embedded/www html .
+    puts "Generating 2nd html, resolving cross-references..."
+    exec 2>@ stderr >@ stdout dtplite -merge -o ../embedded/www html .
+
+    return
+}
 proc Hinstall {} { return "?destination?\n\tInstall all packages.\n\tdestination = path of package directory, default \[info library\]." }
 proc _install {{ldir {}} {config {}}} {
     global packages
