@@ -1,0 +1,11 @@
+[comment {-*- tcl -*- doctools manpage}]
+[manpage_begin kinetcl n 0.1]
+[include include/module.inc]
+[titledesc {KineTcl - API}]
+[require Tcl 8.5]
+[require kinetcl [opt 0.1]]
+[description]
+
+[section API]
+[manpage_end]
+

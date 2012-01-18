@@ -1,0 +1,6 @@
+[comment {--- Standard header for all manpages in this module --}]
+[copyright {2012 Andreas Kupries}]
+[copyright {2012 Documentation, Andreas Kupries}]
+[moddesc   {KineTcl}]
+[keywords OpenNI Kinect PrimeSense]
+[keywords {computer vision}]
