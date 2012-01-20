@@ -65,24 +65,39 @@ critcl::ccode {
      *            auto-generated instance names.
      */
 
+    typedef struct kinetcl_ctx {
+	XnContext* context;
+	Tcl_Obj* strNew;
+	Tcl_Obj* strLost;
+    } kinetcl_ctx;
+
     static void
     kinetcl_context_release (ClientData cd, Tcl_Interp* interp)
     {
-	xnContextRelease ((XnContext*) cd);
+	kinetcl_ctx* c = (kinetcl_ctx*) cd;
+
+	xnContextRelease (c->context);
+	Tcl_DecrRefCount (c->strNew);
+	Tcl_DecrRefCount (c->strLost);
     }
 
-    static XnContext*
+    static kinetcl_ctx*
     kinetcl_context (Tcl_Interp* interp, XnStatus* status)
     {
 #define KEY "KineTcl/OpenNI/Context"
 	Tcl_InterpDeleteProc* proc = kinetcl_context_release;
-	XnContext* context = (XnContext*) Tcl_GetAssocData (interp, KEY, &proc);
 
+	kinetcl_ctx* context = (kinetcl_ctx*) Tcl_GetAssocData (interp, KEY, &proc);
 	if (!context) {
-	    *status = xnInit (&context);
+	    context = (kinetcl_ctx*) ckalloc (sizeof (kinetcl_ctx));
+
+	    *status = xnInit (&context->context);
 	    if (*status != XN_STATUS_OK) {
+		ckfree ((char*) context);
 		return NULL;
 	    }
+	    context->strNew  = Tcl_NewStringObj ("new",-1);
+	    context->strLost = Tcl_NewStringObj ("lost",-1);
 	    Tcl_SetAssocData (interp, KEY, proc, (ClientData) context);
 	}
 
@@ -103,8 +118,8 @@ critcl::class def kinetcl::depth {
     field XnNodeHandle handle {Our handle of the OpenNI depth generator object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The depth generator's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -118,8 +133,8 @@ critcl::class def kinetcl::depth {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateDepthGenerator (c, &h, NULL, NULL);
 
+	s = xnCreateDepthGenerator (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -143,8 +158,8 @@ critcl::class def kinetcl::image {
     field XnNodeHandle handle {Our handle of the OpenNI image generator object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The image generator's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -158,8 +173,8 @@ critcl::class def kinetcl::image {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateImageGenerator (c, &h, NULL, NULL);
 
+	s = xnCreateImageGenerator (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -183,8 +198,8 @@ critcl::class def kinetcl::ir {
     field XnNodeHandle handle {Our handle of the OpenNI IR generator object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The IR generator's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -198,8 +213,8 @@ critcl::class def kinetcl::ir {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateIRGenerator (c, &h, NULL, NULL);
 
+	s = xnCreateIRGenerator (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -223,8 +238,8 @@ critcl::class def kinetcl::gesture {
     field XnNodeHandle handle {Our handle of the OpenNI gesture generator object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The gesture generator's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -238,8 +253,8 @@ critcl::class def kinetcl::gesture {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateGestureGenerator (c, &h, NULL, NULL);
 
+	s = xnCreateGestureGenerator (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -263,8 +278,8 @@ critcl::class def kinetcl::scene {
     field XnNodeHandle handle {Our handle of the OpenNI scene analyzer object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The scene analyzer's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -278,8 +293,8 @@ critcl::class def kinetcl::scene {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateSceneAnalyzer (c, &h, NULL, NULL);
 
+	s = xnCreateSceneAnalyzer (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -300,13 +315,23 @@ critcl::class def kinetcl::scene {
 critcl::class def kinetcl::user {
     include XnOpenNI.h
 
-    field XnNodeHandle handle {Our handle of the OpenNI user tracker object}
+    field XnNodeHandle     handle    {Our handle of the OpenNI user tracker object}
+    field Tcl_Interp*      interp    {Interpreter for the callbacks}
+
+    field XnCallbackHandle onExit    {Handle for exit callbacks, if any}
+    field XnCallbackHandle onEnter   {Handle for enter callbacks, if any}
+    field XnCallbackHandle onNewLost {Handle for New/Lost callbacks, if any}
+
+    field Tcl_Obj* cmdExit    {And associated command prefixes}
+    field Tcl_Obj* cmdEnter
+    field Tcl_Obj* cmdNewLost
+
     # auto method 'destroy'.
 
     # # ## ### ##### ######## #############
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The user tracker's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -320,19 +345,33 @@ critcl::class def kinetcl::user {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateUserGenerator (c, &h, NULL, NULL);
 
+	s = xnCreateUserGenerator (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
 	}
 
 	/* Fill our structure */
-	instance->handle  = h;
+	instance->handle = h;
+	instance->interp = interp;
+
+	/* No callbacks at the beginning */
+	instance->onExit    = NULL;
+	instance->onEnter   = NULL;
+	instance->onNewLost = NULL;
+
+	instance->cmdExit    = NULL;
+	instance->cmdEnter   = NULL;
+	instance->cmdNewLost = NULL;
     }
 
     # # ## ### ##### ######## #############
     destructor {
+	/* instance->interp is non-owned copy, nothing to do */
+	kinetcl_user_exit_unset (instance);
+	kinetcl_user_enter_unset (instance);
+	kinetcl_user_newlost_unset (instance);
 	xnProductionNodeRelease (instance->handle);
     }
 
@@ -425,6 +464,239 @@ critcl::class def kinetcl::user {
 
 
     # # ## ### ##### ######## #############
+    mdef onEnter {
+	/* Syntax: onenter ?<cmd> ?<arg>...?? */
+
+	if (objc == 1) {
+	    kinetcl_user_enter_unset (instance);
+	    return TCL_OK;
+	} else {
+	    return kinetcl_user_enter_set (instance, objc-1, objv+1);
+	}
+    }
+
+    mdef onExit {
+	/* Syntax: onexit ?<cmd> ?<arg>...?? */
+
+	if (objc == 1) {
+	    kinetcl_user_exit_unset (instance);
+	    return TCL_OK;
+	} else {
+	    return kinetcl_user_exit_set (instance, objc-1, objv+1);
+	}
+    }
+
+    mdef onNewOrLost {
+	/* Syntax: onnew-or-lost ?<cmd> ?<arg>...?? */
+
+	if (objc == 1) {
+	    kinetcl_user_newlost_unset (instance);
+	    return TCL_OK;
+	} else {
+	    return kinetcl_user_newlost_set (instance, objc-1, objv+1);
+	}
+    }
+
+    # # ## ### ##### ######## #############
+    support {
+	/* ======================================================================= */
+	static void
+	kinetcl_user_exit_handle (XnNodeHandle h, XnUserID u, void* clientData)
+	{
+	    int res;
+	    Tcl_Obj* cmd;
+	    Tcl_Obj* self;
+	    @instancetype@ instance = (@instancetype@) clientData;
+	    /* ASSERT (h == instance->handle) ? */
+
+	    self = Tcl_NewObj ();
+	    Tcl_GetCommandFullName (instance->interp, instance->cmd, self);
+
+	    cmd = Tcl_DuplicateObj (instance->cmdExit);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, self);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+
+	    /* Invoke "{*}$cmdprefix $self $userid" */
+	    res = Tcl_GlobalEvalObj (instance->interp, cmd);
+
+	    Tcl_DecrRefCount (cmd);
+	}
+
+	static void
+	kinetcl_user_exit_unset (@instancetype@ instance)
+	{
+	    if (!instance->onExit) return;
+	    xnUnregisterFromUserExit (instance->handle, instance->onExit);
+	    Tcl_DecrRefCount (instance->cmdExit);
+
+	    instance->onExit = NULL;
+	    instance->cmdExit = NULL;
+	}
+
+	static int
+	kinetcl_user_exit_set (@instancetype@ instance, int objc, Tcl_Obj*const* objv)
+	{
+	    Tcl_Obj* cmd;
+	    XnCallbackHandle h;
+	    XnStatus s;
+
+	    s = xnRegisterToUserExit (instance->handle,
+				      kinetcl_user_exit_handle,
+				      instance, &h);
+	    if (s != XN_STATUS_OK) {
+		Tcl_AppendResult (instance->interp, xnGetStatusString (s), NULL);
+		return TCL_ERROR;
+	    }
+
+	    kinetcl_user_exit_unset (instance);
+
+	    instance->onExit  = h;
+	    instance->cmdExit = Tcl_NewListObj (objc, objv);
+	    return TCL_OK;
+	}
+
+	/* ======================================================================= */
+	static void
+	kinetcl_user_enter_handle (XnNodeHandle h, XnUserID u, void* clientData)
+	{
+	    int res;
+	    Tcl_Obj* cmd;
+	    Tcl_Obj* self;
+	    @instancetype@ instance = (@instancetype@) clientData;
+	    /* ASSERT (h == instance->handle) ? */
+
+	    self = Tcl_NewObj ();
+	    Tcl_GetCommandFullName (instance->interp, instance->cmd, self);
+
+	    cmd = Tcl_DuplicateObj (instance->cmdEnter);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, self);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+
+	    /* Invoke "{*}$cmdprefix $self $userid" */
+	    res = Tcl_GlobalEvalObj (instance->interp, cmd);
+
+	    Tcl_DecrRefCount (cmd);
+	}
+
+	static void
+	kinetcl_user_enter_unset (@instancetype@ instance)
+	{
+	    if (!instance->onEnter) return;
+	    xnUnregisterFromUserReEnter (instance->handle, instance->onEnter);
+	    Tcl_DecrRefCount (instance->cmdEnter);
+
+	    instance->onEnter = NULL;
+	    instance->cmdEnter = NULL;
+	}
+
+	static int
+	kinetcl_user_enter_set (@instancetype@ instance, int objc, Tcl_Obj*const* objv)
+	{
+	    Tcl_Obj* cmd;
+	    XnCallbackHandle h;
+	    XnStatus s;
+
+	    s = xnRegisterToUserReEnter (instance->handle,
+					 kinetcl_user_enter_handle,
+					 instance, &h);
+	    if (s != XN_STATUS_OK) {
+		Tcl_AppendResult (instance->interp, xnGetStatusString (s), NULL);
+		return TCL_ERROR;
+	    }
+
+	    kinetcl_user_enter_unset (instance);
+
+	    instance->onEnter  = h;
+	    instance->cmdEnter = Tcl_NewListObj (objc, objv);
+	    return TCL_OK;
+	}
+
+	/* ======================================================================= */
+	static void
+	kinetcl_user_newlost_handle_new (XnNodeHandle h, XnUserID u, void* clientData)
+	{
+	    XnStatus s;
+	    int res;
+	    Tcl_Obj* cmd;
+	    Tcl_Obj* self;
+	    @instancetype@ instance = (@instancetype@) clientData;
+	    /* ASSERT (h == instance->handle) ? */
+
+	    self = Tcl_NewObj ();
+	    Tcl_GetCommandFullName (instance->interp, instance->cmd, self);
+
+	    cmd = Tcl_DuplicateObj (instance->cmdNewLost);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, self);
+	    Tcl_ListObjAppendElement (instance->interp, cmd,
+				      kinetcl_context (instance->interp, &s)->strNew);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+
+	    /* Invoke "{*}$cmdprefix new $self $userid" */
+	    res = Tcl_GlobalEvalObj (instance->interp, cmd);
+
+	    Tcl_DecrRefCount (cmd);
+	}
+
+	static void
+	kinetcl_user_newlost_handle_lost (XnNodeHandle h, XnUserID u, void* clientData)
+	{
+	    XnStatus s;
+	    int res;
+	    Tcl_Obj* cmd;
+	    Tcl_Obj* self;
+	    @instancetype@ instance = (@instancetype@) clientData;
+	    /* ASSERT (h == instance->handle) ? */
+
+	    self = Tcl_NewObj ();
+	    Tcl_GetCommandFullName (instance->interp, instance->cmd, self);
+
+	    cmd = Tcl_DuplicateObj (instance->cmdNewLost);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, self);
+	    Tcl_ListObjAppendElement (instance->interp, cmd,
+				      kinetcl_context (instance->interp, &s)->strLost);
+	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+
+	    /* Invoke "{*}$cmdprefix lost $self $userid" */
+	    res = Tcl_GlobalEvalObj (instance->interp, cmd);
+
+	    Tcl_DecrRefCount (cmd);
+	}
+
+	static void
+	kinetcl_user_newlost_unset (@instancetype@ instance)
+	{
+	    if (!instance->onNewLost) return;
+	    xnUnregisterUserCallbacks (instance->handle, instance->onNewLost);
+	    Tcl_DecrRefCount (instance->cmdNewLost);
+
+	    instance->onNewLost = NULL;
+	    instance->cmdNewLost = NULL;
+	}
+
+	static int
+	kinetcl_user_newlost_set (@instancetype@ instance, int objc, Tcl_Obj*const* objv)
+	{
+	    Tcl_Obj* cmd;
+	    XnCallbackHandle h;
+	    XnStatus s;
+
+	    s = xnRegisterUserCallbacks (instance->handle,
+					 kinetcl_user_newlost_handle_new,
+					 kinetcl_user_newlost_handle_lost,
+					 instance, &h);
+	    if (s != XN_STATUS_OK) {
+		Tcl_AppendResult (instance->interp, xnGetStatusString (s), NULL);
+		return TCL_ERROR;
+	    }
+
+	    kinetcl_user_newlost_unset (instance);
+
+	    instance->onNewLost  = h;
+	    instance->cmdNewLost = Tcl_NewListObj (objc, objv);
+	    return TCL_OK;
+	}
+    }
+    # # ## ### ##### ######## #############
 }
 
 # # ## ### ##### ######## #############
@@ -436,8 +708,8 @@ critcl::class def kinetcl::hands {
     field XnNodeHandle handle {Our handle of the OpenNI hands generator object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The hands generator's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -451,8 +723,8 @@ critcl::class def kinetcl::hands {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateHandsGenerator (c, &h, NULL, NULL);
 
+	s = xnCreateHandsGenerator (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -476,8 +748,8 @@ critcl::class def kinetcl::audio {
     field XnNodeHandle handle {Our handle of the OpenNI audio generator object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The audio generator's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -491,8 +763,8 @@ critcl::class def kinetcl::audio {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateAudioGenerator (c, &h, NULL, NULL);
 
+	s = xnCreateAudioGenerator (c->context, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -516,8 +788,8 @@ critcl::class def kinetcl::recorder {
     field XnNodeHandle handle {Our handle of the OpenNI recorder object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The recorder's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -531,8 +803,8 @@ critcl::class def kinetcl::recorder {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateRecorder (c, NULL, &h);
 
+	s = xnCreateRecorder (c->context, NULL, &h);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -556,8 +828,8 @@ critcl::class def kinetcl::player {
     field XnNodeHandle handle {Our handle of the OpenNI player object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The player's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -571,8 +843,8 @@ critcl::class def kinetcl::player {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreatePlayer (c, "oni", &h);
 
+	s = xnCreatePlayer (c->context, "oni", &h);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -596,8 +868,8 @@ critcl::class def kinetcl::script {
     field XnNodeHandle handle {Our handle of the OpenNI script object}
 
     constructor {
+	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnContext*   c; /* The package's OpenNI context, per-interp global */
 	XnNodeHandle h; /* The script's object handle */
 
 	/* Get the framework context. Might fail. */
@@ -611,8 +883,8 @@ critcl::class def kinetcl::script {
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-	s = xnCreateScriptNode (c, NULL, &h); // XXX TODO: Which script formats exist ?
 
+	s = xnCreateScriptNode (c->context, "oni", &h); // XXX TODO: Which script formats exist ?
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
