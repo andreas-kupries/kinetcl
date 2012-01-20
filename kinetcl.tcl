@@ -301,7 +301,9 @@ critcl::class def kinetcl::user {
     include XnOpenNI.h
 
     field XnNodeHandle handle {Our handle of the OpenNI user tracker object}
+    # auto method 'destroy'.
 
+    # # ## ### ##### ######## #############
     constructor {
 	XnStatus     s; /* Status of various OpenNI operations */
 	XnContext*   c; /* The package's OpenNI context, per-interp global */
@@ -329,9 +331,100 @@ critcl::class def kinetcl::user {
 	instance->handle  = h;
     }
 
+    # # ## ### ##### ######## #############
     destructor {
 	xnProductionNodeRelease (instance->handle);
     }
+
+    # # ## ### ##### ######## #############
+    mdef count {
+	/* Syntax: users */
+	if (objc != 1) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnGetNumberOfUsers (instance->handle)));
+	return TCL_OK;
+    }
+
+    # # ## ### ##### ######## #############
+    mdef users {
+	/* Syntax: users */
+
+	int i, res = TCL_OK;
+	XnUInt16  n;
+	XnUserID* id;
+	XnStatus  s;
+	Tcl_Obj*  ulist;
+
+	if (objc != 1) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	n = xnGetNumberOfUsers (instance->handle);
+	id = (XnUserID*) ckalloc (n * sizeof (XnUserID));
+
+	s = xnGetUsers (instance->handle, id, &n);
+	if (s != XN_STATUS_OK) {
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
+	    goto error;
+	}
+
+	ulist = Tcl_NewListObj (0,NULL);
+	for (i=0; i < n; i++) {
+            if (Tcl_ListObjAppendElement (interp, ulist, Tcl_NewIntObj (id [i])) != TCL_OK) {
+		Tcl_DecrRefCount (ulist);
+		goto error;
+	    }
+	}
+
+	Tcl_SetObjResult (interp, ulist);
+	goto done;
+
+      error:
+	res = TCL_ERROR;
+      done:
+	ckfree ((char*) id);
+	return res;
+    }
+
+    # # ## ### ##### ######## #############
+    mdef centerof {
+	/* Syntax: centerof <id> */
+	int id;
+	XnStatus s;
+	XnPoint3D p;
+	Tcl_Obj* coord [3];
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	if (Tcl_GetIntFromObj (interp, objv[1], &id) != TCL_OK) {
+	    return TCL_ERROR;
+	}
+
+	s = xnGetUserCoM (instance->handle, id, &p);
+	if (s != XN_STATUS_OK) {
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
+	    return TCL_ERROR;
+	}
+
+	coord [0] = Tcl_NewIntObj (p.X);
+	coord [1] = Tcl_NewIntObj (p.Y);
+	coord [2] = Tcl_NewIntObj (p.Z);
+	Tcl_SetObjResult (interp, Tcl_NewListObj (3, coord));
+	return TCL_OK;
+    }
+
+    # # ## ### ##### ######## #############
+    # mdef pixelsof {} : TODO - Requires CRIMP (image).
+
+
+    # # ## ### ##### ######## #############
 }
 
 # # ## ### ##### ######## #############
