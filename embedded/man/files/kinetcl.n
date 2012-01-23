@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/home/aku/Projects/KineTcl/kinetcl/embedded/man/files/kinetcl.n' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/net/nas/data/andreask/Dev/Kinetcl/kinetcl/embedded/man/files/kinetcl.n' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2012 Andreas Kupries
 '\" Copyright (c) 2012 Documentation, Andreas Kupries
 '\"
@@ -248,9 +248,387 @@ package require \fBTcl  8.5\fR
 .sp
 package require \fBkinetcl  ?0.1?\fR
 .sp
+\fB::kinetcl::depth\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::image\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::ir\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::gesture\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::scene\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::user\fR
+.sp
+\fBdestroy\fR
+.sp
+\fBcount\fR
+.sp
+\fBusers\fR
+.sp
+\fBcenterof\fR \fIid\fR
+.sp
+\fBpixelsof\fR \fIid\fR
+.sp
+\fBonEnter\fR
+.sp
+\fBonEnter\fR \fIcmd\fR \fIarg\fR...
+.sp
+\fBonExit\fR
+.sp
+\fBonExit\fR \fIcmd\fR \fIarg\fR...
+.sp
+\fBonNewOrLost\fR
+.sp
+\fBonNewOrLost\fR \fIcmd\fR \fIarg\fR...
+.sp
+\fB::kinetcl::hands\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::audio\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::recorder\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::player\fR
+.sp
+\fBdestroy\fR
+.sp
+\fB::kinetcl::script\fR
+.sp
+\fBdestroy\fR
+.sp
 .BE
 .SH DESCRIPTION
 .SH API
+.SH "DEPTH GENERATOR"
+This sections documents the class \fB::kinetcl::depth\fR,
+which provides instances of depth generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe depth generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::depth\fR
+This command creates a new depth generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "IMAGE GENERATOR"
+This sections documents the class \fB::kinetcl::image\fR,
+which provides instances of image generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe image generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::image\fR
+This command creates a new image generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "IR GENERATOR"
+This sections documents the class \fB::kinetcl::ir\fR,
+which provides instances of ir generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe ir generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::ir\fR
+This command creates a new ir generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "GESTURE GENERATOR"
+This sections documents the class \fB::kinetcl::gesture\fR,
+which provides instances of gesture generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe gesture generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::gesture\fR
+This command creates a new gesture generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "SCENE ANALYZER"
+This sections documents the class \fB::kinetcl::scene\fR,
+which provides instances of scene generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe scene analyzer ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::scene\fR
+This command creates a new scene analyzer instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "USER GENERATOR"
+This sections documents the class \fB::kinetcl::user\fR,
+which provides instances of user generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe user generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::user\fR
+This command creates a new user generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.TP
+\fBcount\fR
+This method returns the number of users currently tracked by the
+user generator instance.
+.TP
+\fBusers\fR
+This method returns a list containing the ids of the users currently
+tracked by the user generator instance.
+.TP
+\fBcenterof\fR \fIid\fR
+This method returns the center location for the user specified by its
+id, as a 3-element list, i.e. vector, of integer coordinates. The
+coordinates are specified in the order of X, Y, and Z.
+.sp
+The method will throw an error if the user id is not valid.
+.TP
+\fBpixelsof\fR \fIid\fR
+This method is \fInot implemented\fR. When done it will return a
+\fBcrimp\fR image of type \fB<unknown>\fR where all pixels
+representing the user are set to the user's id, and everything else
+set to \fB0\fR.
+.TP
+\fBonEnter\fR
+.TP
+\fBonEnter\fR \fIcmd\fR \fIarg\fR...
+This method removes (first syntax) or sets (second syntax) a command
+prefix to be called when a user which left the scene re-enters it.
+.sp
+The command prefix is invoked with the id of the re-entering
+user as the last argument.
+.TP
+\fBonExit\fR
+.TP
+\fBonExit\fR \fIcmd\fR \fIarg\fR...
+This method removes (first syntax) or sets (second syntax) a command
+prefix to be called when a user leaves the scene.
+.sp
+The command prefix is invoked with the id of the leaving user
+as the last argument.
+.TP
+\fBonNewOrLost\fR
+.TP
+\fBonNewOrLost\fR \fIcmd\fR \fIarg\fR...
+This method removes (first syntax) or sets (second syntax) a command
+prefix to be called when a new user is detected in the scene, or an
+existing user completely lost.
+.sp
+The command prefix is invoked with two arguments, the event
+happening (\fBnew\fR or \fBlost\fR), and the id of the new/lost
+user, in this order.
+.PP
+.SH "HANDS GENERATOR"
+This sections documents the class \fB::kinetcl::hands\fR,
+which provides instances of hands generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe hands generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::hands\fR
+This command creates a new hands generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "AUDIO GENERATOR"
+This sections documents the class \fB::kinetcl::audio\fR,
+which provides instances of audio generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe audio generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::audio\fR
+This command creates a new audio generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "RECORDER NODE"
+This sections documents the class \fB::kinetcl::recorder\fR,
+which provides instances of recorder generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe recorder generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::recorder\fR
+This command creates a new recorder generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "PLAYER NODE"
+This sections documents the class \fB::kinetcl::player\fR,
+which provides instances of player generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe player generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::player\fR
+This command creates a new player generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
+.SH "SCRIPT NODE"
+This sections documents the class \fB::kinetcl::script\fR,
+which provides instances of script generators,
+derived from generators,
+derived from production nodes.
+.PP
+... describe script generator ....
+.SS "CLASS API"
+.TP
+\fB::kinetcl::script\fR
+This command creates a new script generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fBdestroy\fR
+This method destroys the instance and releases all associated resources.
+Note that resources used by multiple instances are released only when the
+last instance using them is destroyed.
+The result of the method is the empty string.
+Afterward the instance command is deleted.
+.PP
 .SH KEYWORDS
 Kinect, OpenNI, PrimeSense, computer vision
 .SH COPYRIGHT

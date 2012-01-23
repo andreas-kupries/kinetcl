@@ -7,5 +7,17 @@
 [description]
 
 [section API]
+[section {Depth Generator}]	[include include/c_depth.inc]
+[section {Image Generator}]	[include include/c_image.inc]
+[section {IR Generator}]	[include include/c_ir.inc]
+[section {Gesture Generator}]	[include include/c_gesture.inc]
+[section {Scene Analyzer}]	[include include/c_scene.inc]
+[section {User Generator}]	[include include/c_user.inc]
+[section {Hands Generator}]	[include include/c_hands.inc]
+[section {Audio Generator}]	[include include/c_audio.inc]
+[section {Recorder Node}]	[include include/c_recorder.inc]
+[section {Player Node}]		[include include/c_player.inc]
+[section {Script Node}]		[include include/c_script.inc]
+
 [manpage_end]
 
