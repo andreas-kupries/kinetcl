@@ -116,6 +116,7 @@
 <ul>
 <li class="subsection"><a href="#subsection1">Tcl</a></li>
 <li class="subsection"><a href="#subsection2">CriTcl</a></li>
+<li class="subsection"><a href="#subsection3">OpenNI / NITE</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section3">Build &amp; Installation</a></li>
@@ -174,6 +175,50 @@ provides only critcl 3, nor the utility package we need.</p>
 <p>When not using a starkit as is required here for the moment, you have
 to get and install the sources per the instructions at the site,
 i.e. <a href="http://jcw.github.com/critcl">http://jcw.github.com/critcl</a>.</p>
+</div>
+<div id="subsection3" class="subsection"><h3><a name="subsection3">OpenNI / NITE</a></h3>
+<p>KineTcl is, despite its name, not a direct binding to the Kinect
+itself. It actually is a binding to the more general OpenNI
+framework. This framework provides a set of generic APIs for sensors,
+processing algorithms, and applications into which anything following
+these APIs can be plugged into.</p>
+<p>PrimeSense, the maker of the 3D sensor found in the Kinect is a
+main member of the OpenNI organization managing the framework and
+provides plugins for its sensor and various analysis algorithms.</p>
+<p>To build KineTcl the OpenNI binaries have to be
+installed. These can be found in the downloads section of the OpenNI
+website at <a href="http://www.openni.org/">http://www.openni.org/</a>.</p>
+<p>Development was done against OpenNI version 1.5.2.21. Note that
+this version has a bug in its headers. To work around this bug the
+headers have to be modified, preferably before installing them.</p>
+<p>Open the header file &quot;<b class="file">XnModuleInterface.h</b>&quot; in the editor
+of your choice and look for the declaration of</p>
+<pre class="example">
+     typedef struct XnModuleExportedProductionNodeInterface {
+     	     ...
+     } XnModuleExportedProductionNodeInterface;
+</pre>
+<p>Rewrite the end of this declaration to</p>
+<pre class="example">
+     typedef struct XnModuleExportedProductionNodeInterface {
+     	     ...
+     } ;
+</pre>
+<p>This removes a conflict between this declaration and its forward
+declaration in the header file &quot;<b class="file">XnTypes.h</b>&quot;.</p>
+<p>When actually using a Kinect the OpenNI framework alone is not
+useful. To talk to a Kinect we also have to install the binaries for
+the PrimeSense Sensor inside of the device. These can also be found in
+the downloads section of the OpenNI website. During development
+PrimeSensor version 5.1.0.41 was installed.</p>
+<p>Furthermore it is recommended to install the PrimeSense NITE
+binaries, which provide various higher-level analysis
+algorithms. These are again found at the OpenNI website. During
+development NITE version 1.5.2.23 was installed.</p>
+<p>For those wishing to understand things on a deeper level the
+sources of OpenNI and of the sensor are available as well, through the
+OpenNI website. Of course. The NITE package however seems to be
+closed.</p>
 </div>
 </div>
 <div id="section3" class="section"><h2><a name="section3">Build &amp; Installation</a></h2>

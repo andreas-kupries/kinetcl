@@ -23,14 +23,13 @@ described in the next subsection.
 [list_begin definitions]
 
 [comment ===============================================================]
-[call [method destroy]]
+[call [arg imageInstanceCmd] [method destroy]]
 
-This method destroys the instance and releases all associated resources.
-Note that resources used by multiple instances are released only when the
-last instance using them is destroyed.
+This method destroys the image generator instance and releases all
+associated resources, including the instance command. Note that
+resources used by multiple instances are released only when the last
+instance using them is destroyed.
 
-The result of the method is the empty string.
-
-Afterward the instance command is deleted.
+[para] The result of the method is the empty string.
 
 [list_end]

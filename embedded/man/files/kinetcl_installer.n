@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/net/nas/data/andreask/Dev/Kinetcl/kinetcl/embedded/man/files/kinetcl_installer.n' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/home/aku/Projects/KineTcl/kinetcl/embedded/man/files/kinetcl_installer.n' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2012 Andreas Kupries
 '\" Copyright (c) 2012 Documentation, Andreas Kupries
 '\"
@@ -277,11 +277,12 @@ Follow the link for ActiveTcl to find it.
 .PP
 After the installation of ActiveTcl 8.5 in a directory of your
 choice run the command
-.nf
+.CS
+
 
     teacup update
 
-.fi
+.CE
 This will install a lot more packages than found in the distribution
 alone.
 (Disclosure: I, Andreas Kupries, work for ActiveState, maintaining
@@ -304,13 +305,70 @@ provides only critcl 3, nor the utility package we need.
 When not using a starkit as is required here for the moment, you have
 to get and install the sources per the instructions at the site,
 i.e. \fIhttp://jcw.github.com/critcl\fR.
+.SS "OPENNI / NITE"
+KineTcl is, despite its name, not a direct binding to the Kinect
+itself. It actually is a binding to the more general OpenNI
+framework. This framework provides a set of generic APIs for sensors,
+processing algorithms, and applications into which anything following
+these APIs can be plugged into.
+.PP
+PrimeSense, the maker of the 3D sensor found in the Kinect is a
+main member of the OpenNI organization managing the framework and
+provides plugins for its sensor and various analysis algorithms.
+.PP
+To build KineTcl the OpenNI binaries have to be
+installed. These can be found in the downloads section of the OpenNI
+website at \fIhttp://www.openni.org/\fR.
+.PP
+Development was done against OpenNI version 1.5.2.21. Note that
+this version has a bug in its headers. To work around this bug the
+headers have to be modified, preferably before installing them.
+.PP
+Open the header file "\fIXnModuleInterface.h\fR" in the editor
+of your choice and look for the declaration of
+.CS
+
+
+     typedef struct XnModuleExportedProductionNodeInterface {
+     	     ...
+     } XnModuleExportedProductionNodeInterface;
+
+.CE
+Rewrite the end of this declaration to
+.CS
+
+
+     typedef struct XnModuleExportedProductionNodeInterface {
+     	     ...
+     } ;
+
+.CE
+This removes a conflict between this declaration and its forward
+declaration in the header file "\fIXnTypes.h\fR".
+.PP
+When actually using a Kinect the OpenNI framework alone is not
+useful. To talk to a Kinect we also have to install the binaries for
+the PrimeSense Sensor inside of the device. These can also be found in
+the downloads section of the OpenNI website. During development
+PrimeSensor version 5.1.0.41 was installed.
+.PP
+Furthermore it is recommended to install the PrimeSense NITE
+binaries, which provide various higher-level analysis
+algorithms. These are again found at the OpenNI website. During
+development NITE version 1.5.2.23 was installed.
+.PP
+For those wishing to understand things on a deeper level the
+sources of OpenNI and of the sensor are available as well, through the
+OpenNI website. Of course. The NITE package however seems to be
+closed.
 .SH "BUILD & INSTALLATION"
 To install KineTcl simply run
-.nf
+.CS
+
 
     /path/to/tclsh8.5 /path/to/kinetcl/build.tcl install
 
-.fi
+.CE
 where "\fI/path/to/tclsh8.5\fR" is the tclsh of your Tcl installation, and
 "\fI/path/to/kinetcl\fR" the location of the KineTcl sources on your system.
 .PP
@@ -327,11 +385,12 @@ any arguments.
 .PP
 To get help about the methods of "\fIbuild.tcl\fR", and their complete
 syntax, invoke  "\fIbuild.tcl\fR" with argument \fBhelp\fR, i.e., like
-.nf
+.CS
+
 
     /path/to/tclsh8.5 /path/to/kinetcl/build.tcl help
 
-.fi
+.CE
 .SH KEYWORDS
 Kinect, OpenNI, PrimeSense, computer vision
 .SH COPYRIGHT

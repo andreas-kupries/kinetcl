@@ -23,30 +23,29 @@ described in the next subsection.
 [list_begin definitions]
 
 [comment ===============================================================]
-[call [method destroy]]
+[call [arg userInstanceCmd] [method destroy]]
 
-This method destroys the instance and releases all associated resources.
-Note that resources used by multiple instances are released only when the
-last instance using them is destroyed.
+This method destroys the user generator instance and releases all
+associated resources, including the instance command. Note that
+resources used by multiple instances are released only when the last
+instance using them is destroyed.
 
-The result of the method is the empty string.
-
-Afterward the instance command is deleted.
+[para] The result of the method is the empty string.
 
 [comment ===============================================================]
-[call [method count]]
+[call [arg userInstanceCmd] [method count]]
 
 This method returns the number of users currently tracked by the
 user generator instance.
 
 [comment ===============================================================]
-[call [method users]]
+[call [arg userInstanceCmd] [method users]]
 
 This method returns a list containing the ids of the users currently
 tracked by the user generator instance.
 
 [comment ===============================================================]
-[call [method centerof] [arg id]]
+[call [arg userInstanceCmd] [method centerof] [arg id]]
 
 This method returns the center location for the user specified by its
 id, as a 3-element list, i.e. vector, of integer coordinates. The
@@ -55,7 +54,7 @@ coordinates are specified in the order of X, Y, and Z.
 [para] The method will throw an error if the user id is not valid.
 
 [comment ===============================================================]
-[call [method pixelsof] [arg id]]
+[call [arg userInstanceCmd] [method pixelsof] [arg id]]
 
 This method is [emph {not implemented}]. When done it will return a
 [package crimp] image of type [const <unknown>] where all pixels
@@ -68,8 +67,8 @@ set to [const 0].
 	Single method to specify all callbacks, with sub-method
 	to specify which event is (un)bound.
 }]
-[call [method onEnter]]
-[call [method onEnter] [arg cmd] [arg arg]...]
+[call [arg userInstanceCmd] [method onEnter]]
+[call [arg userInstanceCmd] [method onEnter] [arg cmd] [arg arg]...]
 
 This method removes (first syntax) or sets (second syntax) a command
 prefix to be called when a user which left the scene re-enters it.
@@ -78,8 +77,8 @@ prefix to be called when a user which left the scene re-enters it.
 user as the last argument.
 
 [comment ===============================================================]
-[call [method onExit]]
-[call [method onExit] [arg cmd] [arg arg]...]
+[call [arg userInstanceCmd] [method onExit]]
+[call [arg userInstanceCmd] [method onExit] [arg cmd] [arg arg]...]
 
 This method removes (first syntax) or sets (second syntax) a command
 prefix to be called when a user leaves the scene.
@@ -88,8 +87,8 @@ prefix to be called when a user leaves the scene.
 as the last argument.
 
 [comment ===============================================================]
-[call [method onNewOrLost]]
-[call [method onNewOrLost] [arg cmd] [arg arg]...]
+[call [arg userInstanceCmd] [method onNewOrLost]]
+[call [arg userInstanceCmd] [method onNewOrLost] [arg cmd] [arg arg]...]
 
 This method removes (first syntax) or sets (second syntax) a command
 prefix to be called when a new user is detected in the scene, or an
