@@ -7,7 +7,9 @@
 ## Simply place the toplevel commands into an ensemble.
 
 namespace eval ::kinetcl {
-    namespace export {[a-z]*}
+    namespace export \
+	audio depth gesture hands image ir player \
+	recorder script user
     namespace ensemble create
 }
 

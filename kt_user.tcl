@@ -3,26 +3,38 @@
 ## User Generator
 
 critcl::class def kinetcl::User {
+    introspect-methods
+    # auto instance method 'methods'.
+    # auto classvar 'methods'
+    # auto field    'class'
+    # auto instance method 'destroy'.
+
     include XnOpenNI.h
+    # # ## ### ##### ######## #############
 
-    field XnNodeHandle     handle    {Our handle of the OpenNI user tracker object}
-    field Tcl_Interp*      interp    {Interpreter for the callbacks}
+    classvar kinetcl_ctx* context    {Global kinetcl context, shared by all}
+    classvar XnContext*   onicontext {Global OpenNI context, shared by all}
+    # # ## ### ##### ######## #############
 
-    field XnCallbackHandle onExit    {Handle for exit callbacks, if any}
-    field XnCallbackHandle onEnter   {Handle for enter callbacks, if any}
-    field XnCallbackHandle onNewLost {Handle for New/Lost callbacks, if any}
+    field kinetcl_ctx*     context    {Global kinetcl context, shared by all}
+    field XnContext*       onicontext {Global OpenNI context, shared by all}
+    # # ## ### ##### ######## #############
+
+    field XnNodeHandle     handle     {Our handle of the OpenNI user tracker object}
+    field Tcl_Interp*      interp     {Interpreter for the callbacks}
+
+    field XnCallbackHandle onExit     {Handle for exit callbacks, if any}
+    field XnCallbackHandle onEnter    {Handle for enter callbacks, if any}
+    field XnCallbackHandle onNewLost  {Handle for New/Lost callbacks, if any}
 
     field Tcl_Obj* cmdExit    {And associated command prefixes}
     field Tcl_Obj* cmdEnter
     field Tcl_Obj* cmdNewLost
-
-    # auto method 'destroy'.
-
     # # ## ### ##### ######## #############
-    constructor {
+
+    classconstructor {
 	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnNodeHandle h; /* The user tracker's object handle */
 
 	/* Get the framework context. Might fail. */
 	c = kinetcl_context (interp, &s);
@@ -31,12 +43,24 @@ critcl::class def kinetcl::User {
 	    goto error;
 	}
 
+	class->context = c;
+	class->onicontext = c->context;
+    }
+
+    # # ## ### ##### ######## #############
+    constructor {
+	XnNodeHandle h; /* The user tracker's object handle */
+	XnStatus     s; /* Status of various OpenNI operations */
+
 	/* Create a plain user generator object
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
 
-	s = xnCreateUserGenerator (c->context, &h, NULL, NULL);
+	instance->context    = instance->class->context;
+	instance->onicontext = instance->class->onicontext;
+
+	s = xnCreateUserGenerator (instance->onicontext, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -54,6 +78,9 @@ critcl::class def kinetcl::User {
 	instance->cmdExit    = NULL;
 	instance->cmdEnter   = NULL;
 	instance->cmdNewLost = NULL;
+
+	/* Stash for use by the super classes. */
+	instance->context->mark = h;
     }
 
     # # ## ### ##### ######## #############
@@ -66,8 +93,14 @@ critcl::class def kinetcl::User {
     }
 
     # # ## ### ##### ######## #############
+    mdef @unmark {
+	/* Internal method, no argument checking. */
+	instance->context->mark = NULL;
+    }
+
+    # # ## ### ##### ######## #############
     mdef count {
-	/* Syntax: users */
+	/* Syntax: count */
 	if (objc != 1) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -318,7 +351,7 @@ critcl::class def kinetcl::User {
 	    cmd = Tcl_DuplicateObj (instance->cmdNewLost);
 	    Tcl_ListObjAppendElement (instance->interp, cmd, self);
 	    Tcl_ListObjAppendElement (instance->interp, cmd,
-				      kinetcl_context (instance->interp, &s)->strNew);
+				      instance->context->strNew);
 	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
 
 	    /* Invoke "{*}$cmdprefix new $self $userid" */
@@ -343,7 +376,7 @@ critcl::class def kinetcl::User {
 	    cmd = Tcl_DuplicateObj (instance->cmdNewLost);
 	    Tcl_ListObjAppendElement (instance->interp, cmd, self);
 	    Tcl_ListObjAppendElement (instance->interp, cmd,
-				      kinetcl_context (instance->interp, &s)->strLost);
+				      instance->context->strLost);
 	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
 
 	    /* Invoke "{*}$cmdprefix lost $self $userid" */
