@@ -11,10 +11,10 @@
 
 namespace eval ::kinetcl {}
 
-proc ::kinetcl::Publish {classOrInstance {component MY}} {
-    foreach m [$classOrInstance methods] {
+proc ::kinetcl::Publish {classOrInstance component} {
+    foreach m [uplevel 1 [list $classOrInstance methods]] {
 	if {$m ni {destroy methods @unmark}} continue
-	forward $m $component $m
+	uplevel 1 [list forward $m $component $m]
     }
     return
 }
@@ -41,12 +41,12 @@ oo::class create ::kinetcl::base {
 
     constructor {} {
 	# Pulls C handle out of stash,
-	::kinetcl::Base create MY
+	::kinetcl::Base create BASE
 	kinetcl::MixCapabilities ; # ...
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Base
+    kinetcl::Publish ::kinetcl::Base BASE
 }
 
 # # ## ### ##### ######## #############

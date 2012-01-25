@@ -17,14 +17,14 @@ oo::class create ::kinetcl::recorder {
     # recorder ==> base
 
     constructor {} {
-	::kinetcl::Recorder create MY
+	::kinetcl::Recorder create RECORDER
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	RECORDER @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Recorder
+    kinetcl::Publish ::kinetcl::Recorder RECORDER
 }
 
 # # ## ### ##### ######## #############

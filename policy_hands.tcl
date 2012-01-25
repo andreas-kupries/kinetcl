@@ -17,14 +17,14 @@ oo::class create ::kinetcl::hands {
     # hands ==> generator ==> base
 
     constructor {} {
-	::kinetcl::Hands create MY
+	::kinetcl::Hands create HANDS
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	HANDS @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Hands
+    kinetcl::Publish ::kinetcl::Hands HANDS
 }
 
 # # ## ### ##### ######## #############

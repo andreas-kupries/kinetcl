@@ -20,15 +20,15 @@ oo::class create ::kinetcl::user {
     #      +-> hand touching fov
 
     constructor {} {
-	::kinetcl::User create MY
+	::kinetcl::User create USER
 	# Stashes C handle in global data structures
 	next
 	kinetcl::MixCapabilities ; # ...
-	MY @unmark ; # Clear the stash
+	USER @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::User
+    kinetcl::Publish ::kinetcl::User USER
 }
 
 # # ## ### ##### ######## #############

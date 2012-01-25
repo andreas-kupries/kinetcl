@@ -17,14 +17,14 @@ oo::class create ::kinetcl::ir {
     # ir ==> map ==> generator ==> base
 
     constructor {} {
-	::kinetcl::Ir create MY
+	::kinetcl::Ir create IR
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	IR @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Ir
+    kinetcl::Publish ::kinetcl::Ir IR
 }
 
 # # ## ### ##### ######## #############

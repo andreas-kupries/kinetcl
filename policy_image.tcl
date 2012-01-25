@@ -17,14 +17,14 @@ oo::class create ::kinetcl::image {
     # image ==> map ==> generator ==> base
 
     constructor {} {
-	::kinetcl::Image create MY
+	::kinetcl::Image create IMAGE
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	IMAGE @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Image
+    kinetcl::Publish ::kinetcl::Image IMAGE
 }
 
 # # ## ### ##### ######## #############

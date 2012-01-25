@@ -17,14 +17,14 @@ oo::class create ::kinetcl::player {
     # player ==> base
 
     constructor {} {
-	::kinetcl::Player create MY
+	::kinetcl::Player create PLAYER
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	PLAYER @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Player
+    kinetcl::Publish ::kinetcl::Player PLAYER
 }
 
 # # ## ### ##### ######## #############

@@ -2,15 +2,30 @@
 # # ## ### ##### ######## #############
 ## Player
 
-critcl::class def kinetcl::player {
+critcl::class def kinetcl::Player {
+    introspect-methods
+    # auto instance method 'methods'.
+    # auto classvar 'methods'
+    # auto field    'class'
+    # auto instance method 'destroy'.
+
     include XnOpenNI.h
+    # # ## ### ##### ######## #############
 
-    field XnNodeHandle handle {Our handle of the OpenNI player object}
+    classvar kinetcl_ctx* context    {Global kinetcl context, shared by all}
+    classvar XnContext*   onicontext {Global OpenNI context, shared by all}
+    # # ## ### ##### ######## #############
 
-    constructor {
+    field kinetcl_ctx*     context    {Global kinetcl context, shared by all}
+    field XnContext*       onicontext {Global OpenNI context, shared by all}
+    # # ## ### ##### ######## #############
+
+    field XnNodeHandle     handle     {Our handle of the OpenNI player object}
+    # # ## ### ##### ######## #############
+
+    classconstructor {
 	kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
 	XnStatus     s; /* Status of various OpenNI operations */
-	XnNodeHandle h; /* The player's object handle */
 
 	/* Get the framework context. Might fail. */
 	c = kinetcl_context (interp, &s);
@@ -19,12 +34,24 @@ critcl::class def kinetcl::player {
 	    goto error;
 	}
 
+	class->context = c;
+	class->onicontext = c->context;
+    }
+
+    # # ## ### ##### ######## #############
+    constructor {
+	XnStatus     s; /* Status of various OpenNI operations */
+	XnNodeHandle h; /* The player's object handle */
+
+	instance->context    = instance->class->context;
+	instance->onicontext = instance->class->onicontext;
+
 	/* Create a plain player object
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
 
-	s = xnCreatePlayer (c->context, "oni", &h);
+	s = xnCreatePlayer (instance->onicontext, "oni", &h);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    goto error;
@@ -32,9 +59,19 @@ critcl::class def kinetcl::player {
 
 	/* Fill our structure */
 	instance->handle  = h;
+
+	/* Stash for use by the super classes. */
+	instance->context->mark = h;
     }
 
     destructor {
 	xnProductionNodeRelease (instance->handle);
+    }
+
+    # # ## ### ##### ######## #############
+    mdef @unmark {
+	/* Internal method, no argument checking. */
+	instance->context->mark = NULL;
+	return TCL_OK;
     }
 }

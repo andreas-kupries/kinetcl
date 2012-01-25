@@ -17,14 +17,14 @@ oo::class create ::kinetcl::audio {
     # audio ==> generator ==> base
 
     constructor {} {
-	::kinetcl::Audio create MY
+	::kinetcl::Audio create AUDIO
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	AUDIO @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Audio
+    kinetcl::Publish ::kinetcl::Audio AUDIO
 }
 
 # # ## ### ##### ######## #############

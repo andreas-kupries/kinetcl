@@ -17,14 +17,14 @@ oo::class create ::kinetcl::script {
     # script ==> base
 
     constructor {} {
-	::kinetcl::Script create MY
+	::kinetcl::Script create SCRIPT
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	SCRIPT @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Script
+    kinetcl::Publish ::kinetcl::Script SCRIPT
 }
 
 # # ## ### ##### ######## #############

@@ -17,14 +17,14 @@ oo::class create ::kinetcl::gesture {
     # gesture ==> generator ==> base
 
     constructor {} {
-	::kinetcl::Gesture create MY
+	::kinetcl::Gesture create GESTURE
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	GESTURE @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Gesture
+    kinetcl::Publish ::kinetcl::Gesture GESTURE
 }
 
 # # ## ### ##### ######## #############

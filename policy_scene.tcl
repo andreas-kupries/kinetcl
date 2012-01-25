@@ -17,14 +17,14 @@ oo::class create ::kinetcl::scene {
     # scene ==> map ==> generator ==> base
 
     constructor {} {
-	::kinetcl::Scene create MY
+	::kinetcl::Scene create SCENE
 	# Stashes C handle in global data structures
 	next
-	MY @unmark ; # Clear the stash
+	SCENE @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Scene
+    kinetcl::Publish ::kinetcl::Scene SCENE
 }
 
 # # ## ### ##### ######## #############

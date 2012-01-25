@@ -20,13 +20,13 @@ oo::class create ::kinetcl::map {
 
     constructor {} {
 	# Pulls C handle out of stash,
-	::kinetcl::Map create MY
+	::kinetcl::Map create MAP
 	next
 	kinetcl::MixCapabilities ; # ...
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Map
+    kinetcl::Publish ::kinetcl::Map MAP
 }
 
 # # ## ### ##### ######## #############

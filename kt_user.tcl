@@ -20,7 +20,7 @@ critcl::class def kinetcl::User {
     field XnContext*       onicontext {Global OpenNI context, shared by all}
     # # ## ### ##### ######## #############
 
-    field XnNodeHandle     handle     {Our handle of the OpenNI user tracker object}
+    field XnNodeHandle     handle     {Our handle of the OpenNI user generator object}
     field Tcl_Interp*      interp     {Interpreter for the callbacks}
 
     field XnCallbackHandle onExit     {Handle for exit callbacks, if any}
@@ -52,13 +52,13 @@ critcl::class def kinetcl::User {
 	XnNodeHandle h; /* The user tracker's object handle */
 	XnStatus     s; /* Status of various OpenNI operations */
 
+	instance->context    = instance->class->context;
+	instance->onicontext = instance->class->onicontext;
+
 	/* Create a plain user generator object
 	 * XXX TODO - Restrictions on creation via query object
 	 * XXX TODO - Conversion of enumeration errors
 	 */
-
-	instance->context    = instance->class->context;
-	instance->onicontext = instance->class->onicontext;
 
 	s = xnCreateUserGenerator (instance->onicontext, &h, NULL, NULL);
 	if (s != XN_STATUS_OK) {
@@ -96,6 +96,7 @@ critcl::class def kinetcl::User {
     mdef @unmark {
 	/* Internal method, no argument checking. */
 	instance->context->mark = NULL;
+	return TCL_OK;
     }
 
     # # ## ### ##### ######## #############

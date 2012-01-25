@@ -21,13 +21,13 @@ oo::class create ::kinetcl::generator {
 
     constructor {} {
 	# Pulls C handle out of stash,
-	::kinetcl::Generator create MY
+	::kinetcl::Generator create GENERATOR
 	next
 	kinetcl::MixCapabilities ; # ...
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Generator
+    kinetcl::Publish ::kinetcl::Generator GENERATOR
 }
 
 # # ## ### ##### ######## #############

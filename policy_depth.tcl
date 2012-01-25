@@ -18,15 +18,15 @@ oo::class create ::kinetcl::depth {
     #       +-> user position
 
     constructor {} {
-	::kinetcl::Depth create MY
+	::kinetcl::Depth create DEPTH
 	# Stashes C handle in global data structures
 	next
 	kinetcl::MixCapabilities ; # ...
-	MY @unmark ; # Clear the stash
+	DEPTH @unmark ; # Clear the stash
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Depth
+    kinetcl::Publish ::kinetcl::Depth DEPTH
 }
 
 # # ## ### ##### ######## #############
