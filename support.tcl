@@ -44,8 +44,11 @@ proc kt_class_common {} {
     }
 }
 
-proc kt_abstract_class {} {
-    uplevel 1 {
+proc kt_abstract_class {{construction {}} {destruction {}}} {
+    uplevel 1 [string map [list \
+			       @@construction@@ $construction \
+			       @@destruction@@  $destruction \
+			      ] {
 	::kt_class_common
 	# # ## ### ##### ######## #############
 
@@ -66,15 +69,18 @@ proc kt_abstract_class {} {
 	    instance->onicontext = instance->class->onicontext;
 	    instance->handle     = instance->context->mark;
 	    xnProductionNodeAddRef (instance->handle);
+
+@@construction@@
 	}
 
 	# # ## ### ##### ######## #############
 	destructor {
+@@destruction@@
 	    xnProductionNodeRelease (instance->handle);
 	}
 
 	# # ## ### ##### ######## #############
-    }
+      }]
 }
 
 proc kt_node_class {construction {destruction {}}} {
