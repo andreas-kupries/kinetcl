@@ -159,6 +159,15 @@ proc kt_callback {name consfunction destfunction signature body} {
 	field XnCallbackHandle callback@@cname@@ {Handle for @@name@@ callbacks}
 	field Tcl_Obj*         command@@cname@@  {Command prefix for @@name@@ callbacks}
 
+	constructor {
+	    instance->callback@@cname@@ = NULL;
+	    instance->command@@cname@@ = NULL;
+	}
+
+	destructor {
+	    @stem@_callback_@@cname@@_unset (instance);
+	}
+
 	mdef set-callback-@@name@@ { /* Syntax: <instance> set-callback-@@name@@ <cmd>... */
 	    if (objc < 3) {
 		Tcl_WrongNumArgs (interp, 2, objv, "cmd...");
@@ -176,10 +185,6 @@ proc kt_callback {name consfunction destfunction signature body} {
 
 	    @stem@_callback_@@cname@@_unset (instance);
 	    return TCL_ERROR;
-	}
-
-	destructor {
-	    @stem@_callback_@@cname@@_unset (instance);
 	}
 
 	support {
@@ -284,6 +289,17 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	field Tcl_Obj*         command@@cnamea@@ {Command prefix for @@namea@@ callbacks (@@name@@ aspect)}
 	field Tcl_Obj*         command@@cnameb@@ {Command prefix for @@nameb@@ callbacks (@@name@@ aspect)}
 
+	constructor {
+	    instance->callback@@cname@@ = NULL;
+	    instance->command@@cnamea@@ = NULL;
+	    instance->command@@cnameb@@ = NULL;
+	}
+
+	destructor {
+	    @stem@_callback_@@cnamea@@_unset (instance);
+	    @stem@_callback_@@cnameb@@_unset (instance);
+	}
+
 	mdef set-callback-@@namea@@ { /* Syntax: <instance> set-callback-@@namea@@ <cmd>... */
 	    if (objc < 3) {
 		Tcl_WrongNumArgs (interp, 2, objv, "cmd...");
@@ -320,11 +336,6 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 
 	    @stem@_callback_@@cnameb@@_unset (instance);
 	    return TCL_ERROR;
-	}
-
-	destructor {
-	    @stem@_callback_@@cnamea@@_unset (instance);
-	    @stem@_callback_@@cnameb@@_unset (instance);
 	}
 
 	support {
