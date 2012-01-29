@@ -23,7 +23,11 @@ oo::class create ::kinetcl::user {
 	::kinetcl::User create USER
 	# Stashes C handle in global data structures
 	next
-	kinetcl::MixCapabilities ; # ...
+	kinetcl::MixCapabilities \
+	    user-skeleton \
+	    user-pose-detection \
+	    hand-touching-fov-edge
+
 	USER @unmark ; # Clear the stash
 	return
     }

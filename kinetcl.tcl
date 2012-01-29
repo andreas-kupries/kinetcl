@@ -98,6 +98,10 @@ critcl::source kt_image.tcl     ; # -> map -> generator -> base
 critcl::source kt_ir.tcl        ; # -> map -> generator -> base
 critcl::source kt_scene.tcl     ; # -> map -> generator -> base
 
+critcl::source kt_skeleton.tcl  ; # capability 'user-skeleton'          <- user generator
+critcl::source kt_pose.tcl      ; # capability 'user-pose-detection'    <- user generator
+critcl::source kt_handfov.tcl   ; # capability 'hand-touching-fov-edge' <- user generator
+
 # # ## ### ##### ######## #############
 ## Make the C pieces ready. Immediate build of the binaries, no deferal.
 
