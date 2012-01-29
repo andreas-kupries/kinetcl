@@ -14,6 +14,108 @@ critcl::class def kinetcl::Player {
     }
 
     # # ## ### ##### ######## #############
+    mdef speed { /* Syntax: <instance> speed ?speed? */
+	XnStatus s;
+	double speed;
+
+	if (objc == 2) { /* Syntax: <instance> speed */
+	    speed = xnGetPlaybackSpeed (instance->handle);
+	    Tcl_SetObjResult (interp, Tcl_NewDoubleObj (speed));
+	    return TCL_OK;
+	}
+
+	if (objc == 3) { /* Syntax: <instance> speed <n> */
+	    if (Tcl_GetDoubleFromObj (interp, objv [2], &speed) != TCL_OK) {
+		return TCL_ERROR;
+	    }
+
+	    s = xnSetPlaybackSpeed  (instance->handle, speed);
+	    if (s != XN_STATUS_OK) {
+		Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
+		return TCL_ERROR;
+	    }
+
+	    return TCL_OK;
+	}
+
+	Tcl_WrongNumArgs (interp, 2, objv, "?speed?");
+	return TCL_ERROR;
+    }
+
+    mdef repeat { /* Syntax: <instance> repeat bool */
+	XnStatus s;
+	int repeat;
+
+	if (objc != 3) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	if (Tcl_GetBoolFromObj (interp, objv [2], &repeat) != TCL_OK) {
+	    return TCL_ERROR;
+	}
+
+	s = xnSetPlayerRepeat (instance->handle, repeat);
+	if (s != XN_STATUS_OK) {
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
+	    return TCL_ERROR;
+	}
+
+	return TCL_OK;
+    }
+
+    mdef eof { /* Syntax: <instance> eof */
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnIsPlayerAtEOF (instance->handle)));
+	return TCL_OK;
+    }
+
+    mdef format { /* Syntax: <instance> format */
+	Tcl_Obj* format;
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	format = Tcl_NewStringObj (xnGetPlayerSupportedFormat (instance->handle), -1);
+	Tcl_SetObjResult (interp, format);
+	return TCL_OK;
+    }
+
+    mdef next { /* Syntax: <instance> next */
+	XnStatus s;
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	s = xnPlayerReadNext (instance->handle);
+	if (s != XN_STATUS_OK) {
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
+	    return TCL_ERROR;
+	}
+
+	return TCL_OK;
+    }
+
+    # XXX enumerate player nodes
+    # XXX seek, tell, query frames - player nodes needed.
+    # XXX source
+
+    # # ## ### ##### ######## #############
+    ## Callbacks: @eof
+
+    ::kt_callback eof \
+	xnRegisterToEndOfFileReached \
+	xnUnregisterFromEndOfFileReached \
+	{} {}
+
     # # ## ### ##### ######## #############
 }
 
