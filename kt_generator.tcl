@@ -51,7 +51,7 @@ critcl::class def kinetcl::Generator {
     # # ## ### ##### ######## #############
     ## Wait for data, check if waiting would not block
 
-    mdef wait { /* Syntax: <instance> wait */
+    mdef update { /* Syntax: <instance> update */
 	XnStatus s;
 
 	if (objc != 2) {
@@ -80,7 +80,7 @@ critcl::class def kinetcl::Generator {
     ## Query data attributes (is it new?, frame id, timestamp)
     ## Note: Data size and data itself are not accessible here, but only is derived classes.
 
-    mdef isNew { /* Syntax: <instance> new */
+    mdef isNew { /* Syntax: <instance> isNew */
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;

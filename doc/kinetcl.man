@@ -7,6 +7,10 @@
 [description]
 
 [section API]
+[section {Base}]		[include include/c_base.inc]
+[section {Generator}]		[include include/c_generator.inc]
+[section {Map Generator}]	[include include/c_map.inc]
+
 [section {Depth Generator}]	[include include/c_depth.inc]
 [section {Image Generator}]	[include include/c_image.inc]
 [section {IR Generator}]	[include include/c_ir.inc]
