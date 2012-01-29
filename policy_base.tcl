@@ -22,11 +22,20 @@ proc ::kinetcl::Publish {classOrInstance component {exclude {}}} {
     return
 }
 
+proc ::kinetcl::CapClass {cap} {
+    set class Cap
+    foreach c [split $cap -] {
+	append class [string totitle $c]
+    }
+    return $class
+}
+
 proc ::kinetcl::MixCapabilities {args} {
     foreach cap $args {
 	if {![uplevel 1 [list my isCapableOf $cap]]} continue
-	uplevel 1 [list ::kinetcl::CAP$cap create C$cap]
-	uplevel 1 [list ::kinetcl::Publish C$cap C$cap]
+	set class [CapClass $cap]
+	uplevel 1 [list ::kinetcl::$class create I$class]
+	uplevel 1 [list ::kinetcl::Publish I$class I$class]
     }
     return
 }
