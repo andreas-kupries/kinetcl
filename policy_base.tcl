@@ -11,9 +11,12 @@
 
 namespace eval ::kinetcl {}
 
-proc ::kinetcl::Publish {classOrInstance component} {
-    foreach m [uplevel 1 [list $classOrInstance methods]] {
-	if {$m ni {destroy methods @unmark}} continue
+proc ::kinetcl::Publish {classOrInstance component {exclude {}}} {
+    set methods [uplevel 1 [list $classOrInstance methods]]
+    #puts "$classOrInstance $component = ($methods)"
+    foreach m $methods {
+	if {$m in {destroy methods @unmark}} continue
+	if {$m in $exclude} continue
 	uplevel 1 [list forward $m $component $m]
     }
     return
@@ -35,7 +38,6 @@ package require TclOO
 # # ## ### ##### ######## #############
 
 oo::class create ::kinetcl::base {
-
     # +-> error state
     # +-> general int
 
@@ -46,7 +48,26 @@ oo::class create ::kinetcl::base {
 	return
     }
 
-    kinetcl::Publish ::kinetcl::Base BASE
+    method capabilities {args} {
+	if {([llength $args] == 1) &&
+	    ([lindex $args 0] eq "-all")} {
+	    return [lsort -dict [BASE capabilities]]
+	}
+	if {[llength $args] == 0} {
+	    set result {}
+	    foreach c [BASE capabilities] {
+		if {![BASE isCapableOf $c]} continue
+		lappend result $c
+	    }
+	    return [lsort -dict $result]
+	}
+
+	return -code error \
+	    "wrong#args: expected [self] capabilities ?-all?"
+    }
+
+    kinetcl::Publish ::kinetcl::Base BASE \
+	{capabilities}
 }
 
 # # ## ### ##### ######## #############
