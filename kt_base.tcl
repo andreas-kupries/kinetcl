@@ -17,7 +17,7 @@ critcl::class def kinetcl::Base {
 	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
 
 	XnBool supported;
-	char* capName;
+	const char* capName;
 	int cap;
 
 	if (objc != 3) {
