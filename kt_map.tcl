@@ -63,10 +63,7 @@ critcl::class def kinetcl::Map {
 	    Tcl_Obj* mv [3];
 
 	    s = xnGetMapOutputMode (instance->handle, &mode);
-	    if (s != XN_STATUS_OK) {
-		Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-		return TCL_ERROR;
-	    }
+	    CHECK_STATUS_RETURN;
 
 	    mv [0] = Tcl_NewIntObj (mode.nXRes);
 	    mv [1] = Tcl_NewIntObj (mode.nYRes);
@@ -88,10 +85,7 @@ critcl::class def kinetcl::Map {
 	    }
 
 	    s = xnSetMapOutputMode (instance->handle, &mode);
-	    if (s != XN_STATUS_OK) {
-		Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-		return TCL_ERROR;
-	    }
+	    CHECK_STATUS_RETURN;
 
 	    return TCL_OK;
 	}

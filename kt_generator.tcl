@@ -19,10 +19,7 @@ critcl::class def kinetcl::Generator {
 	}
 
 	s = xnStartGenerating (instance->handle);
-	if (s != XN_STATUS_OK) {
-	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-	    return TCL_ERROR;
-	}
+	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
     }
@@ -36,10 +33,7 @@ critcl::class def kinetcl::Generator {
 	}
 
 	s = xnStopGenerating (instance->handle);
-	if (s != XN_STATUS_OK) {
-	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-	    return TCL_ERROR;
-	}
+	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
     }
@@ -66,10 +60,7 @@ critcl::class def kinetcl::Generator {
 	}
 
 	s = xnWaitAndUpdateData (instance->handle);
-	if (s != XN_STATUS_OK) {
-	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-	    return TCL_ERROR;
-	}
+	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
     }

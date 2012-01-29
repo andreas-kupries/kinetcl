@@ -30,10 +30,7 @@ critcl::class def kinetcl::Player {
 	    }
 
 	    s = xnSetPlaybackSpeed  (instance->handle, speed);
-	    if (s != XN_STATUS_OK) {
-		Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-		return TCL_ERROR;
-	    }
+	    CHECK_STATUS_RETURN;
 
 	    return TCL_OK;
 	}
@@ -51,15 +48,12 @@ critcl::class def kinetcl::Player {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_GetBoolFromObj (interp, objv [2], &repeat) != TCL_OK) {
+	if (Tcl_GetBooleanFromObj (interp, objv [2], &repeat) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
 	s = xnSetPlayerRepeat (instance->handle, repeat);
-	if (s != XN_STATUS_OK) {
-	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-	    return TCL_ERROR;
-	}
+	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
     }
@@ -96,10 +90,7 @@ critcl::class def kinetcl::Player {
 	}
 
 	s = xnPlayerReadNext (instance->handle);
-	if (s != XN_STATUS_OK) {
-	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-	    return TCL_ERROR;
-	}
+	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
     }

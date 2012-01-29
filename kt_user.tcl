@@ -44,10 +44,7 @@ critcl::class def kinetcl::User {
 	id = (XnUserID*) ckalloc (n * sizeof (XnUserID));
 
 	s = xnGetUsers (instance->handle, id, &n);
-	if (s != XN_STATUS_OK) {
-	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-	    goto error;
-	}
+	CHECK_STATUS_RETURN;
 
 	ulist = Tcl_NewListObj (0,NULL);
 	for (i=0; i < n; i++) {
@@ -85,10 +82,7 @@ critcl::class def kinetcl::User {
 	}
 
 	s = xnGetUserCoM (instance->handle, id, &p);
-	if (s != XN_STATUS_OK) {
-	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-	    return TCL_ERROR;
-	}
+	CHECK_STATUS_RETURN;
 
 	coord [0] = Tcl_NewIntObj (p.X);
 	coord [1] = Tcl_NewIntObj (p.Y);
@@ -107,24 +101,24 @@ critcl::class def kinetcl::User {
 	xnRegisterToUserReEnter \
 	xnUnregisterFromUserReEnter \
 	{{XnUserID u}} {
-	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	}
 
     ::kt_callback exit \
 	xnRegisterToUserExit \
 	xnUnregisterFromUserExit \
 	{{XnUserID u}} {
-	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	}
 
     ::kt_2callback newlost \
 	xnRegisterUserCallbacks \
 	xnUnregisterUserCallbacks \
 	new {{XnUserID u}} {
-	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	} \
 	lost {{XnUserID u}} {
-	    Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewIntObj (u));
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	}
 
     # # ## ### ##### ######## #############

@@ -61,4 +61,17 @@ critcl::ccode {
 	return context;
 #undef KEY
     }
+
+
+#define CHECK_STATUS_RETURN \
+	if (s != XN_STATUS_OK) { \
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL); \
+	    return TCL_ERROR; \
+	}
+
+#define CHECK_STATUS_GOTO \
+	if (s != XN_STATUS_OK) { \
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL); \
+	    goto error; \
+	}
 }

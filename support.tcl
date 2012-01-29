@@ -107,10 +107,7 @@ proc kt_node_class {construction {destruction {}}} {
 
 @@construction@@
 
-	    if (s != XN_STATUS_OK) {
-		Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
-		goto error;
-	    }
+	    CHECK_STATUS_GOTO;
 
 	    /* Fill our structure */
 	    instance->handle  = h;
@@ -193,18 +190,19 @@ proc kt_callback {name consfunction destfunction signature body} {
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
 		@instancetype@ instance = (@instancetype@) clientData;
+		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
 
 		self = Tcl_NewObj ();
-		Tcl_GetCommandFullName (instance->interp, instance->cmd, self);
+		Tcl_GetCommandFullName (interp, instance->cmd, self);
 
 		cmd = Tcl_DuplicateObj (instance->command@@cname@@);
-		Tcl_ListObjAppendElement (instance->interp, cmd, self);
-		Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
+		Tcl_ListObjAppendElement (interp, cmd, self);
+		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
 @@body@@
 
 		/* Invoke "{*}$cmdprefix $self @@name@@ ..." */
-		res = Tcl_GlobalEvalObj (instance->interp, cmd);
+		res = Tcl_GlobalEvalObj (interp, cmd);
 
 		Tcl_DecrRefCount (cmd);
 	    }
@@ -227,16 +225,13 @@ proc kt_callback {name consfunction destfunction signature body} {
 		Tcl_Obj* cmd;
 		XnCallbackHandle callback;
 		XnStatus s;
+		Tcl_Interp* interp = instance->interp;
 
 		s = @@consfunction@@ (instance->handle,
 				      @stem@_callback_@@cname@@_handler,
 				      instance,
 				      &callback);
-
-		if (s != XN_STATUS_OK) {
-		    Tcl_AppendResult (instance->interp, xnGetStatusString (s), NULL);
-		    return TCL_ERROR;
-		}
+		CHECK_STATUS_RETURN;
 
 		@stem@_callback_@@cname@@_unset (instance);
 
@@ -340,21 +335,22 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
 		@instancetype@ instance = (@instancetype@) clientData;
+		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
 
 		/* Ignore callback @@namea@@ if not set */
 		if (!instance->command@@cnamea@@) return;
 
 		self = Tcl_NewObj ();
-		Tcl_GetCommandFullName (instance->interp, instance->cmd, self);
+		Tcl_GetCommandFullName (interp, instance->cmd, self);
 
 		cmd = Tcl_DuplicateObj (instance->command@@cnamea@@);
-		Tcl_ListObjAppendElement (instance->interp, cmd, self);
-		Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewStringObj ("@@namea@@", -1));
+		Tcl_ListObjAppendElement (interp, cmd, self);
+		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@namea@@", -1));
 @@bodya@@
 
 		/* Invoke "{*}$cmdprefix $self @@namea@@ ..." */
-		res = Tcl_GlobalEvalObj (instance->interp, cmd);
+		res = Tcl_GlobalEvalObj (interp, cmd);
 
 		Tcl_DecrRefCount (cmd);
 	    }
@@ -366,21 +362,22 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
 		@instancetype@ instance = (@instancetype@) clientData;
+		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
 
 		/* Ignore callback @@nameb@@ if not set */
 		if (!instance->command@@cnameb@@) return;
 
 		self = Tcl_NewObj ();
-		Tcl_GetCommandFullName (instance->interp, instance->cmd, self);
+		Tcl_GetCommandFullName (interp, instance->cmd, self);
 
 		cmd = Tcl_DuplicateObj (instance->command@@cnameb@@);
-		Tcl_ListObjAppendElement (instance->interp, cmd, self);
-		Tcl_ListObjAppendElement (instance->interp, cmd, Tcl_NewStringObj ("@@nameb@@", -1));
+		Tcl_ListObjAppendElement (interp, cmd, self);
+		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@nameb@@", -1));
 @@bodyb@@
 
 		/* Invoke "{*}$cmdprefix $self @@nameb@@ ..." */
-		res = Tcl_GlobalEvalObj (instance->interp, cmd);
+		res = Tcl_GlobalEvalObj (interp, cmd);
 
 		Tcl_DecrRefCount (cmd);
 	    }
@@ -425,6 +422,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		Tcl_Obj* cmd;
 
 		if (!instance->callback@@cname@@) {
+		    Tcl_Interp* interp = instance->interp;
 		    XnCallbackHandle callback;
 		    XnStatus s;
 
@@ -433,11 +431,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 					  @stem@_callback_@@cnameb@@_handler,
 					  instance,
 					  &callback);
-
-		    if (s != XN_STATUS_OK) {
-			Tcl_AppendResult (instance->interp, xnGetStatusString (s), NULL);
-			return TCL_ERROR;
-		    }
+		    CHECK_STATUS_RETURN;
 
 		    instance->callback@@cname@@ = callback;
 		}
@@ -453,6 +447,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		Tcl_Obj* cmd;
 
 		if (!instance->callback@@cname@@) {
+		    Tcl_Interp* interp = instance->interp;
 		    XnCallbackHandle callback;
 		    XnStatus s;
 
@@ -461,11 +456,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 					  @stem@_callback_@@cnameb@@_handler,
 					  instance,
 					  &callback);
-
-		    if (s != XN_STATUS_OK) {
-			Tcl_AppendResult (instance->interp, xnGetStatusString (s), NULL);
-			return TCL_ERROR;
-		    }
+		    CHECK_STATUS_RETURN;
 
 		    instance->callback@@cname@@ = callback;
 		}
