@@ -76,6 +76,8 @@ critcl::tsources policy.tcl
 # # ## ### ##### ######## #############
 ## C classes for the various types of objects.
 
+critcl::source support.tcl ; # Build-time helper commands.
+
 critcl::source kt_context.tcl   ; # Per-interp package information,
 #                                 # shared to all classes and instances.
 
