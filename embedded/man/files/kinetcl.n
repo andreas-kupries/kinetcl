@@ -248,6 +248,58 @@ package require \fBTcl  8.5\fR
 .sp
 package require \fBkinetcl  ?0.1?\fR
 .sp
+\fB::kinetcl::base\fR \fBnew\fR
+.sp
+\fB::kinetcl::base\fR \fBcreate\fR \fIobjname\fR
+.sp
+\fIbaseInstanceCmd\fR \fBcapabilities\fR ?\fB-all\fR?
+.sp
+\fIbaseInstanceCmd\fR \fBisCapableOf\fR \fIcapability\fR
+.sp
+\fB::kinetcl::generator\fR \fBnew\fR
+.sp
+\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBstart\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBstop\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBactive\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBupdate\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBhasNew\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBisNew\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBframe\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBtime\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-active\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-active\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-newdata\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-newdata\fR
+.sp
+\fB::kinetcl::generator\fR \fBnew\fR
+.sp
+\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBbytes_pixel\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBmodes\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBmode\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBmode\fR \fIxres\fR \fIyres\fR \fIfps\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-mode\fR
+.sp
 \fB::kinetcl::depth\fR
 .sp
 \fIdepthInstanceCmd\fR \fBdestroy\fR
@@ -280,17 +332,21 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBpixelsof\fR \fIid\fR
 .sp
-\fIuserInstanceCmd\fR \fBonEnter\fR
+\fIuserInstanceCmd\fR \fBset-callback-enter\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBonEnter\fR \fIcmd\fR \fIarg\fR...
+\fIuserInstanceCmd\fR \fBunset-callback-enter\fR
 .sp
-\fIuserInstanceCmd\fR \fBonExit\fR
+\fIuserInstanceCmd\fR \fBset-callback-exit\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBonExit\fR \fIcmd\fR \fIarg\fR...
+\fIuserInstanceCmd\fR \fBunset-callback-exit\fR
 .sp
-\fIuserInstanceCmd\fR \fBonNewOrLost\fR
+\fIuserInstanceCmd\fR \fBset-callback-new\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBonNewOrLost\fR \fIcmd\fR \fIarg\fR...
+\fIuserInstanceCmd\fR \fBunset-callback-new\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-lost\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-lost\fR
 .sp
 \fB::kinetcl::hands\fR
 .sp
@@ -308,6 +364,22 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIplayerInstanceCmd\fR \fBdestroy\fR
 .sp
+\fIplayerInstanceCmd\fR \fBspeed\fR \fIspeed\fR
+.sp
+\fIplayerInstanceCmd\fR \fBspeed\fR
+.sp
+\fIplayerInstanceCmd\fR \fBrepeat\fR \fIbool\fR
+.sp
+\fIplayerInstanceCmd\fR \fBeof\fR
+.sp
+\fIplayerInstanceCmd\fR \fBformat\fR
+.sp
+\fIplayerInstanceCmd\fR \fBnext\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-eof\fR
+.sp
 \fB::kinetcl::script\fR
 .sp
 \fIscriptInstanceCmd\fR \fBdestroy\fR
@@ -315,6 +387,198 @@ package require \fBkinetcl  ?0.1?\fR
 .BE
 .SH DESCRIPTION
 .SH API
+.SH BASE
+This sections documents the class \fB::kinetcl::base\fR, the (abstract) base
+class for all OpenNI production nodes.
+.SS "CLASS API"
+.TP
+\fB::kinetcl::base\fR \fBnew\fR
+.TP
+\fB::kinetcl::base\fR \fBcreate\fR \fIobjname\fR
+This command creates a new instance of the base.
+Note that it is \fIimpossible\fR to create such an instance on its
+own. It can be done only as part of constructing the instance of a
+concrete class.
+The API provided by the instance, i.e. the set of available methods
+and their semantics is described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIbaseInstanceCmd\fR \fBcapabilities\fR ?\fB-all\fR?
+This method returns the capabilities of the instance, or, if option
+\fB-all\fR was specified, the set of all possible capabilities.
+.sp
+The result is a list containing the names of the capabilities.
+.TP
+\fIbaseInstanceCmd\fR \fBisCapableOf\fR \fIcapability\fR
+This method checks if the named capability is supported by the
+instance or not.
+.sp
+The result is a boolean value, \fBtrue\fR if the capability
+is supported, and \fBfalse\fR else.
+.PP
+.SH GENERATOR
+This sections documents the class \fB::kinetcl::generator\fR, the (abstract) base
+class for all OpenNI generator nodes.
+.PP
+This class inherits from \fB::kinetcl::base\fR.
+.SS "CLASS API"
+.TP
+\fB::kinetcl::generator\fR \fBnew\fR
+.TP
+\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+This command creates a new instance of the generator.
+Note that it is \fIimpossible\fR to create such an instance on its
+own. It can be done only as part of constructing the instance of a
+concrete class.
+The API provided by the instance, i.e. the set of available methods
+and their semantics is described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIgeneratorInstanceCmd\fR \fBstart\fR
+This method causes the instance to start generating output. It implies
+the activation of all dependencies as well.
+.sp
+The result of the method is the empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBstop\fR
+This method causes the instance to stop generating output.
+.sp
+The result of the method is the empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBactive\fR
+This method tests if the instance is generating output.
+.sp
+The result of the method is a boolean value, \fBtrue\fR if the
+instance is generating output, and \fBfalse\fR else.
+.TP
+\fIgeneratorInstanceCmd\fR \fBupdate\fR
+This method causes the instance to update its output to the newest
+available. If no new output was available the method blocks until this
+happens.
+.sp
+The result of the method is the empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBhasNew\fR
+This method tests if the instance has new output available it could be
+updated to.  I.e. it checks if the method \fBupdate\fR would block
+or not.
+.sp
+The result of the method is a boolean value, \fBtrue\fR if
+the instance has new data (i.e. \fBupdate\fR would not block), and
+\fBfalse\fR else.
+.TP
+\fIgeneratorInstanceCmd\fR \fBisNew\fR
+This method tests if the instance's current input frame is new,
+i.e. unchanged since the last call to method \fBupdate\fR.
+.sp
+The result of the method is a boolean value, \fBtrue\fR if
+the instance if the current frame is still new, and \fBfalse\fR
+else.
+.sp
+The result of the method is the empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBframe\fR
+This method returns the id of the input frame currently handled by the
+instance.
+.sp
+The result of the method is an integer number.
+.TP
+\fIgeneratorInstanceCmd\fR \fBtime\fR
+This method returns the time of the input frame currently handled by
+the instance, in microseconds.
+.sp
+The result of the method is an integer number.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-active\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-active\fR
+These methods define and remove a callback responding to activity
+events, i.e. the instance starting and stopping the generation of
+output.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "active", in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-newdata\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-newdata\fR
+These methods define and remove a callback responding to data
+events, i.e. the instance having new output available.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "newdata", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SH "MAP GENERATOR"
+This sections documents the class \fB::kinetcl::map\fR, the (abstract) base
+class for all OpenNI map generator nodes.
+.PP
+This class inherits from \fB::kinetcl::generator\fR and its
+superclasses.
+.SS "CLASS API"
+.TP
+\fB::kinetcl::generator\fR \fBnew\fR
+.TP
+\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+This command creates a new instance of the map generator.
+Note that it is \fIimpossible\fR to create such an instance on its
+own. It can be done only as part of constructing the instance of a
+concrete class.
+The API provided by the instance, i.e. the set of available methods
+and their semantics is described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIgeneratorInstanceCmd\fR \fBbytes_pixel\fR
+This method returns the number of bytes per pixel in the map.
+.TP
+\fIgeneratorInstanceCmd\fR \fBmodes\fR
+This method returns the map output modes supported by the instance.
+.sp
+The result of the method is a list of modes. Each mode is a
+3-element list reporting the x- and y-resolution of the map in pixels,
+and the associated frame rate in frames per second, in this order. All
+elements are integer numbers.
+.TP
+\fIgeneratorInstanceCmd\fR \fBmode\fR
+This form of the method reports the currently set map output mode.
+.sp
+The result of the method is a 3-element list reporting the x-
+and y-resolution of the map in pixels, and the associated frame rate
+in frames per second, in this order. All elements are integer numbers.
+.TP
+\fIgeneratorInstanceCmd\fR \fBmode\fR \fIxres\fR \fIyres\fR \fIfps\fR
+This form of the method changes the map output mode to the specified
+resolution and frame rate. The method throws an error if the
+combination is not supported by the instance.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-mode\fR
+These methods define and remove a callback responding to mode change
+events, i.e. the instance changing the its output mode.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "mode", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
 .SH "DEPTH GENERATOR"
 This sections documents the class \fB::kinetcl::depth\fR,
 which provides instances of depth generators,
@@ -441,12 +705,11 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "USER GENERATOR"
-This sections documents the class \fB::kinetcl::user\fR,
-which provides instances of user generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class \fB::kinetcl::user\fR, the concrete class
+for all OpenNI user generator nodes.
 .PP
-... describe user generator ....
+This class inherits from \fB::kinetcl::generator\fR and its
+superclasses.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::user\fR
@@ -486,34 +749,65 @@ This method is \fInot implemented\fR. When done it will return a
 representing the user are set to the user's id, and everything else
 set to \fB0\fR.
 .TP
-\fIuserInstanceCmd\fR \fBonEnter\fR
+\fIuserInstanceCmd\fR \fBset-callback-enter\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBonEnter\fR \fIcmd\fR \fIarg\fR...
-This method removes (first syntax) or sets (second syntax) a command
-prefix to be called when a user which left the scene re-enters it.
+\fIuserInstanceCmd\fR \fBunset-callback-enter\fR
+These methods define and remove a callback responding to re-entry
+events, i.e. a user re-entering the scene after exiting it.
 .sp
-The command prefix is invoked with the id of the re-entering
-user as the last argument.
-.TP
-\fIuserInstanceCmd\fR \fBonExit\fR
-.TP
-\fIuserInstanceCmd\fR \fBonExit\fR \fIcmd\fR \fIarg\fR...
-This method removes (first syntax) or sets (second syntax) a command
-prefix to be called when a user leaves the scene.
+Setting a callback implicitly removes any previous callback set.
 .sp
-The command prefix is invoked with the id of the leaving user
-as the last argument.
-.TP
-\fIuserInstanceCmd\fR \fBonNewOrLost\fR
-.TP
-\fIuserInstanceCmd\fR \fBonNewOrLost\fR \fIcmd\fR \fIarg\fR...
-This method removes (first syntax) or sets (second syntax) a command
-prefix to be called when a new user is detected in the scene, or an
-existing user completely lost.
+The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "enter", and the (numerical) id of the user
+re-entering, in this order.
 .sp
-The command prefix is invoked with two arguments, the event
-happening (\fBnew\fR or \fBlost\fR), and the id of the new/lost
-user, in this order.
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-exit\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-exit\fR
+These methods define and remove a callback responding to exit events,
+i.e. a user exiting the scene.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "exit", and the (numerical) id of the user exiting,
+in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-new\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-new\fR
+These methods define and remove a callback responding to "new user"
+events, i.e. when a new user is identified.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "new", and the (numerical) id of the newly
+identified user, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-lost\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-lost\fR
+These methods define and remove a callback responding to "lost user"
+events, i.e. when a user is no longer identified.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "lost", and the (numerical) id of the lost user, in
+this order.
+.sp
+The result of the methods is an empty string.
 .PP
 .SH "HANDS GENERATOR"
 This sections documents the class \fB::kinetcl::hands\fR,
@@ -591,12 +885,10 @@ them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "PLAYER NODE"
-This sections documents the class \fB::kinetcl::player\fR,
-which provides instances of players,
-derived from generators,
-derived from production nodes.
+This sections documents the class \fB::kinetcl::player\fR, the concrete class
+for all OpenNI player nodes.
 .PP
-... describe player generator ....
+This class inherits from \fB::kinetcl::base\fR.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::player\fR
@@ -614,6 +906,58 @@ by multiple instances are released only when the last instance using
 them is destroyed.
 .sp
 The result of the method is the empty string.
+.TP
+\fIplayerInstanceCmd\fR \fBspeed\fR \fIspeed\fR
+This method sets the speed of playback as a ratio of the time passed
+in the recording. I.e. a speed of \fB1\fR implies playback at the
+same frame/rate as recorded, whereas a speed < 1 causes slow-motion,
+and a speed > 1 fast-forward.
+.sp
+The result of the method is the empty string.
+.TP
+\fIplayerInstanceCmd\fR \fBspeed\fR
+This method returns the speed of playback, as a ratio of the time
+passed in the recording.
+.sp
+The result of the method is a floating point number.
+.TP
+\fIplayerInstanceCmd\fR \fBrepeat\fR \fIbool\fR
+This method activates or deactivates repeating mode. If repeating is
+activated (\fIbool\fR is \fBtrue\fR) the player will automatically
+rewind to the beginning of the recording when reaching the end, and
+continue playing.
+.sp
+The result of the method is the empty string.
+.TP
+\fIplayerInstanceCmd\fR \fBeof\fR
+This method tests if the player has reached the end of the recording,
+or not. Note that this is never \fBtrue\fR when the player is in
+repeating mode, however "eof" events are still triggered.
+.sp
+The result of the method is boolean value, \fBtrue\fR if the
+player is at the end of the recording, and \fBfalse\fR else.
+.TP
+\fIplayerInstanceCmd\fR \fBformat\fR
+This method returns the name of the format supported by the player instance.
+.TP
+\fIplayerInstanceCmd\fR \fBnext\fR
+This method causes the player to explicitly advance to the next frame.
+.sp
+The result of the method is the empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-eof\fR
+These methods define and remove a callback responding to "eof" events,
+i.e. when the end of the recording was reached.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, and the word "eof", in this order.
+.sp
+The result of the methods is an empty string.
 .PP
 .SH "SCRIPT NODE"
 This sections documents the class \fB::kinetcl::script\fR,

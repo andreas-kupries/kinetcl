@@ -11,7 +11,7 @@ class for all OpenNI production nodes.
 This command creates a new instance of the base.
 
 Note that it is [emph impossible] to create such an instance on its
-own. It can be done only as part of the constructing the instance of a
+own. It can be done only as part of constructing the instance of a
 concrete class.
 
 The API provided by the instance, i.e. the set of available methods
@@ -24,16 +24,15 @@ and their semantics is described in the next subsection.
 [list_begin definitions]
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method capabilities] [opt [option -arg]]]
+[call [arg baseInstanceCmd] [method capabilities] [opt [option -all]]]
 
 This method returns the capabilities of the instance, or, if option
-[option -all] was specified, the set of all possibile
-capabilities.
+[option -all] was specified, the set of all possible capabilities.
 
 [para] The result is a list containing the names of the capabilities.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method isCapableOf] [arg capability]]
+[call [arg baseInstanceCmd] [method isCapableOf] [arg capability]]
 
 This method checks if the named capability is supported by the
 instance or not.

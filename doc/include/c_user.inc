@@ -1,10 +1,9 @@
 
-This sections documents the class [cmd ::kinetcl::user],
-which provides instances of user generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::user], the concrete class
+for all OpenNI user generator nodes.
 
-[para] ... describe user generator ....
+[para] This class inherits from [cmd ::kinetcl::generator] and its
+superclasses.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
@@ -61,41 +60,71 @@ This method is [emph {not implemented}]. When done it will return a
 representing the user are set to the user's id, and everything else
 set to [const 0].
 
-[comment ===============================================================]
-[comment {
-	API unification - single callback for all events?
-	Single method to specify all callbacks, with sub-method
-	to specify which event is (un)bound.
-}]
-[call [arg userInstanceCmd] [method onEnter]]
-[call [arg userInstanceCmd] [method onEnter] [arg cmd] [arg arg]...]
 
-This method removes (first syntax) or sets (second syntax) a command
-prefix to be called when a user which left the scene re-enters it.
 
-[para] The command prefix is invoked with the id of the re-entering
-user as the last argument.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method onExit]]
-[call [arg userInstanceCmd] [method onExit] [arg cmd] [arg arg]...]
+[call [arg userInstanceCmd] [method set-callback-enter] [arg cmd]...]
+[call [arg userInstanceCmd] [method unset-callback-enter]]
 
-This method removes (first syntax) or sets (second syntax) a command
-prefix to be called when a user leaves the scene.
+These methods define and remove a callback responding to re-entry
+events, i.e. a user re-entering the scene after exiting it.
 
-[para] The command prefix is invoked with the id of the leaving user
-as the last argument.
+[para] Setting a callback implicitly removes any previous callback set.
+
+[para] The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "enter", and the (numerical) id of the user
+re-entering, in this order.
+
+[para] The result of the methods is an empty string.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method onNewOrLost]]
-[call [arg userInstanceCmd] [method onNewOrLost] [arg cmd] [arg arg]...]
+[call [arg userInstanceCmd] [method set-callback-exit] [arg cmd]...]
+[call [arg userInstanceCmd] [method unset-callback-exit]]
 
-This method removes (first syntax) or sets (second syntax) a command
-prefix to be called when a new user is detected in the scene, or an
-existing user completely lost.
+These methods define and remove a callback responding to exit events,
+i.e. a user exiting the scene.
 
-[para] The command prefix is invoked with two arguments, the event
-happening ([const new] or [const lost]), and the id of the new/lost
-user, in this order.
+[para] Setting a callback implicitly removes any previous callback set.
+
+[para] The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "exit", and the (numerical) id of the user exiting,
+in this order.
+
+[para] The result of the methods is an empty string.
+
+[comment ===============================================================]
+[call [arg userInstanceCmd] [method set-callback-new] [arg cmd]...]
+[call [arg userInstanceCmd] [method unset-callback-new]]
+
+These methods define and remove a callback responding to "new user"
+events, i.e. when a new user is identified.
+
+[para] Setting a callback implicitly removes any previous callback set.
+
+[para] The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "new", and the (numerical) id of the newly
+identified user, in this order.
+
+[para] The result of the methods is an empty string.
+
+[comment ===============================================================]
+[call [arg userInstanceCmd] [method set-callback-lost] [arg cmd]...]
+[call [arg userInstanceCmd] [method unset-callback-lost]]
+
+These methods define and remove a callback responding to "lost user"
+events, i.e. when a user is no longer identified.
+
+[para] Setting a callback implicitly removes any previous callback set.
+
+[para] The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "lost", and the (numerical) id of the lost user, in
+this order.
+
+[para] The result of the methods is an empty string.
 
 [list_end]
