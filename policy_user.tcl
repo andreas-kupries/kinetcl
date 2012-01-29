@@ -12,30 +12,23 @@ package require TclOO
 # # ## ### ##### ######## #############
 
 oo::class create ::kinetcl::user {
-    # XXX superclass ...
+    superclass ::kinetcl::generator
 
-    # user -> generator -> production
-    #      -> skeleton
-    #      -> pose detection
-    #      -> hand touching fov
-
-    variable myuser ;# mygenerator myproduction
+    # user ==> generator ==> base
+    #      +-> skeleton
+    #      +-> pose detection
+    #      +-> hand touching fov
 
     constructor {} {
-	set myuser [::kinetcl::User]
-	# next [$myuser @handle] ; # Initialize superclass, same C handle.
+	::kinetcl::User create USER
+	# Stashes C handle in global data structures
+	next
+	kinetcl::MixCapabilities ; # ...
+	USER @unmark ; # Clear the stash
 	return
     }
 
-    destructor {
-	$myuser destroy
-	return
-    }
-
-    # XXX How do I forward this class' instance methods to the myuser component ?
-    # XXX At best automatically,without having to write a wrapper/forward for each
-    # XXX method.
-
+    kinetcl::Publish ::kinetcl::User USER
 }
 
 # # ## ### ##### ######## #############
