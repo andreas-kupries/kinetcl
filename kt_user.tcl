@@ -15,8 +15,8 @@ critcl::class def kinetcl::User {
 
     # # ## ### ##### ######## #############
     mdef count {
-	/* Syntax: count */
-	if (objc != 1) {
+	/* Syntax: <instance> count */
+	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
@@ -27,7 +27,7 @@ critcl::class def kinetcl::User {
 
     # # ## ### ##### ######## #############
     mdef users {
-	/* Syntax: users */
+	/* Syntax: <instance> users */
 
 	int i, res = TCL_OK;
 	XnUInt16  n;
@@ -35,7 +35,7 @@ critcl::class def kinetcl::User {
 	XnStatus  s;
 	Tcl_Obj*  ulist;
 
-	if (objc != 1) {
+	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
@@ -69,13 +69,13 @@ critcl::class def kinetcl::User {
 
     # # ## ### ##### ######## #############
     mdef centerof {
-	/* Syntax: centerof <id> */
+	/* Syntax: <instance> centerof <id> */
 	int id;
 	XnStatus s;
 	XnPoint3D p;
 	Tcl_Obj* coord [3];
 
-	if (objc != 2) {
+	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
