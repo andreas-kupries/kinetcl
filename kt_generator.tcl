@@ -65,7 +65,7 @@ critcl::class def kinetcl::Generator {
 	    return TCL_ERROR;
 	}
 
-	s = xnWaitAndUpdate (instance->handle);
+	s = xnWaitAndUpdateData (instance->handle);
 	if (s != XN_STATUS_OK) {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    return TCL_ERROR;
@@ -107,7 +107,7 @@ critcl::class def kinetcl::Generator {
 	    return TCL_ERROR;
 	}
 
-	frame = xnGetFrameId (instance->handle);
+	frame = xnGetFrameID (instance->handle);
 	if (frame == ((XnUInt32) -1)) {
 	    Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
 	    return TCL_ERROR;
@@ -134,6 +134,19 @@ critcl::class def kinetcl::Generator {
 	Tcl_SetObjResult (interp, Tcl_NewWideIntObj (timestamp));
 	return TCL_OK;
     }
+
+    # # ## ### ##### ######## #############
+    ## Callbacks: activity change, data update
+
+    ::kt_callback active \
+	xnRegisterToGenerationRunningChange \
+	xnUnregisterFromGenerationRunningChange \
+	{} {}
+
+    ::kt_callback newdata \
+	xnRegisterToNewDataAvailable \
+	xnUnregisterFromNewDataAvailable \
+	{} {}
 
     # # ## ### ##### ######## #############
 }
