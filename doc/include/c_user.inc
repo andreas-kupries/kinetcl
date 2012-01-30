@@ -177,11 +177,12 @@ This method deactivates the detection of any poses for the specified
 [comment ===============================================================]
 [call [arg userInstanceCmd] [method status] [arg user] [arg pose]]
 
-This method queries the status of the detection of the named [arg
-pose] for the specified [arg user].
+This method queries the status of the detection of the named [arg pose]
+for the specified [arg user].
 
 [para] The result of the method is 3-element string containing, in the named order
-[list_begin]
+
+[list_begin enumerated]
 
 [enum] The state of the user with respect to the pose,
 one of [const in], [const out], or [const unkown]

@@ -348,6 +348,30 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBunset-callback-lost\fR
 .sp
+\fIuserInstanceCmd\fR \fBposes\fR
+.sp
+\fIuserInstanceCmd\fR \fBisSupported\fR \fIpose\fR
+.sp
+\fIuserInstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
+.sp
+\fIuserInstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
+.sp
+\fIuserInstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
+.sp
+\fIuserInstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-poseEnter\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-poseExit\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-poseProgress\fR
+.sp
 \fB::kinetcl::hands\fR
 .sp
 \fIhandsInstanceCmd\fR \fBdestroy\fR
@@ -806,6 +830,102 @@ The callback to invoke is specified as a command prefix, and
 will be invoked with three arguments added to it, the instance
 command, the word "lost", and the (numerical) id of the lost user, in
 this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS "INSTANCE POSE DETECTION API"
+Should the user generator instance support the pose detection API the
+following methods become available. This support can checked by
+invoking the inherited method \fBisCapableOf\fR for the capability
+name \fBuser-pose-detection\fR.
+.TP
+\fIuserInstanceCmd\fR \fBposes\fR
+This method returns a list containing the names of the supported user
+poses.
+.TP
+\fIuserInstanceCmd\fR \fBisSupported\fR \fIpose\fR
+This method tests if the named user pose is supported by the instance.
+.sp
+The result is a boolean value, \fBtrue\fR if the pose is
+supported, and \fBfalse\fR else.
+.TP
+\fIuserInstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
+This method activates the detection of the named \fIpose\fR for the
+specified \fIuser\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
+This method deactivates the detection of the named \fIpose\fR for the
+specified \fIuser\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
+This method deactivates the detection of any poses for the specified
+\fIuser\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
+This method queries the status of the detection of the named \fIpose\fR
+for the specified \fIuser\fR.
+.sp
+The result of the method is 3-element string containing, in the named order
+.RS
+.IP [1]
+The state of the user with respect to the pose,
+one of \fBin\fR, \fBout\fR, or \fBunkown\fR
+.IP [2]
+The status of the detection progress.
+.IP [3]
+A timestamp telling us when the user entered the pose, if it is
+in the pose. If the user is out of the pose \fB0\fR is returned
+here.
+.RE
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-poseEnter\fR
+These methods define and remove a callback responding to pose entry
+events, i.e. a user entering a pose.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "poseEnter", the name of the pose entered and the (numerical)
+id of the user entering it, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-poseExit\fR
+These methods define and remove a callback responding to pose exit
+events, i.e. a user existing a pose.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "poseExit", the name of pose, and the (numerical) id of the
+user exiting it, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-poseProgress\fR
+These methods define and remove a callback responding to pose progress
+events, i.e. the steps of the engine for detecting user poses.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word "poseProgress", the name of pose, the (numerical) id of the
+user, and the status of the detection engine, in this order.
 .sp
 The result of the methods is an empty string.
 .PP
