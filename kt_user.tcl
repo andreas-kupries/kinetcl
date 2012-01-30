@@ -73,7 +73,7 @@ critcl::class def kinetcl::User {
 	Tcl_Obj* coord [3];
 
 	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    Tcl_WrongNumArgs (interp, 2, objv, "id");
 	    return TCL_ERROR;
 	}
 
