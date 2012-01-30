@@ -17,8 +17,10 @@ critcl::class def kinetcl::Map {
     }
 
     mdef modes { /* Syntax: <instance> modes */
+	XnStatus s;
 	int lc;
 	Tcl_Obj** lv = NULL;
+	XnMapOutputMode* modes;
 
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
@@ -28,9 +30,10 @@ critcl::class def kinetcl::Map {
 	lc = xnGetSupportedMapOutputModesCount (instance->handle);
 	if (lc) {
 	    int i;
-	    XnMapOutputMode* modes  = (XnMapOutputMode*) ckalloc (lc * sizeof (XnMapOutputMode));
 
-	    xnGetSupportedMapOutputModes (instance->handle, modes, &lc);
+	    modes = (XnMapOutputMode*) ckalloc (lc * sizeof (XnMapOutputMode));
+	    s = xnGetSupportedMapOutputModes (instance->handle, modes, &lc);
+	    CHECK_STATUS_GOTO;
 
 	    for (i = 0;
 		 i < lc;
@@ -52,6 +55,9 @@ critcl::class def kinetcl::Map {
 	}
 
 	return TCL_OK;
+error:
+	ckfree ((char*) modes);
+	return TCL_ERROR;
     }
 
     # # ## ### ##### ######## #############
