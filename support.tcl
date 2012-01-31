@@ -204,7 +204,8 @@ proc kt_callback {name consfunction destfunction signature body} {
 		cmd = Tcl_DuplicateObj (instance->command@@cname@@);
 		Tcl_ListObjAppendElement (interp, cmd, self);
 		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
-@@body@@
+
+		{ @@body@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@name@@ ..." */
 		res = Tcl_GlobalEvalObj (interp, cmd);
@@ -358,7 +359,8 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		cmd = Tcl_DuplicateObj (instance->command@@cnamea@@);
 		Tcl_ListObjAppendElement (interp, cmd, self);
 		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@namea@@", -1));
-@@bodya@@
+
+		{ @@bodya@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@namea@@ ..." */
 		res = Tcl_GlobalEvalObj (interp, cmd);
@@ -385,7 +387,8 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		cmd = Tcl_DuplicateObj (instance->command@@cnameb@@);
 		Tcl_ListObjAppendElement (interp, cmd, self);
 		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@nameb@@", -1));
-@@bodyb@@
+
+		{ @@bodyb@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@nameb@@ ..." */
 		res = Tcl_GlobalEvalObj (interp, cmd);
