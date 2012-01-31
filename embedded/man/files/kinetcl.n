@@ -372,6 +372,10 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBunset-callback-poseProgress\fR
 .sp
+\fIuserInstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-fovEdge\fR
+.sp
 \fB::kinetcl::hands\fR
 .sp
 \fIhandsInstanceCmd\fR \fBdestroy\fR
@@ -926,6 +930,53 @@ The callback to invoke is specified as a command prefix, and
 will be invoked with five arguments added to it, the instance command,
 the word "poseProgress", the name of pose, the (numerical) id of the
 user, and the status of the detection engine, in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS "INSTANCE HAND TOUCHING FV EDGE API"
+Should the user generator instance support the API for a "Hand
+Touching FOV Edge" the following methods become available.
+This support can checked by invoking the inherited method
+\fBisCapableOf\fR for the capability name
+\fBhand-touching-fov-edge\fR.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-fovEdge\fR
+These methods define and remove a callback responding to edge touch
+events, i.e. a hand coming into contact with the edge of the field of
+view (a box).
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "fovEdge", The id of the hand? (user?) causing the event, the
+position of the hand in space, a timestamp, and the direction of the
+edge that is touched on.
+.sp
+The 3D-position is a 3-element list containing the x-, y-, and
+z-coordinates, in this order.
+.sp
+The timestamp is a floating point value in seconds.
+.sp
+The direction is one
+.RS
+.IP [1]
+\fBillegal\fR
+.IP [2]
+\fBleft\fR
+.IP [3]
+\fBright\fR
+.IP [4]
+\fBup\fR
+.IP [5]
+\fBdown\fR
+.IP [6]
+\fBforward\fR
+.IP [7]
+\fBbackward\fR
+.RE
 .sp
 The result of the methods is an empty string.
 .PP

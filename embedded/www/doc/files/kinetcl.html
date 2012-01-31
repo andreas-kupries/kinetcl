@@ -167,36 +167,37 @@
 <li class="subsection"><a href="#subsection17">Class API</a></li>
 <li class="subsection"><a href="#subsection18">Instance API</a></li>
 <li class="subsection"><a href="#subsection19">Instance Pose Detection API</a></li>
+<li class="subsection"><a href="#subsection20">Instance Hand Touching FV Edge API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section12">Hands Generator</a>
 <ul>
-<li class="subsection"><a href="#subsection20">Class API</a></li>
-<li class="subsection"><a href="#subsection21">Instance API</a></li>
+<li class="subsection"><a href="#subsection21">Class API</a></li>
+<li class="subsection"><a href="#subsection22">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section13">Audio Generator</a>
 <ul>
-<li class="subsection"><a href="#subsection22">Class API</a></li>
-<li class="subsection"><a href="#subsection23">Instance API</a></li>
+<li class="subsection"><a href="#subsection23">Class API</a></li>
+<li class="subsection"><a href="#subsection24">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section14">Recorder Node</a>
 <ul>
-<li class="subsection"><a href="#subsection24">Class API</a></li>
-<li class="subsection"><a href="#subsection25">Instance API</a></li>
+<li class="subsection"><a href="#subsection25">Class API</a></li>
+<li class="subsection"><a href="#subsection26">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section15">Player Node</a>
 <ul>
-<li class="subsection"><a href="#subsection26">Class API</a></li>
-<li class="subsection"><a href="#subsection27">Instance API</a></li>
+<li class="subsection"><a href="#subsection27">Class API</a></li>
+<li class="subsection"><a href="#subsection28">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section16">Script Node</a>
 <ul>
-<li class="subsection"><a href="#subsection28">Class API</a></li>
-<li class="subsection"><a href="#subsection29">Instance API</a></li>
+<li class="subsection"><a href="#subsection29">Class API</a></li>
+<li class="subsection"><a href="#subsection30">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#keywords">Keywords</a></li>
@@ -272,24 +273,26 @@
 <li><a href="#60"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-poseExit</b></a></li>
 <li><a href="#61"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></li>
 <li><a href="#62"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></li>
-<li><a href="#63"><b class="cmd">::kinetcl::hands</b></a></li>
-<li><a href="#64"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#65"><b class="cmd">::kinetcl::audio</b></a></li>
-<li><a href="#66"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#67"><b class="cmd">::kinetcl::recorder</b></a></li>
-<li><a href="#68"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#69"><b class="cmd">::kinetcl::player</b></a></li>
-<li><a href="#70"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#71"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></li>
-<li><a href="#72"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></li>
-<li><a href="#73"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></li>
-<li><a href="#74"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></li>
-<li><a href="#75"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></li>
-<li><a href="#76"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></li>
-<li><a href="#77"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#78"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></li>
-<li><a href="#79"><b class="cmd">::kinetcl::script</b></a></li>
-<li><a href="#80"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#63"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#64"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></li>
+<li><a href="#65"><b class="cmd">::kinetcl::hands</b></a></li>
+<li><a href="#66"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#67"><b class="cmd">::kinetcl::audio</b></a></li>
+<li><a href="#68"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#69"><b class="cmd">::kinetcl::recorder</b></a></li>
+<li><a href="#70"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#71"><b class="cmd">::kinetcl::player</b></a></li>
+<li><a href="#72"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#73"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></li>
+<li><a href="#74"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></li>
+<li><a href="#75"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></li>
+<li><a href="#76"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></li>
+<li><a href="#77"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></li>
+<li><a href="#78"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></li>
+<li><a href="#79"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#80"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></li>
+<li><a href="#81"><b class="cmd">::kinetcl::script</b></a></li>
+<li><a href="#82"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></li>
 </ul>
 </div>
 </div>
@@ -745,6 +748,41 @@ user, and the status of the detection engine, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
 </dl>
 </div>
+<div id="subsection20" class="subsection"><h3><a name="subsection20">Instance Hand Touching FV Edge API</a></h3>
+<p>Should the user generator instance support the API for a &quot;Hand
+Touching FOV Edge&quot; the following methods become available.
+This support can checked by invoking the inherited method
+<b class="method">isCapableOf</b> for the capability name
+<b class="const">hand-touching-fov-edge</b>.</p>
+<dl class="definitions">
+<dt><a name="63"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="64"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></dt>
+<dd><p>These methods define and remove a callback responding to edge touch
+events, i.e. a hand coming into contact with the edge of the field of
+view (a box).</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word &quot;fovEdge&quot;, The id of the hand? (user?) causing the event, the
+position of the hand in space, a timestamp, and the direction of the
+edge that is touched on.</p>
+<p>The 3D-position is a 3-element list containing the x-, y-, and
+z-coordinates, in this order.</p>
+<p>The timestamp is a floating point value in seconds.</p>
+<p>The direction is one</p>
+<ol class="enumerated">
+<li><p><b class="const">illegal</b></p></li>
+<li><p><b class="const">left</b></p></li>
+<li><p><b class="const">right</b></p></li>
+<li><p><b class="const">up</b></p></li>
+<li><p><b class="const">down</b></p></li>
+<li><p><b class="const">forward</b></p></li>
+<li><p><b class="const">backward</b></p></li>
+</ol>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
 </div>
 <div id="section12" class="section"><h2><a name="section12">Hands Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::hands</b>,
@@ -752,18 +790,18 @@ which provides instances of hands generators,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe hands generator ....</p>
-<div id="subsection20" class="subsection"><h3><a name="subsection20">Class API</a></h3>
+<div id="subsection21" class="subsection"><h3><a name="subsection21">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="63"><b class="cmd">::kinetcl::hands</b></a></dt>
+<dt><a name="65"><b class="cmd">::kinetcl::hands</b></a></dt>
 <dd><p>This command creates a new hands generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection21" class="subsection"><h3><a name="subsection21">Instance API</a></h3>
+<div id="subsection22" class="subsection"><h3><a name="subsection22">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="64"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="66"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the hands generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
@@ -778,18 +816,18 @@ which provides instances of audio generators,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe audio generator ....</p>
-<div id="subsection22" class="subsection"><h3><a name="subsection22">Class API</a></h3>
+<div id="subsection23" class="subsection"><h3><a name="subsection23">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="65"><b class="cmd">::kinetcl::audio</b></a></dt>
+<dt><a name="67"><b class="cmd">::kinetcl::audio</b></a></dt>
 <dd><p>This command creates a new audio generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection23" class="subsection"><h3><a name="subsection23">Instance API</a></h3>
+<div id="subsection24" class="subsection"><h3><a name="subsection24">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="66"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="68"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the audio generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
@@ -804,18 +842,18 @@ which provides instances of recorders,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe recorder generator ....</p>
-<div id="subsection24" class="subsection"><h3><a name="subsection24">Class API</a></h3>
+<div id="subsection25" class="subsection"><h3><a name="subsection25">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="67"><b class="cmd">::kinetcl::recorder</b></a></dt>
+<dt><a name="69"><b class="cmd">::kinetcl::recorder</b></a></dt>
 <dd><p>This command creates a new recorder instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection25" class="subsection"><h3><a name="subsection25">Instance API</a></h3>
+<div id="subsection26" class="subsection"><h3><a name="subsection26">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="68"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="70"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the recorder instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
@@ -828,53 +866,53 @@ them is destroyed.</p>
 <p>This sections documents the class <b class="cmd">::kinetcl::player</b>, the concrete class
 for all OpenNI player nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::base</b>.</p>
-<div id="subsection26" class="subsection"><h3><a name="subsection26">Class API</a></h3>
+<div id="subsection27" class="subsection"><h3><a name="subsection27">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="69"><b class="cmd">::kinetcl::player</b></a></dt>
+<dt><a name="71"><b class="cmd">::kinetcl::player</b></a></dt>
 <dd><p>This command creates a new player instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection27" class="subsection"><h3><a name="subsection27">Instance API</a></h3>
+<div id="subsection28" class="subsection"><h3><a name="subsection28">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="70"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="72"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the player instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
 them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="71"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></dt>
+<dt><a name="73"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></dt>
 <dd><p>This method sets the speed of playback as a ratio of the time passed
 in the recording. I.e. a speed of <b class="const">1</b> implies playback at the
 same frame/rate as recorded, whereas a speed &lt; 1 causes slow-motion,
 and a speed &gt; 1 fast-forward.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="72"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></dt>
+<dt><a name="74"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></dt>
 <dd><p>This method returns the speed of playback, as a ratio of the time
 passed in the recording.</p>
 <p>The result of the method is a floating point number.</p></dd>
-<dt><a name="73"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></dt>
+<dt><a name="75"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></dt>
 <dd><p>This method activates or deactivates repeating mode. If repeating is
 activated (<i class="arg">bool</i> is <b class="const">true</b>) the player will automatically
 rewind to the beginning of the recording when reaching the end, and
 continue playing.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="74"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></dt>
+<dt><a name="76"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></dt>
 <dd><p>This method tests if the player has reached the end of the recording,
 or not. Note that this is never <b class="const">true</b> when the player is in
 repeating mode, however &quot;eof&quot; events are still triggered.</p>
 <p>The result of the method is boolean value, <b class="const">true</b> if the
 player is at the end of the recording, and <b class="const">false</b> else.</p></dd>
-<dt><a name="75"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></dt>
+<dt><a name="77"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></dt>
 <dd><p>This method returns the name of the format supported by the player instance.</p></dd>
-<dt><a name="76"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></dt>
+<dt><a name="78"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></dt>
 <dd><p>This method causes the player to explicitly advance to the next frame.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="77"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="79"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="78"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></dt>
+<dt><a name="80"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></dt>
 <dd><p>These methods define and remove a callback responding to &quot;eof&quot; events,
 i.e. when the end of the recording was reached.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -891,18 +929,18 @@ which provides instances of scripts,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe script generator ....</p>
-<div id="subsection28" class="subsection"><h3><a name="subsection28">Class API</a></h3>
+<div id="subsection29" class="subsection"><h3><a name="subsection29">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="79"><b class="cmd">::kinetcl::script</b></a></dt>
+<dt><a name="81"><b class="cmd">::kinetcl::script</b></a></dt>
 <dd><p>This command creates a new script instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection29" class="subsection"><h3><a name="subsection29">Instance API</a></h3>
+<div id="subsection30" class="subsection"><h3><a name="subsection30">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="80"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="82"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the script instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
