@@ -934,8 +934,8 @@ user, and the status of the detection engine, in this order.
 The result of the methods is an empty string.
 .PP
 .SS "INSTANCE HAND TOUCHING FV EDGE API"
-Should the user generator instance support the API for a "Hand
-Touching FOV Edge" the following methods become available.
+Should the user generator instance support the API for "Hand Touching
+FOV Edge" events the following methods become available.
 This support can checked by invoking the inherited method
 \fBisCapableOf\fR for the capability name
 \fBhand-touching-fov-edge\fR.
@@ -960,7 +960,7 @@ z-coordinates, in this order.
 .sp
 The timestamp is a floating point value in seconds.
 .sp
-The direction is one
+The direction is one of
 .RS
 .IP [1]
 \fBillegal\fR
