@@ -128,4 +128,5 @@ this order.
 
 [include c_cap_pose.inc]
 [include c_cap_handfov.inc]
+[include c_cap_skeleton.inc]
 

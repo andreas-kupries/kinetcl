@@ -254,7 +254,7 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIbaseInstanceCmd\fR \fBcapabilities\fR ?\fB-all\fR?
 .sp
-\fIbaseInstanceCmd\fR \fBisCapableOf\fR \fIcapability\fR
+\fIbaseInstanceCmd\fR \fBis-capable-of\fR \fIcapability\fR
 .sp
 \fB::kinetcl::generator\fR \fBnew\fR
 .sp
@@ -288,7 +288,7 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBbytes_pixel\fR
+\fIgeneratorInstanceCmd\fR \fBbytes-per-pixel\fR
 .sp
 \fIgeneratorInstanceCmd\fR \fBmodes\fR
 .sp
@@ -350,7 +350,7 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBposes\fR
 .sp
-\fIuserInstanceCmd\fR \fBisSupported\fR \fIpose\fR
+\fIuserInstanceCmd\fR \fBis-supported\fR \fIpose\fR
 .sp
 \fIuserInstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
 .sp
@@ -438,7 +438,7 @@ This method returns the capabilities of the instance, or, if option
 .sp
 The result is a list containing the names of the capabilities.
 .TP
-\fIbaseInstanceCmd\fR \fBisCapableOf\fR \fIcapability\fR
+\fIbaseInstanceCmd\fR \fBis-capable-of\fR \fIcapability\fR
 This method checks if the named capability is supported by the
 instance or not.
 .sp
@@ -568,7 +568,7 @@ and their semantics is described in the next subsection.
 .PP
 .SS "INSTANCE API"
 .TP
-\fIgeneratorInstanceCmd\fR \fBbytes_pixel\fR
+\fIgeneratorInstanceCmd\fR \fBbytes-per-pixel\fR
 This method returns the number of bytes per pixel in the map.
 .TP
 \fIgeneratorInstanceCmd\fR \fBmodes\fR
@@ -847,7 +847,7 @@ name \fBuser-pose-detection\fR.
 This method returns a list containing the names of the supported user
 poses.
 .TP
-\fIuserInstanceCmd\fR \fBisSupported\fR \fIpose\fR
+\fIuserInstanceCmd\fR \fBis-supported\fR \fIpose\fR
 This method tests if the named user pose is supported by the instance.
 .sp
 The result is a boolean value, \fBtrue\fR if the pose is

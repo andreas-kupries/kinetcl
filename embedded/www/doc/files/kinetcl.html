@@ -214,7 +214,7 @@
 <li><a href="#1"><b class="cmd">::kinetcl::base</b> <b class="method">new</b></a></li>
 <li><a href="#2"><b class="cmd">::kinetcl::base</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
 <li><a href="#3"><i class="arg">baseInstanceCmd</i> <b class="method">capabilities</b> <span class="opt">?<b class="option">-all</b>?</span></a></li>
-<li><a href="#4"><i class="arg">baseInstanceCmd</i> <b class="method">isCapableOf</b> <i class="arg">capability</i></a></li>
+<li><a href="#4"><i class="arg">baseInstanceCmd</i> <b class="method">is-capable-of</b> <i class="arg">capability</i></a></li>
 <li><a href="#5"><b class="cmd">::kinetcl::generator</b> <b class="method">new</b></a></li>
 <li><a href="#6"><b class="cmd">::kinetcl::generator</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
 <li><a href="#7"><i class="arg">generatorInstanceCmd</i> <b class="method">start</b></a></li>
@@ -231,7 +231,7 @@
 <li><a href="#18"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-newdata</b></a></li>
 <li><a href="#19"><b class="cmd">::kinetcl::generator</b> <b class="method">new</b></a></li>
 <li><a href="#20"><b class="cmd">::kinetcl::generator</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
-<li><a href="#21"><i class="arg">generatorInstanceCmd</i> <b class="method">bytes_pixel</b></a></li>
+<li><a href="#21"><i class="arg">generatorInstanceCmd</i> <b class="method">bytes-per-pixel</b></a></li>
 <li><a href="#22"><i class="arg">generatorInstanceCmd</i> <b class="method">modes</b></a></li>
 <li><a href="#23"><i class="arg">generatorInstanceCmd</i> <b class="method">mode</b></a></li>
 <li><a href="#24"><i class="arg">generatorInstanceCmd</i> <b class="method">mode</b> <i class="arg">xres</i> <i class="arg">yres</i> <i class="arg">fps</i></a></li>
@@ -262,7 +262,7 @@
 <li><a href="#49"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-lost</b> <i class="arg">cmd</i>...</a></li>
 <li><a href="#50"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-lost</b></a></li>
 <li><a href="#51"><i class="arg">userInstanceCmd</i> <b class="method">poses</b></a></li>
-<li><a href="#52"><i class="arg">userInstanceCmd</i> <b class="method">isSupported</b> <i class="arg">pose</i></a></li>
+<li><a href="#52"><i class="arg">userInstanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></li>
 <li><a href="#53"><i class="arg">userInstanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
 <li><a href="#54"><i class="arg">userInstanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
 <li><a href="#55"><i class="arg">userInstanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></li>
@@ -322,7 +322,7 @@ and their semantics is described in the next subsection.</p></dd>
 <dd><p>This method returns the capabilities of the instance, or, if option
 <b class="option">-all</b> was specified, the set of all possible capabilities.</p>
 <p>The result is a list containing the names of the capabilities.</p></dd>
-<dt><a name="4"><i class="arg">baseInstanceCmd</i> <b class="method">isCapableOf</b> <i class="arg">capability</i></a></dt>
+<dt><a name="4"><i class="arg">baseInstanceCmd</i> <b class="method">is-capable-of</b> <i class="arg">capability</i></a></dt>
 <dd><p>This method checks if the named capability is supported by the
 instance or not.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the capability
@@ -431,7 +431,7 @@ and their semantics is described in the next subsection.</p></dd>
 </div>
 <div id="subsection6" class="subsection"><h3><a name="subsection6">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="21"><i class="arg">generatorInstanceCmd</i> <b class="method">bytes_pixel</b></a></dt>
+<dt><a name="21"><i class="arg">generatorInstanceCmd</i> <b class="method">bytes-per-pixel</b></a></dt>
 <dd><p>This method returns the number of bytes per pixel in the map.</p></dd>
 <dt><a name="22"><i class="arg">generatorInstanceCmd</i> <b class="method">modes</b></a></dt>
 <dd><p>This method returns the map output modes supported by the instance.</p>
@@ -685,7 +685,7 @@ name <b class="const">user-pose-detection</b>.</p>
 <dt><a name="51"><i class="arg">userInstanceCmd</i> <b class="method">poses</b></a></dt>
 <dd><p>This method returns a list containing the names of the supported user
 poses.</p></dd>
-<dt><a name="52"><i class="arg">userInstanceCmd</i> <b class="method">isSupported</b> <i class="arg">pose</i></a></dt>
+<dt><a name="52"><i class="arg">userInstanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></dt>
 <dd><p>This method tests if the named user pose is supported by the instance.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the pose is
 supported, and <b class="const">false</b> else.</p></dd>
