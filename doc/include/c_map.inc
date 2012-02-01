@@ -27,7 +27,7 @@ and their semantics is described in the next subsection.
 [list_begin definitions]
 
 [comment ===============================================================]
-[call [arg generatorInstanceCmd] [method bytes_pixel]]
+[call [arg generatorInstanceCmd] [method bytes-per-pixel]]
 
 This method returns the number of bytes per pixel in the map.
 

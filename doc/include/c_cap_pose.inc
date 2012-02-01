@@ -16,7 +16,7 @@ This method returns a list containing the names of the supported user
 poses.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method isSupported] [arg pose]]
+[call [arg userInstanceCmd] [method is-supported] [arg pose]]
 
 This method tests if the named user pose is supported by the instance.
 

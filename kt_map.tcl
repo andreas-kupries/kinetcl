@@ -6,7 +6,7 @@ critcl::class def kinetcl::Map {
     ::kt_abstract_class
 
     # # ## ### ##### ######## #############
-    mdef bytes_pixel { /* Syntax: <instance> bytes_pixel */
+    mdef bytes-per-pixel { /* Syntax: <instance> bytes_pixel */
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;

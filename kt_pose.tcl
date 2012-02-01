@@ -7,7 +7,7 @@ critcl::class def kinetcl::CapUserPoseDetection {
 
     # # ## ### ##### ######## #############
 
-    mdef isSupported { /* Syntax: <instance> isSupported <pose> */
+    mdef is-supported { /* Syntax: <instance> isSupported <pose> */
 	int supported;
 
 	if (objc != 3) {
