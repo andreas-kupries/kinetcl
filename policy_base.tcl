@@ -32,7 +32,7 @@ proc ::kinetcl::CapClass {cap} {
 
 proc ::kinetcl::MixCapabilities {args} {
     foreach cap $args {
-	if {![uplevel 1 [list my isCapableOf $cap]]} continue
+	if {![uplevel 1 [list my is-capable-of $cap]]} continue
 	set class [CapClass $cap]
 	uplevel 1 [list ::kinetcl::$class create I$class]
 	uplevel 1 [list ::kinetcl::Publish I$class I$class]
@@ -65,7 +65,7 @@ oo::class create ::kinetcl::base {
 	if {[llength $args] == 0} {
 	    set result {}
 	    foreach c [BASE capabilities] {
-		if {![BASE isCapableOf $c]} continue
+		if {![BASE is-capable-of $c]} continue
 		lappend result $c
 	    }
 	    return [lsort -dict $result]

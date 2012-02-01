@@ -32,7 +32,7 @@ This method returns the capabilities of the instance, or, if option
 [para] The result is a list containing the names of the capabilities.
 
 [comment ===============================================================]
-[call [arg baseInstanceCmd] [method isCapableOf] [arg capability]]
+[call [arg baseInstanceCmd] [method is-capable-of] [arg capability]]
 
 This method checks if the named capability is supported by the
 instance or not.

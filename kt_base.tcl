@@ -13,7 +13,7 @@ critcl::class def kinetcl::Base {
     field Tcl_Obj* capnames {Fixed list of possible capabilities}
 
     # # ## ### ##### ######## #############
-    mdef isCapableOf { /* Syntax: <instance> isCapableOf capName */
+    mdef is-capable-of { /* Syntax: <instance> is-capable-of capName */
 	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
 
 	XnBool supported;
