@@ -4,7 +4,7 @@
 
 Should the user generator instance support the pose detection API the
 following methods become available. This support can checked by
-invoking the inherited method [method isCapableOf] for the capability
+invoking the inherited method [method is-capable-of] for the capability
 name [const user-pose-detection].
 
 [list_begin definitions]

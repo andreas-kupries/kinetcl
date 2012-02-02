@@ -376,6 +376,68 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBunset-callback-fovEdge\fR
 .sp
+\fBuserInstanceCmd\fR \fBneed-pose\fR
+.sp
+\fBuserInstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
+.sp
+\fBuserInstanceCmd\fR \fBset-profile\fR \fIprofile\fR
+.sp
+\fBuserInstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+.sp
+\fBuserInstanceCmd\fR \fBstart-tracking\fR \fIid\fR
+.sp
+\fBuserInstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+.sp
+\fBuserInstanceCmd\fR \fBreset-tracking\fR \fIid\fR
+.sp
+\fBuserInstanceCmd\fR \fBis-tracking\fR \fIid\fR
+.sp
+\fBuserInstanceCmd\fR \fBis-calibrated\fR \fIid\fR
+.sp
+\fBuserInstanceCmd\fR \fBis-calibrating\fR \fIid\fR
+.sp
+\fBuserInstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
+.sp
+\fBuserInstanceCmd\fR \fBabort-calibration\fR \fIid\fR
+.sp
+\fBuserInstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
+.sp
+\fBuserInstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
+.sp
+\fBuserInstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
+.sp
+\fBuserInstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
+.sp
+\fBuserInstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
+.sp
+\fBuserInstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
+.sp
+\fBuserInstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
+.sp
+\fBuserInstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
+.sp
+\fBuserInstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
+.sp
+\fBuserInstanceCmd\fR \fBactive-joints\fR
+.sp
+\fBuserInstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-jointConfigChange\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationStart\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationComplete\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationProgress\fR
+.sp
 \fB::kinetcl::hands\fR
 .sp
 \fIhandsInstanceCmd\fR \fBdestroy\fR
@@ -840,7 +902,7 @@ The result of the methods is an empty string.
 .SS "INSTANCE POSE DETECTION API"
 Should the user generator instance support the pose detection API the
 following methods become available. This support can checked by
-invoking the inherited method \fBisCapableOf\fR for the capability
+invoking the inherited method \fBis-capable-of\fR for the capability
 name \fBuser-pose-detection\fR.
 .TP
 \fIuserInstanceCmd\fR \fBposes\fR
@@ -937,7 +999,7 @@ The result of the methods is an empty string.
 Should the user generator instance support the API for "Hand Touching
 FOV Edge" events the following methods become available.
 This support can checked by invoking the inherited method
-\fBisCapableOf\fR for the capability name
+\fBis-capable-of\fR for the capability name
 \fBhand-touching-fov-edge\fR.
 .TP
 \fIuserInstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
@@ -979,6 +1041,362 @@ The direction is one of
 .RE
 .sp
 The result of the methods is an empty string.
+.PP
+.SS "INSTANCE SKELETON/JOINT API"
+Should the user generator instance support the skeleton API the
+following methods become available. This support can checked by
+invoking the inherited method \fBis-capable-of\fR for the
+capability name \fBuser-skeleton\fR.
+.TP
+\fBuserInstanceCmd\fR \fBneed-pose\fR
+This method tests if the skeleton tracking requires the user to enter
+a pose for calibration.
+.sp
+The result is a boolean value, \fBtrue\fR if entering a pose
+is required, and \fBfalse\fR else.
+\fINOTE\fR: XXX. The C API to query the name of the required pose
+looks to be borken, or underspecified. Research required.
+.TP
+\fBuserInstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
+This method tests if the skeleton tracking supports the named
+\fIprofile\fR.
+.sp
+The result is a boolean value, \fBtrue\fR if the profile is
+supported, and \fBfalse\fR else.
+.sp
+The accepted profile names are
+.RS
+.IP [1]
+\fBnone\fR
+.IP [2]
+\fBall\fR
+.IP [3]
+\fBupper\fR
+.IP [4]
+\fBlower\fR
+.IP [5]
+\fBheads-hands\fR
+.RE
+.TP
+\fBuserInstanceCmd\fR \fBset-profile\fR \fIprofile\fR
+This method activates the named \fIprofile\fR. This will result in
+joints getting activated or deactivated, as per the profile.
+.sp
+The accepted profile names are described above, at
+\fBis-profile-available\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+This method sets the skeleton smoothing \fIfactor\fR, a floating point
+value.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBstart-tracking\fR \fIid\fR
+This method activates the tracking of the skeleton for the user
+specified by the \fIid\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+This method stops tracking of the skeleton for the user
+specified by the \fIid\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBreset-tracking\fR \fIid\fR
+This method discards the calibration of the skeleton for the user
+specified by the \fIid\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBis-tracking\fR \fIid\fR
+This method tests if the skeleton for the user \fIid\fR is currently
+tracked.
+.sp
+The result is a boolean value, \fBtrue\fR if tracking is
+active, and \fBfalse\fR else.
+.TP
+\fBuserInstanceCmd\fR \fBis-calibrated\fR \fIid\fR
+This method tests if the skeleton for the user \fIid\fR is calibrated.
+.sp
+The result is a boolean value, \fBtrue\fR if the skeleton is
+calbrated, and \fBfalse\fR else.
+.TP
+\fBuserInstanceCmd\fR \fBis-calibrating\fR \fIid\fR
+This method tests if calibration of the skeleton for the user \fIid\fR
+is currently in progress.
+.sp
+The result is a boolean value, \fBtrue\fR if calibration is
+in progress, and \fBfalse\fR else.
+.TP
+\fBuserInstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
+This method requests calibration of the skeleton for the user
+specified by the \fIid\fR.
+.sp
+The result of the method is an empty string.
+.sp
+If the boolean flag \fIforce\fR is set any previous calibration
+data is discarded.
+.TP
+\fBuserInstanceCmd\fR \fBabort-calibration\fR \fIid\fR
+This method stops a calibration in progress, for the user specified by
+the \fIid\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
+This method saves the calibration data for the skeleton of the user
+specified by the \fIid\fR into the file \fIpath\fR. The format of the
+calibration data is not documented.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
+This method loads the calibration data for the skeleton of the user
+specified by the \fIid\fR from the file \fIpath\fR. The format of the
+calibration data is not documented.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
+This method saves the calibration data for the skeleton of the user
+specified by the \fIid\fR into the in-memory storage identified by the
+\fIslot\fR number.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
+This method loads the calibration data for the skeleton of the user
+specified by the \fIid\fR from the in-memory storage identified by the
+\fIslot\fR number.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
+This method clears the in-memory calibration data storage identified
+by the \fIslot\fR number.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
+This method tests if the in-memory storage identified by the
+\fIslot\fR number contains skeleton calibration data.
+.sp
+The result is a boolean value, \fBtrue\fR if the slot is
+occupied, and \fBfalse\fR else.
+.TP
+\fBuserInstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
+This method tests if the skeleton tracking supports the named
+\fIjoint\fR.
+.sp
+The result is a boolean value, \fBtrue\fR if the joint is
+supported, and \fBfalse\fR else.
+.sp
+The accepted joint names are
+.RS
+.IP [1]
+\fBhead\fR
+.IP [2]
+\fBneck\fR
+.IP [3]
+\fBtorso\fR
+.IP [4]
+\fBwaist\fR
+.IP [5]
+\fBleft-collar\fR
+.IP [6]
+\fBleft-shoulder\fR
+.IP [7]
+\fBleft-elbow\fR
+.IP [8]
+\fBleft-wrist\fR
+.IP [9]
+\fBleft-hand\fR
+.IP [10]
+\fBleft-fingertip\fR
+.IP [11]
+\fBright-collar\fR
+.IP [12]
+\fBright-shoulder\fR
+.IP [13]
+\fBright-elbow\fR
+.IP [14]
+\fBright-wrist\fR
+.IP [15]
+\fBright-hand\fR
+.IP [16]
+\fBright-fingertip\fR
+.IP [17]
+\fBleft-hip\fR
+.IP [18]
+\fBleft-knee\fR
+.IP [19]
+\fBleft-ankle\fR
+.IP [20]
+\fBleft-foot\fR
+.IP [21]
+\fBright-hip\fR
+.IP [22]
+\fBright-knee\fR
+.IP [23]
+\fBright-ankle\fR
+.IP [24]
+\fBright-foot\fR
+.RE
+.TP
+\fBuserInstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
+This method tests if the the named \fIjoint\fR is actively tracked.
+.sp
+The result is a boolean value, \fBtrue\fR if the joint is
+active, and \fBfalse\fR else.
+.sp
+The accepted joint names are described above, at
+\fBis-joint-available\fR.
+.TP
+\fBuserInstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
+This method (de)activates the named \fIjoint\fR.
+.sp
+The accepted joint names are described above, at
+\fBis-joint-available\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fBuserInstanceCmd\fR \fBactive-joints\fR
+This method returns a list containig the names of all currently active
+joints.
+.sp
+The possible joint names are described above, at
+\fBis-joint-available\fR.
+.TP
+\fBuserInstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
+This method retrieves position and orientation data for the user
+specified by \fIid\fR and the named \fIjoint\fR.
+.sp
+The accepted joint names are described above, at
+\fBis-joint-available\fR.
+.sp
+The result of the command is a 2-element list containing, in
+the order specified:
+.RS
+.TP
+position
+A 2-element list containing, in the order specified:
+.RS
+.TP
+confidence
+A floating point value representing the system's
+confidence in the position information.
+.TP
+coordinates
+A 3-element list of floating point values
+representing the x-, y-, and z-position of the joint.
+.RE
+.TP
+orientation
+A 2-element list containing, in the order specified:
+.RS
+.TP
+confidence
+A floating point value representing the system's
+confidence in the orientation information.
+.TP
+rotation
+A 9-element list of floating point values
+representating the rotation matrix for the joint.
+.RE
+.RE
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-jointConfigChange\fR
+These methods define and remove a callback responding to joint
+configration changes, i.e. when joints are (de)activated.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "jointConfigChange", in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationStart\fR
+These methods define and remove a callback responding to the start of
+a calibration.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word "calibrationStart", and the (numerical) id of the
+user for whom calibration has started, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationComplete\fR
+These methods define and remove a callback responding to the
+completion of calibrations.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "calibrationComplete", the (numerical) id of the user for
+whom calibration completed, and the completion status, in this order.
+.sp
+The result of the methods is an empty string.
+.sp
+The possible completion stati are
+.RS
+.IP [1]
+\fBok\fR
+.IP [2]
+\fBno-user\fR
+.IP [3]
+\fBarm\fR
+.IP [4]
+\fBleg\fR
+.IP [5]
+\fBhead\fR
+.IP [6]
+\fBtorso\fR
+.IP [7]
+\fBtop-fov\fR
+.IP [8]
+\fBside-fov\fR
+.IP [9]
+\fBpose\fR
+.IP [10]
+\fBmanual-abort\fR
+.IP [11]
+\fBmanual-reset\fR
+.IP [12]
+\fBtimeout\fR
+.RE
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationProgress\fR
+These methods define and remove a callback responding to calibration
+progress events.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "calibrationProgress", the (numerical) id of the user, and the
+calibration progreess status, in this order.
+.sp
+The result of the methods is an empty string.
+.sp
+The possible progress stati are identical to the completion
+stati described above.
 .PP
 .SH "HANDS GENERATOR"
 This sections documents the class \fB::kinetcl::hands\fR,

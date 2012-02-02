@@ -168,36 +168,37 @@
 <li class="subsection"><a href="#subsection18">Instance API</a></li>
 <li class="subsection"><a href="#subsection19">Instance Pose Detection API</a></li>
 <li class="subsection"><a href="#subsection20">Instance Hand Touching FV Edge API</a></li>
+<li class="subsection"><a href="#subsection21">Instance Skeleton/Joint API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section12">Hands Generator</a>
 <ul>
-<li class="subsection"><a href="#subsection21">Class API</a></li>
-<li class="subsection"><a href="#subsection22">Instance API</a></li>
+<li class="subsection"><a href="#subsection22">Class API</a></li>
+<li class="subsection"><a href="#subsection23">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section13">Audio Generator</a>
 <ul>
-<li class="subsection"><a href="#subsection23">Class API</a></li>
-<li class="subsection"><a href="#subsection24">Instance API</a></li>
+<li class="subsection"><a href="#subsection24">Class API</a></li>
+<li class="subsection"><a href="#subsection25">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section14">Recorder Node</a>
 <ul>
-<li class="subsection"><a href="#subsection25">Class API</a></li>
-<li class="subsection"><a href="#subsection26">Instance API</a></li>
+<li class="subsection"><a href="#subsection26">Class API</a></li>
+<li class="subsection"><a href="#subsection27">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section15">Player Node</a>
 <ul>
-<li class="subsection"><a href="#subsection27">Class API</a></li>
-<li class="subsection"><a href="#subsection28">Instance API</a></li>
+<li class="subsection"><a href="#subsection28">Class API</a></li>
+<li class="subsection"><a href="#subsection29">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section16">Script Node</a>
 <ul>
-<li class="subsection"><a href="#subsection29">Class API</a></li>
-<li class="subsection"><a href="#subsection30">Instance API</a></li>
+<li class="subsection"><a href="#subsection30">Class API</a></li>
+<li class="subsection"><a href="#subsection31">Instance API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#keywords">Keywords</a></li>
@@ -275,24 +276,55 @@
 <li><a href="#62"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></li>
 <li><a href="#63"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></li>
 <li><a href="#64"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></li>
-<li><a href="#65"><b class="cmd">::kinetcl::hands</b></a></li>
-<li><a href="#66"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#67"><b class="cmd">::kinetcl::audio</b></a></li>
-<li><a href="#68"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#69"><b class="cmd">::kinetcl::recorder</b></a></li>
-<li><a href="#70"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#71"><b class="cmd">::kinetcl::player</b></a></li>
-<li><a href="#72"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#73"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></li>
-<li><a href="#74"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></li>
-<li><a href="#75"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></li>
-<li><a href="#76"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></li>
-<li><a href="#77"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></li>
-<li><a href="#78"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></li>
-<li><a href="#79"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#80"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></li>
-<li><a href="#81"><b class="cmd">::kinetcl::script</b></a></li>
-<li><a href="#82"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#65"><b class="cmd">userInstanceCmd</b> <b class="method">need-pose</b></a></li>
+<li><a href="#66"><b class="cmd">userInstanceCmd</b> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></li>
+<li><a href="#67"><b class="cmd">userInstanceCmd</b> <b class="method">set-profile</b> <i class="arg">profile</i></a></li>
+<li><a href="#68"><b class="cmd">userInstanceCmd</b> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></li>
+<li><a href="#69"><b class="cmd">userInstanceCmd</b> <b class="method">start-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#70"><b class="cmd">userInstanceCmd</b> <b class="method">stop-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#71"><b class="cmd">userInstanceCmd</b> <b class="method">reset-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#72"><b class="cmd">userInstanceCmd</b> <b class="method">is-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#73"><b class="cmd">userInstanceCmd</b> <b class="method">is-calibrated</b> <i class="arg">id</i></a></li>
+<li><a href="#74"><b class="cmd">userInstanceCmd</b> <b class="method">is-calibrating</b> <i class="arg">id</i></a></li>
+<li><a href="#75"><b class="cmd">userInstanceCmd</b> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></li>
+<li><a href="#76"><b class="cmd">userInstanceCmd</b> <b class="method">abort-calibration</b> <i class="arg">id</i></a></li>
+<li><a href="#77"><b class="cmd">userInstanceCmd</b> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
+<li><a href="#78"><b class="cmd">userInstanceCmd</b> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
+<li><a href="#79"><b class="cmd">userInstanceCmd</b> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
+<li><a href="#80"><b class="cmd">userInstanceCmd</b> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
+<li><a href="#81"><b class="cmd">userInstanceCmd</b> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></li>
+<li><a href="#82"><b class="cmd">userInstanceCmd</b> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></li>
+<li><a href="#83"><b class="cmd">userInstanceCmd</b> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></li>
+<li><a href="#84"><b class="cmd">userInstanceCmd</b> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></li>
+<li><a href="#85"><b class="cmd">userInstanceCmd</b> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></li>
+<li><a href="#86"><b class="cmd">userInstanceCmd</b> <b class="method">active-joints</b></a></li>
+<li><a href="#87"><b class="cmd">userInstanceCmd</b> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></li>
+<li><a href="#88"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#89"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></li>
+<li><a href="#90"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#91"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></li>
+<li><a href="#92"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#93"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></li>
+<li><a href="#94"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#95"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></li>
+<li><a href="#96"><b class="cmd">::kinetcl::hands</b></a></li>
+<li><a href="#97"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#98"><b class="cmd">::kinetcl::audio</b></a></li>
+<li><a href="#99"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#100"><b class="cmd">::kinetcl::recorder</b></a></li>
+<li><a href="#101"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#102"><b class="cmd">::kinetcl::player</b></a></li>
+<li><a href="#103"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#104"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></li>
+<li><a href="#105"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></li>
+<li><a href="#106"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></li>
+<li><a href="#107"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></li>
+<li><a href="#108"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></li>
+<li><a href="#109"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></li>
+<li><a href="#110"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#111"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></li>
+<li><a href="#112"><b class="cmd">::kinetcl::script</b></a></li>
+<li><a href="#113"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></li>
 </ul>
 </div>
 </div>
@@ -679,7 +711,7 @@ this order.</p>
 <div id="subsection19" class="subsection"><h3><a name="subsection19">Instance Pose Detection API</a></h3>
 <p>Should the user generator instance support the pose detection API the
 following methods become available. This support can checked by
-invoking the inherited method <b class="method">isCapableOf</b> for the capability
+invoking the inherited method <b class="method">is-capable-of</b> for the capability
 name <b class="const">user-pose-detection</b>.</p>
 <dl class="definitions">
 <dt><a name="51"><i class="arg">userInstanceCmd</i> <b class="method">poses</b></a></dt>
@@ -752,7 +784,7 @@ user, and the status of the detection engine, in this order.</p>
 <p>Should the user generator instance support the API for &quot;Hand Touching
 FOV Edge&quot; events the following methods become available.
 This support can checked by invoking the inherited method
-<b class="method">isCapableOf</b> for the capability name
+<b class="method">is-capable-of</b> for the capability name
 <b class="const">hand-touching-fov-edge</b>.</p>
 <dl class="definitions">
 <dt><a name="63"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></dt>
@@ -783,6 +815,246 @@ z-coordinates, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
 </dl>
 </div>
+<div id="subsection21" class="subsection"><h3><a name="subsection21">Instance Skeleton/Joint API</a></h3>
+<p>Should the user generator instance support the skeleton API the
+following methods become available. This support can checked by
+invoking the inherited method <b class="method">is-capable-of</b> for the
+capability name <b class="const">user-skeleton</b>.</p>
+<dl class="definitions">
+<dt><a name="65"><b class="cmd">userInstanceCmd</b> <b class="method">need-pose</b></a></dt>
+<dd><p>This method tests if the skeleton tracking requires the user to enter
+a pose for calibration.</p>
+<p>The result is a boolean value, <b class="const">true</b> if entering a pose
+is required, and <b class="const">false</b> else.
+<em>NOTE</em>: XXX. The C API to query the name of the required pose
+looks to be borken, or underspecified. Research required.</p></dd>
+<dt><a name="66"><b class="cmd">userInstanceCmd</b> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></dt>
+<dd><p>This method tests if the skeleton tracking supports the named
+<i class="arg">profile</i>.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the profile is
+supported, and <b class="const">false</b> else.</p>
+<p>The accepted profile names are</p>
+<ol class="enumerated">
+<li><p><b class="const">none</b></p></li>
+<li><p><b class="const">all</b></p></li>
+<li><p><b class="const">upper</b></p></li>
+<li><p><b class="const">lower</b></p></li>
+<li><p><b class="const">heads-hands</b></p></li>
+</ol></dd>
+<dt><a name="67"><b class="cmd">userInstanceCmd</b> <b class="method">set-profile</b> <i class="arg">profile</i></a></dt>
+<dd><p>This method activates the named <i class="arg">profile</i>. This will result in
+joints getting activated or deactivated, as per the profile.</p>
+<p>The accepted profile names are described above, at
+<b class="method">is-profile-available</b>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="68"><b class="cmd">userInstanceCmd</b> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></dt>
+<dd><p>This method sets the skeleton smoothing <i class="arg">factor</i>, a floating point
+value.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="69"><b class="cmd">userInstanceCmd</b> <b class="method">start-tracking</b> <i class="arg">id</i></a></dt>
+<dd><p>This method activates the tracking of the skeleton for the user
+specified by the <i class="arg">id</i>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="70"><b class="cmd">userInstanceCmd</b> <b class="method">stop-tracking</b> <i class="arg">id</i></a></dt>
+<dd><p>This method stops tracking of the skeleton for the user
+specified by the <i class="arg">id</i>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="71"><b class="cmd">userInstanceCmd</b> <b class="method">reset-tracking</b> <i class="arg">id</i></a></dt>
+<dd><p>This method discards the calibration of the skeleton for the user
+specified by the <i class="arg">id</i>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="72"><b class="cmd">userInstanceCmd</b> <b class="method">is-tracking</b> <i class="arg">id</i></a></dt>
+<dd><p>This method tests if the skeleton for the user <i class="arg">id</i> is currently
+tracked.</p>
+<p>The result is a boolean value, <b class="const">true</b> if tracking is
+active, and <b class="const">false</b> else.</p></dd>
+<dt><a name="73"><b class="cmd">userInstanceCmd</b> <b class="method">is-calibrated</b> <i class="arg">id</i></a></dt>
+<dd><p>This method tests if the skeleton for the user <i class="arg">id</i> is calibrated.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the skeleton is
+calbrated, and <b class="const">false</b> else.</p></dd>
+<dt><a name="74"><b class="cmd">userInstanceCmd</b> <b class="method">is-calibrating</b> <i class="arg">id</i></a></dt>
+<dd><p>This method tests if calibration of the skeleton for the user <i class="arg">id</i>
+is currently in progress.</p>
+<p>The result is a boolean value, <b class="const">true</b> if calibration is
+in progress, and <b class="const">false</b> else.</p></dd>
+<dt><a name="75"><b class="cmd">userInstanceCmd</b> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></dt>
+<dd><p>This method requests calibration of the skeleton for the user
+specified by the <i class="arg">id</i>.</p>
+<p>The result of the method is an empty string.</p>
+<p>If the boolean flag <i class="arg">force</i> is set any previous calibration
+data is discarded.</p></dd>
+<dt><a name="76"><b class="cmd">userInstanceCmd</b> <b class="method">abort-calibration</b> <i class="arg">id</i></a></dt>
+<dd><p>This method stops a calibration in progress, for the user specified by
+the <i class="arg">id</i>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="77"><b class="cmd">userInstanceCmd</b> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
+<dd><p>This method saves the calibration data for the skeleton of the user
+specified by the <i class="arg">id</i> into the file <i class="arg">path</i>. The format of the
+calibration data is not documented.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="78"><b class="cmd">userInstanceCmd</b> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
+<dd><p>This method loads the calibration data for the skeleton of the user
+specified by the <i class="arg">id</i> from the file <i class="arg">path</i>. The format of the
+calibration data is not documented.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="79"><b class="cmd">userInstanceCmd</b> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
+<dd><p>This method saves the calibration data for the skeleton of the user
+specified by the <i class="arg">id</i> into the in-memory storage identified by the
+<i class="arg">slot</i> number.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="80"><b class="cmd">userInstanceCmd</b> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
+<dd><p>This method loads the calibration data for the skeleton of the user
+specified by the <i class="arg">id</i> from the in-memory storage identified by the
+<i class="arg">slot</i> number.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="81"><b class="cmd">userInstanceCmd</b> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></dt>
+<dd><p>This method clears the in-memory calibration data storage identified
+by the <i class="arg">slot</i> number.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="82"><b class="cmd">userInstanceCmd</b> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></dt>
+<dd><p>This method tests if the in-memory storage identified by the
+<i class="arg">slot</i> number contains skeleton calibration data.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the slot is
+occupied, and <b class="const">false</b> else.</p></dd>
+<dt><a name="83"><b class="cmd">userInstanceCmd</b> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></dt>
+<dd><p>This method tests if the skeleton tracking supports the named
+<i class="arg">joint</i>.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the joint is
+supported, and <b class="const">false</b> else.</p>
+<p>The accepted joint names are</p>
+<ol class="enumerated">
+<li><p><b class="const">head</b></p></li>
+<li><p><b class="const">neck</b></p></li>
+<li><p><b class="const">torso</b></p></li>
+<li><p><b class="const">waist</b></p></li>
+<li><p><b class="const">left-collar</b></p></li>
+<li><p><b class="const">left-shoulder</b></p></li>
+<li><p><b class="const">left-elbow</b></p></li>
+<li><p><b class="const">left-wrist</b></p></li>
+<li><p><b class="const">left-hand</b></p></li>
+<li><p><b class="const">left-fingertip</b></p></li>
+<li><p><b class="const">right-collar</b></p></li>
+<li><p><b class="const">right-shoulder</b></p></li>
+<li><p><b class="const">right-elbow</b></p></li>
+<li><p><b class="const">right-wrist</b></p></li>
+<li><p><b class="const">right-hand</b></p></li>
+<li><p><b class="const">right-fingertip</b></p></li>
+<li><p><b class="const">left-hip</b></p></li>
+<li><p><b class="const">left-knee</b></p></li>
+<li><p><b class="const">left-ankle</b></p></li>
+<li><p><b class="const">left-foot</b></p></li>
+<li><p><b class="const">right-hip</b></p></li>
+<li><p><b class="const">right-knee</b></p></li>
+<li><p><b class="const">right-ankle</b></p></li>
+<li><p><b class="const">right-foot</b></p></li>
+</ol></dd>
+<dt><a name="84"><b class="cmd">userInstanceCmd</b> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></dt>
+<dd><p>This method tests if the the named <i class="arg">joint</i> is actively tracked.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the joint is
+active, and <b class="const">false</b> else.</p>
+<p>The accepted joint names are described above, at
+<b class="method">is-joint-available</b>.</p></dd>
+<dt><a name="85"><b class="cmd">userInstanceCmd</b> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></dt>
+<dd><p>This method (de)activates the named <i class="arg">joint</i>.</p>
+<p>The accepted joint names are described above, at
+<b class="method">is-joint-available</b>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="86"><b class="cmd">userInstanceCmd</b> <b class="method">active-joints</b></a></dt>
+<dd><p>This method returns a list containig the names of all currently active
+joints.</p>
+<p>The possible joint names are described above, at
+<b class="method">is-joint-available</b>.</p></dd>
+<dt><a name="87"><b class="cmd">userInstanceCmd</b> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></dt>
+<dd><p>This method retrieves position and orientation data for the user
+specified by <i class="arg">id</i> and the named <i class="arg">joint</i>.</p>
+<p>The accepted joint names are described above, at
+<b class="method">is-joint-available</b>.</p>
+<p>The result of the command is a 2-element list containing, in
+the order specified:</p>
+<dl class="definitions">
+<dt>position</dt>
+<dd><p>A 2-element list containing, in the order specified:</p>
+<dl class="definitions">
+<dt>confidence</dt>
+<dd><p>A floating point value representing the system's
+confidence in the position information.</p></dd>
+<dt>coordinates</dt>
+<dd><p>A 3-element list of floating point values
+representing the x-, y-, and z-position of the joint.</p></dd>
+</dl></dd>
+<dt>orientation</dt>
+<dd><p>A 2-element list containing, in the order specified:</p>
+<dl class="definitions">
+<dt>confidence</dt>
+<dd><p>A floating point value representing the system's
+confidence in the orientation information.</p></dd>
+<dt>rotation</dt>
+<dd><p>A 9-element list of floating point values
+representating the rotation matrix for the joint.</p></dd>
+</dl></dd>
+</dl></dd>
+<dt><a name="88"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="89"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></dt>
+<dd><p>These methods define and remove a callback responding to joint
+configration changes, i.e. when joints are (de)activated.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;jointConfigChange&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+<dt><a name="90"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="91"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></dt>
+<dd><p>These methods define and remove a callback responding to the start of
+a calibration.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, the word &quot;calibrationStart&quot;, and the (numerical) id of the
+user for whom calibration has started, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+<dt><a name="92"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="93"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></dt>
+<dd><p>These methods define and remove a callback responding to the
+completion of calibrations.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word &quot;calibrationComplete&quot;, the (numerical) id of the user for
+whom calibration completed, and the completion status, in this order.</p>
+<p>The result of the methods is an empty string.</p>
+<p>The possible completion stati are</p>
+<ol class="enumerated">
+<li><p><b class="const">ok</b></p></li>
+<li><p><b class="const">no-user</b></p></li>
+<li><p><b class="const">arm</b></p></li>
+<li><p><b class="const">leg</b></p></li>
+<li><p><b class="const">head</b></p></li>
+<li><p><b class="const">torso</b></p></li>
+<li><p><b class="const">top-fov</b></p></li>
+<li><p><b class="const">side-fov</b></p></li>
+<li><p><b class="const">pose</b></p></li>
+<li><p><b class="const">manual-abort</b></p></li>
+<li><p><b class="const">manual-reset</b></p></li>
+<li><p><b class="const">timeout</b></p></li>
+</ol></dd>
+<dt><a name="94"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="95"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></dt>
+<dd><p>These methods define and remove a callback responding to calibration
+progress events.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word &quot;calibrationProgress&quot;, the (numerical) id of the user, and the
+calibration progreess status, in this order.</p>
+<p>The result of the methods is an empty string.</p>
+<p>The possible progress stati are identical to the completion
+stati described above.</p></dd>
+</dl>
+</div>
 </div>
 <div id="section12" class="section"><h2><a name="section12">Hands Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::hands</b>,
@@ -790,18 +1062,18 @@ which provides instances of hands generators,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe hands generator ....</p>
-<div id="subsection21" class="subsection"><h3><a name="subsection21">Class API</a></h3>
+<div id="subsection22" class="subsection"><h3><a name="subsection22">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="65"><b class="cmd">::kinetcl::hands</b></a></dt>
+<dt><a name="96"><b class="cmd">::kinetcl::hands</b></a></dt>
 <dd><p>This command creates a new hands generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection22" class="subsection"><h3><a name="subsection22">Instance API</a></h3>
+<div id="subsection23" class="subsection"><h3><a name="subsection23">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="66"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="97"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the hands generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
@@ -816,18 +1088,18 @@ which provides instances of audio generators,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe audio generator ....</p>
-<div id="subsection23" class="subsection"><h3><a name="subsection23">Class API</a></h3>
+<div id="subsection24" class="subsection"><h3><a name="subsection24">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="67"><b class="cmd">::kinetcl::audio</b></a></dt>
+<dt><a name="98"><b class="cmd">::kinetcl::audio</b></a></dt>
 <dd><p>This command creates a new audio generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection24" class="subsection"><h3><a name="subsection24">Instance API</a></h3>
+<div id="subsection25" class="subsection"><h3><a name="subsection25">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="68"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="99"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the audio generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
@@ -842,18 +1114,18 @@ which provides instances of recorders,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe recorder generator ....</p>
-<div id="subsection25" class="subsection"><h3><a name="subsection25">Class API</a></h3>
+<div id="subsection26" class="subsection"><h3><a name="subsection26">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="69"><b class="cmd">::kinetcl::recorder</b></a></dt>
+<dt><a name="100"><b class="cmd">::kinetcl::recorder</b></a></dt>
 <dd><p>This command creates a new recorder instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection26" class="subsection"><h3><a name="subsection26">Instance API</a></h3>
+<div id="subsection27" class="subsection"><h3><a name="subsection27">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="70"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="101"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the recorder instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
@@ -866,53 +1138,53 @@ them is destroyed.</p>
 <p>This sections documents the class <b class="cmd">::kinetcl::player</b>, the concrete class
 for all OpenNI player nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::base</b>.</p>
-<div id="subsection27" class="subsection"><h3><a name="subsection27">Class API</a></h3>
+<div id="subsection28" class="subsection"><h3><a name="subsection28">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="71"><b class="cmd">::kinetcl::player</b></a></dt>
+<dt><a name="102"><b class="cmd">::kinetcl::player</b></a></dt>
 <dd><p>This command creates a new player instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection28" class="subsection"><h3><a name="subsection28">Instance API</a></h3>
+<div id="subsection29" class="subsection"><h3><a name="subsection29">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="72"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="103"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the player instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
 them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="73"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></dt>
+<dt><a name="104"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></dt>
 <dd><p>This method sets the speed of playback as a ratio of the time passed
 in the recording. I.e. a speed of <b class="const">1</b> implies playback at the
 same frame/rate as recorded, whereas a speed &lt; 1 causes slow-motion,
 and a speed &gt; 1 fast-forward.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="74"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></dt>
+<dt><a name="105"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></dt>
 <dd><p>This method returns the speed of playback, as a ratio of the time
 passed in the recording.</p>
 <p>The result of the method is a floating point number.</p></dd>
-<dt><a name="75"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></dt>
+<dt><a name="106"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></dt>
 <dd><p>This method activates or deactivates repeating mode. If repeating is
 activated (<i class="arg">bool</i> is <b class="const">true</b>) the player will automatically
 rewind to the beginning of the recording when reaching the end, and
 continue playing.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="76"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></dt>
+<dt><a name="107"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></dt>
 <dd><p>This method tests if the player has reached the end of the recording,
 or not. Note that this is never <b class="const">true</b> when the player is in
 repeating mode, however &quot;eof&quot; events are still triggered.</p>
 <p>The result of the method is boolean value, <b class="const">true</b> if the
 player is at the end of the recording, and <b class="const">false</b> else.</p></dd>
-<dt><a name="77"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></dt>
+<dt><a name="108"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></dt>
 <dd><p>This method returns the name of the format supported by the player instance.</p></dd>
-<dt><a name="78"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></dt>
+<dt><a name="109"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></dt>
 <dd><p>This method causes the player to explicitly advance to the next frame.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="79"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="110"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="80"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></dt>
+<dt><a name="111"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></dt>
 <dd><p>These methods define and remove a callback responding to &quot;eof&quot; events,
 i.e. when the end of the recording was reached.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -929,18 +1201,18 @@ which provides instances of scripts,
 derived from generators,
 derived from production nodes.</p>
 <p>... describe script generator ....</p>
-<div id="subsection29" class="subsection"><h3><a name="subsection29">Class API</a></h3>
+<div id="subsection30" class="subsection"><h3><a name="subsection30">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="81"><b class="cmd">::kinetcl::script</b></a></dt>
+<dt><a name="112"><b class="cmd">::kinetcl::script</b></a></dt>
 <dd><p>This command creates a new script instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
 described in the next subsection.</p></dd>
 </dl>
 </div>
-<div id="subsection30" class="subsection"><h3><a name="subsection30">Instance API</a></h3>
+<div id="subsection31" class="subsection"><h3><a name="subsection31">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="82"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="113"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the script instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using

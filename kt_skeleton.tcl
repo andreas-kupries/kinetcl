@@ -534,7 +534,7 @@ critcl::class def kinetcl::CapUserSkeleton {
 	    "left-collar",	/* XN_SKEL_LEFT_COLLAR */
 	    "left-shoulder",	/* XN_SKEL_LEFT_SHOULDER */
 	    "left-elbow",	/* XN_SKEL_LEFT_ELBOW */
-	    "left-wrist	",	/* XN_SKEL_LEFT_WRIST */
+	    "left-wrist",	/* XN_SKEL_LEFT_WRIST */
 	    "left-hand",	/* XN_SKEL_LEFT_HAND */
 	    "left-fingertip",	/* XN_SKEL_LEFT_FINGERTIP */
 	    "right-collar",	/* XN_SKEL_RIGHT_COLLAR */

@@ -6,7 +6,7 @@ Should the user generator instance support the API for "Hand Touching
 FOV Edge" events the following methods become available.
 
 This support can checked by invoking the inherited method
-[method isCapableOf] for the capability name
+[method is-capable-of] for the capability name
 [const hand-touching-fov-edge].
 
 [list_begin definitions]
