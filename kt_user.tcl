@@ -81,9 +81,9 @@ critcl::class def kinetcl::User {
 	s = xnGetUserCoM (instance->handle, id, &p);
 	CHECK_STATUS_RETURN;
 
-	coord [0] = Tcl_NewIntObj (p.X);
-	coord [1] = Tcl_NewIntObj (p.Y);
-	coord [2] = Tcl_NewIntObj (p.Z);
+	coord [0] = Tcl_NewDoubleObj (p.X);
+	coord [1] = Tcl_NewDoubleObj (p.Y);
+	coord [2] = Tcl_NewDoubleObj (p.Z);
 	Tcl_SetObjResult (interp, Tcl_NewListObj (3, coord));
 	return TCL_OK;
     }

@@ -47,8 +47,8 @@ tracked by the user generator instance.
 [call [arg userInstanceCmd] [method centerof] [arg id]]
 
 This method returns the center location for the user specified by its
-id, as a 3-element list, i.e. vector, of integer coordinates. The
-coordinates are specified in the order of X, Y, and Z.
+id, as a 3-element list, i.e. vector, of floating point coordinates.
+The coordinates are specified in the order of X, Y, and Z.
 
 [para] The method will throw an error if the user id is not valid.
 

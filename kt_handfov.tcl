@@ -33,9 +33,9 @@ critcl::class def kinetcl::CapHandTouchingFovEdge {
 	} {
 	    Tcl_Obj* coord [3];
 
-	    coord [0] = Tcl_NewIntObj (pPosition->X);
-	    coord [1] = Tcl_NewIntObj (pPosition->Y);
-	    coord [2] = Tcl_NewIntObj (pPosition->Z);
+	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
+	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
+	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
 
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3, coord));

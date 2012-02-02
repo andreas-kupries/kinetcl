@@ -34,8 +34,8 @@ edge that is touched on.
 	 and then maybe to the whole wrapper object.
 }]
 
-[para] The 3D-position is a 3-element list containing the x-, y-, and
-z-coordinates, in this order.
+[para] The 3D-position is a 3-element list of floating point values
+containing the x-, y-, and z-coordinates, in this order.
 
 [para] The timestamp is a floating point value in seconds.
 
