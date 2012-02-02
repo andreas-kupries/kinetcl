@@ -21,18 +21,16 @@ proc kt_class_common {} {
 	include XnOpenNI.h
 	# # ## ### ##### ######## #############
 
-	classvar kinetcl_ctx* context    {Global kinetcl context, shared by all}
-	classvar XnContext*   onicontext {Global OpenNI context, shared by all}
+	classvar kinetcl_context_data context    {Global kinetcl context, shared by all}
+	classvar XnContext*           onicontext {Global OpenNI context, shared by all}
 	# # ## ### ##### ######## #############
 
 	classconstructor {
-	    kinetcl_ctx* c; /* The package's OpenNI context, per-interp global */
-	    XnStatus     s; /* Status of various OpenNI operations */
+	    kinetcl_context_data c; /* The package's global (per-interp) data */
 
 	    /* Get the framework context. Might fail. */
-	    c = kinetcl_context (interp, &s);
+	    c = kinetcl_context (interp);
 	    if (!c) {
-		Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 		goto error;
 	    }
 
@@ -52,7 +50,7 @@ proc kt_abstract_class {{construction {}} {destruction {}}} {
 	::kt_class_common
 	# # ## ### ##### ######## #############
 
-	field kinetcl_ctx*     context    {Global kinetcl context, shared by all}
+	field kinetcl_context_data     context    {Global kinetcl context, shared by all}
 	field XnContext*       onicontext {Global OpenNI context, shared by all}
 	# # ## ### ##### ######## #############
 
@@ -91,8 +89,8 @@ proc kt_node_class {construction {destruction {}}} {
 	::kt_class_common
 	# # ## ### ##### ######## #############
 
-	field kinetcl_ctx*     context    {Global kinetcl context, shared by all}
-	field XnContext*       onicontext {Global OpenNI context, shared by all}
+	field kinetcl_context_data context    {Global kinetcl context, shared by all}
+	field XnContext*           onicontext {Global OpenNI context, shared by all}
 	# # ## ### ##### ######## #############
 
 	field XnNodeHandle     handle     {Our handle of the OpenNI player object}
