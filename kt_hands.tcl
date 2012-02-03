@@ -106,8 +106,51 @@ critcl::class def kinetcl::Hands {
 	return TCL_OK;
     }
 
-
     # # ## ### ##### ######## #############
+
+    ::kt_3callback hand \
+	xnRegisterHandCallbacks \
+	xnUnregisterHandCallbacks \
+	handCreate {
+	    {XnUserID         user}
+	    {const XnPoint3D* pPosition}
+	    {XnFloat          fTime}
+	} {
+	    Tcl_Obj* coord [3];
+
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
+
+	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
+	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
+	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
+
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
+	} \
+	handUpdate {
+	    {XnUserID         user}
+	    {const XnPoint3D* pPosition}
+	    {XnFloat          fTime}
+	} {
+	    Tcl_Obj* coord [3];
+
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
+
+	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
+	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
+	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
+
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
+	} \
+	handDestroy {
+	    {XnUserID         user}
+	    {XnFloat          fTime}
+	} {
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
+	}
+
     # # ## ### ##### ######## #############
 }
 
