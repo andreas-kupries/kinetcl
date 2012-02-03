@@ -131,7 +131,7 @@ critcl::class def kinetcl::Gesture {
 	return TCL_OK;
     }
 
-    mdef all-gestures { /* <instance> all-gestures */
+    mdef all-gestures { /* Syntax: <instance> all-gestures */
 	int i, res = TCL_OK;
 	XnUInt16  n;
 	XnChar** gesture;
@@ -167,7 +167,7 @@ critcl::class def kinetcl::Gesture {
 	return res;
     }
 
-    mdef active-gestures { /* <instance> active-gestures */
+    mdef active-gestures { /* Syntax: <instance> active-gestures */
 	int i, res = TCL_OK;
 	XnUInt16  n;
 	XnChar** gesture;
