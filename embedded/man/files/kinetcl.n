@@ -316,6 +316,38 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgestureInstanceCmd\fR \fBdestroy\fR
 .sp
+\fBgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
+.sp
+\fBgestureInstanceCmd\fR \fBremove-gesture\fR \fIgesture\fR
+.sp
+\fBgestureInstanceCmd\fR \fBis-gesture\fR \fIgesture\fR
+.sp
+\fBgestureInstanceCmd\fR \fBgesture-has-progress\fR \fIgesture\fR
+.sp
+\fBgestureInstanceCmd\fR \fBall-gestures\fR
+.sp
+\fBgestureInstanceCmd\fR \fBactive-gestures\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-gestureProgress\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-gestureChange\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
+.sp
 \fB::kinetcl::scene\fR
 .sp
 \fIsceneInstanceCmd\fR \fBdestroy\fR
@@ -768,6 +800,124 @@ resources used by multiple instances are released only when the last
 instance using them is destroyed.
 .sp
 The result of the method is the empty string.
+.TP
+\fBgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
+This method activates the gesture, i.e. causes the instance to start
+looking for it in the input.
+.sp
+The \fIbox\fR describes the area where to look for it, in
+real-world coordinates. It is a 2-element list of 3-element lists of
+x-, y-, and z-coordinates. The 1st 3D coordinate describes the
+left-bottom-near corner of the box, whereas the 2nd describes the
+right-top-far corner.
+.sp
+The result of the method is the empty string.
+.TP
+\fBgestureInstanceCmd\fR \fBremove-gesture\fR \fIgesture\fR
+This method deactivates the gesture, i.e. causes the instance to stop
+looking for it in the input.
+.sp
+The result of the method is the empty string.
+.TP
+\fBgestureInstanceCmd\fR \fBis-gesture\fR \fIgesture\fR
+This method tests if the named \fIgesture\fR is supported by the instance.
+.sp
+The result is a boolean value, \fBtrue\fR if the gesture is
+supported, and \fBfalse\fR else.
+.TP
+\fBgestureInstanceCmd\fR \fBgesture-has-progress\fR \fIgesture\fR
+This method tests if the named \fIgesture\fR supports progess
+reporting during recognition.
+.sp
+The result is a boolean value, \fBtrue\fR if the gesture
+supports progress reporting, and \fBfalse\fR else.
+.TP
+\fBgestureInstanceCmd\fR \fBall-gestures\fR
+This method returns a list containing the names of all gestures
+supported by the instance.
+.TP
+\fBgestureInstanceCmd\fR \fBactive-gestures\fR
+This method returns a list containing the names of all gestures
+that are currently active.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
+These methods define and remove a callback responding to gesture
+recognition events.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word "gestureRecognized", the name of the recognized gesture, the
+3D coordinates of the location where the gesture was recognized, and
+the location of the hand which performed the gesture at the end of the
+gesture, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-gestureProgress\fR
+These methods define and remove a callback responding to gesture
+progress events.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word "gestureProgress", the name of the gesture progressing, the
+current 3D coordinates of the hand performing the gesture, and the
+percentage of the gesture already performed, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-gestureChange\fR
+These methods define and remove a callback responding to gesture
+change events, i.e when gestures are (de)activated.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "gestureChange", in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
+These methods define and remove a callback responding to gesture
+stage completion events.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "gestureStageComplete", the name of the gesture which
+complete one of its stages, and the current 3D coordinates of the hand
+performing the gesture, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
+These methods define and remove a callback responding to gesture
+stage readiness events.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "gestureStageReadyForNext", the name of the gesture which is
+ready for the recognition of the next of its stages, and the current
+3D coordinates of the hand performing the gesture, in this order.
+.sp
+The result of the methods is an empty string.
 .PP
 .SH "SCENE ANALYZER"
 This sections documents the class \fB::kinetcl::scene\fR,
@@ -828,8 +978,8 @@ tracked by the user generator instance.
 .TP
 \fIuserInstanceCmd\fR \fBcenterof\fR \fIid\fR
 This method returns the center location for the user specified by its
-id, as a 3-element list, i.e. vector, of integer coordinates. The
-coordinates are specified in the order of X, Y, and Z.
+id, as a 3-element list, i.e. vector, of floating point coordinates.
+The coordinates are specified in the order of X, Y, and Z.
 .sp
 The method will throw an error if the user id is not valid.
 .TP
@@ -1017,8 +1167,8 @@ the word "fovEdge", The id of the hand? (user?) causing the event, the
 position of the hand in space, a timestamp, and the direction of the
 edge that is touched on.
 .sp
-The 3D-position is a 3-element list containing the x-, y-, and
-z-coordinates, in this order.
+The 3D-position is a 3-element list of floating point values
+containing the x-, y-, and z-coordinates, in this order.
 .sp
 The timestamp is a floating point value in seconds.
 .sp
