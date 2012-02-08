@@ -243,20 +243,37 @@ Database Class:	\\fB\\$3\\fR
 .BS
 .SH NAME
 kinetcl_introduction \- KineTcl - Introduction to KineTcl
+.SH SYNOPSIS
+package require \fBTcl  8.5\fR
+.sp
+package require \fBkinetcl  ?0.1?\fR
+.sp
+.BE
 .SH DESCRIPTION
-Welcome to KineTcl, a binding of the OpenNI framework providing Tcl
-with access to MS Kinect (tm), and related sensor systems.
+.PP
+Welcome to KineTcl, a binding of the OpenNI framework providing
+Tcl with access to MS Kinect (tm), and related sensor systems.
 .SH "RELATED DOCUMENTS"
 .IP [1]
-\fIKineTcl - How To Get The Sources\fR.
+\fIKineTcl - License\fR.
 .IP [2]
-\fIKineTcl - The Installer's Guide\fR.
+\fIKineTcl - How To Get The Sources\fR.
 .IP [3]
+\fIKineTcl - The Installer's Guide\fR.
+.IP [4]
 \fIKineTcl - The Developer's Guide\fR.
 .PP
 .SH "SYSTEM ARCHITECTURE"
+.SH "BUGS, IDEAS, FEEDBACK"
+This document, and the package it describes, will undoubtedly contain
+bugs and other problems.
+Please report such at the \fIKineTcl Tracker\fR [http://chiselapp.com/user/andreas_kupries/repository/KineTcl].
+Please also report any ideas for enhancements you may have for either
+package and/or documentation.
 .SH KEYWORDS
-Kinect, OpenNI, PrimeSense, computer vision
+3D vision, Kinect, OpenNI, PrimeSense, computer vision, tracking, volume sensor
+.SH CATEGORY
+3rd party library binding
 .SH COPYRIGHT
 .nf
 Copyright (c) 2012 Andreas Kupries

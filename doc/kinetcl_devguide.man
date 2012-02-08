@@ -3,13 +3,9 @@
 [include include/module.inc]
 [titledesc {KineTcl - The Developer's Guide}]
 [description]
+[include include/welcome.inc]
 
-Welcome to KineTcl, a binding of the OpenNI framework providing Tcl
-with access to MS Kinect (tm), and related sensor systems.
-
-[para]
-
-This document is a guide for developers working on KineTcl,
+[para] This document is a guide for developers working on KineTcl,
 i.e. maintainers fixing bugs, extending the package's functionality,
 etc.
 
@@ -18,7 +14,8 @@ etc.
 Please read
 
 [list_begin enum]
-[enum] [term {KineTcl - How To Get The Sources}] and
+[enum] [term {KineTcl - License}],
+[enum] [term {KineTcl - How To Get The Sources}], and
 [enum] [term {KineTcl - The Installer's Guide}]
 [list_end]
 
@@ -118,5 +115,5 @@ getting wrapped into Tcl procedures.
 
 [list_end][comment {___1___}]
 
+[include include/feedback.inc]
 [manpage_end]
-

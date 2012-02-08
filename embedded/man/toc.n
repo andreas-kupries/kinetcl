@@ -251,6 +251,9 @@ doc
 \fBkinetcl_introduction\fR
 \fIfiles/kinetcl_intro.n\fR: KineTcl - Introduction to KineTcl
 .TP
+\fBkinetcl_license\fR
+\fIfiles/license.n\fR: KineTcl - License
+.TP
 \fBkinetcl_devguide\fR
 \fIfiles/kinetcl_devguide.n\fR: KineTcl - The Developer's Guide
 .TP

@@ -243,16 +243,25 @@ Database Class:	\\fB\\$3\\fR
 .BS
 .SH NAME
 kinetcl_install_guide \- KineTcl - The Installer's Guide
+.SH SYNOPSIS
+package require \fBTcl  8.5\fR
+.sp
+package require \fBkinetcl  ?0.1?\fR
+.sp
+.BE
 .SH DESCRIPTION
-Welcome to KineTcl, a binding of the OpenNI framework providing Tcl
-with access to MS Kinect (tm), and related sensor systems.
 .PP
-The audience of this document is anyone wishing to build the packages,
-for either themselves, or others.
+Welcome to KineTcl, a binding of the OpenNI framework providing
+Tcl with access to MS Kinect (tm), and related sensor systems.
+.PP
+The audience of this document is anyone wishing to build the
+packages, for either themselves, or others.
 .PP
 For a developer intending to extend or modify the packages we
 additionally provide
 .IP [1]
+\fIKineTcl - License\fR.
+.IP [2]
 \fIKineTcl - The Developer's Guide\fR.
 .PP
 .PP
@@ -267,10 +276,10 @@ package that should be pretty much obvious, and I will not belabor the
 point.
 .PP
 Use whatever you are comfortable with, as long as it provides
-Tcl 8.5, or higher.
+Tcl 8.5, or higher, and Tk 8.5 or higher.
 .PP
-An easy way to get an installation of a recent Tcl 8.5, which I
-recommend, is to download and install
+An easy way to get an installation of a recent Tcl 8.5 and the
+mentioned packages, which I recommend, is to download and install
 \fIActiveState's\fR [http://www.activestate.com]
 \fIActiveTcl\fR [http://www.activestate.com/activetcl] for your platform.
 Follow the link for ActiveTcl to find it.
@@ -287,6 +296,16 @@ This will install a lot more packages than found in the distribution
 alone.
 (Disclosure: I, Andreas Kupries, work for ActiveState, maintaining
 ActiveTcl and TclDevKit).
+.PP
+For those wishing to build Tcl/Tk on their own, their sources
+can be found at
+.TP
+Tcl
+\fIhttp://core.tcl.tk/tcl/\fR
+.TP
+Tk
+\fIhttp://core.tcl.tk/tk/\fR
+.PP
 .SS CRITCL
 The tool \fIcritcl\fR [http://jcw.github.com/critcl] is required to
 build KineTcl, either as an application found in the PATH, or as a Tcl
@@ -391,8 +410,16 @@ syntax, invoke  "\fIbuild.tcl\fR" with argument \fBhelp\fR, i.e., like
     /path/to/tclsh8.5 /path/to/kinetcl/build.tcl help
 
 .CE
+.SH "BUGS, IDEAS, FEEDBACK"
+This document, and the package it describes, will undoubtedly contain
+bugs and other problems.
+Please report such at the \fIKineTcl Tracker\fR [http://chiselapp.com/user/andreas_kupries/repository/KineTcl].
+Please also report any ideas for enhancements you may have for either
+package and/or documentation.
 .SH KEYWORDS
-Kinect, OpenNI, PrimeSense, computer vision
+3D vision, Kinect, OpenNI, PrimeSense, computer vision, tracking, volume sensor
+.SH CATEGORY
+3rd party library binding
 .SH COPYRIGHT
 .nf
 Copyright (c) 2012 Andreas Kupries

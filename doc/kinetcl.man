@@ -2,9 +2,8 @@
 [manpage_begin kinetcl n 0.1]
 [include include/module.inc]
 [titledesc {KineTcl - API}]
-[require Tcl 8.5]
-[require kinetcl [opt 0.1]]
 [description]
+[include include/welcome.inc]
 
 [section API]
 [section {Base}]		[include include/c_base.inc]
@@ -23,5 +22,6 @@
 [section {Player Node}]		[include include/c_player.inc]
 [section {Script Node}]		[include include/c_script.inc]
 
+[include include/feedback.inc]
 [manpage_end]
 

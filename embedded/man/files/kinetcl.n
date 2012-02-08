@@ -508,6 +508,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 .BE
 .SH DESCRIPTION
+.PP
+Welcome to KineTcl, a binding of the OpenNI framework providing
+Tcl with access to MS Kinect (tm), and related sensor systems.
 .SH API
 .SH BASE
 This sections documents the class \fB::kinetcl::base\fR, the (abstract) base
@@ -1723,8 +1726,16 @@ them is destroyed.
 .sp
 The result of the method is the empty string.
 .PP
+.SH "BUGS, IDEAS, FEEDBACK"
+This document, and the package it describes, will undoubtedly contain
+bugs and other problems.
+Please report such at the \fIKineTcl Tracker\fR [http://chiselapp.com/user/andreas_kupries/repository/KineTcl].
+Please also report any ideas for enhancements you may have for either
+package and/or documentation.
 .SH KEYWORDS
-Kinect, OpenNI, PrimeSense, computer vision
+3D vision, Kinect, OpenNI, PrimeSense, computer vision, tracking, volume sensor
+.SH CATEGORY
+3rd party library binding
 .SH COPYRIGHT
 .nf
 Copyright (c) 2012 Andreas Kupries

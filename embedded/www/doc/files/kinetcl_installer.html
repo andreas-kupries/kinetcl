@@ -111,6 +111,7 @@
 <div id="toc" class="section"><h2><a name="toc">Table Of Contents</a></h2>
 <ul class="toc">
 <li class="section"><a href="#toc">Table Of Contents</a></li>
+<li class="section"><a href="#synopsis">Synopsis</a></li>
 <li class="section"><a href="#section1">Description</a></li>
 <li class="section"><a href="#section2">Requisites</a>
 <ul>
@@ -120,18 +121,29 @@
 </ul>
 </li>
 <li class="section"><a href="#section3">Build &amp; Installation</a></li>
+<li class="section"><a href="#section4">Bugs, Ideas, Feedback</a></li>
 <li class="section"><a href="#keywords">Keywords</a></li>
+<li class="section"><a href="#category">Category</a></li>
 <li class="section"><a href="#copyright">Copyright</a></li>
 </ul>
 </div>
+<div id="synopsis" class="section"><h2><a name="synopsis">Synopsis</a></h2>
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8.5</b></li>
+<li>package require <b class="pkgname">kinetcl <span class="opt">?0.1?</span></b></li>
+</ul>
+</div>
+</div>
 <div id="section1" class="section"><h2><a name="section1">Description</a></h2>
-<p>Welcome to KineTcl, a binding of the OpenNI framework providing Tcl
-with access to MS Kinect (tm), and related sensor systems.</p>
-<p>The audience of this document is anyone wishing to build the packages,
-for either themselves, or others.</p>
+<p>Welcome to KineTcl, a binding of the OpenNI framework providing
+Tcl with access to MS Kinect (tm), and related sensor systems.</p>
+<p>The audience of this document is anyone wishing to build the
+packages, for either themselves, or others.</p>
 <p>For a developer intending to extend or modify the packages we
 additionally provide</p>
 <ol class="enumerated">
+<li><p><i class="term"><a href="license.html">KineTcl - License</a></i>.</p></li>
 <li><p><i class="term"><a href="kinetcl_devguide.html">KineTcl - The Developer's Guide</a></i>.</p></li>
 </ol>
 <p>Please read <i class="term"><a href="kinetcl_sources.html">KineTcl - How To Get The Sources</a></i> first, if that was
@@ -144,9 +156,9 @@ available in a directory of your choice.</p>
 package that should be pretty much obvious, and I will not belabor the
 point.</p>
 <p>Use whatever you are comfortable with, as long as it provides
-Tcl 8.5, or higher.</p>
-<p>An easy way to get an installation of a recent Tcl 8.5, which I
-recommend, is to download and install
+Tcl 8.5, or higher, and Tk 8.5 or higher.</p>
+<p>An easy way to get an installation of a recent Tcl 8.5 and the
+mentioned packages, which I recommend, is to download and install
 <a href="http://www.activestate.com">ActiveState's</a>
 <a href="http://www.activestate.com/activetcl">ActiveTcl</a> for your platform.
 Follow the link for ActiveTcl to find it.</p>
@@ -159,6 +171,14 @@ choice run the command</p>
 alone.
 (Disclosure: I, Andreas Kupries, work for ActiveState, maintaining
 ActiveTcl and TclDevKit).</p>
+<p>For those wishing to build Tcl/Tk on their own, their sources
+can be found at</p>
+<dl class="definitions">
+<dt>Tcl</dt>
+<dd><p><a href="http://core.tcl.tk/tcl/">http://core.tcl.tk/tcl/</a></p></dd>
+<dt>Tk</dt>
+<dd><p><a href="http://core.tcl.tk/tk/">http://core.tcl.tk/tk/</a></p></dd>
+</dl>
 </div>
 <div id="subsection2" class="subsection"><h3><a name="subsection2">CriTcl</a></h3>
 <p>The tool <a href="http://jcw.github.com/critcl">critcl</a> is required to
@@ -242,8 +262,18 @@ syntax, invoke  &quot;<b class="file">build.tcl</b>&quot; with argument <b class
     /path/to/tclsh8.5 /path/to/kinetcl/build.tcl help
 </pre>
 </div>
+<div id="section4" class="section"><h2><a name="section4">Bugs, Ideas, Feedback</a></h2>
+<p>This document, and the package it describes, will undoubtedly contain
+bugs and other problems.
+Please report such at the <a href="http://chiselapp.com/user/andreas_kupries/repository/KineTcl">KineTcl Tracker</a>.
+Please also report any ideas for enhancements you may have for either
+package and/or documentation.</p>
+</div>
 <div id="keywords" class="section"><h2><a name="keywords">Keywords</a></h2>
-<p><a href="../../index.html#key1">Kinect</a>, <a href="../../index.html#key0">OpenNI</a>, <a href="../../index.html#key3">PrimeSense</a>, <a href="../../index.html#key2">computer vision</a></p>
+<p><a href="../../index.html#key4">3D vision</a>, <a href="../../index.html#key2">Kinect</a>, <a href="../../index.html#key0">OpenNI</a>, <a href="../../index.html#key6">PrimeSense</a>, <a href="../../index.html#key5">computer vision</a>, <a href="../../index.html#key3">tracking</a>, <a href="../../index.html#key1">volume sensor</a></p>
+</div>
+<div id="category" class="section"><h2><a name="category">Category</a></h2>
+<p>3rd party library binding</p>
 </div>
 <div id="copyright" class="section"><h2><a name="copyright">Copyright</a></h2>
 <p>Copyright &copy; 2012 Andreas Kupries<br>

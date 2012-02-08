@@ -3,4 +3,7 @@
 [copyright {2012 Documentation, Andreas Kupries}]
 [moddesc   {KineTcl}]
 [keywords OpenNI Kinect PrimeSense]
-[keywords {computer vision}]
+[keywords {computer vision} {3D vision} {volume sensor} tracking]
+[require Tcl 8.5]
+[require kinetcl [opt 0.1]]
+[category {3rd party library binding}]
