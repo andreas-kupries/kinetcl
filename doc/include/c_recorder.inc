@@ -1,10 +1,13 @@
 
-This sections documents the class [cmd ::kinetcl::recorder],
-which provides instances of recorders,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::recorder], the
+concrete class for all OpenNI recorder nodes.
 
-[para] ... describe recorder generator ....
+[para] This class inherits from [cmd ::kinetcl::base]. See section
+[sectref {Base}].
+
+[para] A recorder watches the stream of sensor information in the
+system and serializes it to a file. A player node may in the future
+read this information and replay it.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]

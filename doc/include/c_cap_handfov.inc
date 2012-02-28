@@ -1,9 +1,9 @@
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
-[subsection {Instance Hand Touching FV Edge API}]
+[subsection {Instance Hand Touching FOV Edge API}]
 
-Should the user generator instance support the API for "Hand Touching
-FOV Edge" events the following methods become available.
+Should a production node support the API for "Hand Touching FOV Edge"
+events the following methods become available.
 
 This support can checked by invoking the inherited method
 [method is-capable-of] for the capability name
@@ -12,8 +12,8 @@ This support can checked by invoking the inherited method
 [list_begin definitions]
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-fovEdge] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-fovEdge]]
+[call [cmd instanceCmd] [method set-callback-fovEdge] [arg cmd]...]
+[call [cmd instanceCmd] [method unset-callback-fovEdge]]
 
 These methods define and remove a callback responding to edge touch
 events, i.e. a hand coming into contact with the edge of the field of

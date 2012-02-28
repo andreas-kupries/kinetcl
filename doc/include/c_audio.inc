@@ -1,10 +1,12 @@
 
-This sections documents the class [cmd ::kinetcl::audio],
-which provides instances of audio generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::audio], the concrete
+class for all OpenNI audio generator nodes.
 
-[para] ... describe audio generator ....
+[para] This class inherits from [cmd ::kinetcl::generator] and its
+superclasses. See section [sectref {Generator}].
+
+[para] An audio generator provides access to the stream of sound data
+from the sensor.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]

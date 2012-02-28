@@ -1,10 +1,12 @@
 
-This sections documents the class [cmd ::kinetcl::ir],
-which provides instances of ir image generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::ir], the
+concrete class for all OpenNI IR image generator nodes.
 
-[para] ... describe ir generator ....
+[para] This class inherits from [cmd ::kinetcl::map] and its
+superclasses. See section [sectref {Map Generator}].
+
+[para] An IR image generator is a map generator providing infrared
+images.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]

@@ -22,6 +22,8 @@
 [section {Player Node}]		[include include/c_player.inc]
 [section {Script Node}]		[include include/c_script.inc]
 
+[section Capabilities]          [include include/c_cap.inc]
+
 [include include/feedback.inc]
 [manpage_end]
 

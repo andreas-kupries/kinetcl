@@ -1,10 +1,12 @@
 
-This sections documents the class [cmd ::kinetcl::hands],
-which provides instances of hands generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::hands], the concrete
+class for all OpenNI hand generator nodes.
 
-[para] ... describe hands generator ....
+[para] This class inherits from [cmd ::kinetcl::generator] and its
+superclasses. See section [sectref {Generator}].
+
+[para] A hand generator identifies and tracks the hands of the users
+within the field of view of the sensor.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]

@@ -284,21 +284,21 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgeneratorInstanceCmd\fR \fBunset-callback-newdata\fR
 .sp
-\fB::kinetcl::generator\fR \fBnew\fR
+\fB::kinetcl::map\fR \fBnew\fR
 .sp
-\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl::map\fR \fBcreate\fR \fIobjname\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBbytes-per-pixel\fR
+\fImapInstanceCmd\fR \fBbytes-per-pixel\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBmodes\fR
+\fImapInstanceCmd\fR \fBmodes\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBmode\fR
+\fImapInstanceCmd\fR \fBmode\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBmode\fR \fIxres\fR \fIyres\fR \fIfps\fR
+\fImapInstanceCmd\fR \fBmode\fR \fIxres\fR \fIyres\fR \fIfps\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
+\fImapInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
 .sp
-\fIgeneratorInstanceCmd\fR \fBunset-callback-mode\fR
+\fImapInstanceCmd\fR \fBunset-callback-mode\fR
 .sp
 \fB::kinetcl::depth\fR
 .sp
@@ -380,96 +380,6 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBunset-callback-lost\fR
 .sp
-\fIuserInstanceCmd\fR \fBposes\fR
-.sp
-\fIuserInstanceCmd\fR \fBis-supported\fR \fIpose\fR
-.sp
-\fIuserInstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
-.sp
-\fIuserInstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
-.sp
-\fIuserInstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
-.sp
-\fIuserInstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-poseEnter\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-poseExit\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-poseProgress\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-fovEdge\fR
-.sp
-\fBuserInstanceCmd\fR \fBneed-pose\fR
-.sp
-\fBuserInstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
-.sp
-\fBuserInstanceCmd\fR \fBset-profile\fR \fIprofile\fR
-.sp
-\fBuserInstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
-.sp
-\fBuserInstanceCmd\fR \fBstart-tracking\fR \fIid\fR
-.sp
-\fBuserInstanceCmd\fR \fBstop-tracking\fR \fIid\fR
-.sp
-\fBuserInstanceCmd\fR \fBreset-tracking\fR \fIid\fR
-.sp
-\fBuserInstanceCmd\fR \fBis-tracking\fR \fIid\fR
-.sp
-\fBuserInstanceCmd\fR \fBis-calibrated\fR \fIid\fR
-.sp
-\fBuserInstanceCmd\fR \fBis-calibrating\fR \fIid\fR
-.sp
-\fBuserInstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
-.sp
-\fBuserInstanceCmd\fR \fBabort-calibration\fR \fIid\fR
-.sp
-\fBuserInstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
-.sp
-\fBuserInstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
-.sp
-\fBuserInstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
-.sp
-\fBuserInstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
-.sp
-\fBuserInstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
-.sp
-\fBuserInstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
-.sp
-\fBuserInstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
-.sp
-\fBuserInstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
-.sp
-\fBuserInstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
-.sp
-\fBuserInstanceCmd\fR \fBactive-joints\fR
-.sp
-\fBuserInstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-jointConfigChange\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationStart\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationComplete\fR
-.sp
-\fIuserInstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
-.sp
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationProgress\fR
-.sp
 \fB::kinetcl::hands\fR
 .sp
 \fIhandsInstanceCmd\fR \fBdestroy\fR
@@ -505,6 +415,96 @@ package require \fBkinetcl  ?0.1?\fR
 \fB::kinetcl::script\fR
 .sp
 \fIscriptInstanceCmd\fR \fBdestroy\fR
+.sp
+\fBinstanceCmd\fR \fBposes\fR
+.sp
+\fBinstanceCmd\fR \fBis-supported\fR \fIpose\fR
+.sp
+\fBinstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
+.sp
+\fBinstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
+.sp
+\fBinstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
+.sp
+\fBinstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
+.sp
+\fBinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+.sp
+\fBinstanceCmd\fR \fBunset-callback-poseEnter\fR
+.sp
+\fBinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+.sp
+\fBinstanceCmd\fR \fBunset-callback-poseExit\fR
+.sp
+\fBinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+.sp
+\fBinstanceCmd\fR \fBunset-callback-poseProgress\fR
+.sp
+\fBinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+.sp
+\fBinstanceCmd\fR \fBunset-callback-fovEdge\fR
+.sp
+\fBinstanceCmd\fR \fBneed-pose\fR
+.sp
+\fBinstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
+.sp
+\fBinstanceCmd\fR \fBset-profile\fR \fIprofile\fR
+.sp
+\fBinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+.sp
+\fBinstanceCmd\fR \fBstart-tracking\fR \fIid\fR
+.sp
+\fBinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+.sp
+\fBinstanceCmd\fR \fBreset-tracking\fR \fIid\fR
+.sp
+\fBinstanceCmd\fR \fBis-tracking\fR \fIid\fR
+.sp
+\fBinstanceCmd\fR \fBis-calibrated\fR \fIid\fR
+.sp
+\fBinstanceCmd\fR \fBis-calibrating\fR \fIid\fR
+.sp
+\fBinstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
+.sp
+\fBinstanceCmd\fR \fBabort-calibration\fR \fIid\fR
+.sp
+\fBinstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
+.sp
+\fBinstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
+.sp
+\fBinstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
+.sp
+\fBinstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
+.sp
+\fBinstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
+.sp
+\fBinstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
+.sp
+\fBinstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
+.sp
+\fBinstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
+.sp
+\fBinstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
+.sp
+\fBinstanceCmd\fR \fBactive-joints\fR
+.sp
+\fBinstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-jointConfigChange\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationStart\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationComplete\fR
+.sp
+\fIuserInstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
+.sp
+\fIuserInstanceCmd\fR \fBunset-callback-calibrationProgress\fR
 .sp
 .BE
 .SH DESCRIPTION
@@ -546,7 +546,8 @@ is supported, and \fBfalse\fR else.
 This sections documents the class \fB::kinetcl::generator\fR, the (abstract) base
 class for all OpenNI generator nodes.
 .PP
-This class inherits from \fB::kinetcl::base\fR.
+This class inherits from \fB::kinetcl::base\fR. See section
+\fBBase\fR.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::generator\fR \fBnew\fR
@@ -650,12 +651,12 @@ This sections documents the class \fB::kinetcl::map\fR, the (abstract) base
 class for all OpenNI map generator nodes.
 .PP
 This class inherits from \fB::kinetcl::generator\fR and its
-superclasses.
+superclasses. See section \fBGenerator\fR.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::generator\fR \fBnew\fR
+\fB::kinetcl::map\fR \fBnew\fR
 .TP
-\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl::map\fR \fBcreate\fR \fIobjname\fR
 This command creates a new instance of the map generator.
 Note that it is \fIimpossible\fR to create such an instance on its
 own. It can be done only as part of constructing the instance of a
@@ -665,10 +666,10 @@ and their semantics is described in the next subsection.
 .PP
 .SS "INSTANCE API"
 .TP
-\fIgeneratorInstanceCmd\fR \fBbytes-per-pixel\fR
+\fImapInstanceCmd\fR \fBbytes-per-pixel\fR
 This method returns the number of bytes per pixel in the map.
 .TP
-\fIgeneratorInstanceCmd\fR \fBmodes\fR
+\fImapInstanceCmd\fR \fBmodes\fR
 This method returns the map output modes supported by the instance.
 .sp
 The result of the method is a list of modes. Each mode is a
@@ -676,23 +677,23 @@ The result of the method is a list of modes. Each mode is a
 and the associated frame rate in frames per second, in this order. All
 elements are integer numbers.
 .TP
-\fIgeneratorInstanceCmd\fR \fBmode\fR
+\fImapInstanceCmd\fR \fBmode\fR
 This form of the method reports the currently set map output mode.
 .sp
 The result of the method is a 3-element list reporting the x-
 and y-resolution of the map in pixels, and the associated frame rate
 in frames per second, in this order. All elements are integer numbers.
 .TP
-\fIgeneratorInstanceCmd\fR \fBmode\fR \fIxres\fR \fIyres\fR \fIfps\fR
+\fImapInstanceCmd\fR \fBmode\fR \fIxres\fR \fIyres\fR \fIfps\fR
 This form of the method changes the map output mode to the specified
 resolution and frame rate. The method throws an error if the
 combination is not supported by the instance.
 .sp
 The result of the method is an empty string.
 .TP
-\fIgeneratorInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
+\fImapInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
 .TP
-\fIgeneratorInstanceCmd\fR \fBunset-callback-mode\fR
+\fImapInstanceCmd\fR \fBunset-callback-mode\fR
 These methods define and remove a callback responding to mode change
 events, i.e. the instance changing the its output mode.
 .sp
@@ -705,12 +706,15 @@ and the word "mode", in this order.
 The result of the methods is an empty string.
 .PP
 .SH "DEPTH GENERATOR"
-This sections documents the class \fB::kinetcl::depth\fR,
-which provides instances of depth generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class \fB::kinetcl::generator\fR, the
+concrete class for all OpenNI depth generator nodes.
 .PP
-... describe depth generator ....
+This class inherits from \fB::kinetcl::generator\fR and its
+superclasses. See section \fBGenerator\fR.
+.PP
+A depth generator is a generator providing depth maps,
+i.e. images where each pixel value describes the distance of the pixel
+from the sensor.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::depth\fR
@@ -730,12 +734,14 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "IMAGE GENERATOR"
-This sections documents the class \fB::kinetcl::image\fR,
-which provides instances of image generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class \fB::kinetcl::image\fR, the
+concrete class for all OpenNI image generator nodes.
 .PP
-... describe image generator ....
+This class inherits from \fB::kinetcl::map\fR and its
+superclasses. See section \fBMap Generator\fR.
+.PP
+An image generator is a map generator providing plain images,
+where each pixel value describes the color (or luminance) of the pixel.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::image\fR
@@ -755,12 +761,14 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "IR GENERATOR"
-This sections documents the class \fB::kinetcl::ir\fR,
-which provides instances of ir image generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class \fB::kinetcl::ir\fR, the
+concrete class for all OpenNI IR image generator nodes.
 .PP
-... describe ir generator ....
+This class inherits from \fB::kinetcl::map\fR and its
+superclasses. See section \fBMap Generator\fR.
+.PP
+An IR image generator is a map generator providing infrared
+images.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::ir\fR
@@ -780,12 +788,14 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "GESTURE GENERATOR"
-This sections documents the class \fB::kinetcl::gesture\fR,
-which provides instances of gesture generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class \fB::kinetcl::gesture\fR, the
+concrete class for all OpenNI gesture generator nodes.
 .PP
-... describe gesture generator ....
+This class inherits from \fB::kinetcl::generator\fR and its
+superclasses. See section \fBGenerator\fR.
+.PP
+A genestur generator identifies and tracks gestures performed
+by the users within the field of view of the sensor.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::gesture\fR
@@ -923,12 +933,14 @@ ready for the recognition of the next of its stages, and the current
 The result of the methods is an empty string.
 .PP
 .SH "SCENE ANALYZER"
-This sections documents the class \fB::kinetcl::scene\fR,
-which provides instances of scene analyzers,
-derived from generators,
-derived from production nodes.
+This sections documents the class \fB::kinetcl::scene\fR, the concrete
+class for all OpenNI scene analyzer nodes.
 .PP
-... describe scene analyzer ....
+This class inherits from \fB::kinetcl::map\fR and its
+superclasses. See section \fBMap Generator\fR.
+.PP
+A scene analyzer segments a scene, identifying the floor and
+other connected areas in the view of the sensor.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::scene\fR
@@ -948,11 +960,23 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "USER GENERATOR"
-This sections documents the class \fB::kinetcl::user\fR, the concrete class
-for all OpenNI user generator nodes.
+This sections documents the class \fB::kinetcl::user\fR, the concrete
+class for all OpenNI user generator nodes.
 .PP
 This class inherits from \fB::kinetcl::generator\fR and its
-superclasses.
+superclasses. See section \fBGenerator\fR.
+.PP
+A user generator identifies and tracks users within the field
+of view of the sensor.
+.PP
+They may have the following capabilities:
+.IP [1]
+\fBInstance Pose Detection API\fR
+.IP [2]
+\fBInstance Hand Touching FOV Edge API\fR
+.IP [3]
+\fBInstance Skeleton/Joint API\fR
+.PP
 .SS "CLASS API"
 .TP
 \fB::kinetcl::user\fR
@@ -1052,41 +1076,233 @@ this order.
 .sp
 The result of the methods is an empty string.
 .PP
-.SS "INSTANCE POSE DETECTION API"
-Should the user generator instance support the pose detection API the
-following methods become available. This support can checked by
-invoking the inherited method \fBis-capable-of\fR for the capability
-name \fBuser-pose-detection\fR.
+.SH "HANDS GENERATOR"
+This sections documents the class \fB::kinetcl::hands\fR, the concrete
+class for all OpenNI hand generator nodes.
+.PP
+This class inherits from \fB::kinetcl::generator\fR and its
+superclasses. See section \fBGenerator\fR.
+.PP
+A hand generator identifies and tracks the hands of the users
+within the field of view of the sensor.
+.SS "CLASS API"
 .TP
-\fIuserInstanceCmd\fR \fBposes\fR
+\fB::kinetcl::hands\fR
+This command creates a new hands generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIhandsInstanceCmd\fR \fBdestroy\fR
+This method destroys the hands generator instance and releases all
+associated resources, including the instance command. Note that
+resources used by multiple instances are released only when the last
+instance using them is destroyed.
+.sp
+The result of the method is the empty string.
+.PP
+.SH "AUDIO GENERATOR"
+This sections documents the class \fB::kinetcl::audio\fR, the concrete
+class for all OpenNI audio generator nodes.
+.PP
+This class inherits from \fB::kinetcl::generator\fR and its
+superclasses. See section \fBGenerator\fR.
+.PP
+An audio generator provides access to the stream of sound data
+from the sensor.
+.SS "CLASS API"
+.TP
+\fB::kinetcl::audio\fR
+This command creates a new audio generator instance and returns the
+fully qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIaudioInstanceCmd\fR \fBdestroy\fR
+This method destroys the audio generator instance and releases all
+associated resources, including the instance command. Note that
+resources used by multiple instances are released only when the last
+instance using them is destroyed.
+.sp
+The result of the method is the empty string.
+.PP
+.SH "RECORDER NODE"
+This sections documents the class \fB::kinetcl::recorder\fR, the
+concrete class for all OpenNI recorder nodes.
+.PP
+This class inherits from \fB::kinetcl::base\fR. See section
+\fBBase\fR.
+.PP
+A recorder watches the stream of sensor information in the
+system and serializes it to a file. A player node may in the future
+read this information and replay it.
+.SS "CLASS API"
+.TP
+\fB::kinetcl::recorder\fR
+This command creates a new recorder instance and returns the fully
+qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIrecorderInstanceCmd\fR \fBdestroy\fR
+This method destroys the recorder instance and releases all associated
+resources, including the instance command. Note that resources used
+by multiple instances are released only when the last instance using
+them is destroyed.
+.sp
+The result of the method is the empty string.
+.PP
+.SH "PLAYER NODE"
+This sections documents the class \fB::kinetcl::player\fR, the
+concrete class for all OpenNI player nodes.
+.PP
+This class inherits from \fB::kinetcl::base\fR. See section
+\fBBase\fR.
+.PP
+A player read a stream of sensor information from a file and
+injects it into the system, faking the existence of a sensor.
+.SS "CLASS API"
+.TP
+\fB::kinetcl::player\fR
+This command creates a new player instance and returns the fully
+qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIplayerInstanceCmd\fR \fBdestroy\fR
+This method destroys the player instance and releases all associated
+resources, including the instance command. Note that resources used
+by multiple instances are released only when the last instance using
+them is destroyed.
+.sp
+The result of the method is the empty string.
+.TP
+\fIplayerInstanceCmd\fR \fBspeed\fR \fIspeed\fR
+This method sets the speed of playback as a ratio of the time passed
+in the recording. I.e. a speed of \fB1\fR implies playback at the
+same frame/rate as recorded, whereas a speed < 1 causes slow-motion,
+and a speed > 1 fast-forward.
+.sp
+The result of the method is the empty string.
+.TP
+\fIplayerInstanceCmd\fR \fBspeed\fR
+This method returns the speed of playback, as a ratio of the time
+passed in the recording.
+.sp
+The result of the method is a floating point number.
+.TP
+\fIplayerInstanceCmd\fR \fBrepeat\fR \fIbool\fR
+This method activates or deactivates repeating mode. If repeating is
+activated (\fIbool\fR is \fBtrue\fR) the player will automatically
+rewind to the beginning of the recording when reaching the end, and
+continue playing.
+.sp
+The result of the method is the empty string.
+.TP
+\fIplayerInstanceCmd\fR \fBeof\fR
+This method tests if the player has reached the end of the recording,
+or not. Note that this is never \fBtrue\fR when the player is in
+repeating mode, however "eof" events are still triggered.
+.sp
+The result of the method is boolean value, \fBtrue\fR if the
+player is at the end of the recording, and \fBfalse\fR else.
+.TP
+\fIplayerInstanceCmd\fR \fBformat\fR
+This method returns the name of the format supported by the player instance.
+.TP
+\fIplayerInstanceCmd\fR \fBnext\fR
+This method causes the player to explicitly advance to the next frame.
+.sp
+The result of the method is the empty string.
+.TP
+\fIuserInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
+.TP
+\fIuserInstanceCmd\fR \fBunset-callback-eof\fR
+These methods define and remove a callback responding to "eof" events,
+i.e. when the end of the recording was reached.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with three arguments added to it, the instance
+command, and the word "eof", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SH "SCRIPT NODE"
+This sections documents the class \fB::kinetcl::script\fR, the
+concrete class for all OpenNI recorder nodes.
+.PP
+This class inherits from \fB::kinetcl::base\fR. See section
+\fBBase\fR.
+.PP
+A script node can run scripts (sic!), and manages the life-time
+of all nodes created by such.
+.SS "CLASS API"
+.TP
+\fB::kinetcl::script\fR
+This command creates a new script instance and returns the fully
+qualified name of the instance command. The API provided by that
+command, i.e. the set of available methods and their semantics is
+described in the next subsection.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIscriptInstanceCmd\fR \fBdestroy\fR
+This method destroys the script instance and releases all associated
+resources, including the instance command. Note that resources used
+by multiple instances are released only when the last instance using
+them is destroyed.
+.sp
+The result of the method is the empty string.
+.PP
+.SH CAPABILITIES
+This sections documents the various capabilities a production node may have.
+The main classes will all refer to the sub-sections found here.
+.SS "INSTANCE POSE DETECTION API"
+Should a production node support the pose detection API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name
+\fBuser-pose-detection\fR.
+.TP
+\fBinstanceCmd\fR \fBposes\fR
 This method returns a list containing the names of the supported user
 poses.
 .TP
-\fIuserInstanceCmd\fR \fBis-supported\fR \fIpose\fR
+\fBinstanceCmd\fR \fBis-supported\fR \fIpose\fR
 This method tests if the named user pose is supported by the instance.
 .sp
 The result is a boolean value, \fBtrue\fR if the pose is
 supported, and \fBfalse\fR else.
 .TP
-\fIuserInstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
+\fBinstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
 This method activates the detection of the named \fIpose\fR for the
 specified \fIuser\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
+\fBinstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
 This method deactivates the detection of the named \fIpose\fR for the
 specified \fIuser\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
+\fBinstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
 This method deactivates the detection of any poses for the specified
 \fIuser\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
+\fBinstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
 This method queries the status of the detection of the named \fIpose\fR
 for the specified \fIuser\fR.
 .sp
@@ -1103,9 +1319,9 @@ in the pose. If the user is out of the pose \fB0\fR is returned
 here.
 .RE
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+\fBinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-poseEnter\fR
+\fBinstanceCmd\fR \fBunset-callback-poseEnter\fR
 These methods define and remove a callback responding to pose entry
 events, i.e. a user entering a pose.
 .sp
@@ -1118,9 +1334,9 @@ id of the user entering it, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+\fBinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-poseExit\fR
+\fBinstanceCmd\fR \fBunset-callback-poseExit\fR
 These methods define and remove a callback responding to pose exit
 events, i.e. a user existing a pose.
 .sp
@@ -1133,9 +1349,9 @@ user exiting it, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+\fBinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-poseProgress\fR
+\fBinstanceCmd\fR \fBunset-callback-poseProgress\fR
 These methods define and remove a callback responding to pose progress
 events, i.e. the steps of the engine for detecting user poses.
 .sp
@@ -1148,16 +1364,16 @@ user, and the status of the detection engine, in this order.
 .sp
 The result of the methods is an empty string.
 .PP
-.SS "INSTANCE HAND TOUCHING FV EDGE API"
-Should the user generator instance support the API for "Hand Touching
-FOV Edge" events the following methods become available.
+.SS "INSTANCE HAND TOUCHING FOV EDGE API"
+Should a production node support the API for "Hand Touching FOV Edge"
+events the following methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
 \fBhand-touching-fov-edge\fR.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+\fBinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-fovEdge\fR
+\fBinstanceCmd\fR \fBunset-callback-fovEdge\fR
 These methods define and remove a callback responding to edge touch
 events, i.e. a hand coming into contact with the edge of the field of
 view (a box).
@@ -1196,12 +1412,13 @@ The direction is one of
 The result of the methods is an empty string.
 .PP
 .SS "INSTANCE SKELETON/JOINT API"
-Should the user generator instance support the skeleton API the
-following methods become available. This support can checked by
-invoking the inherited method \fBis-capable-of\fR for the
-capability name \fBuser-skeleton\fR.
+Should a production node support the skeleton API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name
+\fBuser-skeleton\fR.
 .TP
-\fBuserInstanceCmd\fR \fBneed-pose\fR
+\fBinstanceCmd\fR \fBneed-pose\fR
 This method tests if the skeleton tracking requires the user to enter
 a pose for calibration.
 .sp
@@ -1210,7 +1427,7 @@ is required, and \fBfalse\fR else.
 \fINOTE\fR: XXX. The C API to query the name of the required pose
 looks to be borken, or underspecified. Research required.
 .TP
-\fBuserInstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
+\fBinstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
 This method tests if the skeleton tracking supports the named
 \fIprofile\fR.
 .sp
@@ -1231,7 +1448,7 @@ The accepted profile names are
 \fBheads-hands\fR
 .RE
 .TP
-\fBuserInstanceCmd\fR \fBset-profile\fR \fIprofile\fR
+\fBinstanceCmd\fR \fBset-profile\fR \fIprofile\fR
 This method activates the named \fIprofile\fR. This will result in
 joints getting activated or deactivated, as per the profile.
 .sp
@@ -1240,51 +1457,51 @@ The accepted profile names are described above, at
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+\fBinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
 This method sets the skeleton smoothing \fIfactor\fR, a floating point
 value.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBstart-tracking\fR \fIid\fR
+\fBinstanceCmd\fR \fBstart-tracking\fR \fIid\fR
 This method activates the tracking of the skeleton for the user
 specified by the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+\fBinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
 This method stops tracking of the skeleton for the user
 specified by the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBreset-tracking\fR \fIid\fR
+\fBinstanceCmd\fR \fBreset-tracking\fR \fIid\fR
 This method discards the calibration of the skeleton for the user
 specified by the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBis-tracking\fR \fIid\fR
+\fBinstanceCmd\fR \fBis-tracking\fR \fIid\fR
 This method tests if the skeleton for the user \fIid\fR is currently
 tracked.
 .sp
 The result is a boolean value, \fBtrue\fR if tracking is
 active, and \fBfalse\fR else.
 .TP
-\fBuserInstanceCmd\fR \fBis-calibrated\fR \fIid\fR
+\fBinstanceCmd\fR \fBis-calibrated\fR \fIid\fR
 This method tests if the skeleton for the user \fIid\fR is calibrated.
 .sp
 The result is a boolean value, \fBtrue\fR if the skeleton is
 calbrated, and \fBfalse\fR else.
 .TP
-\fBuserInstanceCmd\fR \fBis-calibrating\fR \fIid\fR
+\fBinstanceCmd\fR \fBis-calibrating\fR \fIid\fR
 This method tests if calibration of the skeleton for the user \fIid\fR
 is currently in progress.
 .sp
 The result is a boolean value, \fBtrue\fR if calibration is
 in progress, and \fBfalse\fR else.
 .TP
-\fBuserInstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
+\fBinstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
 This method requests calibration of the skeleton for the user
 specified by the \fIid\fR.
 .sp
@@ -1293,54 +1510,54 @@ The result of the method is an empty string.
 If the boolean flag \fIforce\fR is set any previous calibration
 data is discarded.
 .TP
-\fBuserInstanceCmd\fR \fBabort-calibration\fR \fIid\fR
+\fBinstanceCmd\fR \fBabort-calibration\fR \fIid\fR
 This method stops a calibration in progress, for the user specified by
 the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
+\fBinstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
 This method saves the calibration data for the skeleton of the user
 specified by the \fIid\fR into the file \fIpath\fR. The format of the
 calibration data is not documented.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
+\fBinstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
 This method loads the calibration data for the skeleton of the user
 specified by the \fIid\fR from the file \fIpath\fR. The format of the
 calibration data is not documented.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
+\fBinstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
 This method saves the calibration data for the skeleton of the user
 specified by the \fIid\fR into the in-memory storage identified by the
 \fIslot\fR number.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
+\fBinstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
 This method loads the calibration data for the skeleton of the user
 specified by the \fIid\fR from the in-memory storage identified by the
 \fIslot\fR number.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
+\fBinstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
 This method clears the in-memory calibration data storage identified
 by the \fIslot\fR number.
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
+\fBinstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
 This method tests if the in-memory storage identified by the
 \fIslot\fR number contains skeleton calibration data.
 .sp
 The result is a boolean value, \fBtrue\fR if the slot is
 occupied, and \fBfalse\fR else.
 .TP
-\fBuserInstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
+\fBinstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
 This method tests if the skeleton tracking supports the named
 \fIjoint\fR.
 .sp
@@ -1399,7 +1616,7 @@ The accepted joint names are
 \fBright-foot\fR
 .RE
 .TP
-\fBuserInstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
+\fBinstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
 This method tests if the the named \fIjoint\fR is actively tracked.
 .sp
 The result is a boolean value, \fBtrue\fR if the joint is
@@ -1408,7 +1625,7 @@ active, and \fBfalse\fR else.
 The accepted joint names are described above, at
 \fBis-joint-available\fR.
 .TP
-\fBuserInstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
+\fBinstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
 This method (de)activates the named \fIjoint\fR.
 .sp
 The accepted joint names are described above, at
@@ -1416,14 +1633,14 @@ The accepted joint names are described above, at
 .sp
 The result of the method is an empty string.
 .TP
-\fBuserInstanceCmd\fR \fBactive-joints\fR
+\fBinstanceCmd\fR \fBactive-joints\fR
 This method returns a list containig the names of all currently active
 joints.
 .sp
 The possible joint names are described above, at
 \fBis-joint-available\fR.
 .TP
-\fBuserInstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
+\fBinstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
 This method retrieves position and orientation data for the user
 specified by \fIid\fR and the named \fIjoint\fR.
 .sp
@@ -1550,181 +1767,6 @@ The result of the methods is an empty string.
 .sp
 The possible progress stati are identical to the completion
 stati described above.
-.PP
-.SH "HANDS GENERATOR"
-This sections documents the class \fB::kinetcl::hands\fR,
-which provides instances of hands generators,
-derived from generators,
-derived from production nodes.
-.PP
-... describe hands generator ....
-.SS "CLASS API"
-.TP
-\fB::kinetcl::hands\fR
-This command creates a new hands generator instance and returns the
-fully qualified name of the instance command. The API provided by that
-command, i.e. the set of available methods and their semantics is
-described in the next subsection.
-.PP
-.SS "INSTANCE API"
-.TP
-\fIhandsInstanceCmd\fR \fBdestroy\fR
-This method destroys the hands generator instance and releases all
-associated resources, including the instance command. Note that
-resources used by multiple instances are released only when the last
-instance using them is destroyed.
-.sp
-The result of the method is the empty string.
-.PP
-.SH "AUDIO GENERATOR"
-This sections documents the class \fB::kinetcl::audio\fR,
-which provides instances of audio generators,
-derived from generators,
-derived from production nodes.
-.PP
-... describe audio generator ....
-.SS "CLASS API"
-.TP
-\fB::kinetcl::audio\fR
-This command creates a new audio generator instance and returns the
-fully qualified name of the instance command. The API provided by that
-command, i.e. the set of available methods and their semantics is
-described in the next subsection.
-.PP
-.SS "INSTANCE API"
-.TP
-\fIaudioInstanceCmd\fR \fBdestroy\fR
-This method destroys the audio generator instance and releases all
-associated resources, including the instance command. Note that
-resources used by multiple instances are released only when the last
-instance using them is destroyed.
-.sp
-The result of the method is the empty string.
-.PP
-.SH "RECORDER NODE"
-This sections documents the class \fB::kinetcl::recorder\fR,
-which provides instances of recorders,
-derived from generators,
-derived from production nodes.
-.PP
-... describe recorder generator ....
-.SS "CLASS API"
-.TP
-\fB::kinetcl::recorder\fR
-This command creates a new recorder instance and returns the fully
-qualified name of the instance command. The API provided by that
-command, i.e. the set of available methods and their semantics is
-described in the next subsection.
-.PP
-.SS "INSTANCE API"
-.TP
-\fIrecorderInstanceCmd\fR \fBdestroy\fR
-This method destroys the recorder instance and releases all associated
-resources, including the instance command. Note that resources used
-by multiple instances are released only when the last instance using
-them is destroyed.
-.sp
-The result of the method is the empty string.
-.PP
-.SH "PLAYER NODE"
-This sections documents the class \fB::kinetcl::player\fR, the concrete class
-for all OpenNI player nodes.
-.PP
-This class inherits from \fB::kinetcl::base\fR.
-.SS "CLASS API"
-.TP
-\fB::kinetcl::player\fR
-This command creates a new player instance and returns the fully
-qualified name of the instance command. The API provided by that
-command, i.e. the set of available methods and their semantics is
-described in the next subsection.
-.PP
-.SS "INSTANCE API"
-.TP
-\fIplayerInstanceCmd\fR \fBdestroy\fR
-This method destroys the player instance and releases all associated
-resources, including the instance command. Note that resources used
-by multiple instances are released only when the last instance using
-them is destroyed.
-.sp
-The result of the method is the empty string.
-.TP
-\fIplayerInstanceCmd\fR \fBspeed\fR \fIspeed\fR
-This method sets the speed of playback as a ratio of the time passed
-in the recording. I.e. a speed of \fB1\fR implies playback at the
-same frame/rate as recorded, whereas a speed < 1 causes slow-motion,
-and a speed > 1 fast-forward.
-.sp
-The result of the method is the empty string.
-.TP
-\fIplayerInstanceCmd\fR \fBspeed\fR
-This method returns the speed of playback, as a ratio of the time
-passed in the recording.
-.sp
-The result of the method is a floating point number.
-.TP
-\fIplayerInstanceCmd\fR \fBrepeat\fR \fIbool\fR
-This method activates or deactivates repeating mode. If repeating is
-activated (\fIbool\fR is \fBtrue\fR) the player will automatically
-rewind to the beginning of the recording when reaching the end, and
-continue playing.
-.sp
-The result of the method is the empty string.
-.TP
-\fIplayerInstanceCmd\fR \fBeof\fR
-This method tests if the player has reached the end of the recording,
-or not. Note that this is never \fBtrue\fR when the player is in
-repeating mode, however "eof" events are still triggered.
-.sp
-The result of the method is boolean value, \fBtrue\fR if the
-player is at the end of the recording, and \fBfalse\fR else.
-.TP
-\fIplayerInstanceCmd\fR \fBformat\fR
-This method returns the name of the format supported by the player instance.
-.TP
-\fIplayerInstanceCmd\fR \fBnext\fR
-This method causes the player to explicitly advance to the next frame.
-.sp
-The result of the method is the empty string.
-.TP
-\fIuserInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
-.TP
-\fIuserInstanceCmd\fR \fBunset-callback-eof\fR
-These methods define and remove a callback responding to "eof" events,
-i.e. when the end of the recording was reached.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, and the word "eof", in this order.
-.sp
-The result of the methods is an empty string.
-.PP
-.SH "SCRIPT NODE"
-This sections documents the class \fB::kinetcl::script\fR,
-which provides instances of scripts,
-derived from generators,
-derived from production nodes.
-.PP
-... describe script generator ....
-.SS "CLASS API"
-.TP
-\fB::kinetcl::script\fR
-This command creates a new script instance and returns the fully
-qualified name of the instance command. The API provided by that
-command, i.e. the set of available methods and their semantics is
-described in the next subsection.
-.PP
-.SS "INSTANCE API"
-.TP
-\fIscriptInstanceCmd\fR \fBdestroy\fR
-This method destroys the script instance and releases all associated
-resources, including the instance command. Note that resources used
-by multiple instances are released only when the last instance using
-them is destroyed.
-.sp
-The result of the method is the empty string.
 .PP
 .SH "BUGS, IDEAS, FEEDBACK"
 This document, and the package it describes, will undoubtedly contain

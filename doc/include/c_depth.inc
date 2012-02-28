@@ -1,10 +1,13 @@
 
-This sections documents the class [cmd ::kinetcl::depth],
-which provides instances of depth generators,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::generator], the
+concrete class for all OpenNI depth generator nodes.
 
-[para] ... describe depth generator ....
+[para] This class inherits from [cmd ::kinetcl::generator] and its
+superclasses. See section [sectref {Generator}].
+
+[para] A depth generator is a generator providing depth maps,
+i.e. images where each pixel value describes the distance of the pixel
+from the sensor.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]

@@ -1,10 +1,12 @@
 
-This sections documents the class [cmd ::kinetcl::script],
-which provides instances of scripts,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::script], the
+concrete class for all OpenNI recorder nodes.
 
-[para] ... describe script generator ....
+[para] This class inherits from [cmd ::kinetcl::base]. See section
+[sectref {Base}].
+
+[para] A script node can run scripts (sic!), and manages the life-time
+of all nodes created by such.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]

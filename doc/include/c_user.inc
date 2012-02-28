@@ -1,9 +1,19 @@
 
-This sections documents the class [cmd ::kinetcl::user], the concrete class
-for all OpenNI user generator nodes.
+This sections documents the class [cmd ::kinetcl::user], the concrete
+class for all OpenNI user generator nodes.
 
 [para] This class inherits from [cmd ::kinetcl::generator] and its
-superclasses.
+superclasses. See section [sectref {Generator}].
+
+[para] A user generator identifies and tracks users within the field
+of view of the sensor.
+
+[para] They may have the following capabilities:
+[list_begin enumerated]
+[enum] [sectref {Instance Pose Detection API}]
+[enum] [sectref {Instance Hand Touching FOV Edge API}]
+[enum] [sectref {Instance Skeleton/Joint API}]
+[list_end]
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
@@ -125,8 +135,3 @@ this order.
 [para] The result of the methods is an empty string.
 
 [list_end]
-
-[include c_cap_pose.inc]
-[include c_cap_handfov.inc]
-[include c_cap_skeleton.inc]
-

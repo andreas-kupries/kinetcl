@@ -2,14 +2,16 @@
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Instance Skeleton/Joint API}]
 
-Should the user generator instance support the skeleton API the
-following methods become available. This support can checked by
-invoking the inherited method [method is-capable-of] for the
-capability name [const user-skeleton].
+Should a production node support the skeleton API the following
+methods become available.
+
+This support can checked by invoking the inherited method
+[method is-capable-of] for the capability name
+[const user-skeleton].
 
 [list_begin definitions]
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method need-pose]]
+[call [cmd instanceCmd] [method need-pose]]
 
 This method tests if the skeleton tracking requires the user to enter
 a pose for calibration.
@@ -21,7 +23,7 @@ is required, and [const false] else.
 looks to be borken, or underspecified. Research required.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method is-profile-available] [arg profile]]
+[call [cmd instanceCmd] [method is-profile-available] [arg profile]]
 
 This method tests if the skeleton tracking supports the named
 [arg profile].
@@ -39,7 +41,7 @@ supported, and [const false] else.
 [list_end]
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method set-profile] [arg profile]]
+[call [cmd instanceCmd] [method set-profile] [arg profile]]
 
 This method activates the named [arg profile]. This will result in
 joints getting activated or deactivated, as per the profile.
@@ -50,7 +52,7 @@ joints getting activated or deactivated, as per the profile.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method set-smoothing] [arg factor]]
+[call [cmd instanceCmd] [method set-smoothing] [arg factor]]
 
 This method sets the skeleton smoothing [arg factor], a floating point
 value.
@@ -58,7 +60,7 @@ value.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method start-tracking] [arg id]]
+[call [cmd instanceCmd] [method start-tracking] [arg id]]
 
 This method activates the tracking of the skeleton for the user
 specified by the [arg id].
@@ -66,7 +68,7 @@ specified by the [arg id].
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method stop-tracking] [arg id]]
+[call [cmd instanceCmd] [method stop-tracking] [arg id]]
 
 This method stops tracking of the skeleton for the user
 specified by the [arg id].
@@ -74,7 +76,7 @@ specified by the [arg id].
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method reset-tracking] [arg id]]
+[call [cmd instanceCmd] [method reset-tracking] [arg id]]
 
 This method discards the calibration of the skeleton for the user
 specified by the [arg id].
@@ -82,7 +84,7 @@ specified by the [arg id].
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method is-tracking] [arg id]]
+[call [cmd instanceCmd] [method is-tracking] [arg id]]
 
 This method tests if the skeleton for the user [arg id] is currently
 tracked.
@@ -91,7 +93,7 @@ tracked.
 active, and [const false] else.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method is-calibrated] [arg id]]
+[call [cmd instanceCmd] [method is-calibrated] [arg id]]
 
 This method tests if the skeleton for the user [arg id] is calibrated.
 
@@ -99,7 +101,7 @@ This method tests if the skeleton for the user [arg id] is calibrated.
 calbrated, and [const false] else.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method is-calibrating] [arg id]]
+[call [cmd instanceCmd] [method is-calibrating] [arg id]]
 
 This method tests if calibration of the skeleton for the user [arg id]
 is currently in progress.
@@ -108,7 +110,7 @@ is currently in progress.
 in progress, and [const false] else.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method request-calibration] [arg id] [arg force]]
+[call [cmd instanceCmd] [method request-calibration] [arg id] [arg force]]
 
 This method requests calibration of the skeleton for the user
 specified by the [arg id].
@@ -119,7 +121,7 @@ specified by the [arg id].
 data is discarded.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method abort-calibration] [arg id]]
+[call [cmd instanceCmd] [method abort-calibration] [arg id]]
 
 This method stops a calibration in progress, for the user specified by
 the [arg id].
@@ -127,7 +129,7 @@ the [arg id].
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method save-calibration-file] [arg id] [arg path]]
+[call [cmd instanceCmd] [method save-calibration-file] [arg id] [arg path]]
 
 This method saves the calibration data for the skeleton of the user
 specified by the [arg id] into the file [arg path]. The format of the
@@ -136,7 +138,7 @@ calibration data is not documented.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method load-calibration-file] [arg id] [arg path]]
+[call [cmd instanceCmd] [method load-calibration-file] [arg id] [arg path]]
 
 This method loads the calibration data for the skeleton of the user
 specified by the [arg id] from the file [arg path]. The format of the
@@ -145,7 +147,7 @@ calibration data is not documented.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method save-calibration] [arg id] [arg slot]]
+[call [cmd instanceCmd] [method save-calibration] [arg id] [arg slot]]
 
 This method saves the calibration data for the skeleton of the user
 specified by the [arg id] into the in-memory storage identified by the
@@ -154,7 +156,7 @@ specified by the [arg id] into the in-memory storage identified by the
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method load-calibration-slot] [arg id] [arg slot]]
+[call [cmd instanceCmd] [method load-calibration-slot] [arg id] [arg slot]]
 
 This method loads the calibration data for the skeleton of the user
 specified by the [arg id] from the in-memory storage identified by the
@@ -163,7 +165,7 @@ specified by the [arg id] from the in-memory storage identified by the
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method clear-calibration-slot] [arg slot]]
+[call [cmd instanceCmd] [method clear-calibration-slot] [arg slot]]
 
 This method clears the in-memory calibration data storage identified
 by the [arg slot] number.
@@ -171,7 +173,7 @@ by the [arg slot] number.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method is-calibration-slot] [arg slot]]
+[call [cmd instanceCmd] [method is-calibration-slot] [arg slot]]
 
 This method tests if the in-memory storage identified by the
 [arg slot] number contains skeleton calibration data.
@@ -180,7 +182,7 @@ This method tests if the in-memory storage identified by the
 occupied, and [const false] else.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method is-joint-available] [arg joint]]
+[call [cmd instanceCmd] [method is-joint-available] [arg joint]]
 
 This method tests if the skeleton tracking supports the named
 [arg joint].
@@ -217,7 +219,7 @@ supported, and [const false] else.
 [list_end]
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method is-joint-active] [arg joint]]
+[call [cmd instanceCmd] [method is-joint-active] [arg joint]]
 
 This method tests if the the named [arg joint] is actively tracked.
 
@@ -228,7 +230,7 @@ active, and [const false] else.
 [method is-joint-available].
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method set-joint-active] [arg joint] [arg active]]
+[call [cmd instanceCmd] [method set-joint-active] [arg joint] [arg active]]
 
 This method (de)activates the named [arg joint].
 
@@ -238,7 +240,7 @@ This method (de)activates the named [arg joint].
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method active-joints]]
+[call [cmd instanceCmd] [method active-joints]]
 
 This method returns a list containig the names of all currently active
 joints.
@@ -247,7 +249,7 @@ joints.
 [method is-joint-available].
 
 [comment ===============================================================]
-[call [cmd userInstanceCmd] [method get-joint] [arg user] [arg joint]]
+[call [cmd instanceCmd] [method get-joint] [arg user] [arg joint]]
 
 This method retrieves position and orientation data for the user
 specified by [arg id] and the named [arg joint].

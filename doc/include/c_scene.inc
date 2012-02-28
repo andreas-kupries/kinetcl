@@ -1,10 +1,12 @@
 
-This sections documents the class [cmd ::kinetcl::scene],
-which provides instances of scene analyzers,
-derived from generators,
-derived from production nodes.
+This sections documents the class [cmd ::kinetcl::scene], the concrete
+class for all OpenNI scene analyzer nodes.
 
-[para] ... describe scene analyzer ....
+[para] This class inherits from [cmd ::kinetcl::map] and its
+superclasses. See section [sectref {Map Generator}].
+
+[para] A scene analyzer segments a scene, identifying the floor and
+other connected areas in the view of the sensor.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
