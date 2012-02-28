@@ -2,18 +2,23 @@
 # # ## ### ##### ######## #############
 
 ## This file defines a TclOO class 'base' wrapping around the C level
-## class 'Base' and its associated superclasses and aspects. The code
-## here glues the C pieces together into a whole.
+## class 'Base' and its associated. The code here glues the C pieces
+## together into a whole.
 
-## It additionally provides a number of shared helper commands.
+## It additionally provides some shared helper commands.
 
 # # ## ### ##### ######## #############
 
+package require TclOO
+
 namespace eval ::kinetcl {}
 
-proc ::kinetcl::Publish {classOrInstance component {exclude {}}} {
-    set methods [uplevel 1 [list $classOrInstance methods]]
-    #puts "$classOrInstance $component = ($methods)"
+# # ## ### ##### ######## #############
+## Required by the class defitinio(s), define before.
+
+proc ::kinetcl::Publish {class component {exclude {}}} {
+    set methods [uplevel 1 [list $class methods]]
+    #puts "$class $component = ($methods)"
     foreach m $methods {
 	if {$m in {destroy methods @unmark}} continue
 	if {$m in $exclude} continue
@@ -21,28 +26,6 @@ proc ::kinetcl::Publish {classOrInstance component {exclude {}}} {
     }
     return
 }
-
-proc ::kinetcl::CapClass {cap} {
-    set class Cap
-    foreach c [split $cap -] {
-	append class [string totitle $c]
-    }
-    return $class
-}
-
-proc ::kinetcl::MixCapabilities {args} {
-    foreach cap $args {
-	if {![uplevel 1 [list my is-capable-of $cap]]} continue
-	set class [CapClass $cap]
-	uplevel 1 [list ::kinetcl::$class create I$class]
-	uplevel 1 [list ::kinetcl::Publish I$class I$class]
-    }
-    return
-}
-
-# # ## ### ##### ######## #############
-
-package require TclOO
 
 # # ## ### ##### ######## #############
 
@@ -53,7 +36,33 @@ oo::class create ::kinetcl::base {
     constructor {} {
 	# Pulls C handle out of stash,
 	::kinetcl::Base create BASE
-	kinetcl::MixCapabilities ; # ...
+
+	# Check the handle for capabilities, create their C instances,
+	# and expose all the provided methods
+	foreach cap [my capabilities] {
+	    set class [my CapabilityClass $cap]
+	    ::kinetcl::$class create I$class
+	    my CapabilityPublish     I$class
+	}
+	return
+    }
+
+    method CapabilityClass {cap} {
+	set class Cap
+	foreach c [split $cap -] {
+	    append class [string totitle $c]
+	}
+	return $class
+    }
+
+    method CapabilityPublish {component {exclude {}}} {
+	set methods [$component methods]
+	#puts "$component = ($methods)"
+	foreach m $methods {
+	    if {$m in {destroy methods @unmark}} continue
+	    if {$m in $exclude} continue
+	    oo::objdefine [self] forward $m $component $m
+	}
 	return
     }
 
@@ -75,6 +84,7 @@ oo::class create ::kinetcl::base {
 	    "wrong#args: expected [self] capabilities ?-all?"
     }
 
+    # Expose the base methods.
     kinetcl::Publish ::kinetcl::Base BASE \
 	{capabilities}
 }

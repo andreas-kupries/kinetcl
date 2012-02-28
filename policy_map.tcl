@@ -22,7 +22,6 @@ oo::class create ::kinetcl::map {
 	# Pulls C handle out of stash,
 	::kinetcl::Map create MAP
 	next
-	kinetcl::MixCapabilities ; # ...
 	return
     }
 

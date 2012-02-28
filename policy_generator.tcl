@@ -23,7 +23,6 @@ oo::class create ::kinetcl::generator {
 	# Pulls C handle out of stash,
 	::kinetcl::Generator create GENERATOR
 	next
-	kinetcl::MixCapabilities ; # ...
 	return
     }
 

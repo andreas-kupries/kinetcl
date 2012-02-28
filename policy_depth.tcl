@@ -21,7 +21,6 @@ oo::class create ::kinetcl::depth {
 	::kinetcl::Depth create DEPTH
 	# Stashes C handle in global data structures
 	next
-	kinetcl::MixCapabilities ; # ...
 	DEPTH @unmark ; # Clear the stash
 	return
     }
