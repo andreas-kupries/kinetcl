@@ -1,7 +1,7 @@
 # # ## ### ##### ######## #############
 ## Capability Class
 
-critcl::class def kinetcl::CapHandTouchingFovEdge {
+critcl::class def ::kinetcl::CapHandTouchingFovEdge {
     # # ## ### ##### ######## #############
     ::kt_abstract_class
 

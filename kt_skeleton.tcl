@@ -1,7 +1,7 @@
 # # ## ### ##### ######## #############
 ## Capability Class
 
-critcl::class def kinetcl::CapUserSkeleton {
+critcl::class def ::kinetcl::CapUserSkeleton {
     # # ## ### ##### ######## #############
     ::kt_abstract_class
 

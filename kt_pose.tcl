@@ -1,7 +1,7 @@
 # # ## ### ##### ######## #############
 ## Capability Class
 
-critcl::class def kinetcl::CapUserPoseDetection {
+critcl::class def ::kinetcl::CapUserPoseDetection {
     # # ## ### ##### ######## #############
     ::kt_abstract_class
 
