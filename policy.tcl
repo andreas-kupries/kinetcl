@@ -9,7 +9,7 @@
 namespace eval ::kinetcl {
     namespace export \
 	audio depth gesture hands image ir player \
-	recorder script user
+	recorder script user scene
     namespace ensemble create
 }
 
