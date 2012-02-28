@@ -98,9 +98,38 @@ critcl::source kt_image.tcl     ; # -> map -> generator -> base
 critcl::source kt_ir.tcl        ; # -> map -> generator -> base
 critcl::source kt_scene.tcl     ; # -> map -> generator -> base
 
-critcl::source kt_skeleton.tcl  ; # capability 'user-skeleton'          <- user generator
-critcl::source kt_pose.tcl      ; # capability 'user-pose-detection'    <- user generator
-critcl::source kt_handfov.tcl   ; # capability 'hand-touching-fov-edge' <- user generator
+critcl::source kt_cap_skeleton.tcl      ; # capability 'user-skeleton'          <- user generator
+critcl::source kt_cap_pose.tcl          ; # capability 'user-pose-detection'    <- user generator
+critcl::source kt_cap_handfov.tcl       ; # capability 'hand-touching-fov-edge' <- user generator
+
+critcl::source kt_cap_altview.tcl       ; # capability 'alternative-viewpoint'
+critcl::source kt_cap_antiflicker.tcl   ; # capability 'antiflicker'
+critcl::source kt_cap_cropping.tcl      ; # capability 'cropping'
+critcl::source kt_cap_eserial.tcl       ; # capability 'extended-serialization'
+critcl::source kt_cap_framesync.tcl     ; # capability 'framesync'
+critcl::source kt_cap_lockaware.tcl     ; # capability 'lock-aware'
+critcl::source kt_cap_mirror.tcl        ; # capability 'mirror
+critcl::source kt_cap_userpos.tcl       ; # capability 'user-position'
+
+critcl::source kt_cap_backlightcomp.tcl ; # capability 'backlight-compensation'
+critcl::source kt_cap_brightness.tcl    ; # capability 'brightness'
+critcl::source kt_cap_colortemp.tcl     ; # capability 'color-temperature'
+critcl::source kt_cap_contrast.tcl      ; # capability 'contrast'
+critcl::source kt_cap_deviceid.tcl      ; # capability 'device-identification'
+critcl::source kt_cap_errorstate.tcl    ; # capability 'error-state'
+critcl::source kt_cap_exposure.tcl      ; # capability 'exposure'
+critcl::source kt_cap_focus.tcl         ; # capability 'focus'
+critcl::source kt_cap_gain.tcl          ; # capability 'gain'
+critcl::source kt_cap_gamma.tcl         ; # capability 'gamma'
+critcl::source kt_cap_hue.tcl           ; # capability 'hue'
+critcl::source kt_cap_iris.tcl          ; # capability 'iris'
+critcl::source kt_cap_lowlightcomp.tcl  ; # capability 'lowlight-compensation'
+critcl::source kt_cap_pan.tcl           ; # capability 'pan'
+critcl::source kt_cap_roll.tcl          ; # capability 'roll'
+critcl::source kt_cap_saturation.tcl    ; # capability 'saturation'
+critcl::source kt_cap_sharpness.tcl     ; # capability 'sharpness'
+critcl::source kt_cap_tilt.tcl          ; # capability 'tilt'
+critcl::source kt_cap_zoom.tcl          ; # capability 'zoom'
 
 # # ## ### ##### ######## #############
 ## Make the C pieces ready. Immediate build of the binaries, no deferal.
