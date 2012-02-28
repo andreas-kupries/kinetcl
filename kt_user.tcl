@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## User Generator
 
-critcl::class def kinetcl::User {
+critcl::class def ::kinetcl::User {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain user generator object

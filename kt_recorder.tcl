@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Recorder
 
-critcl::class def kinetcl::Recorder {
+critcl::class def ::kinetcl::Recorder {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain recorder object

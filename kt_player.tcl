@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Player
 
-critcl::class def kinetcl::Player {
+critcl::class def ::kinetcl::Player {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain player object

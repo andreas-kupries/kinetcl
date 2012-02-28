@@ -1,7 +1,7 @@
 # # ## ### ##### ######## #############
 ## Map Generator Base Class -> generator
 
-critcl::class def kinetcl::Map {
+critcl::class def ::kinetcl::Map {
     # # ## ### ##### ######## #############
     ::kt_abstract_class
 

@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Script
 
-critcl::class def kinetcl::Script {
+critcl::class def ::kinetcl::Script {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain script object

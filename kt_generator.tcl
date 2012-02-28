@@ -1,7 +1,7 @@
 # # ## ### ##### ######## #############
 ## Generator Base Class -> production
 
-critcl::class def kinetcl::Generator {
+critcl::class def ::kinetcl::Generator {
     # # ## ### ##### ######## #############
     ::kt_abstract_class {
     } {

@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Gesture Generator
 
-critcl::class def kinetcl::Gesture {
+critcl::class def ::kinetcl::Gesture {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain gesture generator object

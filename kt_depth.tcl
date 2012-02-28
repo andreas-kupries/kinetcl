@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Depth Generator
 
-critcl::class def kinetcl::Depth {
+critcl::class def ::kinetcl::Depth {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain depth generator object

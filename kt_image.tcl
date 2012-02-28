@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Image Generator
 
-critcl::class def kinetcl::Image {
+critcl::class def ::kinetcl::Image {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain image generator object

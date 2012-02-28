@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Audio Generator
 
-critcl::class def kinetcl::Audio {
+critcl::class def ::kinetcl::Audio {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain audio generator object

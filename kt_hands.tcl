@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## Hands Generator
 
-critcl::class def kinetcl::Hands {
+critcl::class def ::kinetcl::Hands {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain hands generator object

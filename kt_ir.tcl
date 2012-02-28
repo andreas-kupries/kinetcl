@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 ## IR (image) Generator
 
-critcl::class def kinetcl::Ir {
+critcl::class def ::kinetcl::Ir {
     # # ## ### ##### ######## #############
     ::kt_node_class {
 	/* Create a plain ir generator object

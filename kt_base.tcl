@@ -1,7 +1,7 @@
 # # ## ### ##### ######## #############
 ## Base Class
 
-critcl::class def kinetcl::Base {
+critcl::class def ::kinetcl::Base {
     # # ## ### ##### ######## #############
     ::kt_abstract_class {
 	instance->capnames = ComputeMethodList (@stem@_tcl_capability_names);
