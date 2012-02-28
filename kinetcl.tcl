@@ -98,18 +98,23 @@ critcl::source kt_image.tcl     ; # -> map -> generator -> base
 critcl::source kt_ir.tcl        ; # -> map -> generator -> base
 critcl::source kt_scene.tcl     ; # -> map -> generator -> base
 
+# # ## ### ##### ######## #############
+
 critcl::source kt_cap_skeleton.tcl      ; # capability 'user-skeleton'          <- user generator
 critcl::source kt_cap_pose.tcl          ; # capability 'user-pose-detection'    <- user generator
 critcl::source kt_cap_handfov.tcl       ; # capability 'hand-touching-fov-edge' <- user generator
 
-critcl::source kt_cap_altview.tcl       ; # capability 'alternative-viewpoint'
-critcl::source kt_cap_antiflicker.tcl   ; # capability 'antiflicker'
-critcl::source kt_cap_cropping.tcl      ; # capability 'cropping'
+critcl::source kt_cap_altview.tcl       ; # capability 'alternative-viewpoint'  <- generator
+critcl::source kt_cap_framesync.tcl     ; # capability 'framesync'              <- generator
+critcl::source kt_cap_mirror.tcl        ; # capability 'mirror                  <- generator
+
+critcl::source kt_cap_antiflicker.tcl   ; # capability 'antiflicker'            <- map
+critcl::source kt_cap_cropping.tcl      ; # capability 'cropping'               <- map
+
+critcl::source kt_cap_userpos.tcl       ; # capability 'user-position'          <- depth
+
 critcl::source kt_cap_eserial.tcl       ; # capability 'extended-serialization'
-critcl::source kt_cap_framesync.tcl     ; # capability 'framesync'
 critcl::source kt_cap_lockaware.tcl     ; # capability 'lock-aware'
-critcl::source kt_cap_mirror.tcl        ; # capability 'mirror
-critcl::source kt_cap_userpos.tcl       ; # capability 'user-position'
 
 critcl::source kt_cap_backlightcomp.tcl ; # capability 'backlight-compensation'
 critcl::source kt_cap_brightness.tcl    ; # capability 'brightness'
