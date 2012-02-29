@@ -54,25 +54,17 @@ critcl::class def ::kinetcl::Depth {
     }
 
     mdef meta { /* Syntax: <instance> meta */
-	XnOutputMetaData out;
-	XnMapMetaData map;
-	XnDepthMetaData meta;
+	XnDepthMetaData* meta = xnAllocateDepthMetaData ();
 
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
 
-	/* Note how we have to provide all structures, and link them
-	 * together, for the call to work. OpenNI is not allocating
-	 * this stuff, but expecting a proper structure it can fill
-	 * by directly copying.
-	 */
-	map.pOutput = &out;
-	meta.pMap   = &map;
+	xnGetDepthMetaData (instance->handle, meta);
+	Tcl_SetObjResult (interp, kinetcl_convert_depth_metadata (meta));
 
-	xnGetDepthMetaData (instance->handle, &meta);
-	Tcl_SetObjResult (interp, kinetcl_convert_depth_metadata (&meta));
+	xnFreeDepthMetaData (meta);
 	return TCL_OK;
     }
 
