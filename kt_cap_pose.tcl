@@ -41,6 +41,7 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 	    s = xnGetAvailablePoses (instance->handle, poses, &lc);
 	    CHECK_STATUS_GOTO;
 
+	    lv = (Tcl_Obj*) ckalloc (lc * sizeof (Tcl_Obj*));
 	    for (i = 0;
 		 i < lc;
 		 i++) {

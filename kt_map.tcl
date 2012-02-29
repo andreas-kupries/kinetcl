@@ -35,6 +35,7 @@ critcl::class def ::kinetcl::Map {
 	    s = xnGetSupportedMapOutputModes (instance->handle, modes, &lc);
 	    CHECK_STATUS_GOTO;
 
+	    lv = (Tcl_Obj*) ckalloc (lc * sizeof (Tcl_Obj*));
 	    for (i = 0;
 		 i < lc;
 		 i++) {
