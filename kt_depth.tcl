@@ -2,6 +2,8 @@
 # # ## ### ##### ######## #############
 ## Depth Generator
 
+critcl::api import crimp::core 0
+
 critcl::class def ::kinetcl::Depth {
     # # ## ### ##### ######## #############
     ::kt_node_class {
@@ -63,6 +65,33 @@ critcl::class def ::kinetcl::Depth {
 
 	xnGetDepthMetaData (instance->handle, meta);
 	Tcl_SetObjResult (interp, kinetcl_convert_depth_metadata (meta));
+
+	xnFreeDepthMetaData (meta);
+	return TCL_OK;
+    }
+
+    mdef map { /* Syntax: <instance> map */
+	crimp_image* image;
+	XnDepthMetaData* meta = xnAllocateDepthMetaData ();
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	xnGetDepthMetaData (instance->handle, meta);
+
+	/* Allocate and fill a CRIMP grey16 image with the
+	 * depth map.
+	 *
+	 * NOTE: We should assert bytes-pixel == 2
+	 */
+
+	image = crimp_new_grey16 (meta->pMap->Res.X, meta->pMap->Res.Y);
+	memcpy (image->pixel, meta->pData,
+		meta->pMap->pOutput->nDataSize);
+
+	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
 
 	xnFreeDepthMetaData (meta);
 	return TCL_OK;
