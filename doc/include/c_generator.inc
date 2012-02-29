@@ -121,6 +121,11 @@ output.
 will be invoked with two arguments added to it, the instance command,
 and the word "active", in this order.
 
+[para] [emph Note] that the callback is not told the actual state of
+the instance. If this information is required then it is the
+callback's responsibility to query the state, using the interogatory
+method [method active].
+
 [para] The result of the methods is an empty string.
 
 [comment ===============================================================]
