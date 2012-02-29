@@ -110,6 +110,55 @@ error:
 	{} {}
 
     # # ## ### ##### ######## #############
+
+    support {
+	static const char* @stem@_pixelformat [] = {
+	    "rgb24",  /* XN_PIXEL_FORMAT_RGB24 	          */
+	    "yuv422", /* XN_PIXEL_FORMAT_YUV422 	  */
+	    "grey8",  /* XN_PIXEL_FORMAT_GRAYSCALE_8_BIT  */
+	    "grey16", /* XN_PIXEL_FORMAT_GRAYSCALE_16_BIT */
+	    "mjpeg",  /* XN_PIXEL_FORMAT_MJPEG 	          */
+	    NULL
+	};
+
+	static Tcl_Obj*
+	kinetcl_convert_map_metadata (XnMapMetaData* meta)
+	{
+	    Tcl_Obj* res = Tcl_NewDictObj ();
+	    Tcl_Obj* pair [2];
+
+	    pair [0] = Tcl_NewIntObj (meta->Res.X);
+	    pair [1] = Tcl_NewIntObj (meta->Res.Y);
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("res",-1),
+			    Tcl_NewListObj (2, pair));
+
+	    pair [0] = Tcl_NewIntObj (meta->Offset.X);
+	    pair [1] = Tcl_NewIntObj (meta->Offset.Y);
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("offset",-1),
+			    Tcl_NewListObj (2, pair));
+
+	    pair [0] = Tcl_NewIntObj (meta->FullRes.X);
+	    pair [1] = Tcl_NewIntObj (meta->FullRes.Y);
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("fullres",-1),
+			    Tcl_NewListObj (2, pair));
+
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("format",-1),
+			    Tcl_NewStringObj (@stem@_pixelformat [meta->PixelFormat],-1));
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("fps",-1),
+			    Tcl_NewIntObj (meta->nFPS));
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("output",-1),
+			    kinetcl_convert_output_metadata (meta->pOutput));
+	    return res;
+	}
+    }
+
+    # # ## ### ##### ######## #############
 }
 
 # # ## ### ##### ######## #############

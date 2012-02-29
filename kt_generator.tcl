@@ -140,6 +140,37 @@ critcl::class def ::kinetcl::Generator {
 	{} {}
 
     # # ## ### ##### ######## #############
+    ## The C level accessor functions cannot be used here, but only in
+    ## the concrete classes, as only they know the type of the data,
+    ## and how to convert it.
+    ##
+    ## const void *xnGetData     (XnNodeHandle hInstance)
+    #	Gets the current data. (raw bytes).
+    #
+    ## XnUInt32    xnGetDataSize (XnNodeHandle hInstance)
+    #	Gets the size of current data, in bytes. 
+
+    support {
+	static Tcl_Obj*
+	kinetcl_convert_output_metadata (XnOutputMetaData* meta)
+	{
+	    Tcl_Obj* res = Tcl_NewDictObj ();
+
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("time",-1),
+			    Tcl_NewWideIntObj (meta->nTimestamp));
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("frame",-1),
+			    Tcl_NewIntObj (meta->nFrameID));
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("size",-1),
+			    Tcl_NewIntObj (meta->nDataSize));
+	    Tcl_DictObjPut (NULL, res,
+			    Tcl_NewStringObj ("new",-1),
+			    Tcl_NewIntObj (meta->bIsNew));
+	    return res;
+	}
+    }
 }
 
 # # ## ### ##### ######## #############
