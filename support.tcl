@@ -189,7 +189,6 @@ proc kt_callback {name consfunction destfunction signature body} {
 	    static void
 	    @stem@_callback_@@cname@@_handler (@@signature@@)
 	    {
-		int res;
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
 		@instancetype@ instance = (@instancetype@) clientData;
@@ -206,9 +205,7 @@ proc kt_callback {name consfunction destfunction signature body} {
 		{ @@body@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@name@@ ..." */
-		res = Tcl_GlobalEvalObj (interp, cmd);
-
-		Tcl_DecrRefCount (cmd);
+		kinetcl_invoke_callback (interp, cmd);
 	    }
 
 	    static void
@@ -341,7 +338,6 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	    static void
 	    @stem@_callback_@@cnamea@@_handler (@@signaturea@@)
 	    {
-		int res;
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
 		@instancetype@ instance = (@instancetype@) clientData;
@@ -361,15 +357,12 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		{ @@bodya@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@namea@@ ..." */
-		res = Tcl_GlobalEvalObj (interp, cmd);
-
-		Tcl_DecrRefCount (cmd);
+		kinetcl_invoke_callback (interp, cmd);
 	    }
 
 	    static void
 	    @stem@_callback_@@cnameb@@_handler (@@signatureb@@)
 	    {
-		int res;
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
 		@instancetype@ instance = (@instancetype@) clientData;
@@ -389,11 +382,8 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		{ @@bodyb@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@nameb@@ ..." */
-		res = Tcl_GlobalEvalObj (interp, cmd);
-
-		Tcl_DecrRefCount (cmd);
+		kinetcl_invoke_callback (interp, cmd);
 	    }
-
 
 	    static void
 	    @stem@_callback_@@cnamea@@_unset (@instancetype@ instance)
@@ -609,7 +599,6 @@ proc kt_3callback {name consfunction destfunction
 	    static void
 	    @stem@_callback_@@cnamea@@_handler (@@signaturea@@)
 	    {
-		int res;
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
 		@instancetype@ instance = (@instancetype@) clientData;
@@ -629,17 +618,15 @@ proc kt_3callback {name consfunction destfunction
 		{ @@bodya@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@namea@@ ..." */
-		res = Tcl_GlobalEvalObj (interp, cmd);
-
-		Tcl_DecrRefCount (cmd);
+		kinetcl_invoke_callback (interp, cmd);
 	    }
 
 	    static void
 	    @stem@_callback_@@cnameb@@_handler (@@signatureb@@)
 	    {
-		int res;
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
+		Tcl_InterpState saved;
 		@instancetype@ instance = (@instancetype@) clientData;
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
@@ -657,17 +644,15 @@ proc kt_3callback {name consfunction destfunction
 		{ @@bodyb@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@nameb@@ ..." */
-		res = Tcl_GlobalEvalObj (interp, cmd);
-
-		Tcl_DecrRefCount (cmd);
+		kinetcl_invoke_callback (interp, cmd);
 	    }
 
 	    static void
 	    @stem@_callback_@@cnamec@@_handler (@@signaturec@@)
 	    {
-		int res;
 		Tcl_Obj* cmd;
 		Tcl_Obj* self;
+		Tcl_InterpState saved;
 		@instancetype@ instance = (@instancetype@) clientData;
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
@@ -685,9 +670,7 @@ proc kt_3callback {name consfunction destfunction
 		{ @@bodyc@@ }
 
 		/* Invoke "{*}$cmdprefix $self @@namec@@ ..." */
-		res = Tcl_GlobalEvalObj (interp, cmd);
-
-		Tcl_DecrRefCount (cmd);
+		kinetcl_invoke_callback (interp, cmd);
 	    }
 
 	    static void
@@ -821,6 +804,26 @@ proc kt_3callback {name consfunction destfunction
 	    }
 	}
     }]
+}
+
+# # ## ### ##### ######## #############
+
+critcl::ccode {
+    static void
+    kinetcl_invoke_callback (Tcl_Interp* interp, Tcl_Obj* cmd)
+    {
+	int res;
+	Tcl_InterpState saved;
+
+	Tcl_Preserve (interp);
+	saved = Tcl_SaveInterpState (interp, TCL_OK);
+
+	res = Tcl_GlobalEvalObj (interp, cmd);
+
+	Tcl_RestoreInterpState (interp, saved);
+	Tcl_Release (interp);
+	Tcl_DecrRefCount (cmd);
+    }
 }
 
 # # ## ### ##### ######## #############
