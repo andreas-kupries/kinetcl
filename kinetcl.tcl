@@ -73,6 +73,8 @@ critcl::tsources policy.tcl
 # # ## ### ##### ######## #############
 ## Main C section.
 
+critcl::api import crimp::core 0
+
 # # ## ### ##### ######## #############
 ## C classes for the various types of objects.
 

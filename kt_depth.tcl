@@ -2,8 +2,6 @@
 # # ## ### ##### ######## #############
 ## Depth Generator
 
-critcl::api import crimp::core 0
-
 critcl::class def ::kinetcl::Depth {
     # # ## ### ##### ######## #############
     ::kt_node_class {
