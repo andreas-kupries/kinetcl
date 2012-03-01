@@ -88,12 +88,18 @@ critcl::class def ::kinetcl::Depth {
 	 */
 
 	image = crimp_new_grey16 (meta->pMap->Res.X, meta->pMap->Res.Y);
+
+	/* Assert size equivalence */
+	if ((SZ (image)*crimp_image_area(image)) != meta->pMap->pOutput->nDataSize) {
+	    Tcl_Panic ("raw pixel size mismatch");
+	}
+
 	memcpy (image->pixel, meta->pData,
 		meta->pMap->pOutput->nDataSize);
 
-	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
-
 	xnFreeDepthMetaData (meta);
+
+	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
 	return TCL_OK;
     }
 
