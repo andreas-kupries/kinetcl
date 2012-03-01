@@ -112,7 +112,14 @@ error:
     # # ## ### ##### ######## #############
 
     support {
-	static const char* @stem@_pixelformat [] = {
+	#define kinetcl_NUM_PIXELFORMATS (5)
+
+	/* NOTE !!
+	 * The XnPixelFormat enum starts counting at 1, this array is
+	 * 0-indexed however. Take care in indexing.
+	 */
+
+	static const char* kinetcl_pixelformat [] = {
 	    "rgb24",  /* XN_PIXEL_FORMAT_RGB24 	          */
 	    "yuv422", /* XN_PIXEL_FORMAT_YUV422 	  */
 	    "grey8",  /* XN_PIXEL_FORMAT_GRAYSCALE_8_BIT  */
@@ -147,7 +154,8 @@ error:
 
 	    Tcl_DictObjPut (NULL, res,
 			    Tcl_NewStringObj ("format",-1),
-			    Tcl_NewStringObj (@stem@_pixelformat [meta->PixelFormat],-1));
+			    /* array is 0-indexed, pixelformats are 1-indexed */
+			    Tcl_NewStringObj (kinetcl_pixelformat [meta->PixelFormat-1],-1));
 	    Tcl_DictObjPut (NULL, res,
 			    Tcl_NewStringObj ("fps",-1),
 			    Tcl_NewIntObj (meta->nFPS));
