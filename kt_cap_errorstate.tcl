@@ -23,8 +23,8 @@ critcl::class def ::kinetcl::CapErrorState {
     # # ## ### ##### ######## #############
 
     kt_callback errorstate \
-	xnRegisterToErrorStateChange \
-	xnUnregisterFromErrorStateChange \
+	xnRegisterToNodeErrorStateChange \
+	xnUnregisterFromNodeErrorStateChange \
     {} {}
 
     # # ## ### ##### ######## #############
