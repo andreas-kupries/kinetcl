@@ -49,6 +49,41 @@ critcl::class def ::kinetcl::Base {
 	return TCL_OK;
     }
 
+    mdef node-name { /* Syntax: <instance> ni-name */
+	Tcl_SetObjResult (interp, Tcl_NewStringObj (xnGetNodeName (instance->handle),-1));
+	return TCL_OK;
+    }
+
+    mdef node-info { /* Syntax: <instance> node-info */
+	XnNodeInfo*                        ni = xnGetNodeInfo (instance->handle);
+	const XnProductionNodeDescription* d  = xnNodeInfoGetDescription (ni);
+	Tcl_Obj* vv [4];
+	Tcl_Obj* res = Tcl_NewDictObj ();
+
+	vv [0] = Tcl_NewIntObj (d->Version.nMajor);
+	vv [1] = Tcl_NewIntObj (d->Version.nMinor);
+	vv [2] = Tcl_NewIntObj (d->Version.nMaintenance);
+	vv [3] = Tcl_NewIntObj (d->Version.nBuild);
+
+	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("type",-1),
+			d->Type >= XN_NODE_TYPE_FIRST_EXTENSION
+			? Tcl_NewIntObj (d->Type)
+			: Tcl_NewStringObj (kinetcl_ptype [d->Type+1], -1));
+	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("vendor",-1),
+			Tcl_NewStringObj (d->strVendor, -1));
+	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("name",-1),
+			Tcl_NewStringObj (d->strName, -1));
+	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("version",-1),
+			Tcl_NewListObj (4, vv));
+	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("create",-1),
+			Tcl_NewStringObj (xnNodeInfoGetCreationInfo (ni), -1));
+
+	/* ni is owned by the system, do not release - xnNodeInfoFree (ni);
+	 */
+	Tcl_SetObjResult (interp, res);
+	return TCL_OK;
+    }
+
     # # ## ### ##### ######## #############
     # set int, real, string, general properties - by name - XnPropNames.h?
     # get int, real, string, general properties - by name
@@ -128,6 +163,28 @@ critcl::class def ::kinetcl::Base {
 	    XN_CAPABILITY_TILT,
 	    XN_CAPABILITY_USER_POSITION,
 	    XN_CAPABILITY_ZOOM,
+	    NULL
+	};
+
+        static const char* kinetcl_ptype [] = {
+	    "invalid",	  /* XN_NODE_TYPE_INVALID  = -1	*/
+	    "",		  /* -- undefined -- gap -- */
+	    "device",	  /* XN_NODE_TYPE_DEVICE   = 1	*/
+	    "depth",	  /* XN_NODE_TYPE_DEPTH    = 2	*/
+	    "image",	  /* XN_NODE_TYPE_IMAGE    = 3	*/
+	    "audio",	  /* XN_NODE_TYPE_AUDIO    = 4	*/
+	    "ir",	  /* XN_NODE_TYPE_IR       = 5	*/
+	    "user",	  /* XN_NODE_TYPE_USER     = 6	*/
+	    "recorder",	  /* XN_NODE_TYPE_RECORDER = 7	*/
+	    "player",	  /* XN_NODE_TYPE_PLAYER   = 8	*/
+	    "gesture",	  /* XN_NODE_TYPE_GESTURE  = 9	*/
+	    "scene",	  /* XN_NODE_TYPE_SCENE           = 10	*/
+	    "hands",	  /* XN_NODE_TYPE_HANDS           = 11	*/
+	    "codec",	  /* XN_NODE_TYPE_CODEC           = 12	*/
+	    "production", /* XN_NODE_TYPE_PRODUCTION_NODE = 13	*/
+	    "generator",  /* XN_NODE_TYPE_GENERATOR       = 14	*/
+	    "map",	  /* XN_NODE_TYPE_MAP_GENERATOR   = 15	*/
+	    "script",	  /* XN_NODE_TYPE_SCRIPT          = 16	*/
 	    NULL
 	};
     }
