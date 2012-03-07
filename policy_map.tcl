@@ -21,6 +21,7 @@ oo::class create ::kinetcl::map {
     constructor {} {
 	# Pulls C handle out of stash,
 	::kinetcl::Map create MAP
+	MAP @self [self]
 	next
 	return
     }

@@ -18,6 +18,7 @@ oo::class create ::kinetcl::hands {
 
     constructor {} {
 	::kinetcl::Hands create HANDS
+	HANDS @self [self]
 	# Stashes C handle in global data structures
 	next
 	HANDS @unmark ; # Clear the stash

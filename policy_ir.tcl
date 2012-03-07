@@ -18,6 +18,7 @@ oo::class create ::kinetcl::ir {
 
     constructor {} {
 	::kinetcl::Ir create IR
+	IR @self [self]
 	# Stashes C handle in global data structures
 	next
 	IR @unmark ; # Clear the stash

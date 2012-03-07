@@ -19,6 +19,7 @@ oo::class create ::kinetcl::depth {
 
     constructor {} {
 	::kinetcl::Depth create DEPTH
+	DEPTH @self [self]
 	# Stashes C handle in global data structures
 	next
 	DEPTH @unmark ; # Clear the stash

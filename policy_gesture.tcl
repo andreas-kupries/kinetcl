@@ -18,6 +18,7 @@ oo::class create ::kinetcl::gesture {
 
     constructor {} {
 	::kinetcl::Gesture create GESTURE
+	GESTURE @self [self]
 	# Stashes C handle in global data structures
 	next
 	GESTURE @unmark ; # Clear the stash

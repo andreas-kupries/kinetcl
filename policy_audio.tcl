@@ -18,6 +18,7 @@ oo::class create ::kinetcl::audio {
 
     constructor {} {
 	::kinetcl::Audio create AUDIO
+	AUDIO @self [self]
 	# Stashes C handle in global data structures
 	next
 	AUDIO @unmark ; # Clear the stash

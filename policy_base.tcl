@@ -20,7 +20,7 @@ proc ::kinetcl::Publish {class component {exclude {}}} {
     set methods [uplevel 1 [list $class methods]]
     #puts "$class $component = ($methods)"
     foreach m $methods {
-	if {$m in {destroy methods @unmark}} continue
+	if {$m in {destroy methods @unmark @self}} continue
 	if {$m in $exclude} continue
 	uplevel 1 [list forward $m $component $m]
     }
@@ -36,12 +36,14 @@ oo::class create ::kinetcl::base {
     constructor {} {
 	# Pulls C handle out of stash,
 	::kinetcl::Base create BASE
+	BASE @self [self]
 
 	# Check the handle for capabilities, create their C instances,
 	# and expose all the provided methods
 	foreach cap [my capabilities] {
 	    set class [my CapabilityClass $cap]
 	    ::kinetcl::$class create I$class
+	    I$class @self [self]
 	    my CapabilityPublish     I$class
 	}
 	return
@@ -59,7 +61,7 @@ oo::class create ::kinetcl::base {
 	set methods [$component methods]
 	#puts "$component = ($methods)"
 	foreach m $methods {
-	    if {$m in {destroy methods @unmark}} continue
+	    if {$m in {destroy methods @unmark @self}} continue
 	    if {$m in $exclude} continue
 	    oo::objdefine [self] forward $m $component $m
 	}

@@ -21,6 +21,7 @@ oo::class create ::kinetcl::user {
 
     constructor {} {
 	::kinetcl::User create USER
+	USER @self [self]
 	# Stashes C handle in global data structures
 	next
 	USER @unmark ; # Clear the stash

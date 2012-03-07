@@ -22,6 +22,7 @@ oo::class create ::kinetcl::generator {
     constructor {} {
 	# Pulls C handle out of stash,
 	::kinetcl::Generator create GENERATOR
+	GENERATOR @self [self]
 	next
 	return
     }

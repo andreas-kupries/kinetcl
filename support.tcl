@@ -39,6 +39,25 @@ proc kt_class_common {} {
 	}
 
 	# # ## ### ##### ######## #############
+
+	field Tcl_Obj* self {Self object, can be set to wrapper, see @self}
+
+	constructor {} {
+	    instance->self = fqn;
+	    Tcl_IncrRefCount (instance->self);
+
+fprintf (stdout,"%u @ %s = (%p) [%p]\n", pthread_self(), Tcl_GetString (instance->self), instance, instance->handle);fflush(stdout);
+return;
+	}
+
+	mdef @self { /* @self obj */
+	    Tcl_DecrRefCount (instance->self);
+	    instance->self = objv [2];
+	    Tcl_IncrRefCount (instance->self);
+	    return TCL_OK;
+	}
+
+	# # ## ### ##### ######## #############
     }
 }
 
@@ -50,11 +69,11 @@ proc kt_abstract_class {{construction {}} {destruction {}}} {
 	::kt_class_common
 	# # ## ### ##### ######## #############
 
-	field kinetcl_context_data     context    {Global kinetcl context, shared by all}
-	field XnContext*       onicontext {Global OpenNI context, shared by all}
+	field kinetcl_context_data context    {Global kinetcl context, shared by all}
+	field XnContext*           onicontext {Global OpenNI context, shared by all}
 	# # ## ### ##### ######## #############
 
-	field XnNodeHandle     handle     {Our handle of the OpenNI production object}
+	field XnNodeHandle         handle     {Our handle of the OpenNI production object}
 	# # ## ### ##### ######## #############
 	constructor {
 	    /* As an abstract base class it does not create its own
@@ -194,6 +213,9 @@ proc kt_callback {name consfunction destfunction signature body} {
 		@instancetype@ instance = (@instancetype@) clientData;
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
+
+fprintf (stdout,"%u @ %s = (%p) [%p] @@cname@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
+return;
 
 		self = Tcl_NewObj ();
 		Tcl_GetCommandFullName (interp, instance->cmd, self);
@@ -344,6 +366,9 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
 
+fprintf (stdout,"%u @ %s = (%p) [%p] @@cnamea@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
+return;
+
 		/* Ignore callback @@namea@@ if not set */
 		if (!instance->command@@cnamea@@) return;
 
@@ -368,6 +393,9 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		@instancetype@ instance = (@instancetype@) clientData;
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
+
+fprintf (stdout,"%u @ %s = (%p) [%p] @@cnameb@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
+return;
 
 		/* Ignore callback @@nameb@@ if not set */
 		if (!instance->command@@cnameb@@) return;
@@ -605,6 +633,9 @@ proc kt_3callback {name consfunction destfunction
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
 
+fprintf (stdout,"%u @ %s = (%p) [%p] @@cnamea@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
+return;
+
 		/* Ignore callback @@namea@@ if not set */
 		if (!instance->command@@cnamea@@) return;
 
@@ -631,6 +662,9 @@ proc kt_3callback {name consfunction destfunction
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
 
+fprintf (stdout,"%u @ %s = (%p) [%p] @@cnameb@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
+return;
+
 		/* Ignore callback @@nameb@@ if not set */
 		if (!instance->command@@cnameb@@) return;
 
@@ -656,6 +690,9 @@ proc kt_3callback {name consfunction destfunction
 		@instancetype@ instance = (@instancetype@) clientData;
 		Tcl_Interp* interp = instance->interp;
 		/* ASSERT (h == instance->handle) ? */
+
+fprintf (stdout,"%u @ %s = (%p) [%p] @@cnamec@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
+return;
 
 		/* Ignore callback @@namec@@ if not set */
 		if (!instance->command@@cnamec@@) return;
@@ -809,20 +846,31 @@ proc kt_3callback {name consfunction destfunction
 # # ## ### ##### ######## #############
 
 critcl::ccode {
+#include <pthread.h>
+
     static void
     kinetcl_invoke_callback (Tcl_Interp* interp, Tcl_Obj* cmd)
     {
 	int res;
 	Tcl_InterpState saved;
 
+fprintf (stdout,"CB... %d (%s)\n", pthread_self(), Tcl_GetString(cmd));fflush(stdout);
+
+	Tcl_IncrRefCount (cmd);
 	Tcl_Preserve (interp);
 	saved = Tcl_SaveInterpState (interp, TCL_OK);
 
+fprintf (stdout,"Cmd/ %d\n",cmd->refCount);fflush(stdout);
+
 	res = Tcl_GlobalEvalObj (interp, cmd);
+
+fprintf (stdout,"Cmd\\ %d\n",cmd->refCount);fflush(stdout);
 
 	Tcl_RestoreInterpState (interp, saved);
 	Tcl_Release (interp);
 	Tcl_DecrRefCount (cmd);
+
+fprintf (stdout,"...Done/CB\n");fflush(stdout);
     }
 }
 
