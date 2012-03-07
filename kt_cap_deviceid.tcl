@@ -17,3 +17,8 @@ critcl::class def ::kinetcl::CapDeviceIdentification {
 }
 
 # # ## ### ##### ######## #############
+if 0 {
+    XnStatus xnGetDeviceName         (XnNodeHandle hInstance, XnChar *strBuffer, XnUInt32 *pnBufferSize)
+    XnStatus xnGetVendorSpecificData (XnNodeHandle hInstance, XnChar *strBuffer, XnUInt32 *pnBufferSize)
+    XnStatus xnGetSerialNumber       (XnNodeHandle hInstance, XnChar *strBuffer, XnUInt32 *pnBufferSize)
+}
