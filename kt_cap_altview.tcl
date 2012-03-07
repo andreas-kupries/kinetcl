@@ -13,15 +13,24 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 
     # # ## ### ##### ######## #############
 
+    kt_callback viewpoint \
+	xnRegisterToViewPointChange \
+	xnUnregisterFromViewPointChange \
+    {} {}
+
     # # ## ### ##### ######## #############
 }
 
 # # ## ### ##### ######## #############
 if 0 {
-XN_C_API XnBool XN_C_DECL 	xnIsViewPointSupported (XnNodeHandle hInstance, XnNodeHandle hOther)
-XN_C_API XnStatus XN_C_DECL 	xnSetViewPoint (XnNodeHandle hInstance, XnNodeHandle hOther)
-XN_C_API XnStatus XN_C_DECL 	xnResetViewPoint (XnNodeHandle hInstance)
-XN_C_API XnBool XN_C_DECL 	xnIsViewPointAs (XnNodeHandle hInstance, XnNodeHandle hOther)
-XN_C_API XnStatus XN_C_DECL 	xnRegisterToViewPointChange (XnNodeHandle hInstance, XnStateChangedHandler handler, void *pCookie, XnCallbackHandle *phCallback)
-XN_C_API void XN_C_DECL 	xnUnregisterFromViewPointChange (XnNodeHandle hInstance, XnCallbackHandle hCallback)
+    # Support requires ability to determine if a Tcl_Obj* holds a node
+    # object command (name), and to convert from that to an instnce
+    # handle.
+
+    # See framesync as well.
+
+    XnBool   xnIsViewPointSupported (XnNodeHandle hInstance, XnNodeHandle hOther)
+    XnStatus xnSetViewPoint         (XnNodeHandle hInstance, XnNodeHandle hOther)
+    XnStatus xnResetViewPoint       (XnNodeHandle hInstance)
+    XnBool   xnIsViewPointAs        (XnNodeHandle hInstance, XnNodeHandle hOther)
 }
