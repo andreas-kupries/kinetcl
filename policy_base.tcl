@@ -20,10 +20,31 @@ proc ::kinetcl::Publish {class component {exclude {}}} {
     set methods [uplevel 1 [list $class methods]]
     #puts "$class $component = ($methods)"
     foreach m $methods {
-	if {$m in {destroy methods @unmark @self}} continue
+	if {$m in {destroy methods}} continue
+	if {[string match @* $m]} continue
 	if {$m in $exclude} continue
 	uplevel 1 [list forward $m $component $m]
     }
+    return
+}
+
+proc ::kinetcl::Valid {o} {
+    # Check if o is a proper kinetcl object.  If yes, directly access
+    # the internal BASE object and have it stash the handle for use by
+    # other methods.  These methods are responsible for un-stashing
+    # the handle after use.
+
+    variable known
+    set cmd [uplevel 1 [list namespace which -command $o]]
+
+    if {![dict exists $known  $cmd]} {
+	return -code error -errorcode {KINETCL INVALID INSTANCE} \
+	    "Expected kinetcl instance, got \"$o\""
+    }
+
+    # Directly access the instance internals to put the object's
+    # OpenNI handle into the standard shared location.
+    [info object namespace $o]::BASE @mark
     return
 }
 
@@ -46,6 +67,17 @@ oo::class create ::kinetcl::base {
 	    I$class @self [self]
 	    my CapabilityPublish     I$class
 	}
+
+	# Remember the instance for validation
+	variable ::kinetcl::known
+	dict set known [self] .
+	return
+    }
+
+    destructor {
+	# Remove the instance from the validation database.
+	variable ::kinetcl::known
+	dict unset known [self]
 	return
     }
 
@@ -61,7 +93,8 @@ oo::class create ::kinetcl::base {
 	set methods [$component methods]
 	#puts "$component = ($methods)"
 	foreach m $methods {
-	    if {$m in {destroy methods @unmark @self}} continue
+	    if {$m in {destroy methods}} continue
+	    if {[string match @* $m]} continue
 	    if {$m in $exclude} continue
 	    oo::objdefine [self] forward $m $component $m
 	}
