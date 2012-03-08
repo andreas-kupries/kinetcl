@@ -21,7 +21,7 @@ oo::class create ::kinetcl::audio {
 	AUDIO @self [self]
 	# Stashes C handle in global data structures
 	next
-	AUDIO @unmark ; # Clear the stash
+	BASE @unmark ; # Clear the stash
 	return
     }
 

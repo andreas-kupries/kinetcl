@@ -18,10 +18,10 @@ oo::class create ::kinetcl::script {
 
     constructor {} {
 	::kinetcl::Script create SCRIPT
-	SCRIPT @self [self]
 	# Stashes C handle in global data structures
+	SCRIPT @self [self]
 	next
-	SCRIPT @unmark ; # Clear the stash
+	BASE @unmark ; # Clear the stash
 	return
     }
 

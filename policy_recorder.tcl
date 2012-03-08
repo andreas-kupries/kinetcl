@@ -18,10 +18,10 @@ oo::class create ::kinetcl::recorder {
 
     constructor {} {
 	::kinetcl::Recorder create RECORDER
-	RECORDER @self [self]
 	# Stashes C handle in global data structures
+	RECORDER @self [self]
 	next
-	RECORDER @unmark ; # Clear the stash
+	BASE @unmark ; # Clear the stash
 	return
     }
 

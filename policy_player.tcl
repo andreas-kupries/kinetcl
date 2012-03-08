@@ -18,10 +18,10 @@ oo::class create ::kinetcl::player {
 
     constructor {} {
 	::kinetcl::Player create PLAYER
-	PLAYER @self [self]
 	# Stashes C handle in global data structures
+	PLAYER @self [self]
 	next
-	PLAYER @unmark ; # Clear the stash
+	BASE @unmark ; # Clear the stash
 	return
     }
 

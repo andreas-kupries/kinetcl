@@ -18,10 +18,10 @@ oo::class create ::kinetcl::image {
 
     constructor {} {
 	::kinetcl::Image create IMAGE
-	IMAGE @self [self]
 	# Stashes C handle in global data structures
+	IMAGE @self [self]
 	next
-	IMAGE @unmark ; # Clear the stash
+	BASE @unmark ; # Clear the stash
 	return
     }
 

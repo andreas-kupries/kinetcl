@@ -13,6 +13,29 @@ critcl::class def ::kinetcl::Base {
     field Tcl_Obj* capnames {Fixed list of possible capabilities}
 
     # # ## ### ##### ######## #############
+    ## Methods managing the OpenNI handle from the Tcl level, and
+    ## other specialities.
+
+    mdef @mark { /* Internal method, no argument checking. */
+	/* Save the OpenNI handle in the shared kinetcl context.
+	 * -- This is done (implicitly) during construction, so that the C-level
+	 *    base classes can find the handle/node they are to use.
+	 * -- This is also done (explicitly through here) by 'Valid',
+	 *    for methods which take another node as argument.
+	 */
+	instance->context->mark = instance->handle;
+	return TCL_OK;
+    }
+
+    mdef @unmark { /* Internal method, no argument checking. */
+	/* Remove the OpenNI handle from the shared stash.
+	 * IOW clean the state up.
+	 */
+	instance->context->mark = NULL;
+	return TCL_OK;
+    }
+
+    # # ## ### ##### ######## #############
     mdef is-capable-of { /* Syntax: <instance> is-capable-of capName */
 	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
 

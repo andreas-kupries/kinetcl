@@ -18,10 +18,10 @@ oo::class create ::kinetcl::scene {
 
     constructor {} {
 	::kinetcl::Scene create SCENE
-	SCENE @self [self]
 	# Stashes C handle in global data structures
+	SCENE @self [self]
 	next
-	SCENE @unmark ; # Clear the stash
+	BASE @unmark ; # Clear the stash
 	return
     }
 

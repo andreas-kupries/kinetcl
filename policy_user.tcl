@@ -21,10 +21,10 @@ oo::class create ::kinetcl::user {
 
     constructor {} {
 	::kinetcl::User create USER
-	USER @self [self]
 	# Stashes C handle in global data structures
+	USER @self [self]
 	next
-	USER @unmark ; # Clear the stash
+	BASE @unmark ; # Clear the stash
 	return
     }
 
