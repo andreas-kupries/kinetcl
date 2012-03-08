@@ -134,7 +134,7 @@ critcl::cproc ::kinetcl::waitOneUpdate {Tcl_Interp* interp Tcl_Obj* o} ok {
 
 critcl::cproc ::kinetcl::errorstate {Tcl_Interp* interp} ok {
     XnStatus s = xnGetGlobalErrorState (kinetcl_context (interp)->context);
-    CHECK_STATUS_RETURN;
+    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
     return TCL_OK;
 }
 
