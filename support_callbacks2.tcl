@@ -162,6 +162,7 @@ return;
 	    {
 		/* Single callback handle for 2 callbacks */
 		if (!instance->callback@@cname@@) return;
+                if (!instance->command@@cnamea@@) return;
 
 		Tcl_DecrRefCount (instance->command@@cnamea@@);
 		instance->command@@cnamea@@ = NULL;
@@ -178,6 +179,7 @@ return;
 	    {
 		/* Single callback handle for 2 callbacks */
 		if (!instance->callback@@cname@@) return;
+                if (!instance->command@@cnameb@@) return;
 
 		Tcl_DecrRefCount (instance->command@@cnameb@@);
 		instance->command@@cnameb@@ = NULL;
