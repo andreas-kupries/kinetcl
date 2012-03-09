@@ -41,9 +41,51 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	available = xnIsProfileAvailable (instance->handle, profile);
+	available = xnIsProfileAvailable (instance->handle, profile+1);
 
 	Tcl_SetObjResult (interp, Tcl_NewIntObj (available));
+	return TCL_OK;
+    }
+
+    mdef available-profiles { /* Syntax: <instance> available-profiles */
+	int available, profile, pc;
+	Tcl_Obj* pv [5];
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	for (profile = XN_SKEL_PROFILE_NONE, pc = 0;
+	     profile <= XN_SKEL_PROFILE_HEAD_HANDS;
+	     profile++) {
+	    available = xnIsProfileAvailable (instance->handle, profile);
+	    if (!available) continue;
+	    pv [pc] = Tcl_NewStringObj (@stem@_skeleton_profile [profile-1],-1);
+	    pc ++;
+	}
+
+	Tcl_SetObjResult (interp, Tcl_NewListObj (pc, pv));
+	return TCL_OK;
+    }
+
+    mdef all-profiles { /* Syntax: <instance> available-profiles */
+	int available, profile, pc;
+	Tcl_Obj* pv [5];
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	for (profile = XN_SKEL_PROFILE_NONE, pc = 0;
+	     profile <= XN_SKEL_PROFILE_HEAD_HANDS;
+	     profile++) {
+	    pv [pc] = Tcl_NewStringObj (@stem@_skeleton_profile [profile-1],-1);
+	    pc ++;
+	}
+
+	Tcl_SetObjResult (interp, Tcl_NewListObj (pc, pv));
 	return TCL_OK;
     }
 
@@ -62,7 +104,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	s = xnSetSkeletonProfile (instance->handle, profile);
+	s = xnSetSkeletonProfile (instance->handle, profile+1);
 	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
@@ -403,7 +445,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	active = xnIsJointActive (instance->handle, joint);
+	active = xnIsJointActive (instance->handle, joint+1);
 
 	Tcl_SetObjResult (interp, Tcl_NewIntObj (active));
 	return TCL_OK;
@@ -428,7 +470,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	s = xnSetJointActive (instance->handle, joint, active);
+	s = xnSetJointActive (instance->handle, joint+1, active);
 	CHECK_STATUS_RETURN;
 
 	Tcl_SetObjResult (interp, Tcl_NewIntObj (active));
@@ -452,7 +494,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	CHECK_STATUS_RETURN;
 
 	for (k=0; k < n; k++) {
-            jn [k] = Tcl_NewStringObj (@stem@_skeleton_joint [j[k]],-1);
+            jn [k] = Tcl_NewStringObj (@stem@_skeleton_joint [j[k]-1],-1);
 	}
 
 	Tcl_SetObjResult (interp, Tcl_NewListObj (n, jn));
@@ -484,7 +526,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	s = xnGetSkeletonJoint (instance->handle, id, joint, &t);
+	s = xnGetSkeletonJoint (instance->handle, id, joint+1, &t);
 	CHECK_STATUS_RETURN;
 
 	/* t.position.position.X         */
