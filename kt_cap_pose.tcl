@@ -35,10 +35,19 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 
 	lc = xnGetNumberOfPoses (instance->handle);
 	if (lc) {
-	    int i;
+	    int i, n;
 
 	    poses = (XnChar**) ckalloc (lc * sizeof (XnChar*));
-	    s = xnGetAvailablePoses (instance->handle, poses, &lc);
+	    for (i=0; i < lc; i++) {
+		/* Pray that this is enough space. Not about overwriting,
+		 * we are using the limited call, but about truncation of
+		 * long pose names
+		 */
+		poses [i] = ckalloc (50);
+	    }
+
+	    n = lc;
+	    s = xnGetAllAvailablePoses (instance->handle, poses, 50, &lc);
 	    CHECK_STATUS_GOTO;
 
 	    lv = (Tcl_Obj**) ckalloc (lc * sizeof (Tcl_Obj*));
@@ -48,6 +57,9 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 	       lv [i] = Tcl_NewStringObj (poses [i],-1);
 	    }
 
+	    for (i=0; i < n; i++) {
+	       ckfree (poses [i]);
+	    }
 	    ckfree ((char*) poses);
 	}
 
@@ -215,7 +227,7 @@ error:
 
     # NOTE
     # xnRegisterToPoseCallbacks     | The 1:2 callbacks are deprecated in favor of the
-    # xnUnregisterFromPoseCallbacks | saeparate callbacks above (enter, exit, progress).
+    # xnUnregisterFromPoseCallbacks | separate callbacks above (enter, exit, progress).
 
     # # ## ### ##### ######## #############
 }
