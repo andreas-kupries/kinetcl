@@ -192,7 +192,7 @@ error:
 	xnRegisterToPoseDetected \
 	xnUnregisterFromPoseDetected \
 	{
-	    {const XnChar *strPose}
+	    {const XnChar* strPose}
 	    {XnUserID u}
 	} {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strPose,-1));
@@ -203,7 +203,7 @@ error:
 	xnRegisterToOutOfPose \
 	xnUnregisterFromOutOfPose \
 	{
-	    {const XnChar *strPose}
+	    {const XnChar* strPose}
 	    {XnUserID u}
 	} {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strPose,-1));
@@ -214,7 +214,7 @@ error:
 	xnRegisterToPoseDetectionInProgress \
 	xnUnregisterFromPoseDetectionInProgress \
 	{
-	    {const XnChar *strPose}
+	    {const XnChar* strPose}
 	    {XnUserID u}
 	    {XnPoseDetectionStatus pstatus}
 	} {
