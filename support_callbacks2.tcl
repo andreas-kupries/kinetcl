@@ -13,13 +13,13 @@
 # # ## ### ##### ######## #############
 
 proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb signatureb bodyb} {
-    set cname     [string totitle $name]
+    set cname  [string totitle $name]
+    set cnamea [string totitle $namea]
+    set cnameb [string totitle $nameb]
 
-    set cnamea     [string totitle $namea]
-    set signaturea [join [list {XnNodeHandle h} {*}$signaturea {void* clientData}] {, }]
-
-    set cnameb     [string totitle $nameb]
-    set signatureb [join [list {XnNodeHandle h} {*}$signatureb {void* clientData}] {, }]
+    # Define the raw callback processing.
+    uplevel 1 [list kt_cbhandler $name $namea $cnamea $signaturea $bodya]
+    uplevel 1 [list kt_cbhandler $name $nameb $cnameb $signatureb $bodyb]
 
     lappend map @@name@@          $name
     lappend map @@cname@@         $cname
@@ -28,28 +28,14 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 
     lappend map @@cnamea@@        $cnamea
     lappend map @@namea@@         $namea
-    lappend map @@signaturea@@    $signaturea
-    lappend map @@bodya@@         $bodya
 
     lappend map @@cnameb@@        $cnameb
     lappend map @@nameb@@         $nameb
-    lappend map @@signatureb@@    $signatureb
-    lappend map @@bodyb@@         $bodyb
 
     uplevel 1 [string map $map {
-	catch {
-	    field Tcl_Interp* interp {Interpreter in callback handlers}
-	    constructor {
-		instance->interp = interp;
-	    }
-	    destructor {
-		/* instance->interp is a non-owned copy, nothing to do */
-	    }
-	}
-
 	field XnCallbackHandle callback@@cname@@ {Handle for @@name@@ callbacks}
-	field Tcl_Obj*         command@@cnamea@@ {Command prefix for @@namea@@ callbacks (@@name@@ aspect)}
-	field Tcl_Obj*         command@@cnameb@@ {Command prefix for @@nameb@@ callbacks (@@name@@ aspect)}
+
+	# The command@@...@@ structures comes from kt_cbhandler.
 
 	constructor {
 	    instance->callback@@cname@@ = NULL;
@@ -101,62 +87,6 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	}
 
 	support {
-	    static void
-	    @stem@_callback_@@cnamea@@_handler (@@signaturea@@)
-	    {
-		Tcl_Obj* cmd;
-		Tcl_Obj* self;
-		@instancetype@ instance = (@instancetype@) clientData;
-		Tcl_Interp* interp = instance->interp;
-		/* ASSERT (h == instance->handle) ? */
-
-fprintf (stdout,"%u @ %s = (%p) [%p] @@cnamea@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
-return;
-
-		/* Ignore callback @@namea@@ if not set */
-		if (!instance->command@@cnamea@@) return;
-
-		self = Tcl_NewObj ();
-		Tcl_GetCommandFullName (interp, instance->cmd, self);
-
-		cmd = Tcl_DuplicateObj (instance->command@@cnamea@@);
-		Tcl_ListObjAppendElement (interp, cmd, self);
-		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@namea@@", -1));
-
-		{ @@bodya@@ }
-
-		/* Invoke "{*}$cmdprefix $self @@namea@@ ..." */
-		kinetcl_invoke_callback (interp, cmd);
-	    }
-
-	    static void
-	    @stem@_callback_@@cnameb@@_handler (@@signatureb@@)
-	    {
-		Tcl_Obj* cmd;
-		Tcl_Obj* self;
-		@instancetype@ instance = (@instancetype@) clientData;
-		Tcl_Interp* interp = instance->interp;
-		/* ASSERT (h == instance->handle) ? */
-
-fprintf (stdout,"%u @ %s = (%p) [%p] @@cnameb@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
-return;
-
-		/* Ignore callback @@nameb@@ if not set */
-		if (!instance->command@@cnameb@@) return;
-
-		self = Tcl_NewObj ();
-		Tcl_GetCommandFullName (interp, instance->cmd, self);
-
-		cmd = Tcl_DuplicateObj (instance->command@@cnameb@@);
-		Tcl_ListObjAppendElement (interp, cmd, self);
-		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@nameb@@", -1));
-
-		{ @@bodyb@@ }
-
-		/* Invoke "{*}$cmdprefix $self @@nameb@@ ..." */
-		kinetcl_invoke_callback (interp, cmd);
-	    }
-
 	    static void
 	    @stem@_callback_@@cnamea@@_unset (@instancetype@ instance)
 	    {

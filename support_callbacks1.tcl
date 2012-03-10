@@ -11,29 +11,20 @@
 # # ## ### ##### ######## #############
 
 proc kt_callback {name consfunction destfunction signature body} {
-    set cname     [string totitle $name]
-    set signature [join [list {XnNodeHandle h} {*}$signature {void* clientData}] {, }]
+    set cname [string totitle $name]
+
+    # Define the raw callback processing.
+    uplevel 1 [list kt_cbhandler $name $name $cname $signature $body]
 
     lappend map @@cname@@         $cname 
     lappend map @@name@@          $name
     lappend map @@consfunction@@  $consfunction
     lappend map @@destfunction@@  $destfunction
-    lappend map @@signature@@     $signature
-    lappend map @@body@@          $body
 
     uplevel 1 [string map $map {
-	catch {
-	    field Tcl_Interp* interp {Interpreter in callback handlers}
-	    constructor {
-		instance->interp = interp;
-	    }
-	    destructor {
-		/* instance->interp is a non-owned copy, nothing to do */
-	    }
-	}
-
 	field XnCallbackHandle callback@@cname@@ {Handle for @@name@@ callbacks}
-	field Tcl_Obj*         command@@cname@@  {Command prefix for @@name@@ callbacks}
+
+	# The command@@...@@ structure comes from kt_cbhandler.
 
 	constructor {
 	    instance->callback@@cname@@ = NULL;
@@ -64,31 +55,6 @@ proc kt_callback {name consfunction destfunction signature body} {
 	}
 
 	support {
-	    static void
-	    @stem@_callback_@@cname@@_handler (@@signature@@)
-	    {
-		Tcl_Obj* cmd;
-		Tcl_Obj* self;
-		@instancetype@ instance = (@instancetype@) clientData;
-		Tcl_Interp* interp = instance->interp;
-		/* ASSERT (h == instance->handle) ? */
-
-fprintf (stdout,"%u @ %s = (%p) [%p] @@cname@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
-return;
-
-		self = Tcl_NewObj ();
-		Tcl_GetCommandFullName (interp, instance->cmd, self);
-
-		cmd = Tcl_DuplicateObj (instance->command@@cname@@);
-		Tcl_ListObjAppendElement (interp, cmd, self);
-		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
-
-		{ @@body@@ }
-
-		/* Invoke "{*}$cmdprefix $self @@name@@ ..." */
-		kinetcl_invoke_callback (interp, cmd);
-	    }
-
 	    static void
 	    @stem@_callback_@@cname@@_unset (@instancetype@ instance)
 	    {
