@@ -50,9 +50,10 @@ proc kt_class_common {} {
 	constructor {} {
 	    instance->self = fqn;
 	    Tcl_IncrRefCount (instance->self);
+	}
 
-fprintf (stdout,"%u @ %s = (%p) [%p]\n", pthread_self(), Tcl_GetString (instance->self), instance, instance->handle);fflush(stdout);
-return;
+	destructor {
+	    Tcl_DecrRefCount (instance->self);
 	}
 
 	mdef @self { /* @self obj */
