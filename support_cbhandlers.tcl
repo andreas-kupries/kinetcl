@@ -133,8 +133,6 @@ proc kt_cbhandler {group name cname signature body} {
 
 		instance = e->instance;
 
-fprintf (stdout,"EXEC  %u @ %p = (%p) [%p] @@cname@@ -- %p\n", (unsigned int) pthread_self(), instance->self, instance, h, e);fflush(stdout);
-
 		/* Ignore event '@@name@@' if no handler set. But also signal it as
 		 * processed to get rid of it in queue.
 		 */
@@ -142,9 +140,6 @@ fprintf (stdout,"EXEC  %u @ %p = (%p) [%p] @@cname@@ -- %p\n", (unsigned int) pt
 
                 /* Decode event structure into local variables. */
                 @@edecode@@
-
-fprintf (stdout,"%u @ %s = (%p) [%p] @@cname@@\n", (unsigned int) pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
-return 1;
 
                 interp = instance->interp;
 		cmd = Tcl_DuplicateObj (instance->command@@cname@@);
@@ -173,8 +168,6 @@ return 1;
 	    {
                 @instancetype@ instance = (@instancetype@) clientData;
                 @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
-
-fprintf (stdout,"QUEUE %u @ %p = (%p) [%p] @@cname@@ -- %p\n", (unsigned int) pthread_self(), instance->self, instance, h, e);fflush(stdout);
 
                 e->event.proc = @stem@_callback_@@cname@@_tcl_handler;
                 e->instance = instance;
