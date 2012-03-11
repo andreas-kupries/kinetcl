@@ -12,12 +12,8 @@
 # # ## ### ##### ######## ############# #####################
 
 proc kt_cbhandler {group name cname signature body} {
-    set esignature [list {XnNodeHandle h} {*}$signature {@instancetype@ instance}]
+    set esignature [list {XnNodeHandle h} {*}$signature]
     set fsignature [list {XnNodeHandle h} {*}$signature {void* clientData}]
-
-puts \n
-puts \t[join $esignature \n\t]
-puts \n
 
     foreach parameter $esignature {
 	set ptype     [join [lrange $parameter 0 end-1] { }]
@@ -44,7 +40,8 @@ puts \n
 	set ptype [string map {{const } {}} $ptype]
 	lappend estructd "$ptype $pvariable;"
     }
-    lappend edestructor {ckfree ((char*) e);}
+    #lappend edestructor {ckfree ((char*) e);}
+    lappend edestructor {/* Destruction of the main event structure is handled by the caller */}
 
     set evardef     [join $evardef     "\n\t\t"]
     set esignature  [join $estructd    "\n\t\t"]
@@ -82,12 +79,17 @@ puts \n
 		/* instance->interp is a non-owned copy, nothing to do */
 		/* instance->owner  is a plain id, nothing allocated */
 	    }
-	    ### XXX destructor - clean up all unprocessed events of
-	    ###     the instance.
 	    ### XXX event collapsing - for some/most/whatever events
 	    ###     it makes sense to not keep the individual events,
 	    ###     but only the last. Example: newdata. For these we
 	    ###     have to build a mechanism which ensures this.
+	}
+
+	destructor {
+	    /* Delete all @@cname@@ events not yet processed and refering to the
+	     * destroyed instance.
+	     */
+	    Tcl_DeleteEvents (@stem@_callback_@@cname@@_delete, (ClientData) instance);
 	}
 
 	# # ## ### ##### ######## ############# #####################
@@ -101,6 +103,7 @@ puts \n
 	     */
 	    typedef struct @stem@_callback_@@cname@@_EVENT {
 		Tcl_Event event;
+		@instancetype@ instance;
                 /* ----------------------------------------------------------------- */
 		@@esignature@@
                 /* ----------------------------------------------------------------- */
@@ -113,30 +116,39 @@ puts \n
         ## handler, see the next function.
 
 	support {
-	    static void
-	    @stem@_callback_@@cname@@_tcl_handler (Tcl_Event* evPtr)
+	    static int
+	    @stem@_callback_@@cname@@_tcl_handler (Tcl_Event* evPtr, int mask)
 	    {
 		@stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
+		@instancetype@ instance;
                 @@evardef@@
 		Tcl_Obj* cmd;
-		Tcl_Obj* self;
 		Tcl_Interp* interp;
 		/* ASSERT (h == instance->handle) ? */
 
-		/* Ignore event '@@name@@' if no handler set */
-		if (!instance->command@@cname@@) return;
+		/* Treating kinetcl's callbacks like fileevents, not
+		 * processing them when not allowed by the core.
+		 */
+		if (!(mask & TCL_FILE_EVENTS)) { return 0; }
 
-fprintf (stdout,"%u @ %s = (%p) [%p] @@cname@@\n", pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
-return;
+		instance = e->instance;
+
+fprintf (stdout,"EXEC  %u @ %p = (%p) [%p] @@cname@@ -- %p\n", (unsigned int) pthread_self(), instance->self, instance, h, e);fflush(stdout);
+
+		/* Ignore event '@@name@@' if no handler set. But also signal it as
+		 * processed to get rid of it in queue.
+		 */
+		if (!instance->command@@cname@@) { return 1; }
+
                 /* Decode event structure into local variables. */
                 @@edecode@@
+
+fprintf (stdout,"%u @ %s = (%p) [%p] @@cname@@\n", (unsigned int) pthread_self(), Tcl_GetString (instance->self), instance, h);fflush(stdout);
+return 1;
+
                 interp = instance->interp;
-
-		self = Tcl_NewObj ();
-		Tcl_GetCommandFullName (interp, instance->cmd, self);
-
 		cmd = Tcl_DuplicateObj (instance->command@@cname@@);
-		Tcl_ListObjAppendElement (interp, cmd, self);
+		Tcl_ListObjAppendElement (interp, cmd, instance->self);
 		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
 
 		{ @@body@@ }
@@ -144,6 +156,9 @@ return;
 
 		/* Invoke "{*}$cmdprefix $self @@name@@ ..." */
 		kinetcl_invoke_callback (interp, cmd);
+
+                /* Signal that event was processed */
+                return 1;
 	    }
         }
 
@@ -159,13 +174,46 @@ return;
                 @instancetype@ instance = (@instancetype@) clientData;
                 @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
 
+fprintf (stdout,"QUEUE %u @ %p = (%p) [%p] @@cname@@ -- %p\n", (unsigned int) pthread_self(), instance->self, instance, h, e);fflush(stdout);
+
                 e->event.proc = @stem@_callback_@@cname@@_tcl_handler;
+                e->instance = instance;
                 @@eencode@@
 
                 Tcl_ThreadQueueEvent(instance->owner, (Tcl_Event *) e, TCL_QUEUE_TAIL);
                 Tcl_ThreadAlert     (instance->owner);
             }
 	}
+
+	# # ## ### ##### ######## ############# #####################
+        ## Handler invoked by Tcl_DeleteEvents (see instance destructor)
+        ## Filters out Kinetcl events of the instance and marks them for destruction.
+        ## nothing more than setting up and enqueueing the call as
+        ## event to be processed later.
+
+	support {
+	    static int
+	    @stem@_callback_@@cname@@_delete (Tcl_Event* evPtr, ClientData clientData)
+	    {
+                @instancetype@ instance = (@instancetype@) clientData;
+                @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
+
+                /* Keep events not issued by Kinetcl */
+                if (e->event.proc != @stem@_callback_@@cname@@_tcl_handler) {
+		    return 0;
+		}
+                /* Keep events not issued by the instance about to be destroyed */
+                if (e->instance != instance) {
+		    return 0;
+		}
+             
+                /* Destroy this event, here we deal with the internal allocated parts */
+                @@edestructor@@
+                return 1;
+            }
+	}
+
+        # # ## ### ##### ######## ############# #####################
     }]
 }
 
