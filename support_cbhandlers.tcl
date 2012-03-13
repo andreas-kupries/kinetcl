@@ -11,7 +11,7 @@
 
 # # ## ### ##### ######## ############# #####################
 
-proc kt_cbhandler {group name cname signature body} {
+proc kt_cbhandler {group name cname signature body {mode all}} {
     set esignature [list {XnNodeHandle h} {*}$signature]
     set fsignature [list {XnNodeHandle h} {*}$signature {void* clientData}]
 
@@ -61,6 +61,14 @@ proc kt_cbhandler {group name cname signature body} {
     lappend map @@eencode@@     $eencode
     lappend map @@edecode@@     $edecode
 
+    if {$mode ne "all"} {
+	lappend map @@eeqguard@@ [string map $map {if (@stem@_callback_@@cname@@_queued (instance)) return;}]
+	lappend map @@edqguard@@ [string map $map {@stem@_callback_@@cname@@_dequeue (instance);}]
+    } else {
+	lappend map @@eeqguard@@ ""
+	lappend map @@edqguard@@ ""
+    }
+
     uplevel 1 [string map $map {
 	# # ## ### ##### ######## ############# #####################
 	## This code is fully run only once. At the second time the
@@ -79,23 +87,56 @@ proc kt_cbhandler {group name cname signature body} {
 		/* instance->interp is a non-owned copy, nothing to do */
 		/* instance->owner  is a plain id, nothing allocated */
 	    }
-	    ### XXX event collapsing - for some/most/whatever events
-	    ###     it makes sense to not keep the individual events,
-	    ###     but only the last. Example: newdata. For these we
-	    ###     have to build a mechanism which ensures this.
 	}
 
-	destructor {
-	    /* Delete all @@cname@@ events not yet processed and refering to the
-	     * destroyed instance.
-	     */
-	    Tcl_DeleteEvents (@stem@_callback_@@cname@@_delete, (ClientData) instance);
-	}
+	# # ## ### ##### ######## ############# #####################
+	## Event deletion on destruction is handled by the higher-level _unset functions.
+	## They call <<Tcl_DeleteEvents (@stem@_callback_@@cname@@_delete, (ClientData) instance);>>
 
 	# # ## ### ##### ######## ############# #####################
 	field Tcl_Obj* command@@cname@@ \
 	    {Command prefix for '@@name@@' events (@@group@@ aspect)}
+    }]
 
+    if {$mode ne "all"} {
+	uplevel 1 [string map $map {
+	    field int       queued@@cname@@ {Flag, true when a '@@name@@' event is queued}
+	    field Tcl_Mutex mutex@@cname@@  {Mutex controlling access to the flag}
+
+	    constructor {
+		/* Initialize the mutex and queue flag for collapsed '@@name@@' events.*/
+		instance->queued@@cname@@ = 0;
+		instance->mutex@@cname@@  = 0;
+	    }
+	    destructor {
+		/* Destroy mutex with instance */
+		Tcl_MutexFinalize (&instance->mutex@@cname@@);
+	    }
+
+	    support {
+		static int
+		@stem@_callback_@@cname@@_queued (@instancetype@ instance) {
+		    int queued;
+		    Tcl_MutexLock (&instance->mutex@@cname@@);
+		    queued = instance->queued@@cname@@;
+		    if (!queued) {
+			instance->queued@@cname@@ = 1;
+		    }
+		    Tcl_MutexUnlock (&instance->mutex@@cname@@);
+		    return queued;
+		}
+
+		static void
+		@stem@_callback_@@cname@@_dequeue (@instancetype@ instance) {
+		    Tcl_MutexLock (&instance->mutex@@cname@@);
+		    instance->queued@@cname@@ = 0;
+		    Tcl_MutexUnlock (&instance->mutex@@cname@@);
+		}
+	    }
+	}]
+    }
+
+    uplevel 1 [string map $map {
 	# # ## ### ##### ######## ############# #####################
 	support {
 	    /* Tcl Event Structure for '@@name@@'.
@@ -130,11 +171,14 @@ proc kt_cbhandler {group name cname signature body} {
 		 * processing them when not allowed by the core.
 		 */
 		if (!(mask & TCL_FILE_EVENTS)) { return 0; }
-
 		instance = e->instance;
+		@@edqguard@@
 
-		/* Drop event '@@name@@' if no handler set. But also signal it as
-		 * processed to get rid of it in the queue too.
+		/* Drop event '@@name@@' if no handler set. But also
+		 * signal it as processed to get rid of it in the
+		 * queue too. Note: This should not be necessary,
+		 * given that the higher _unset functions drop all
+		 * unprocessed events from the queue.
 		 */
 		if (!instance->command@@cname@@) {
 		    @@edestructor@@
@@ -170,8 +214,11 @@ proc kt_cbhandler {group name cname signature body} {
 	    @stem@_callback_@@cname@@_handler (@@signature@@)
 	    {
                 @instancetype@ instance = (@instancetype@) clientData;
-                @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
+                @stem@_callback_@@cname@@_EVENT* e;
 
+		@@eeqguard@@
+
+		e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
                 e->event.proc = @stem@_callback_@@cname@@_tcl_handler;
                 e->instance = instance;
                 @@eencode@@
@@ -202,6 +249,8 @@ proc kt_cbhandler {group name cname signature body} {
                 if (e->instance != instance) {
 		    return 0;
 		}
+
+		@@edqguard@@
              
                 /* Destroy this event, here we deal with the internal allocated parts */
                 @@edestructor@@

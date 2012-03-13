@@ -44,8 +44,8 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	}
 
 	destructor {
-	    @stem@_callback_@@cnamea@@_unset (instance);
-	    @stem@_callback_@@cnameb@@_unset (instance);
+	    @stem@_callback_@@cnamea@@_unset (instance, 1);
+	    @stem@_callback_@@cnameb@@_unset (instance, 1);
 	}
 
 	mdef set-callback-@@namea@@ { /* Syntax: <instance> set-callback-@@namea@@ <cmd>... */
@@ -63,7 +63,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		return TCL_OK;
 	    }
 
-	    @stem@_callback_@@cnamea@@_unset (instance);
+	    @stem@_callback_@@cnamea@@_unset (instance, 1);
 	    return TCL_ERROR;
 	}
 
@@ -82,13 +82,13 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		return TCL_OK;
 	    }
 
-	    @stem@_callback_@@cnameb@@_unset (instance);
+	    @stem@_callback_@@cnameb@@_unset (instance, 1);
 	    return TCL_ERROR;
 	}
 
 	support {
 	    static void
-	    @stem@_callback_@@cnamea@@_unset (@instancetype@ instance)
+	    @stem@_callback_@@cnamea@@_unset (@instancetype@ instance, int dev)
 	    {
 		/* Single callback handle for 2 callbacks */
 		if (!instance->callback@@cname@@) return;
@@ -102,10 +102,13 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 
 		@@destfunction@@ (instance->handle, instance->callback@@cname@@);
 		instance->callback@@cname@@ = NULL;
+
+		if (!dev) return;
+		Tcl_DeleteEvents (@stem@_callback_@@cnamea@@_delete, (ClientData) instance);
 	    }
 
 	    static void
-	    @stem@_callback_@@cnameb@@_unset (@instancetype@ instance)
+	    @stem@_callback_@@cnameb@@_unset (@instancetype@ instance, int dev)
 	    {
 		/* Single callback handle for 2 callbacks */
 		if (!instance->callback@@cname@@) return;
@@ -119,6 +122,9 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 
 		@@destfunction@@ (instance->handle, instance->callback@@cname@@);
 		instance->callback@@cname@@ = NULL;
+
+		if (!dev) return;
+		Tcl_DeleteEvents (@stem@_callback_@@cnameb@@_delete, (ClientData) instance);
 	    }
 
 
@@ -142,7 +148,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		    instance->callback@@cname@@ = callback;
 		}
 
-		@stem@_callback_@@cnamea@@_unset (instance);
+		@stem@_callback_@@cnamea@@_unset (instance, 0);
 		instance->command@@cnamea@@ = Tcl_NewListObj (objc, objv);
 		return TCL_OK;
 	    }
@@ -167,7 +173,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		    instance->callback@@cname@@ = callback;
 		}
 
-		@stem@_callback_@@cnameb@@_unset (instance);
+		@stem@_callback_@@cnameb@@_unset (instance, 0);
 		instance->command@@cnameb@@ = Tcl_NewListObj (objc, objv);
 		return TCL_OK;
 	    }

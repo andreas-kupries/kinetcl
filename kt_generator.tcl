@@ -137,7 +137,7 @@ critcl::class def ::kinetcl::Generator {
     ::kt_callback newdata \
 	xnRegisterToNewDataAvailable \
 	xnUnregisterFromNewDataAvailable \
-	{} {}
+	{} {} collapsed
 
     # # ## ### ##### ######## #############
     ## The C level accessor functions cannot be used here, but only in

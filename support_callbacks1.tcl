@@ -10,11 +10,11 @@
 
 # # ## ### ##### ######## #############
 
-proc kt_callback {name consfunction destfunction signature body} {
+proc kt_callback {name consfunction destfunction signature body {mode all}} {
     set cname [string totitle $name]
 
     # Define the raw callback processing.
-    uplevel 1 [list kt_cbhandler $name $name $cname $signature $body]
+    uplevel 1 [list kt_cbhandler $name $name $cname $signature $body $mode]
 
     lappend map @@cname@@         $cname 
     lappend map @@name@@          $name
@@ -32,7 +32,7 @@ proc kt_callback {name consfunction destfunction signature body} {
 	}
 
 	destructor {
-	    @stem@_callback_@@cname@@_unset (instance);
+	    @stem@_callback_@@cname@@_unset (instance, 1);
 	}
 
 	mdef set-callback-@@name@@ { /* Syntax: <instance> set-callback-@@name@@ <cmd>... */
@@ -50,13 +50,13 @@ proc kt_callback {name consfunction destfunction signature body} {
 		return TCL_OK;
 	    }
 
-	    @stem@_callback_@@cname@@_unset (instance);
+	    @stem@_callback_@@cname@@_unset (instance, 1);
 	    return TCL_ERROR;
 	}
 
 	support {
 	    static void
-	    @stem@_callback_@@cname@@_unset (@instancetype@ instance)
+	    @stem@_callback_@@cname@@_unset (@instancetype@ instance, int dev)
 	    {
 		if (!instance->callback@@cname@@) return;
 
@@ -65,6 +65,9 @@ proc kt_callback {name consfunction destfunction signature body} {
 		Tcl_DecrRefCount (instance->command@@cname@@);
 		instance->callback@@cname@@ = NULL;
 		instance->command@@cname@@ = NULL;
+
+		if (!dev) return;
+		Tcl_DeleteEvents (@stem@_callback_@@cname@@_delete, (ClientData) instance);
 	    }
 
 	    static int
@@ -81,7 +84,7 @@ proc kt_callback {name consfunction destfunction signature body} {
 				      &callback);
 		CHECK_STATUS_RETURN;
 
-		@stem@_callback_@@cname@@_unset (instance);
+		@stem@_callback_@@cname@@_unset (instance, 0);
 
 		instance->callback@@cname@@ = callback;
 		instance->command@@cname@@  = Tcl_NewListObj (objc, objv);
