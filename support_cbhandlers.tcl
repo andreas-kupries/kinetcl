@@ -133,10 +133,13 @@ proc kt_cbhandler {group name cname signature body} {
 
 		instance = e->instance;
 
-		/* Ignore event '@@name@@' if no handler set. But also signal it as
-		 * processed to get rid of it in queue.
+		/* Drop event '@@name@@' if no handler set. But also signal it as
+		 * processed to get rid of it in the queue too.
 		 */
-		if (!instance->command@@cname@@) { return 1; }
+		if (!instance->command@@cname@@) {
+		    @@edestructor@@
+		    return 1;
+		}
 
                 /* Decode event structure into local variables. */
                 @@edecode@@
