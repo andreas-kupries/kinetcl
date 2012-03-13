@@ -24,6 +24,10 @@ critcl::ccode {
 
 	res = Tcl_GlobalEvalObj (interp, cmd);
 
+	if (res != TCL_OK) {
+	    Tcl_BackgroundError (interp);
+	}
+
 	Tcl_RestoreInterpState (interp, saved);
 	Tcl_Release (interp);
 	Tcl_DecrRefCount (cmd);
