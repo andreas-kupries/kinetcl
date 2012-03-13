@@ -62,10 +62,10 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
     lappend map @@edecode@@     $edecode
 
     if {$mode ne "all"} {
-	lappend map @@eeqguard@@ [string map $map {if (@stem@_callback_@@cname@@_queued (instance)) return;}]
+	lappend map @@eeqguard@@ "if (kinetcl_locked (instance->context)) return;\n\t\t[string map $map {if (@stem@_callback_@@cname@@_queued (instance)) return;}]"
 	lappend map @@edqguard@@ [string map $map {@stem@_callback_@@cname@@_dequeue (instance);}]
     } else {
-	lappend map @@eeqguard@@ ""
+	lappend map @@eeqguard@@ {if (kinetcl_locked (instance->context)) return;}
 	lappend map @@edqguard@@ ""
     }
 

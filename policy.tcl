@@ -11,7 +11,7 @@ namespace eval ::kinetcl {
 	audio depth gesture hands image ir player \
 	recorder script user scene \
 	\
-	start stop waitUpdate waitOneUpdate \
+	estart estop start stop waitUpdate waitOneUpdate \
 	waitAnyUpdate waitNoneUpdate errorstate
 
     namespace ensemble create

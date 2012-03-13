@@ -43,6 +43,12 @@ critcl::iassoc::def kinetcl_context {} {
      * Tcl level.
      */
     XnNodeHandle mark;
+
+    /* Global event lock, and protection.
+     */
+
+    int       eventLock;
+    Tcl_Mutex eventLockMutex;
 } {
     XnStatus s = xnInit (&data->context);
 
@@ -50,8 +56,13 @@ critcl::iassoc::def kinetcl_context {} {
 	Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	goto error;
     }
+
+    data->mark = 0;
+    data->eventLock = 0;
+    data->eventLockMutex = 0;
 } {
     xnContextRelease (data->context);
+    Tcl_MutexFinalize (&data->eventLockMutex);
 }
 
 # # ## ### ##### ######## #############
@@ -80,6 +91,46 @@ critcl::ccode {
 	c->mark = NULL;
 	return TCL_OK;
     }
+
+    static void
+    kinetcl_lock (Tcl_Interp* interp)
+    {
+	kinetcl_context_data c = kinetcl_context (interp);
+	Tcl_MutexLock (&c->eventLockMutex);
+	c->eventLock = 1;
+	Tcl_MutexUnlock (&c->eventLockMutex);
+    }
+
+    static void
+    kinetcl_unlock (Tcl_Interp* interp)
+    {
+	kinetcl_context_data c = kinetcl_context (interp);
+	Tcl_MutexLock (&c->eventLockMutex);
+	c->eventLock = 0;
+	Tcl_MutexUnlock (&c->eventLockMutex);
+    }
+
+    static int
+    kinetcl_locked (kinetcl_context_data c)
+    {
+	int locked;
+	Tcl_MutexLock (&c->eventLockMutex);
+	locked = c->eventLock;
+	Tcl_MutexUnlock (&c->eventLockMutex);
+	return locked;
+    }
+}
+
+# # ## ### ##### ######## #############
+
+critcl::cproc ::kinetcl::estart {Tcl_Interp* interp} ok {
+    kinetcl_unlock (interp);
+    return TCL_OK;
+}
+
+critcl::cproc ::kinetcl::estop {Tcl_Interp* interp} ok {
+    kinetcl_lock (interp);
+    return TCL_OK;
 }
 
 # # ## ### ##### ######## #############
