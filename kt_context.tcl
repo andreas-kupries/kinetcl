@@ -29,6 +29,17 @@ critcl::ccode {
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL); \
 	    goto error; \
 	}
+
+	/* Common event fields for kinetcl callback events. Tcl's
+	 * information, plus a pointer to an event-specific cleanup
+	 * function, to enable cleanup without knowing anything of
+	 * internals of the event to be deleted.
+	 */
+
+	typedef struct Kinetcl_Event {
+	    Tcl_Event event;
+	    void (*delproc) (struct Kinetcl_Event* evPtr);
+	} Kinetcl_Event;
 }
 
 # # ## ### ##### ######## #############
@@ -44,11 +55,13 @@ critcl::iassoc::def kinetcl_context {} {
      */
     XnNodeHandle mark;
 
-    /* Global event lock, and protection.
+    /* Global event lock, protection, and queue of defered events.
      */
 
-    int       eventLock;
-    Tcl_Mutex eventLockMutex;
+    int            eventLock;
+    Tcl_Mutex      eventLockMutex;
+    Kinetcl_Event* eventDefered;
+    Tcl_ThreadId   eventOwner;
 } {
     XnStatus s = xnInit (&data->context);
 
@@ -60,9 +73,18 @@ critcl::iassoc::def kinetcl_context {} {
     data->mark = 0;
     data->eventLock = 0;
     data->eventLockMutex = 0;
+    data->eventDefered = 0;
+    data->eventOwner = Tcl_GetCurrentThread();
 } {
     xnContextRelease (data->context);
     Tcl_MutexFinalize (&data->eventLockMutex);
+    /* Clean up all unprocessed defered events */
+    while (data->eventDefered) {
+	Tcl_Event* next = data->eventDefered->event.nextPtr;
+	data->eventDefered->delproc (data->eventDefered);
+	ckfree ((char*) data->eventDefered);
+	data->eventDefered = (Kinetcl_Event*) next;
+    }
 }
 
 # # ## ### ##### ######## #############
@@ -107,15 +129,35 @@ critcl::ccode {
 	kinetcl_context_data c = kinetcl_context (interp);
 	Tcl_MutexLock (&c->eventLockMutex);
 	c->eventLock = 0;
+
+	/* Move all unprocessed defered events into the queue proper */
+	while (c->eventDefered) {
+	    Tcl_Event* next = c->eventDefered->event.nextPtr;
+	    Tcl_ThreadQueueEvent(c->eventOwner,
+				 (Tcl_Event *) c->eventDefered,
+				 TCL_QUEUE_HEAD);
+	    /* Note: The events are added at the HEAD because the
+	     * deferal queue is actually a stack, and its inversion of
+	     * event order during lockout is inverted by this here again,
+	     * restoring proper order.
+	     */
+	    c->eventDefered = (Kinetcl_Event*) next;
+	}
 	Tcl_MutexUnlock (&c->eventLockMutex);
+	Tcl_ThreadAlert (c->eventOwner);
     }
 
     static int
-    kinetcl_locked (kinetcl_context_data c)
+    kinetcl_locked (kinetcl_context_data c, Kinetcl_Event* evPtr)
     {
 	int locked;
 	Tcl_MutexLock (&c->eventLockMutex);
 	locked = c->eventLock;
+	if (locked) {
+	    /* Defer the event */
+	    evPtr->event.nextPtr = c->eventDefered;
+	    c->eventDefered = evPtr;
+	}
 	Tcl_MutexUnlock (&c->eventLockMutex);
 	return locked;
     }

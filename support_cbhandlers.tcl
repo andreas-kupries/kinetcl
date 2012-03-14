@@ -62,10 +62,10 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
     lappend map @@edecode@@     $edecode
 
     if {$mode ne "all"} {
-	lappend map @@eeqguard@@ "if (kinetcl_locked (instance->context)) return;\n\t\t[string map $map {if (@stem@_callback_@@cname@@_queued (instance)) return;}]"
+	lappend map @@eeqguard@@ "[string map $map {if (@stem@_callback_@@cname@@_queued (instance)) return;}]"
 	lappend map @@edqguard@@ [string map $map {@stem@_callback_@@cname@@_dequeue (instance);}]
     } else {
-	lappend map @@eeqguard@@ {if (kinetcl_locked (instance->context)) return;}
+	lappend map @@eeqguard@@ ""
 	lappend map @@edqguard@@ ""
     }
 
@@ -143,7 +143,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	     * The 'clientData
 	     */
 	    typedef struct @stem@_callback_@@cname@@_EVENT {
-		Tcl_Event event;
+		Kinetcl_Event event;
 		@instancetype@ instance;
                 /* ----------------------------------------------------------------- */
 		@@esignature@@
@@ -211,6 +211,17 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 
 	support {
 	    static void
+	    @stem@_callback_@@cname@@_free (Kinetcl_Event* evPtr)
+	    {
+                @stem@_callback_@@cname@@_EVENT* e = \
+		    (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
+             
+                /* Destroy this event, here we deal with the internal allocated parts */
+                @@edestructor@@
+                return 1;
+            }
+
+	    static void
 	    @stem@_callback_@@cname@@_handler (@@signature@@)
 	    {
                 @instancetype@ instance = (@instancetype@) clientData;
@@ -219,9 +230,12 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 		@@eeqguard@@
 
 		e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
-                e->event.proc = @stem@_callback_@@cname@@_tcl_handler;
+                e->event.event.proc = @stem@_callback_@@cname@@_tcl_handler;
+		e->event.delproc    = @stem@_callback_@@cname@@_free;
                 e->instance = instance;
                 @@eencode@@
+
+		if (kinetcl_locked (instance->context, e)) return;
 
                 Tcl_ThreadQueueEvent(instance->owner, (Tcl_Event *) e, TCL_QUEUE_TAIL);
                 Tcl_ThreadAlert     (instance->owner);
@@ -239,10 +253,11 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	    @stem@_callback_@@cname@@_delete (Tcl_Event* evPtr, ClientData clientData)
 	    {
                 @instancetype@ instance = (@instancetype@) clientData;
-                @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
+                @stem@_callback_@@cname@@_EVENT* e = \
+		    (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
 
                 /* Keep events not issued by Kinetcl */
-                if (e->event.proc != @stem@_callback_@@cname@@_tcl_handler) {
+                if (e->event.event.proc != @stem@_callback_@@cname@@_tcl_handler) {
 		    return 0;
 		}
                 /* Keep events not issued by the instance about to be destroyed */
@@ -251,9 +266,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 		}
 
 		@@edqguard@@
-             
-                /* Destroy this event, here we deal with the internal allocated parts */
-                @@edestructor@@
+		@stem@_callback_@@cname@@_free ((Kinetcl_Event*) e);
                 return 1;
             }
 	}
