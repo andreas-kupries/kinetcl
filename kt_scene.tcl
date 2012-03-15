@@ -15,6 +15,57 @@ critcl::class def ::kinetcl::Scene {
 
     # # ## ### ##### ######## #############
 
+    mdef map { /* Syntax: <instance> map */
+	crimp_image* image;
+	XnSceneMetaData* meta;
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	meta = xnAllocateSceneMetaData ();
+	xnGetSceneMetaData (instance->handle, meta);
+
+	/* Allocate and fill a CRIMP grey16 image with the
+	 * scene segmentation.
+	 *
+	 * NOTE: We should assert bytes-pixel == 2
+	 */
+
+	image = crimp_new_grey16 (meta->pMap->Res.X, meta->pMap->Res.Y);
+
+	/* Assert size equivalence */
+	if ((SZ (image)*crimp_image_area(image)) != meta->pMap->pOutput->nDataSize) {
+	    Tcl_Panic ("raw pixel size mismatch");
+	}
+
+	memcpy (image->pixel, meta->pData,
+		meta->pMap->pOutput->nDataSize);
+
+	xnFreeSceneMetaData (meta);
+
+	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
+	return TCL_OK;
+    }
+
+    mdef meta { /* Syntax: <instance> meta */
+	XnSceneMetaData* meta;
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	meta = xnAllocateSceneMetaData ();
+
+	xnGetSceneMetaData (instance->handle, meta);
+	Tcl_SetObjResult (interp, kinetcl_convert_scene_metadata (meta));
+
+	xnFreeSceneMetaData (meta);
+	return TCL_OK;
+    }
+
     # # ## ### ##### ######## #############
 
     support {

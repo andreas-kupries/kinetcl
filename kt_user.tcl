@@ -89,7 +89,53 @@ critcl::class def ::kinetcl::User {
     }
 
     # # ## ### ##### ######## #############
-    # mdef pixelsof {} : TODO - Requires CRIMP (image).
+
+    mdef pixelsof { /* Syntax: <instance> pixelsof <id> */
+	int id;
+	XnStatus s;
+	crimp_image* image;
+	XnSceneMetaData* meta;
+
+	if (objc != 3) {
+	    Tcl_WrongNumArgs (interp, 2, objv, "id");
+	    return TCL_ERROR;
+	}
+
+	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
+	    return TCL_ERROR;
+	}
+
+	meta = xnAllocateSceneMetaData ();
+
+	s = xnGetUserPixels (instance->handle, id, meta);
+	/* CHECK_STATUS_RETURN, inlined, to free the meta data */
+	if (s != XN_STATUS_OK) {
+	    xnFreeImageMetaData (meta);
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
+	    return TCL_ERROR;
+	}
+
+	/* Allocate and fill a CRIMP grey16 image with the
+	 * depth map.
+	 *
+	 * NOTE: We should assert bytes-pixel == 2
+	 */
+
+	image = crimp_new_grey16 (meta->pMap->Res.X, meta->pMap->Res.Y);
+
+	/* Assert size equivalence */
+	if ((SZ (image)*crimp_image_area(image)) != meta->pMap->pOutput->nDataSize) {
+	    Tcl_Panic ("raw pixel size mismatch");
+	}
+
+	memcpy (image->pixel, meta->pData,
+		meta->pMap->pOutput->nDataSize);
+
+	xnFreeDepthMetaData (meta);
+
+	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
+	return TCL_OK;
+    }
 
     # # ## ### ##### ######## #############
     ## Callbacks: enter, exit, new/lost
