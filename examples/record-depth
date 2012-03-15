@@ -61,8 +61,9 @@ proc record {} {
     set image [K map]
     set frame [K frame]
 
-    # Currently the crimp pgm doesn't accept grey16, although the format might be able to.
-    # Because of that we compress to grey8, and try to keep as much of the range as possible.
+    # Currently the crimp pgm doesn't accept grey16, although the
+    # format might be able to.  Because of that we compress to grey8,
+    # and try to keep as much of the range as possible.
     set image [crimp::FITFLOAT [crimp convert 2float $image]]
 
     crimp write 2file pgm-raw $tracedir/depth-[format %04d $frame].pgm $image

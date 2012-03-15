@@ -80,11 +80,10 @@ proc newframe {args} {
     set image [K map]
     set frame [K frame]
 
-    # Currently the crimp pgm doesn't accept grey16, although the format might be able to.
-    # Because of that we compress to grey8, and try to keep as much of the range as possible.
-
-    # Of course, we also need the compressed version for display with
-    # Tk.
+    # Currently the crimp pgm doesn't accept grey16, although the
+    # format might be able to.  Because of that we compress to grey8,
+    # and try to keep as much of the range as possible. Of course, we
+    # also need the compressed version for display with Tk.
 
     set image [crimp::FITFLOAT [crimp convert 2float $image]]
 

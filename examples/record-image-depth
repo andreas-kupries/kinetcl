@@ -67,8 +67,9 @@ proc record {} {
     set depth  [D map]
     set dframe [D frame]
 
-    # Currently the crimp pgm doesn't accept grey16, although the format might be able to.
-    # Because of that we compress to grey8, and try to keep as much of the range as possible.
+    # Currently the crimp pgm doesn't accept grey16, although the
+    # format might be able to.  Because of that we compress to grey8,
+    # and try to keep as much of the range as possible.
 
     set depth [crimp::FITFLOAT [crimp convert 2float $depth]]
 
