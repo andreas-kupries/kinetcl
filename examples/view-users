@@ -40,9 +40,9 @@ proc setup {} {
 
     # Determine scene size.
     set size {640 480}
-    set blank [crimp blank grey8 {*}$size 0]
+    set blank [crimp blank grey16 {*}$size 0]
     set photo [image create photo]
-    crimp write 2tk $photo $blank
+    crimp write 2tk $photo [crimp blank grey8 {*}$size 0]
 
     ttk::label  .image -image $photo
     ttk::button .exit -text Exit -command ::exit
@@ -74,7 +74,7 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc newframe {} {
+proc newframe {args} {
     global tracedir photo blank
     set s [clock milliseconds]
 
@@ -85,16 +85,18 @@ proc newframe {} {
 
     set image $blank
     foreach u $users {
-	set image [K pixelsof $u]
+	set user  [K pixelsof $u]
+	set image [crimp add $image $user]
 
 	# Currently the crimp pgm doesn't accept grey16, although the
 	# format might be able to.  Because of that we compress to
 	# grey8, and try to keep as much of the range as possible.
-	set image [crimp::FITFLOAT [crimp convert 2float $image]]
+	set user [crimp::FITFLOAT [crimp convert 2float $user]]
 
-	crimp write 2file pgm-raw $tracedir/user-[format %02d $u]-[format %04d $frame].pgm $image
+	crimp write 2file pgm-raw $tracedir/user-[format %02d $u]-[format %04d $frame].pgm $user
     }
 
+    set image [crimp::FITFLOAT [crimp convert 2float $image]]
     crimp write 2tk $photo $image
     .image configure -image $photo
 
