@@ -54,12 +54,14 @@ critcl::class def ::kinetcl::Depth {
     }
 
     mdef meta { /* Syntax: <instance> meta */
-	XnDepthMetaData* meta = xnAllocateDepthMetaData ();
+	XnDepthMetaData* meta;
 
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
+
+	meta = xnAllocateDepthMetaData ();
 
 	xnGetDepthMetaData (instance->handle, meta);
 	Tcl_SetObjResult (interp, kinetcl_convert_depth_metadata (meta));
@@ -70,13 +72,14 @@ critcl::class def ::kinetcl::Depth {
 
     mdef map { /* Syntax: <instance> map */
 	crimp_image* image;
-	XnDepthMetaData* meta = xnAllocateDepthMetaData ();
+	XnDepthMetaData* meta;
 
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
 
+	meta = xnAllocateDepthMetaData ();
 	xnGetDepthMetaData (instance->handle, meta);
 
 	/* Allocate and fill a CRIMP grey16 image with the

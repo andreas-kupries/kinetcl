@@ -73,12 +73,14 @@ critcl::class def ::kinetcl::Image {
     }
 
     mdef meta { /* Syntax: <instance> meta */
-	XnImageMetaData* meta = xnAllocateImageMetaData ();
+	XnImageMetaData* meta;
 
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
+
+	meta = xnAllocateImageMetaData ();
 
 	xnGetImageMetaData (instance->handle, meta);
 	Tcl_SetObjResult (interp, kinetcl_convert_image_metadata (meta));
@@ -89,13 +91,14 @@ critcl::class def ::kinetcl::Image {
 
     mdef map { /* Syntax: <instance> map */
 	crimp_image* image;
-	XnImageMetaData* meta = xnAllocateImageMetaData ();
+	XnImageMetaData* meta;
 
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
 	}
 
+	meta = xnAllocateImageMetaData ();
 	xnGetImageMetaData (instance->handle, meta);
 
 	switch (meta->pMap->PixelFormat) {
