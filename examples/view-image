@@ -1,0 +1,102 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require crimp::ppm
+package require crimp::tk
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv tracedir
+    if {[llength $argv] != 1} usage
+    lassign $argv tracedir
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0 tracedir"
+    exit 1
+}
+
+proc setup {} {
+    global tracedir photo
+    file mkdir $tracedir
+
+    kinetcl image create K
+    K set-callback-newdata newframe
+
+    set size [dict get [K meta] map res]
+
+    set photo [image create photo]
+    crimp write 2tk $photo [crimp blank rgb {*}$size 0 0 0]
+
+    ttk::label  .image -image $photo
+    ttk::button .exit -text Exit -command ::exit
+
+    pack .image -side top
+    pack .exit  -side left
+
+    # More buttons: stop/start recording
+
+    bind all <q> ::exit
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc newframe {args} {
+    global tracedir photo
+    set s [clock milliseconds]
+
+    set image [K map]
+    set frame [K frame]
+
+    crimp write 2file ppm-raw $tracedir/image-[format %04d $frame].ppm $image
+    crimp write 2tk $photo $image
+    .image configure -image $photo
+
+    set e [clock milliseconds]
+    ping "[expr {$e - $s}] $frame        "
+    return
+}
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit

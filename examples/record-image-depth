@@ -1,0 +1,85 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require crimp::ppm
+package require crimp::pgm
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv tracedir
+    if {[llength $argv] != 1} usage
+    lassign $argv tracedir
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0 tracedir"
+    exit 1
+}
+
+proc setup {} {
+    global tracedir
+    file mkdir $tracedir
+    kinetcl image create I
+    kinetcl depth create D
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    global tracedir
+    kinetcl waitUpdate
+
+    set s [clock milliseconds]
+
+    set image  [I map]
+    set iframe [I frame]
+
+    set depth  [D map]
+    set dframe [D frame]
+
+    # Currently the crimp pgm doesn't accept grey16, although the format might be able to.
+    # Because of that we compress to grey8, and try to keep as much of the range as possible.
+
+    set depth [crimp::FITFLOAT [crimp convert 2float $depth]]
+
+    crimp write 2file ppm-raw $tracedir/image-[format %04d $iframe].ppm $image
+    crimp write 2file pgm-raw $tracedir/depth-[format %04d $dframe].pgm $depth
+
+    set e [clock milliseconds]
+    ping "D [expr {$e - $s}] $iframe $dframe        "
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit

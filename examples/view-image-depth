@@ -1,0 +1,139 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require crimp::ppm
+package require crimp::pgm
+package require crimp::tk
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv tracedir
+    if {[llength $argv] != 1} usage
+    lassign $argv tracedir
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0 tracedir"
+    exit 1
+}
+
+proc setup {} {
+    global tracedir iphoto dphoto
+    file mkdir $tracedir
+
+    kinetcl image create I
+    kinetcl depth create D
+
+    I set-callback-newdata newimage
+    D set-callback-newdata newdepth
+
+    set isize [dict get [I meta] map res]
+    set dsize [dict get [D meta] map res]
+
+    set iphoto [image create photo]
+    set dphoto [image create photo]
+
+    crimp write 2tk $iphoto [crimp blank rgb   {*}$isize 0 0 0]
+    crimp write 2tk $dphoto [crimp blank grey8 {*}$dsize 0]
+
+    ttk::frame  .show
+    ttk::label  .image -image $iphoto
+    ttk::label  .depth -image $dphoto
+    ttk::button .exit -text Exit -command ::exit
+
+    # other buttons:
+    # - change-viewpoint for depth (D set-view I, D unset-view I)
+    # - stop/start recording.
+
+    pack .show -side top
+    pack .depth .image -side left -in .show
+    pack .exit  -side left
+
+    bind all <q> ::exit
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc newimage {args} {
+    global tracedir iphoto
+    set s [clock milliseconds]
+
+    set image [I map]
+    set frame [I frame]
+
+    crimp write 2file ppm-raw $tracedir/image-[format %04d $frame].ppm $image
+    crimp write 2tk $iphoto $image
+    .image configure -image $iphoto
+
+    set e [clock milliseconds]
+    ping "I [expr {$e - $s}] $frame        "
+    return
+}
+
+proc newdepth {args} {
+    global tracedir dphoto
+    set s [clock milliseconds]
+
+    set image [D map]
+    set frame [D frame]
+
+    # Currently the crimp pgm doesn't accept grey16, although the format might be able to.
+    # Because of that we compress to grey8, and try to keep as much of the range as possible.
+
+    # Of course, we also need the compressed version for display with
+    # Tk.
+
+    set image [crimp::FITFLOAT [crimp convert 2float $image]]
+
+    crimp write 2file pgm-raw $tracedir/depth-[format %04d $frame].pgm $image
+    crimp write 2tk $dphoto $image
+    .depth configure -image $dphoto
+
+    set e [clock milliseconds]
+    ping "D [expr {$e - $s}] $frame        "
+    return
+}
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
