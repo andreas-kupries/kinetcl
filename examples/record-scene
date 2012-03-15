@@ -1,0 +1,78 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require crimp::pgm
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv tracedir
+    if {[llength $argv] != 1} usage
+    lassign $argv tracedir
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0 tracedir"
+    exit 1
+}
+
+proc setup {} {
+    global tracedir
+    kinetcl scene create K
+    file mkdir $tracedir
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    global tracedir
+    set s [clock milliseconds]
+
+    kinetcl waitUpdate
+    set image [K map]
+    set frame [K frame]
+
+    # Currently the crimp pgm doesn't accept grey16, although the
+    # format might be able to.  Because of that we compress to grey8,
+    # and try to keep as much of the range as possible.
+    set image [crimp::FITFLOAT [crimp convert 2float $image]]
+
+    crimp write 2file pgm-raw $tracedir/scene-[format %04d $frame].pgm $image
+
+    set e [clock milliseconds]
+    ping "[expr {$e - $s}] $frame        "
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit

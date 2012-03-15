@@ -1,0 +1,116 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require crimp::pgm
+package require crimp::tk
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv tracedir
+    if {[llength $argv] != 1} usage
+    lassign $argv tracedir
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0 tracedir"
+    exit 1
+}
+
+proc setup {} {
+    global tracedir photo blank
+    file mkdir $tracedir
+
+    kinetcl user create K
+    K set-callback-newdata newframe
+
+    # Determine scene size.
+    set size {640 480}
+    set blank [crimp blank grey8 {*}$size 0]
+    set photo [image create photo]
+    crimp write 2tk $photo $blank
+
+    ttk::label  .image -image $photo
+    ttk::button .exit -text Exit -command ::exit
+
+    # More buttons: stop/start recording
+
+    pack .image -side top
+    pack .exit  -side left
+
+    bind all <q> ::exit
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc newframe {} {
+    global tracedir photo blank
+    set s [clock milliseconds]
+
+    kinetcl waitUpdate
+
+    set users [K users]
+    set frame [K frame]
+
+    set image $blank
+    foreach u $users {
+	set image [K pixelsof $u]
+
+	# Currently the crimp pgm doesn't accept grey16, although the
+	# format might be able to.  Because of that we compress to
+	# grey8, and try to keep as much of the range as possible.
+	set image [crimp::FITFLOAT [crimp convert 2float $image]]
+
+	crimp write 2file pgm-raw $tracedir/user-[format %02d $u]-[format %04d $frame].pgm $image
+    }
+
+    crimp write 2tk $photo $image
+    .image configure -image $photo
+
+    set e [clock milliseconds]
+    ping "[expr {$e - $s}] $frame ($users)       "
+    return
+}
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
