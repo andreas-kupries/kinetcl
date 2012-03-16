@@ -1,0 +1,108 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv pose
+    if {![llength $argv]} usage
+    lassign $argv pose
+    return
+}
+
+proc usage {} {
+    global argv0
+
+    kinetcl user create K
+    set p [K poses]
+    K destroy
+    puts stderr "usage: $argv0 [join $p |]"
+    exit 1
+}
+
+proc setup {} {
+    kinetcl user create K
+    #K set-callback-newdata newframe
+    K set-callback-enter userchange
+    K set-callback-exit  userchange
+    K set-callback-new   userchange
+    K set-callback-lost  userchange
+
+    K set-callback-calibrationStart    calibration
+    K set-callback-calibrationComplete calibration
+    K set-callback-calibrationProgress calibration
+
+    K set-callback-poseEnter    pose
+    K set-callback-poseExit     pose
+    K set-callback-poseProgress pose
+    return
+}
+
+proc run {} {
+    global pose
+    ping start...
+    kinetcl start
+    ping process($pose)...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc calibration {obj event user {status {}}} {
+    puts "\t$event $user : $status"
+    return
+}
+
+proc pose {obj event pose user {status {}}} {
+    puts "\t$event $pose $user : $status"
+    return
+}
+
+proc userchange {obj event user} {
+global pose
+    puts "$event $user"
+
+    switch -- $event {
+	new - enter {
+	    K start-tracking $user
+	    K start-detection $user $pose
+	}
+	exit {
+	    K stop-tracking $user
+	    K stop-detection $user $pose
+	}
+    }
+    return
+}
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
