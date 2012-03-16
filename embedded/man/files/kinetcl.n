@@ -448,6 +448,26 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIhandsInstanceCmd\fR \fBdestroy\fR
 .sp
+\fIinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+.sp
+\fIinstanceCmd\fR \fBstart-tracking\fR \fIpoint\fR
+.sp
+\fIinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+.sp
+\fIinstanceCmd\fR \fBstop-tracking-all\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-handCreate\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-handCreate\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-handUpdate\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-handUpdate\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-handDestroy\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-handDestroy\fR
+.sp
 \fB::kinetcl audio\fR \fBnew\fR
 .sp
 \fB::kinetcl audio\fR \fBcreate\fR \fIobjname\fR
@@ -1660,6 +1680,81 @@ resources used by multiple instances are released only when the last
 instance using them is destroyed.
 .sp
 The result of the method is the empty string.
+.TP
+\fIinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+This method sets the smoothing \fIfactor\fR for hand tracking, a
+floating point value.
+.sp
+The result of the method is an empty string.
+.TP
+\fIinstanceCmd\fR \fBstart-tracking\fR \fIpoint\fR
+This method activates the tracking of a hand at the \fIpoint\fR.
+The point must be a 3-element list containing the X, Y, and Z
+coordinates, in this order.
+.sp
+The result of the method is an empty string.
+.TP
+\fIinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+This method stops tracking of the hand(s) for the user specified by
+the \fIid\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIinstanceCmd\fR \fBstop-tracking-all\fR
+This method stops the tracking of all hands known to the node.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-handCreate\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-handCreate\fR
+These methods define and remove a callback responding to hand creation
+events, i.e. the node starting to track an additional hand.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word "handCreate", the id of the user the hand belongs to, the
+location of the hand, and a timestamp, in this order.
+.sp
+The location is a 3-element list containing the X, Y, and Z
+coordinates of the hand, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-handUpdate\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-handUpdate\fR
+These methods define and remove a callback responding to hand update
+events, i.e. when a tracked hand moves to a new location.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word "handUpdate", the id of the user the hand belongs to, the new
+location of the hand, and a timestamp, in this order.
+.sp
+The location is a 3-element list containing the X, Y, and Z
+coordinates of the hand, in this order.
+.sp
+The result of the methods is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-handDestroy\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-handDestroy\fR
+These methods define and remove a callback responding to hand
+destruction events, i.e. when a tracked hand disappears.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "handDestroy", the id of the user the destroyed hand belonged
+to, and a timestamp, in this order.
+.sp
+The result of the methods is an empty string.
 .PP
 .SH "AUDIO GENERATOR"
 This sections documents the class \fB::kinetcl audio\fR, the concrete

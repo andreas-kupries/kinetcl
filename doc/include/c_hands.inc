@@ -35,4 +35,91 @@ instance using them is destroyed.
 
 [para] The result of the method is the empty string.
 
+[comment ===============================================================]
+[call [arg instanceCmd] [method set-smoothing] [arg factor]]
+
+This method sets the smoothing [arg factor] for hand tracking, a
+floating point value.
+
+[para] The result of the method is an empty string.
+
+[comment ===============================================================]
+[call [arg instanceCmd] [method start-tracking] [arg point]]
+
+This method activates the tracking of a hand at the [arg point].
+
+The point must be a 3-element list containing the X, Y, and Z
+coordinates, in this order.
+
+[para] The result of the method is an empty string.
+
+[comment ===============================================================]
+[call [arg instanceCmd] [method stop-tracking] [arg id]]
+
+This method stops tracking of the hand(s) for the user specified by
+the [arg id].
+
+[para] The result of the method is an empty string.
+
+[comment ===============================================================]
+[call [arg instanceCmd] [method stop-tracking-all]]
+
+This method stops the tracking of all hands known to the node.
+
+[para] The result of the method is an empty string.
+
+[comment ===============================================================]
+[call [arg generatorInstanceCmd] [method set-callback-handCreate] [arg cmd]...]
+[call [arg generatorInstanceCmd] [method unset-callback-handCreate]]
+
+These methods define and remove a callback responding to hand creation
+events, i.e. the node starting to track an additional hand.
+
+[para] Setting a callback implicitly removes any previous callback set.
+
+[para] The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word "handCreate", the id of the user the hand belongs to, the
+location of the hand, and a timestamp, in this order.
+
+[para] The location is a 3-element list containing the X, Y, and Z
+coordinates of the hand, in this order.
+
+[para] The result of the methods is an empty string.
+
+[comment ===============================================================]
+[call [arg generatorInstanceCmd] [method set-callback-handUpdate] [arg cmd]...]
+[call [arg generatorInstanceCmd] [method unset-callback-handUpdate]]
+
+These methods define and remove a callback responding to hand update
+events, i.e. when a tracked hand moves to a new location.
+
+[para] Setting a callback implicitly removes any previous callback set.
+
+[para] The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word "handUpdate", the id of the user the hand belongs to, the new
+location of the hand, and a timestamp, in this order.
+
+[para] The location is a 3-element list containing the X, Y, and Z
+coordinates of the hand, in this order.
+
+[para] The result of the methods is an empty string.
+
+[comment ===============================================================]
+[call [arg generatorInstanceCmd] [method set-callback-handDestroy] [arg cmd]...]
+[call [arg generatorInstanceCmd] [method unset-callback-handDestroy]]
+
+These methods define and remove a callback responding to hand
+destruction events, i.e. when a tracked hand disappears.
+
+[para] Setting a callback implicitly removes any previous callback set.
+
+[para] The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word "handDestroy", the id of the user the destroyed hand belonged
+to, and a timestamp, in this order.
+
+[para] The result of the methods is an empty string.
+
 [list_end]
