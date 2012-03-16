@@ -32,6 +32,15 @@ critcl::ccode {
 	Tcl_Release (interp);
 	Tcl_DecrRefCount (cmd);
     }
+
+    static char*
+    kinetcl_strdup (char* s)
+    {
+	int n = strlen (s) + 1;
+	char* r = ckalloc (n);
+	strcpy (r, s);
+	return r;
+    }
 }
 
 # # ## ### ##### ######## #############

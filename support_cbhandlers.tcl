@@ -21,7 +21,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 
 	if {[string match {*XnChar\*} $ptype]} {
 	    # String pointer. Event gets a dynamically allocated copy.
-	    lappend eencode     "e->$pvariable = strdup ($pvariable);"
+	    lappend eencode     "e->$pvariable = kinetcl_strdup ($pvariable);"
 	    lappend edecode     "$pvariable = e->$pvariable;"
 	    lappend evardef     "$parameter;"
 	    lappend edestructor "ckfree (e->$pvariable);"
