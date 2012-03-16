@@ -256,6 +256,10 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIbaseInstanceCmd\fR \fBis-capable-of\fR \fIcapability\fR
 .sp
+\fIbaseInstanceCmd\fR \fBnode-info\fR
+.sp
+\fIbaseInstanceCmd\fR \fBnode-name\fR
+.sp
 \fB::kinetcl::generator\fR \fBnew\fR
 .sp
 \fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
@@ -304,9 +308,33 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIdepthInstanceCmd\fR \fBdestroy\fR
 .sp
+\fIdepthInstanceCmd\fR \fBmax-depth\fR
+.sp
+\fIdepthInstanceCmd\fR \fBfov\fR
+.sp
+\fIdepthInstanceCmd\fR \fBmeta\fR
+.sp
+\fIdepthInstanceCmd\fR \fBmap\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-depthfov\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-depthfov\fR
+.sp
 \fB::kinetcl::image\fR
 .sp
 \fIimageInstanceCmd\fR \fBdestroy\fR
+.sp
+\fIimageInstanceCmd\fR \fBformats\fR
+.sp
+\fIimageInstanceCmd\fR \fBformat\fR ?\fIformat\fR?
+.sp
+\fIimageInstanceCmd\fR \fBmeta\fR
+.sp
+\fIimageInstanceCmd\fR \fBmap\fR
+.sp
+\fIgeneratorInstanceCmd\fR \fBset-callback-pixelformat\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pixelformat\fR
 .sp
 \fB::kinetcl::ir\fR
 .sp
@@ -316,41 +344,45 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgestureInstanceCmd\fR \fBdestroy\fR
 .sp
-\fBgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
+\fIgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
 .sp
-\fBgestureInstanceCmd\fR \fBremove-gesture\fR \fIgesture\fR
+\fIgestureInstanceCmd\fR \fBremove-gesture\fR \fIgesture\fR
 .sp
-\fBgestureInstanceCmd\fR \fBis-gesture\fR \fIgesture\fR
+\fIgestureInstanceCmd\fR \fBis-gesture\fR \fIgesture\fR
 .sp
-\fBgestureInstanceCmd\fR \fBgesture-has-progress\fR \fIgesture\fR
+\fIgestureInstanceCmd\fR \fBgesture-has-progress\fR \fIgesture\fR
 .sp
-\fBgestureInstanceCmd\fR \fBall-gestures\fR
+\fIgestureInstanceCmd\fR \fBall-gestures\fR
 .sp
-\fBgestureInstanceCmd\fR \fBactive-gestures\fR
+\fIgestureInstanceCmd\fR \fBactive-gestures\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-gestureProgress\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureProgress\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-gestureChange\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureChange\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
 .sp
 \fB::kinetcl::scene\fR
 .sp
 \fIsceneInstanceCmd\fR \fBdestroy\fR
+.sp
+\fIsceneInstanceCmd\fR \fBmeta\fR
+.sp
+\fIsceneInstanceCmd\fR \fBmap\fR
 .sp
 \fB::kinetcl::user\fR
 .sp
@@ -416,95 +448,95 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIscriptInstanceCmd\fR \fBdestroy\fR
 .sp
-\fBinstanceCmd\fR \fBposes\fR
+\fIinstanceCmd\fR \fBposes\fR
 .sp
-\fBinstanceCmd\fR \fBis-supported\fR \fIpose\fR
+\fIinstanceCmd\fR \fBis-supported\fR \fIpose\fR
 .sp
-\fBinstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
+\fIinstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
 .sp
-\fBinstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
+\fIinstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
 .sp
-\fBinstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
+\fIinstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
 .sp
-\fBinstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
+\fIinstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
 .sp
-\fBinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
 .sp
-\fBinstanceCmd\fR \fBunset-callback-poseEnter\fR
+\fIinstanceCmd\fR \fBunset-callback-poseEnter\fR
 .sp
-\fBinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
 .sp
-\fBinstanceCmd\fR \fBunset-callback-poseExit\fR
+\fIinstanceCmd\fR \fBunset-callback-poseExit\fR
 .sp
-\fBinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
 .sp
-\fBinstanceCmd\fR \fBunset-callback-poseProgress\fR
+\fIinstanceCmd\fR \fBunset-callback-poseProgress\fR
 .sp
-\fBinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
 .sp
-\fBinstanceCmd\fR \fBunset-callback-fovEdge\fR
+\fIinstanceCmd\fR \fBunset-callback-fovEdge\fR
 .sp
-\fBinstanceCmd\fR \fBneed-pose\fR
+\fIinstanceCmd\fR \fBneed-pose\fR
 .sp
-\fBinstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
+\fIinstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
 .sp
-\fBinstanceCmd\fR \fBset-profile\fR \fIprofile\fR
+\fIinstanceCmd\fR \fBset-profile\fR \fIprofile\fR
 .sp
-\fBinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+\fIinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
 .sp
-\fBinstanceCmd\fR \fBstart-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBstart-tracking\fR \fIid\fR
 .sp
-\fBinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
 .sp
-\fBinstanceCmd\fR \fBreset-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBreset-tracking\fR \fIid\fR
 .sp
-\fBinstanceCmd\fR \fBis-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBis-tracking\fR \fIid\fR
 .sp
-\fBinstanceCmd\fR \fBis-calibrated\fR \fIid\fR
+\fIinstanceCmd\fR \fBis-calibrated\fR \fIid\fR
 .sp
-\fBinstanceCmd\fR \fBis-calibrating\fR \fIid\fR
+\fIinstanceCmd\fR \fBis-calibrating\fR \fIid\fR
 .sp
-\fBinstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
+\fIinstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
 .sp
-\fBinstanceCmd\fR \fBabort-calibration\fR \fIid\fR
+\fIinstanceCmd\fR \fBabort-calibration\fR \fIid\fR
 .sp
-\fBinstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
+\fIinstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
 .sp
-\fBinstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
+\fIinstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
 .sp
-\fBinstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
+\fIinstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
 .sp
-\fBinstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
+\fIinstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
 .sp
-\fBinstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
+\fIinstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
 .sp
-\fBinstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
+\fIinstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
 .sp
-\fBinstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
+\fIinstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
 .sp
-\fBinstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
+\fIinstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
 .sp
-\fBinstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
+\fIinstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
 .sp
-\fBinstanceCmd\fR \fBactive-joints\fR
+\fIinstanceCmd\fR \fBactive-joints\fR
 .sp
-\fBinstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
+\fIinstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-jointConfigChange\fR
+\fIinstanceCmd\fR \fBunset-callback-jointConfigChange\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationStart\fR
+\fIinstanceCmd\fR \fBunset-callback-calibrationStart\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationComplete\fR
+\fIinstanceCmd\fR \fBunset-callback-calibrationComplete\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationProgress\fR
+\fIinstanceCmd\fR \fBunset-callback-calibrationProgress\fR
 .sp
 .BE
 .SH DESCRIPTION
@@ -541,6 +573,73 @@ instance or not.
 .sp
 The result is a boolean value, \fBtrue\fR if the capability
 is supported, and \fBfalse\fR else.
+.TP
+\fIbaseInstanceCmd\fR \fBnode-info\fR
+This method returns a dictionary containing OpenNI's description of the
+node. They keys of the dictinary, and the associated values are
+.RS
+.TP
+\fBtype\fR
+The OpenNI type of the node, which is either one of
+.RS
+.IP \(bu
+invalid
+.IP \(bu
+device
+.IP \(bu
+depth
+.IP \(bu
+image
+.IP \(bu
+audio
+.IP \(bu
+ir
+.IP \(bu
+user
+.IP \(bu
+recorder
+.IP \(bu
+player
+.IP \(bu
+gesture
+.IP \(bu
+scene
+.IP \(bu
+hands
+.IP \(bu
+codec
+.IP \(bu
+production
+.IP \(bu
+generator
+.IP \(bu
+map
+.IP \(bu
+script
+.RE
+.IP
+or an integer number. The latter is used for unknown custom types
+OpenNI has no name for.
+.TP
+\fBvendor\fR
+The name of the vendor supplying the library which implements the
+node.
+.TP
+\fBname\fR
+The name OpenNI has given to the node. This is the same as returned by
+method \fBnode-name\fR.
+.TP
+\fBversion\fR
+The version of the library implementing the node (see also the key
+\fBvendor\fR) as a 4-element list containing major, minor version
+number, maintenance id, and build number, in this order.
+.TP
+\fBcreate\fR
+The node's creation detail information.
+.RE
+.TP
+\fIbaseInstanceCmd\fR \fBnode-name\fR
+This method returns a string holding the OpenNI name of the node.
 .PP
 .SH GENERATOR
 This sections documents the class \fB::kinetcl::generator\fR, the (abstract) base
@@ -629,6 +728,11 @@ Setting a callback implicitly removes any previous callback set.
 The callback to invoke is specified as a command prefix, and
 will be invoked with two arguments added to it, the instance command,
 and the word "active", in this order.
+.sp
+\fINote\fR that the callback is not told the actual state of
+the instance. If this information is required then it is the
+callback's responsibility to query the state, using the interogatory
+method \fBactive\fR.
 .sp
 The result of the methods is an empty string.
 .TP
@@ -732,6 +836,126 @@ resources used by multiple instances are released only when the last
 instance using them is destroyed.
 .sp
 The result of the method is the empty string.
+.TP
+\fIdepthInstanceCmd\fR \fBmax-depth\fR
+This method returns the max depth the node is able to generate. The
+result is an integer number.
+.TP
+\fIdepthInstanceCmd\fR \fBfov\fR
+This method returns the field of view the node is able to generate, in
+radians. The result is a 2-element list containing the horizontal and
+vertical fields of view, in this order.
+.TP
+\fIdepthInstanceCmd\fR \fBmeta\fR
+This method returns a dictionary holding information about the depth
+maps produced by the node. The keys found in this dictionary, and the
+associated values are:
+.RS
+.TP
+\fBmap\fR
+The value is a dictionary holding information about the map produced
+by the node. The keys found in this dictionary, and the associated
+values are:
+.RS
+.TP
+\fBformat\fR
+The pixel format of the depth maps produced by the node.
+The possible values are:
+.RS
+.TP
+\fBrgb24\fR
+3 bytes/pixel red/green/blue.
+.TP
+\fByuv422\fR
+Lumincance/2-Chroma, chroma in reduced horizontal resolution.
+.TP
+\fBgrey8\fR
+1 byte/pixel, 256 grey levels.
+.TP
+\fBgrey16\fR
+2 byte/pixel, 65536 grey levels, depths, or labels.
+.TP
+\fBmjpeg\fR
+Motion JPEG compressed image.
+.RE
+.sp
+The formats \fByuv422\fR and \fBmjpeg\fR are not supported
+by \fBkinetcl\fR.
+.TP
+\fBfps\fR
+The frame rate of the node, in frames per second.
+.TP
+\fBfullres\fR
+The full resolution of the produced depth maps. The value is a
+2-element list containing the horizontal and vertical resolution in
+pixels, in this order.
+.TP
+\fBoffset\fR
+The location of the produced depth map within the full depth map. The
+value is a 2-element list containing the horizontal and vertical
+position in pixels, in this order.
+This can differ from \fB{0 0}\fR if and only if cropping is
+active.
+.TP
+\fBoutput\fR
+The value is a dictionary holding information about the output
+produced by the node. The keys found in this dictionary, and the
+associated values are:
+.RS
+.TP
+\fBframe\fR
+The id of the current frame.
+.TP
+\fBnew\fR
+The \fBisNew\fR flag of the current frame.
+.TP
+\fBsize\fR
+The size of the frame, in bytes. Together with the resolution of the
+frame we can compute the number of bytes per pixel in the map.
+.TP
+\fBtime\fR
+The time-code of the current frame.
+.RE
+.TP
+\fBres\fR
+The current resolution of the produced depth maps. This may be less
+than the full resolution (see above), if cropping is active. The
+value is a 2-element list containing the horizontal and vertical
+resolution in pixels, in this order.
+.RE
+.TP
+\fBmax-depth\fR
+The max depth the node is able to generate. An integer number.
+This is the same value as returned by method \fBmax-depth\fR.
+.RE
+.IP
+Notes:
+.sp
+Depth maps are in pixel format \fBgrey16\fR.
+.TP
+\fIdepthInstanceCmd\fR \fBmap\fR
+This method returns a \fBcrimp\fR image of type \fBgrey16\fR
+where the value of each pixel represents the distance of the pixel
+from the sensor.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-depthfov\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-depthfov\fR
+These methods define and remove a callback responding to changes in
+the field of view of the node.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "depthfov", in this order.
+.sp
+\fINote\fR that the callback is not told the actual state of
+the instance. If this information is required then it is the
+callback's responsibility to query the state, using the interogatory
+method \fBfov\fR.
+.sp
+The result of the methods is an empty string.
 .PP
 .SH "IMAGE GENERATOR"
 This sections documents the class \fB::kinetcl::image\fR, the
@@ -759,6 +983,138 @@ resources used by multiple instances are released only when the last
 instance using them is destroyed.
 .sp
 The result of the method is the empty string.
+.TP
+\fIimageInstanceCmd\fR \fBformats\fR
+This method returns a list of the pixel formats supported by the node.
+.sp
+For the list of possible pixel formats see below, under method
+\fBmeta\fR.
+.TP
+\fIimageInstanceCmd\fR \fBformat\fR ?\fIformat\fR?
+This method returns the name of the currently active pixel format.
+If the argument \fIformat\fR is present the node is reconfigured to
+report the images in the specified format.
+.sp
+For the list of possible pixel formats see below, under method
+\fBmeta\fR.
+.TP
+\fIimageInstanceCmd\fR \fBmeta\fR
+This method returns a dictionary holding information about the image
+maps produced by the node. The keys found in this dictionary, and the
+associated values are:
+.RS
+.TP
+\fBmap\fR
+The value is a dictionary holding information about the map produced
+by the node. The keys found in this dictionary, and the associated
+values are:
+.RS
+.TP
+\fBformat\fR
+The pixel format of the depth maps produced by the node.
+The possible values are:
+.RS
+.TP
+\fBrgb24\fR
+3 bytes/pixel red/green/blue.
+.TP
+\fByuv422\fR
+Lumincance/2-Chroma, chroma in reduced horizontal resolution.
+.TP
+\fBgrey8\fR
+1 byte/pixel, 256 grey levels.
+.TP
+\fBgrey16\fR
+2 byte/pixel, 65536 grey levels, depths, or labels.
+.TP
+\fBmjpeg\fR
+Motion JPEG compressed image.
+.RE
+.sp
+The formats \fByuv422\fR and \fBmjpeg\fR are not supported
+by \fBkinetcl\fR.
+.TP
+\fBfps\fR
+The frame rate of the node, in frames per second.
+.TP
+\fBfullres\fR
+The full resolution of the produced depth maps. The value is a
+2-element list containing the horizontal and vertical resolution in
+pixels, in this order.
+.TP
+\fBoffset\fR
+The location of the produced depth map within the full depth map. The
+value is a 2-element list containing the horizontal and vertical
+position in pixels, in this order.
+This can differ from \fB{0 0}\fR if and only if cropping is
+active.
+.TP
+\fBoutput\fR
+The value is a dictionary holding information about the output
+produced by the node. The keys found in this dictionary, and the
+associated values are:
+.RS
+.TP
+\fBframe\fR
+The id of the current frame.
+.TP
+\fBnew\fR
+The \fBisNew\fR flag of the current frame.
+.TP
+\fBsize\fR
+The size of the frame, in bytes. Together with the resolution of the
+frame we can compute the number of bytes per pixel in the map.
+.TP
+\fBtime\fR
+The time-code of the current frame.
+.RE
+.TP
+\fBres\fR
+The current resolution of the produced depth maps. This may be less
+than the full resolution (see above), if cropping is active. The
+value is a 2-element list containing the horizontal and vertical
+resolution in pixels, in this order.
+.RE
+.RE
+.IP
+Notes:
+.sp
+Image maps are usually in pixel format \fBrgb24\fR.
+.TP
+\fIimageInstanceCmd\fR \fBmap\fR
+This method returns a \fBcrimp\fR image containing the current
+image map. The crimp type of the image depends on the currently active
+pixel format:
+.RS
+.TP
+\fBrgb24\fR
+--> \fBrgb\fR
+.TP
+\fBgrey8\fR
+--> \fBgrey8\fR
+.TP
+\fBgrey16\fR
+--> \fBgrey16\fR
+.RE
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-pixelformat\fR \fIcmd\fR...
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pixelformat\fR
+These methods define and remove a callback responding to changes in
+the active pixel format of the node.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "pixelformat", in this order.
+.sp
+\fINote\fR that the callback is not told the actual state of
+the instance. If this information is required then it is the
+callback's responsibility to query the state, using the interogatory
+method \fBformat\fR.
+.sp
+The result of the methods is an empty string.
 .PP
 .SH "IR GENERATOR"
 This sections documents the class \fB::kinetcl::ir\fR, the
@@ -814,7 +1170,7 @@ instance using them is destroyed.
 .sp
 The result of the method is the empty string.
 .TP
-\fBgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
+\fIgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
 This method activates the gesture, i.e. causes the instance to start
 looking for it in the input.
 .sp
@@ -826,36 +1182,36 @@ right-top-far corner.
 .sp
 The result of the method is the empty string.
 .TP
-\fBgestureInstanceCmd\fR \fBremove-gesture\fR \fIgesture\fR
+\fIgestureInstanceCmd\fR \fBremove-gesture\fR \fIgesture\fR
 This method deactivates the gesture, i.e. causes the instance to stop
 looking for it in the input.
 .sp
 The result of the method is the empty string.
 .TP
-\fBgestureInstanceCmd\fR \fBis-gesture\fR \fIgesture\fR
+\fIgestureInstanceCmd\fR \fBis-gesture\fR \fIgesture\fR
 This method tests if the named \fIgesture\fR is supported by the instance.
 .sp
 The result is a boolean value, \fBtrue\fR if the gesture is
 supported, and \fBfalse\fR else.
 .TP
-\fBgestureInstanceCmd\fR \fBgesture-has-progress\fR \fIgesture\fR
+\fIgestureInstanceCmd\fR \fBgesture-has-progress\fR \fIgesture\fR
 This method tests if the named \fIgesture\fR supports progess
 reporting during recognition.
 .sp
 The result is a boolean value, \fBtrue\fR if the gesture
 supports progress reporting, and \fBfalse\fR else.
 .TP
-\fBgestureInstanceCmd\fR \fBall-gestures\fR
+\fIgestureInstanceCmd\fR \fBall-gestures\fR
 This method returns a list containing the names of all gestures
 supported by the instance.
 .TP
-\fBgestureInstanceCmd\fR \fBactive-gestures\fR
+\fIgestureInstanceCmd\fR \fBactive-gestures\fR
 This method returns a list containing the names of all gestures
 that are currently active.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
 These methods define and remove a callback responding to gesture
 recognition events.
 .sp
@@ -870,9 +1226,9 @@ gesture, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-gestureProgress\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureProgress\fR
 These methods define and remove a callback responding to gesture
 progress events.
 .sp
@@ -886,9 +1242,9 @@ percentage of the gesture already performed, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-gestureChange\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureChange\fR
 These methods define and remove a callback responding to gesture
 change events, i.e when gestures are (de)activated.
 .sp
@@ -900,9 +1256,9 @@ and the word "gestureChange", in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
 These methods define and remove a callback responding to gesture
 stage completion events.
 .sp
@@ -916,9 +1272,9 @@ performing the gesture, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
+\fIgestureInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
+\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
 These methods define and remove a callback responding to gesture
 stage readiness events.
 .sp
@@ -940,7 +1296,7 @@ This class inherits from \fB::kinetcl::map\fR and its
 superclasses. See section \fBMap Generator\fR.
 .PP
 A scene analyzer segments a scene, identifying the floor and
-other connected areas in the view of the sensor.
+other connected areas (i.e. users) in the view of the sensor.
 .SS "CLASS API"
 .TP
 \fB::kinetcl::scene\fR
@@ -958,6 +1314,94 @@ resources used by multiple instances are released only when the last
 instance using them is destroyed.
 .sp
 The result of the method is the empty string.
+.TP
+\fIsceneInstanceCmd\fR \fBmeta\fR
+This method returns a dictionary holding information about the scene
+segmentation produced by the node. The keys found in this dictionary,
+and the associated values are:
+.RS
+.TP
+\fBmap\fR
+The value is a dictionary holding information about the map produced
+by the node. The keys found in this dictionary, and the associated
+values are:
+.RS
+.TP
+\fBformat\fR
+The pixel format of the depth maps produced by the node.
+The possible values are:
+.RS
+.TP
+\fBrgb24\fR
+3 bytes/pixel red/green/blue.
+.TP
+\fByuv422\fR
+Lumincance/2-Chroma, chroma in reduced horizontal resolution.
+.TP
+\fBgrey8\fR
+1 byte/pixel, 256 grey levels.
+.TP
+\fBgrey16\fR
+2 byte/pixel, 65536 grey levels, depths, or labels.
+.TP
+\fBmjpeg\fR
+Motion JPEG compressed image.
+.RE
+.sp
+The formats \fByuv422\fR and \fBmjpeg\fR are not supported
+by \fBkinetcl\fR.
+.TP
+\fBfps\fR
+The frame rate of the node, in frames per second.
+.TP
+\fBfullres\fR
+The full resolution of the produced depth maps. The value is a
+2-element list containing the horizontal and vertical resolution in
+pixels, in this order.
+.TP
+\fBoffset\fR
+The location of the produced depth map within the full depth map. The
+value is a 2-element list containing the horizontal and vertical
+position in pixels, in this order.
+This can differ from \fB{0 0}\fR if and only if cropping is
+active.
+.TP
+\fBoutput\fR
+The value is a dictionary holding information about the output
+produced by the node. The keys found in this dictionary, and the
+associated values are:
+.RS
+.TP
+\fBframe\fR
+The id of the current frame.
+.TP
+\fBnew\fR
+The \fBisNew\fR flag of the current frame.
+.TP
+\fBsize\fR
+The size of the frame, in bytes. Together with the resolution of the
+frame we can compute the number of bytes per pixel in the map.
+.TP
+\fBtime\fR
+The time-code of the current frame.
+.RE
+.TP
+\fBres\fR
+The current resolution of the produced depth maps. This may be less
+than the full resolution (see above), if cropping is active. The
+value is a 2-element list containing the horizontal and vertical
+resolution in pixels, in this order.
+.RE
+.RE
+.IP
+Notes:
+.sp
+Scene segmentations are in pixel format \fBgrey16\fR.
+.TP
+\fIsceneInstanceCmd\fR \fBmap\fR
+This method returns a \fBcrimp\fR image of type \fBgrey16\fR
+containing the current scene segmentation. Each pixel is labeled with
+the id of the user it belongs to, or \fB0\fR if it is background.
 .PP
 .SH "USER GENERATOR"
 This sections documents the class \fB::kinetcl::user\fR, the concrete
@@ -1011,10 +1455,9 @@ The coordinates are specified in the order of X, Y, and Z.
 The method will throw an error if the user id is not valid.
 .TP
 \fIuserInstanceCmd\fR \fBpixelsof\fR \fIid\fR
-This method is \fInot implemented\fR. When done it will return a
-\fBcrimp\fR image of type \fB<unknown>\fR where all pixels
-representing the user are set to the user's id, and everything else
-set to \fB0\fR.
+This method returns a \fBcrimp\fR image of type \fBgrey16\fR
+where all pixels representing the user are set to the user's id, and
+everything else set to \fB0\fR.
 .TP
 \fIuserInstanceCmd\fR \fBset-callback-enter\fR \fIcmd\fR...
 .TP
@@ -1274,35 +1717,35 @@ This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
 \fBuser-pose-detection\fR.
 .TP
-\fBinstanceCmd\fR \fBposes\fR
+\fIinstanceCmd\fR \fBposes\fR
 This method returns a list containing the names of the supported user
 poses.
 .TP
-\fBinstanceCmd\fR \fBis-supported\fR \fIpose\fR
+\fIinstanceCmd\fR \fBis-supported\fR \fIpose\fR
 This method tests if the named user pose is supported by the instance.
 .sp
 The result is a boolean value, \fBtrue\fR if the pose is
 supported, and \fBfalse\fR else.
 .TP
-\fBinstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
+\fIinstanceCmd\fR \fBstart-detection\fR \fIuser\fR \fIpose\fR
 This method activates the detection of the named \fIpose\fR for the
 specified \fIuser\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
+\fIinstanceCmd\fR \fBstop-detection\fR \fIuser\fR \fIpose\fR
 This method deactivates the detection of the named \fIpose\fR for the
 specified \fIuser\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
+\fIinstanceCmd\fR \fBstop-all-detection\fR \fIuser\fR
 This method deactivates the detection of any poses for the specified
 \fIuser\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
+\fIinstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
 This method queries the status of the detection of the named \fIpose\fR
 for the specified \fIuser\fR.
 .sp
@@ -1319,9 +1762,9 @@ in the pose. If the user is out of the pose \fB0\fR is returned
 here.
 .RE
 .TP
-\fBinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
 .TP
-\fBinstanceCmd\fR \fBunset-callback-poseEnter\fR
+\fIinstanceCmd\fR \fBunset-callback-poseEnter\fR
 These methods define and remove a callback responding to pose entry
 events, i.e. a user entering a pose.
 .sp
@@ -1334,9 +1777,9 @@ id of the user entering it, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fBinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
 .TP
-\fBinstanceCmd\fR \fBunset-callback-poseExit\fR
+\fIinstanceCmd\fR \fBunset-callback-poseExit\fR
 These methods define and remove a callback responding to pose exit
 events, i.e. a user existing a pose.
 .sp
@@ -1349,9 +1792,9 @@ user exiting it, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fBinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
 .TP
-\fBinstanceCmd\fR \fBunset-callback-poseProgress\fR
+\fIinstanceCmd\fR \fBunset-callback-poseProgress\fR
 These methods define and remove a callback responding to pose progress
 events, i.e. the steps of the engine for detecting user poses.
 .sp
@@ -1371,9 +1814,9 @@ This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
 \fBhand-touching-fov-edge\fR.
 .TP
-\fBinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
 .TP
-\fBinstanceCmd\fR \fBunset-callback-fovEdge\fR
+\fIinstanceCmd\fR \fBunset-callback-fovEdge\fR
 These methods define and remove a callback responding to edge touch
 events, i.e. a hand coming into contact with the edge of the field of
 view (a box).
@@ -1418,7 +1861,7 @@ This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
 \fBuser-skeleton\fR.
 .TP
-\fBinstanceCmd\fR \fBneed-pose\fR
+\fIinstanceCmd\fR \fBneed-pose\fR
 This method tests if the skeleton tracking requires the user to enter
 a pose for calibration.
 .sp
@@ -1427,7 +1870,7 @@ is required, and \fBfalse\fR else.
 \fINOTE\fR: XXX. The C API to query the name of the required pose
 looks to be borken, or underspecified. Research required.
 .TP
-\fBinstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
+\fIinstanceCmd\fR \fBis-profile-available\fR \fIprofile\fR
 This method tests if the skeleton tracking supports the named
 \fIprofile\fR.
 .sp
@@ -1448,7 +1891,7 @@ The accepted profile names are
 \fBheads-hands\fR
 .RE
 .TP
-\fBinstanceCmd\fR \fBset-profile\fR \fIprofile\fR
+\fIinstanceCmd\fR \fBset-profile\fR \fIprofile\fR
 This method activates the named \fIprofile\fR. This will result in
 joints getting activated or deactivated, as per the profile.
 .sp
@@ -1457,51 +1900,51 @@ The accepted profile names are described above, at
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
+\fIinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
 This method sets the skeleton smoothing \fIfactor\fR, a floating point
 value.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBstart-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBstart-tracking\fR \fIid\fR
 This method activates the tracking of the skeleton for the user
 specified by the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
 This method stops tracking of the skeleton for the user
 specified by the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBreset-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBreset-tracking\fR \fIid\fR
 This method discards the calibration of the skeleton for the user
 specified by the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBis-tracking\fR \fIid\fR
+\fIinstanceCmd\fR \fBis-tracking\fR \fIid\fR
 This method tests if the skeleton for the user \fIid\fR is currently
 tracked.
 .sp
 The result is a boolean value, \fBtrue\fR if tracking is
 active, and \fBfalse\fR else.
 .TP
-\fBinstanceCmd\fR \fBis-calibrated\fR \fIid\fR
+\fIinstanceCmd\fR \fBis-calibrated\fR \fIid\fR
 This method tests if the skeleton for the user \fIid\fR is calibrated.
 .sp
 The result is a boolean value, \fBtrue\fR if the skeleton is
 calbrated, and \fBfalse\fR else.
 .TP
-\fBinstanceCmd\fR \fBis-calibrating\fR \fIid\fR
+\fIinstanceCmd\fR \fBis-calibrating\fR \fIid\fR
 This method tests if calibration of the skeleton for the user \fIid\fR
 is currently in progress.
 .sp
 The result is a boolean value, \fBtrue\fR if calibration is
 in progress, and \fBfalse\fR else.
 .TP
-\fBinstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
+\fIinstanceCmd\fR \fBrequest-calibration\fR \fIid\fR \fIforce\fR
 This method requests calibration of the skeleton for the user
 specified by the \fIid\fR.
 .sp
@@ -1510,54 +1953,54 @@ The result of the method is an empty string.
 If the boolean flag \fIforce\fR is set any previous calibration
 data is discarded.
 .TP
-\fBinstanceCmd\fR \fBabort-calibration\fR \fIid\fR
+\fIinstanceCmd\fR \fBabort-calibration\fR \fIid\fR
 This method stops a calibration in progress, for the user specified by
 the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
+\fIinstanceCmd\fR \fBsave-calibration-file\fR \fIid\fR \fIpath\fR
 This method saves the calibration data for the skeleton of the user
 specified by the \fIid\fR into the file \fIpath\fR. The format of the
 calibration data is not documented.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
+\fIinstanceCmd\fR \fBload-calibration-file\fR \fIid\fR \fIpath\fR
 This method loads the calibration data for the skeleton of the user
 specified by the \fIid\fR from the file \fIpath\fR. The format of the
 calibration data is not documented.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
+\fIinstanceCmd\fR \fBsave-calibration\fR \fIid\fR \fIslot\fR
 This method saves the calibration data for the skeleton of the user
 specified by the \fIid\fR into the in-memory storage identified by the
 \fIslot\fR number.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
+\fIinstanceCmd\fR \fBload-calibration-slot\fR \fIid\fR \fIslot\fR
 This method loads the calibration data for the skeleton of the user
 specified by the \fIid\fR from the in-memory storage identified by the
 \fIslot\fR number.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
+\fIinstanceCmd\fR \fBclear-calibration-slot\fR \fIslot\fR
 This method clears the in-memory calibration data storage identified
 by the \fIslot\fR number.
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
+\fIinstanceCmd\fR \fBis-calibration-slot\fR \fIslot\fR
 This method tests if the in-memory storage identified by the
 \fIslot\fR number contains skeleton calibration data.
 .sp
 The result is a boolean value, \fBtrue\fR if the slot is
 occupied, and \fBfalse\fR else.
 .TP
-\fBinstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
+\fIinstanceCmd\fR \fBis-joint-available\fR \fIjoint\fR
 This method tests if the skeleton tracking supports the named
 \fIjoint\fR.
 .sp
@@ -1616,7 +2059,7 @@ The accepted joint names are
 \fBright-foot\fR
 .RE
 .TP
-\fBinstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
+\fIinstanceCmd\fR \fBis-joint-active\fR \fIjoint\fR
 This method tests if the the named \fIjoint\fR is actively tracked.
 .sp
 The result is a boolean value, \fBtrue\fR if the joint is
@@ -1625,7 +2068,7 @@ active, and \fBfalse\fR else.
 The accepted joint names are described above, at
 \fBis-joint-available\fR.
 .TP
-\fBinstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
+\fIinstanceCmd\fR \fBset-joint-active\fR \fIjoint\fR \fIactive\fR
 This method (de)activates the named \fIjoint\fR.
 .sp
 The accepted joint names are described above, at
@@ -1633,14 +2076,14 @@ The accepted joint names are described above, at
 .sp
 The result of the method is an empty string.
 .TP
-\fBinstanceCmd\fR \fBactive-joints\fR
+\fIinstanceCmd\fR \fBactive-joints\fR
 This method returns a list containig the names of all currently active
 joints.
 .sp
 The possible joint names are described above, at
 \fBis-joint-available\fR.
 .TP
-\fBinstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
+\fIinstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
 This method retrieves position and orientation data for the user
 specified by \fIid\fR and the named \fIjoint\fR.
 .sp
@@ -1678,9 +2121,9 @@ representating the rotation matrix for the joint.
 .RE
 .RE
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-jointConfigChange\fR
+\fIinstanceCmd\fR \fBunset-callback-jointConfigChange\fR
 These methods define and remove a callback responding to joint
 configration changes, i.e. when joints are (de)activated.
 .sp
@@ -1692,9 +2135,9 @@ and the word "jointConfigChange", in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationStart\fR
+\fIinstanceCmd\fR \fBunset-callback-calibrationStart\fR
 These methods define and remove a callback responding to the start of
 a calibration.
 .sp
@@ -1707,9 +2150,9 @@ user for whom calibration has started, in this order.
 .sp
 The result of the methods is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationComplete\fR
+\fIinstanceCmd\fR \fBunset-callback-calibrationComplete\fR
 These methods define and remove a callback responding to the
 completion of calibrations.
 .sp
@@ -1750,9 +2193,9 @@ The possible completion stati are
 \fBtimeout\fR
 .RE
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-calibrationProgress\fR
+\fIinstanceCmd\fR \fBunset-callback-calibrationProgress\fR
 These methods define and remove a callback responding to calibration
 progress events.
 .sp

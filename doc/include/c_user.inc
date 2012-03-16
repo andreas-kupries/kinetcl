@@ -65,10 +65,9 @@ The coordinates are specified in the order of X, Y, and Z.
 [comment ===============================================================]
 [call [arg userInstanceCmd] [method pixelsof] [arg id]]
 
-This method is [emph {not implemented}]. When done it will return a
-[package crimp] image of type [const <unknown>] where all pixels
-representing the user are set to the user's id, and everything else
-set to [const 0].
+This method returns a [package crimp] image of type [const grey16]
+where all pixels representing the user are set to the user's id, and
+everything else set to [const 0].
 
 [comment ===============================================================]
 [call [arg userInstanceCmd] [method set-callback-enter] [arg cmd]...]

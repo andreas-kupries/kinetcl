@@ -12,8 +12,8 @@ This support can checked by invoking the inherited method
 [list_begin definitions]
 
 [comment ===============================================================]
-[call [cmd instanceCmd] [method set-callback-fovEdge] [arg cmd]...]
-[call [cmd instanceCmd] [method unset-callback-fovEdge]]
+[call [arg instanceCmd] [method set-callback-fovEdge] [arg cmd]...]
+[call [arg instanceCmd] [method unset-callback-fovEdge]]
 
 These methods define and remove a callback responding to edge touch
 events, i.e. a hand coming into contact with the edge of the field of

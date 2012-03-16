@@ -35,7 +35,7 @@ instance using them is destroyed.
 [para] The result of the method is the empty string.
 
 [comment ===============================================================]
-[call [cmd gestureInstanceCmd] [method add-gesture] [arg gesture] [arg box]]
+[call [arg gestureInstanceCmd] [method add-gesture] [arg gesture] [arg box]]
 
 This method activates the gesture, i.e. causes the instance to start
 looking for it in the input.
@@ -49,7 +49,7 @@ right-top-far corner.
 [para] The result of the method is the empty string.
 
 [comment ===============================================================]
-[call [cmd gestureInstanceCmd] [method remove-gesture] [arg gesture]]
+[call [arg gestureInstanceCmd] [method remove-gesture] [arg gesture]]
 
 This method deactivates the gesture, i.e. causes the instance to stop
 looking for it in the input.
@@ -57,7 +57,7 @@ looking for it in the input.
 [para] The result of the method is the empty string.
 
 [comment ===============================================================]
-[call [cmd gestureInstanceCmd] [method is-gesture] [arg gesture]]
+[call [arg gestureInstanceCmd] [method is-gesture] [arg gesture]]
 
 This method tests if the named [arg gesture] is supported by the instance.
 
@@ -65,7 +65,7 @@ This method tests if the named [arg gesture] is supported by the instance.
 supported, and [const false] else.
 
 [comment ===============================================================]
-[call [cmd gestureInstanceCmd] [method gesture-has-progress] [arg gesture]]
+[call [arg gestureInstanceCmd] [method gesture-has-progress] [arg gesture]]
 
 This method tests if the named [arg gesture] supports progess
 reporting during recognition.
@@ -74,20 +74,20 @@ reporting during recognition.
 supports progress reporting, and [const false] else.
 
 [comment ===============================================================]
-[call [cmd gestureInstanceCmd] [method all-gestures]]
+[call [arg gestureInstanceCmd] [method all-gestures]]
 
 This method returns a list containing the names of all gestures
 supported by the instance.
 
 [comment ===============================================================]
-[call [cmd gestureInstanceCmd] [method active-gestures]]
+[call [arg gestureInstanceCmd] [method active-gestures]]
 
 This method returns a list containing the names of all gestures
 that are currently active.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-gestureRecognized] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-gestureRecognized]]
+[call [arg gestureInstanceCmd] [method set-callback-gestureRecognized] [arg cmd]...]
+[call [arg gestureInstanceCmd] [method unset-callback-gestureRecognized]]
 
 These methods define and remove a callback responding to gesture
 recognition events.
@@ -104,8 +104,8 @@ gesture, in this order.
 [para] The result of the methods is an empty string.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-gestureProgress] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-gestureProgress]]
+[call [arg gestureInstanceCmd] [method set-callback-gestureProgress] [arg cmd]...]
+[call [arg gestureInstanceCmd] [method unset-callback-gestureProgress]]
 
 These methods define and remove a callback responding to gesture
 progress events.
@@ -121,8 +121,8 @@ percentage of the gesture already performed, in this order.
 [para] The result of the methods is an empty string.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-gestureChange] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-gestureChange]]
+[call [arg gestureInstanceCmd] [method set-callback-gestureChange] [arg cmd]...]
+[call [arg gestureInstanceCmd] [method unset-callback-gestureChange]]
 
 These methods define and remove a callback responding to gesture
 change events, i.e when gestures are (de)activated.
@@ -136,8 +136,8 @@ and the word "gestureChange", in this order.
 [para] The result of the methods is an empty string.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-gestureStageComplete] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-gestureStageComplete]]
+[call [arg gestureInstanceCmd] [method set-callback-gestureStageComplete] [arg cmd]...]
+[call [arg gestureInstanceCmd] [method unset-callback-gestureStageComplete]]
 
 These methods define and remove a callback responding to gesture
 stage completion events.
@@ -153,8 +153,8 @@ performing the gesture, in this order.
 [para] The result of the methods is an empty string.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-gestureStageReadyForNext] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-gestureStageReadyForNext]]
+[call [arg gestureInstanceCmd] [method set-callback-gestureStageReadyForNext] [arg cmd]...]
+[call [arg gestureInstanceCmd] [method unset-callback-gestureStageReadyForNext]]
 
 These methods define and remove a callback responding to gesture
 stage readiness events.
