@@ -1,12 +1,12 @@
 
-This sections documents the class [cmd ::kinetcl::base], the (abstract) base
+This sections documents the class [cmd {::kinetcl base}], the (abstract) base
 class for all OpenNI production nodes.
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::base] [method new]]
-[call [cmd ::kinetcl::base] [method create] [arg objname]]
+[call [cmd {::kinetcl base}] [method new]]
+[call [cmd {::kinetcl base}] [method create] [arg objname]]
 
 This command creates a new instance of the base.
 

@@ -1,8 +1,8 @@
 
-This sections documents the class [cmd ::kinetcl::player], the
+This sections documents the class [cmd {::kinetcl player}], the
 concrete class for all OpenNI player nodes.
 
-[para] This class inherits from [cmd ::kinetcl::base]. See section
+[para] This class inherits from [cmd {::kinetcl base}]. See section
 [sectref {Base}].
 
 [para] A player read a stream of sensor information from a file and
@@ -11,7 +11,8 @@ injects it into the system, faking the existence of a sensor.
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::player]]
+[call [cmd {::kinetcl player}] [method new]]
+[call [cmd {::kinetcl player}] [method create] [arg objname]]
 
 This command creates a new player instance and returns the fully
 qualified name of the instance command. The API provided by that

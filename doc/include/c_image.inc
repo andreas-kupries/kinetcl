@@ -1,8 +1,8 @@
 
-This sections documents the class [cmd ::kinetcl::image], the
+This sections documents the class [cmd {::kinetcl image}], the
 concrete class for all OpenNI image generator nodes.
 
-[para] This class inherits from [cmd ::kinetcl::map] and its
+[para] This class inherits from [cmd {::kinetcl map}] and its
 superclasses. See section [sectref {Map Generator}].
 
 [para] An image generator is a map generator providing plain images,
@@ -11,7 +11,8 @@ where each pixel value describes the color (or luminance) of the pixel.
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::image]]
+[call [cmd {::kinetcl image}] [method new]]
+[call [cmd {::kinetcl image}] [method create] [arg objname]]
 
 This command creates a new image generator instance and returns the
 fully qualified name of the instance command. The API provided by that

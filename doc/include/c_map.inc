@@ -1,15 +1,15 @@
 
-This sections documents the class [cmd ::kinetcl::map], the (abstract) base
+This sections documents the class [cmd {::kinetcl map}], the (abstract) base
 class for all OpenNI map generator nodes.
 
-[para] This class inherits from [cmd ::kinetcl::generator] and its
+[para] This class inherits from [cmd {::kinetcl generator}] and its
 superclasses. See section [sectref {Generator}].
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::map] [method new]]
-[call [cmd ::kinetcl::map] [method create] [arg objname]]
+[call [cmd {::kinetcl map}] [method new]]
+[call [cmd {::kinetcl map}] [method create] [arg objname]]
 
 This command creates a new instance of the map generator.
 

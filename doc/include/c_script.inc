@@ -1,8 +1,8 @@
 
-This sections documents the class [cmd ::kinetcl::script], the
+This sections documents the class [cmd {::kinetcl script}], the
 concrete class for all OpenNI recorder nodes.
 
-[para] This class inherits from [cmd ::kinetcl::base]. See section
+[para] This class inherits from [cmd {::kinetcl base}]. See section
 [sectref {Base}].
 
 [para] A script node can run scripts (sic!), and manages the life-time
@@ -11,7 +11,8 @@ of all nodes created by such.
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::script]]
+[call [cmd {::kinetcl script}] [method new]]
+[call [cmd {::kinetcl script}] [method create] [arg objname]]
 
 This command creates a new script instance and returns the fully
 qualified name of the instance command. The API provided by that

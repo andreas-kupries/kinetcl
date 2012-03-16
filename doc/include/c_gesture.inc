@@ -1,8 +1,8 @@
 
-This sections documents the class [cmd ::kinetcl::gesture], the
+This sections documents the class [cmd {::kinetcl gesture}], the
 concrete class for all OpenNI gesture generator nodes.
 
-[para] This class inherits from [cmd ::kinetcl::generator] and its
+[para] This class inherits from [cmd {::kinetcl generator}] and its
 superclasses. See section [sectref {Generator}].
 
 [para] A genestur generator identifies and tracks gestures performed
@@ -11,7 +11,8 @@ by the users within the field of view of the sensor.
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::gesture]]
+[call [cmd {::kinetcl gesture}] [method new]]
+[call [cmd {::kinetcl gesture}] [method create] [arg objname]]
 
 This command creates a new gesture generator instance and returns the
 fully qualified name of the instance command. The API provided by that

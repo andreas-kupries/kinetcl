@@ -1,8 +1,8 @@
 
-This sections documents the class [cmd ::kinetcl::recorder], the
+This sections documents the class [cmd {::kinetcl recorder}], the
 concrete class for all OpenNI recorder nodes.
 
-[para] This class inherits from [cmd ::kinetcl::base]. See section
+[para] This class inherits from [cmd {::kinetcl base}]. See section
 [sectref {Base}].
 
 [para] A recorder watches the stream of sensor information in the
@@ -12,7 +12,8 @@ read this information and replay it.
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::recorder]]
+[call [cmd {::kinetcl recorder}] [method new]]
+[call [cmd {::kinetcl recorder}] [method create] [arg objname]]
 
 This command creates a new recorder instance and returns the fully
 qualified name of the instance command. The API provided by that

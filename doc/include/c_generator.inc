@@ -1,15 +1,15 @@
 
-This sections documents the class [cmd ::kinetcl::generator], the (abstract) base
+This sections documents the class [cmd {::kinetcl generator}], the (abstract) base
 class for all OpenNI generator nodes.
 
-[para] This class inherits from [cmd ::kinetcl::base]. See section
+[para] This class inherits from [cmd {::kinetcl base}]. See section
 [sectref {Base}].
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::generator] [method new]]
-[call [cmd ::kinetcl::generator] [method create] [arg objname]]
+[call [cmd {::kinetcl generator}] [method new]]
+[call [cmd {::kinetcl generator}] [method create] [arg objname]]
 
 This command creates a new instance of the generator.
 

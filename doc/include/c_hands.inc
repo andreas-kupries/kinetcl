@@ -1,8 +1,8 @@
 
-This sections documents the class [cmd ::kinetcl::hands], the concrete
+This sections documents the class [cmd {::kinetcl hands}], the concrete
 class for all OpenNI hand generator nodes.
 
-[para] This class inherits from [cmd ::kinetcl::generator] and its
+[para] This class inherits from [cmd {::kinetcl generator}] and its
 superclasses. See section [sectref {Generator}].
 
 [para] A hand generator identifies and tracks the hands of the users
@@ -11,7 +11,8 @@ within the field of view of the sensor.
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::hands]]
+[call [cmd {::kinetcl hands}] [method new]]
+[call [cmd {::kinetcl hands}] [method create] [arg objname]]
 
 This command creates a new hands generator instance and returns the
 fully qualified name of the instance command. The API provided by that

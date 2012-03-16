@@ -1,8 +1,8 @@
 
-This sections documents the class [cmd ::kinetcl::user], the concrete
+This sections documents the class [cmd {::kinetcl user}], the concrete
 class for all OpenNI user generator nodes.
 
-[para] This class inherits from [cmd ::kinetcl::generator] and its
+[para] This class inherits from [cmd {::kinetcl generator}] and its
 superclasses. See section [sectref {Generator}].
 
 [para] A user generator identifies and tracks users within the field
@@ -18,7 +18,8 @@ of view of the sensor.
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
-[call [cmd ::kinetcl::user]]
+[call [cmd {::kinetcl user}] [method new]]
+[call [cmd {::kinetcl user}] [method create] [arg objname]]
 
 This command creates a new user generator instance and returns the
 fully qualified name of the instance command. The API provided by that

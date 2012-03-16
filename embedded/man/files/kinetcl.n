@@ -268,9 +268,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fB::kinetcl mirror\fR ?\fIbool\fR?
 .sp
-\fB::kinetcl::base\fR \fBnew\fR
+\fB::kinetcl base\fR \fBnew\fR
 .sp
-\fB::kinetcl::base\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl base\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIbaseInstanceCmd\fR \fBcapabilities\fR ?\fB-all\fR?
 .sp
@@ -280,9 +280,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIbaseInstanceCmd\fR \fBnode-name\fR
 .sp
-\fB::kinetcl::generator\fR \fBnew\fR
+\fB::kinetcl generator\fR \fBnew\fR
 .sp
-\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl generator\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIgeneratorInstanceCmd\fR \fBstart\fR
 .sp
@@ -308,9 +308,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgeneratorInstanceCmd\fR \fBunset-callback-newdata\fR
 .sp
-\fB::kinetcl::map\fR \fBnew\fR
+\fB::kinetcl map\fR \fBnew\fR
 .sp
-\fB::kinetcl::map\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl map\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fImapInstanceCmd\fR \fBbytes-per-pixel\fR
 .sp
@@ -324,7 +324,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fImapInstanceCmd\fR \fBunset-callback-mode\fR
 .sp
-\fB::kinetcl::depth\fR
+\fB::kinetcl depth\fR \fBnew\fR
+.sp
+\fB::kinetcl depth\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIdepthInstanceCmd\fR \fBdestroy\fR
 .sp
@@ -340,7 +342,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgeneratorInstanceCmd\fR \fBunset-callback-depthfov\fR
 .sp
-\fB::kinetcl::image\fR
+\fB::kinetcl image\fR \fBnew\fR
+.sp
+\fB::kinetcl image\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIimageInstanceCmd\fR \fBdestroy\fR
 .sp
@@ -356,11 +360,15 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgeneratorInstanceCmd\fR \fBunset-callback-pixelformat\fR
 .sp
-\fB::kinetcl::ir\fR
+\fB::kinetcl ir\fR \fBnew\fR
+.sp
+\fB::kinetcl ir\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIirIstanceCmd\fR \fBdestroy\fR
 .sp
-\fB::kinetcl::gesture\fR
+\fB::kinetcl gesture\fR \fBnew\fR
+.sp
+\fB::kinetcl gesture\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIgestureInstanceCmd\fR \fBdestroy\fR
 .sp
@@ -396,7 +404,7 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgestureInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
 .sp
-\fB::kinetcl::scene\fR
+\fB::kinetcl scene\fR
 .sp
 \fIsceneInstanceCmd\fR \fBdestroy\fR
 .sp
@@ -404,7 +412,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIsceneInstanceCmd\fR \fBmap\fR
 .sp
-\fB::kinetcl::user\fR
+\fB::kinetcl user\fR \fBnew\fR
+.sp
+\fB::kinetcl user\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIuserInstanceCmd\fR \fBdestroy\fR
 .sp
@@ -432,19 +442,27 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBunset-callback-lost\fR
 .sp
-\fB::kinetcl::hands\fR
+\fB::kinetcl hands\fR \fBnew\fR
+.sp
+\fB::kinetcl hands\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIhandsInstanceCmd\fR \fBdestroy\fR
 .sp
-\fB::kinetcl::audio\fR
+\fB::kinetcl audio\fR \fBnew\fR
+.sp
+\fB::kinetcl audio\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIaudioInstanceCmd\fR \fBdestroy\fR
 .sp
-\fB::kinetcl::recorder\fR
+\fB::kinetcl recorder\fR \fBnew\fR
+.sp
+\fB::kinetcl recorder\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIrecorderInstanceCmd\fR \fBdestroy\fR
 .sp
-\fB::kinetcl::player\fR
+\fB::kinetcl player\fR \fBnew\fR
+.sp
+\fB::kinetcl player\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIplayerInstanceCmd\fR \fBdestroy\fR
 .sp
@@ -464,7 +482,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBunset-callback-eof\fR
 .sp
-\fB::kinetcl::script\fR
+\fB::kinetcl script\fR \fBnew\fR
+.sp
+\fB::kinetcl script\fR \fBcreate\fR \fIobjname\fR
 .sp
 \fIscriptInstanceCmd\fR \fBdestroy\fR
 .sp
@@ -628,13 +648,13 @@ value, and all existing nodes supporting mirroring are reconfigured to
 reflect the new state.
 .PP
 .SH BASE
-This sections documents the class \fB::kinetcl::base\fR, the (abstract) base
+This sections documents the class \fB::kinetcl base\fR, the (abstract) base
 class for all OpenNI production nodes.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::base\fR \fBnew\fR
+\fB::kinetcl base\fR \fBnew\fR
 .TP
-\fB::kinetcl::base\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl base\fR \fBcreate\fR \fIobjname\fR
 This command creates a new instance of the base.
 Note that it is \fIimpossible\fR to create such an instance on its
 own. It can be done only as part of constructing the instance of a
@@ -725,16 +745,16 @@ The node's creation detail information.
 This method returns a string holding the OpenNI name of the node.
 .PP
 .SH GENERATOR
-This sections documents the class \fB::kinetcl::generator\fR, the (abstract) base
+This sections documents the class \fB::kinetcl generator\fR, the (abstract) base
 class for all OpenNI generator nodes.
 .PP
-This class inherits from \fB::kinetcl::base\fR. See section
+This class inherits from \fB::kinetcl base\fR. See section
 \fBBase\fR.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::generator\fR \fBnew\fR
+\fB::kinetcl generator\fR \fBnew\fR
 .TP
-\fB::kinetcl::generator\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl generator\fR \fBcreate\fR \fIobjname\fR
 This command creates a new instance of the generator.
 Note that it is \fIimpossible\fR to create such an instance on its
 own. It can be done only as part of constructing the instance of a
@@ -834,16 +854,16 @@ and the word "newdata", in this order.
 The result of the methods is an empty string.
 .PP
 .SH "MAP GENERATOR"
-This sections documents the class \fB::kinetcl::map\fR, the (abstract) base
+This sections documents the class \fB::kinetcl map\fR, the (abstract) base
 class for all OpenNI map generator nodes.
 .PP
-This class inherits from \fB::kinetcl::generator\fR and its
+This class inherits from \fB::kinetcl generator\fR and its
 superclasses. See section \fBGenerator\fR.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::map\fR \fBnew\fR
+\fB::kinetcl map\fR \fBnew\fR
 .TP
-\fB::kinetcl::map\fR \fBcreate\fR \fIobjname\fR
+\fB::kinetcl map\fR \fBcreate\fR \fIobjname\fR
 This command creates a new instance of the map generator.
 Note that it is \fIimpossible\fR to create such an instance on its
 own. It can be done only as part of constructing the instance of a
@@ -893,10 +913,10 @@ and the word "mode", in this order.
 The result of the methods is an empty string.
 .PP
 .SH "DEPTH GENERATOR"
-This sections documents the class \fB::kinetcl::generator\fR, the
+This sections documents the class \fB::kinetcl generator\fR, the
 concrete class for all OpenNI depth generator nodes.
 .PP
-This class inherits from \fB::kinetcl::generator\fR and its
+This class inherits from \fB::kinetcl generator\fR and its
 superclasses. See section \fBGenerator\fR.
 .PP
 A depth generator is a generator providing depth maps,
@@ -904,7 +924,9 @@ i.e. images where each pixel value describes the distance of the pixel
 from the sensor.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::depth\fR
+\fB::kinetcl depth\fR \fBnew\fR
+.TP
+\fB::kinetcl depth\fR \fBcreate\fR \fIobjname\fR
 This command creates a new depth generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1041,17 +1063,19 @@ method \fBfov\fR.
 The result of the methods is an empty string.
 .PP
 .SH "IMAGE GENERATOR"
-This sections documents the class \fB::kinetcl::image\fR, the
+This sections documents the class \fB::kinetcl image\fR, the
 concrete class for all OpenNI image generator nodes.
 .PP
-This class inherits from \fB::kinetcl::map\fR and its
+This class inherits from \fB::kinetcl map\fR and its
 superclasses. See section \fBMap Generator\fR.
 .PP
 An image generator is a map generator providing plain images,
 where each pixel value describes the color (or luminance) of the pixel.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::image\fR
+\fB::kinetcl image\fR \fBnew\fR
+.TP
+\fB::kinetcl image\fR \fBcreate\fR \fIobjname\fR
 This command creates a new image generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1200,17 +1224,19 @@ method \fBformat\fR.
 The result of the methods is an empty string.
 .PP
 .SH "IR GENERATOR"
-This sections documents the class \fB::kinetcl::ir\fR, the
+This sections documents the class \fB::kinetcl ir\fR, the
 concrete class for all OpenNI IR image generator nodes.
 .PP
-This class inherits from \fB::kinetcl::map\fR and its
+This class inherits from \fB::kinetcl map\fR and its
 superclasses. See section \fBMap Generator\fR.
 .PP
 An IR image generator is a map generator providing infrared
 images.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::ir\fR
+\fB::kinetcl ir\fR \fBnew\fR
+.TP
+\fB::kinetcl ir\fR \fBcreate\fR \fIobjname\fR
 This command creates a new ir image generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1227,17 +1253,19 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "GESTURE GENERATOR"
-This sections documents the class \fB::kinetcl::gesture\fR, the
+This sections documents the class \fB::kinetcl gesture\fR, the
 concrete class for all OpenNI gesture generator nodes.
 .PP
-This class inherits from \fB::kinetcl::generator\fR and its
+This class inherits from \fB::kinetcl generator\fR and its
 superclasses. See section \fBGenerator\fR.
 .PP
 A genestur generator identifies and tracks gestures performed
 by the users within the field of view of the sensor.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::gesture\fR
+\fB::kinetcl gesture\fR \fBnew\fR
+.TP
+\fB::kinetcl gesture\fR \fBcreate\fR \fIobjname\fR
 This command creates a new gesture generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1372,17 +1400,17 @@ ready for the recognition of the next of its stages, and the current
 The result of the methods is an empty string.
 .PP
 .SH "SCENE ANALYZER"
-This sections documents the class \fB::kinetcl::scene\fR, the concrete
+This sections documents the class \fB::kinetcl scene\fR, the concrete
 class for all OpenNI scene analyzer nodes.
 .PP
-This class inherits from \fB::kinetcl::map\fR and its
+This class inherits from \fB::kinetcl map\fR and its
 superclasses. See section \fBMap Generator\fR.
 .PP
 A scene analyzer segments a scene, identifying the floor and
 other connected areas (i.e. users) in the view of the sensor.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::scene\fR
+\fB::kinetcl scene\fR
 This command creates a new scene analyzer instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1487,10 +1515,10 @@ containing the current scene segmentation. Each pixel is labeled with
 the id of the user it belongs to, or \fB0\fR if it is background.
 .PP
 .SH "USER GENERATOR"
-This sections documents the class \fB::kinetcl::user\fR, the concrete
+This sections documents the class \fB::kinetcl user\fR, the concrete
 class for all OpenNI user generator nodes.
 .PP
-This class inherits from \fB::kinetcl::generator\fR and its
+This class inherits from \fB::kinetcl generator\fR and its
 superclasses. See section \fBGenerator\fR.
 .PP
 A user generator identifies and tracks users within the field
@@ -1506,7 +1534,9 @@ They may have the following capabilities:
 .PP
 .SS "CLASS API"
 .TP
-\fB::kinetcl::user\fR
+\fB::kinetcl user\fR \fBnew\fR
+.TP
+\fB::kinetcl user\fR \fBcreate\fR \fIobjname\fR
 This command creates a new user generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1603,17 +1633,19 @@ this order.
 The result of the methods is an empty string.
 .PP
 .SH "HANDS GENERATOR"
-This sections documents the class \fB::kinetcl::hands\fR, the concrete
+This sections documents the class \fB::kinetcl hands\fR, the concrete
 class for all OpenNI hand generator nodes.
 .PP
-This class inherits from \fB::kinetcl::generator\fR and its
+This class inherits from \fB::kinetcl generator\fR and its
 superclasses. See section \fBGenerator\fR.
 .PP
 A hand generator identifies and tracks the hands of the users
 within the field of view of the sensor.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::hands\fR
+\fB::kinetcl hands\fR \fBnew\fR
+.TP
+\fB::kinetcl hands\fR \fBcreate\fR \fIobjname\fR
 This command creates a new hands generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1630,17 +1662,19 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "AUDIO GENERATOR"
-This sections documents the class \fB::kinetcl::audio\fR, the concrete
+This sections documents the class \fB::kinetcl audio\fR, the concrete
 class for all OpenNI audio generator nodes.
 .PP
-This class inherits from \fB::kinetcl::generator\fR and its
+This class inherits from \fB::kinetcl generator\fR and its
 superclasses. See section \fBGenerator\fR.
 .PP
 An audio generator provides access to the stream of sound data
 from the sensor.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::audio\fR
+\fB::kinetcl audio\fR \fBnew\fR
+.TP
+\fB::kinetcl audio\fR \fBcreate\fR \fIobjname\fR
 This command creates a new audio generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1657,10 +1691,10 @@ instance using them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "RECORDER NODE"
-This sections documents the class \fB::kinetcl::recorder\fR, the
+This sections documents the class \fB::kinetcl recorder\fR, the
 concrete class for all OpenNI recorder nodes.
 .PP
-This class inherits from \fB::kinetcl::base\fR. See section
+This class inherits from \fB::kinetcl base\fR. See section
 \fBBase\fR.
 .PP
 A recorder watches the stream of sensor information in the
@@ -1668,7 +1702,9 @@ system and serializes it to a file. A player node may in the future
 read this information and replay it.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::recorder\fR
+\fB::kinetcl recorder\fR \fBnew\fR
+.TP
+\fB::kinetcl recorder\fR \fBcreate\fR \fIobjname\fR
 This command creates a new recorder instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1685,17 +1721,19 @@ them is destroyed.
 The result of the method is the empty string.
 .PP
 .SH "PLAYER NODE"
-This sections documents the class \fB::kinetcl::player\fR, the
+This sections documents the class \fB::kinetcl player\fR, the
 concrete class for all OpenNI player nodes.
 .PP
-This class inherits from \fB::kinetcl::base\fR. See section
+This class inherits from \fB::kinetcl base\fR. See section
 \fBBase\fR.
 .PP
 A player read a stream of sensor information from a file and
 injects it into the system, faking the existence of a sensor.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::player\fR
+\fB::kinetcl player\fR \fBnew\fR
+.TP
+\fB::kinetcl player\fR \fBcreate\fR \fIobjname\fR
 This command creates a new player instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1764,17 +1802,19 @@ command, and the word "eof", in this order.
 The result of the methods is an empty string.
 .PP
 .SH "SCRIPT NODE"
-This sections documents the class \fB::kinetcl::script\fR, the
+This sections documents the class \fB::kinetcl script\fR, the
 concrete class for all OpenNI recorder nodes.
 .PP
-This class inherits from \fB::kinetcl::base\fR. See section
+This class inherits from \fB::kinetcl base\fR. See section
 \fBBase\fR.
 .PP
 A script node can run scripts (sic!), and manages the life-time
 of all nodes created by such.
 .SS "CLASS API"
 .TP
-\fB::kinetcl::script\fR
+\fB::kinetcl script\fR \fBnew\fR
+.TP
+\fB::kinetcl script\fR \fBcreate\fR \fIobjname\fR
 This command creates a new script instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
