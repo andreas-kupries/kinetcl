@@ -78,8 +78,6 @@ proc newframe {args} {
     global tracedir photo blank
     set s [clock milliseconds]
 
-    kinetcl waitUpdate
-
     set users [K users]
     set frame [K frame]
 
