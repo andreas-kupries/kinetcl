@@ -248,6 +248,26 @@ package require \fBTcl  8.5\fR
 .sp
 package require \fBkinetcl  ?0.1?\fR
 .sp
+\fB::kinetcl estart\fR
+.sp
+\fB::kinetcl estop\fR
+.sp
+\fB::kinetcl start\fR
+.sp
+\fB::kinetcl stop\fR
+.sp
+\fB::kinetcl waitUpdate\fR
+.sp
+\fB::kinetcl waitAnyUpdate\fR
+.sp
+\fB::kinetcl waitNoneUpdate\fR
+.sp
+\fB::kinetcl waitOneUpdate\fR \fInode\fR
+.sp
+\fB::kinetcl errorstate\fR
+.sp
+\fB::kinetcl mirror\fR ?\fIbool\fR?
+.sp
 \fB::kinetcl::base\fR \fBnew\fR
 .sp
 \fB::kinetcl::base\fR \fBcreate\fR \fIobjname\fR
@@ -544,6 +564,69 @@ package require \fBkinetcl  ?0.1?\fR
 Welcome to KineTcl, a binding of the OpenNI framework providing
 Tcl with access to MS Kinect (tm), and related sensor systems.
 .SH API
+.SH "GLOBAL COMMANDS"
+This sections documents the global commands in the
+\fB::kinetcl\fR namespace and ensemble.
+.TP
+\fB::kinetcl estart\fR
+This command deactivates the event deferal, aka lockout mode.
+Any OpenNI/kinetcl events which were prevented from entering Tcl's
+event queue are now moved into it.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl estop\fR
+This command activates the event deferal, aka lockout mode.
+Any OpenNI/kinetcl events occuring while this mode is active are
+prevented from entering Tcl's event queue until the next invokation of
+\fB::kinetcl estop\fR.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl start\fR
+This command activates data processing and generation in all known
+generator nodes.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl stop\fR
+This command deactivates data processing and generation in all known
+generator nodes.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl waitUpdate\fR
+This command waits for all generator nodes to have new data and then
+updates them all.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl waitAnyUpdate\fR
+This command waits for any of the generator nodes to have new data and
+then updates them all.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl waitNoneUpdate\fR
+This command updates all generator nodes, without any waiting.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl waitOneUpdate\fR \fInode\fR
+This command waits for the specified generator \fInode\fR to have new
+data and then updates all nodes.
+.sp
+The result of the command is the empty string.
+.TP
+\fB::kinetcl errorstate\fR
+This command returns the global error state of OpenNI as string.
+.TP
+\fB::kinetcl mirror\fR ?\fIbool\fR?
+This command returns the current value of the global mirror flag.
+If the argument is specified the global mirror flag is set to its
+value, and all existing nodes supporting mirroring are reconfigured to
+reflect the new state.
+.PP
 .SH BASE
 This sections documents the class \fB::kinetcl::base\fR, the (abstract) base
 class for all OpenNI production nodes.

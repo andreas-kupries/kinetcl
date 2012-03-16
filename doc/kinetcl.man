@@ -6,6 +6,8 @@
 [include include/welcome.inc]
 
 [section API]
+[section {Global commands}]	[include include/c_global.inc]
+
 [section {Base}]		[include include/c_base.inc]
 [section {Generator}]		[include include/c_generator.inc]
 [section {Map Generator}]	[include include/c_map.inc]

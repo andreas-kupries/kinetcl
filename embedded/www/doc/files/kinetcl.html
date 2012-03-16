@@ -114,98 +114,99 @@
 <li class="section"><a href="#synopsis">Synopsis</a></li>
 <li class="section"><a href="#section1">Description</a></li>
 <li class="section"><a href="#section2">API</a></li>
-<li class="section"><a href="#section3">Base</a>
+<li class="section"><a href="#section3">Global commands</a></li>
+<li class="section"><a href="#section4">Base</a>
 <ul>
 <li class="subsection"><a href="#subsection1">Class API</a></li>
 <li class="subsection"><a href="#subsection2">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section4">Generator</a>
+<li class="section"><a href="#section5">Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection3">Class API</a></li>
 <li class="subsection"><a href="#subsection4">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section5">Map Generator</a>
+<li class="section"><a href="#section6">Map Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection5">Class API</a></li>
 <li class="subsection"><a href="#subsection6">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section6">Depth Generator</a>
+<li class="section"><a href="#section7">Depth Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection7">Class API</a></li>
 <li class="subsection"><a href="#subsection8">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section7">Image Generator</a>
+<li class="section"><a href="#section8">Image Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection9">Class API</a></li>
 <li class="subsection"><a href="#subsection10">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section8">IR Generator</a>
+<li class="section"><a href="#section9">IR Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection11">Class API</a></li>
 <li class="subsection"><a href="#subsection12">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section9">Gesture Generator</a>
+<li class="section"><a href="#section10">Gesture Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection13">Class API</a></li>
 <li class="subsection"><a href="#subsection14">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section10">Scene Analyzer</a>
+<li class="section"><a href="#section11">Scene Analyzer</a>
 <ul>
 <li class="subsection"><a href="#subsection15">Class API</a></li>
 <li class="subsection"><a href="#subsection16">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section11">User Generator</a>
+<li class="section"><a href="#section12">User Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection17">Class API</a></li>
 <li class="subsection"><a href="#subsection18">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section12">Hands Generator</a>
+<li class="section"><a href="#section13">Hands Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection19">Class API</a></li>
 <li class="subsection"><a href="#subsection20">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section13">Audio Generator</a>
+<li class="section"><a href="#section14">Audio Generator</a>
 <ul>
 <li class="subsection"><a href="#subsection21">Class API</a></li>
 <li class="subsection"><a href="#subsection22">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section14">Recorder Node</a>
+<li class="section"><a href="#section15">Recorder Node</a>
 <ul>
 <li class="subsection"><a href="#subsection23">Class API</a></li>
 <li class="subsection"><a href="#subsection24">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section15">Player Node</a>
+<li class="section"><a href="#section16">Player Node</a>
 <ul>
 <li class="subsection"><a href="#subsection25">Class API</a></li>
 <li class="subsection"><a href="#subsection26">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section16">Script Node</a>
+<li class="section"><a href="#section17">Script Node</a>
 <ul>
 <li class="subsection"><a href="#subsection27">Class API</a></li>
 <li class="subsection"><a href="#subsection28">Instance API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section17">Capabilities</a>
+<li class="section"><a href="#section18">Capabilities</a>
 <ul>
 <li class="subsection"><a href="#subsection29">Instance Pose Detection API</a></li>
 <li class="subsection"><a href="#subsection30">Instance Hand Touching FOV Edge API</a></li>
 <li class="subsection"><a href="#subsection31">Instance Skeleton/Joint API</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section18">Bugs, Ideas, Feedback</a></li>
+<li class="section"><a href="#section19">Bugs, Ideas, Feedback</a></li>
 <li class="section"><a href="#keywords">Keywords</a></li>
 <li class="section"><a href="#category">Category</a></li>
 <li class="section"><a href="#copyright">Copyright</a></li>
@@ -218,151 +219,161 @@
 <li>package require <b class="pkgname">kinetcl <span class="opt">?0.1?</span></b></li>
 </ul>
 <ul class="syntax">
-<li><a href="#1"><b class="cmd">::kinetcl::base</b> <b class="method">new</b></a></li>
-<li><a href="#2"><b class="cmd">::kinetcl::base</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
-<li><a href="#3"><i class="arg">baseInstanceCmd</i> <b class="method">capabilities</b> <span class="opt">?<b class="option">-all</b>?</span></a></li>
-<li><a href="#4"><i class="arg">baseInstanceCmd</i> <b class="method">is-capable-of</b> <i class="arg">capability</i></a></li>
-<li><a href="#5"><i class="arg">baseInstanceCmd</i> <b class="method">node-info</b></a></li>
-<li><a href="#6"><i class="arg">baseInstanceCmd</i> <b class="method">node-name</b></a></li>
-<li><a href="#7"><b class="cmd">::kinetcl::generator</b> <b class="method">new</b></a></li>
-<li><a href="#8"><b class="cmd">::kinetcl::generator</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
-<li><a href="#9"><i class="arg">generatorInstanceCmd</i> <b class="method">start</b></a></li>
-<li><a href="#10"><i class="arg">generatorInstanceCmd</i> <b class="method">stop</b></a></li>
-<li><a href="#11"><i class="arg">generatorInstanceCmd</i> <b class="method">active</b></a></li>
-<li><a href="#12"><i class="arg">generatorInstanceCmd</i> <b class="method">update</b></a></li>
-<li><a href="#13"><i class="arg">generatorInstanceCmd</i> <b class="method">hasNew</b></a></li>
-<li><a href="#14"><i class="arg">generatorInstanceCmd</i> <b class="method">isNew</b></a></li>
-<li><a href="#15"><i class="arg">generatorInstanceCmd</i> <b class="method">frame</b></a></li>
-<li><a href="#16"><i class="arg">generatorInstanceCmd</i> <b class="method">time</b></a></li>
-<li><a href="#17"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-active</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#18"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-active</b></a></li>
-<li><a href="#19"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-newdata</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#20"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-newdata</b></a></li>
-<li><a href="#21"><b class="cmd">::kinetcl::map</b> <b class="method">new</b></a></li>
-<li><a href="#22"><b class="cmd">::kinetcl::map</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
-<li><a href="#23"><i class="arg">mapInstanceCmd</i> <b class="method">bytes-per-pixel</b></a></li>
-<li><a href="#24"><i class="arg">mapInstanceCmd</i> <b class="method">modes</b></a></li>
-<li><a href="#25"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b></a></li>
-<li><a href="#26"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b> <i class="arg">xres</i> <i class="arg">yres</i> <i class="arg">fps</i></a></li>
-<li><a href="#27"><i class="arg">mapInstanceCmd</i> <b class="method">set-callback-mode</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#28"><i class="arg">mapInstanceCmd</i> <b class="method">unset-callback-mode</b></a></li>
-<li><a href="#29"><b class="cmd">::kinetcl::depth</b></a></li>
-<li><a href="#30"><i class="arg">depthInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#31"><i class="arg">depthInstanceCmd</i> <b class="method">max-depth</b></a></li>
-<li><a href="#32"><i class="arg">depthInstanceCmd</i> <b class="method">fov</b></a></li>
-<li><a href="#33"><i class="arg">depthInstanceCmd</i> <b class="method">meta</b></a></li>
-<li><a href="#34"><i class="arg">depthInstanceCmd</i> <b class="method">map</b></a></li>
-<li><a href="#35"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-depthfov</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#36"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-depthfov</b></a></li>
-<li><a href="#37"><b class="cmd">::kinetcl::image</b></a></li>
-<li><a href="#38"><i class="arg">imageInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#39"><i class="arg">imageInstanceCmd</i> <b class="method">formats</b></a></li>
-<li><a href="#40"><i class="arg">imageInstanceCmd</i> <b class="method">format</b> <span class="opt">?<i class="arg">format</i>?</span></a></li>
-<li><a href="#41"><i class="arg">imageInstanceCmd</i> <b class="method">meta</b></a></li>
-<li><a href="#42"><i class="arg">imageInstanceCmd</i> <b class="method">map</b></a></li>
-<li><a href="#43"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-pixelformat</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#44"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-pixelformat</b></a></li>
-<li><a href="#45"><b class="cmd">::kinetcl::ir</b></a></li>
-<li><a href="#46"><i class="arg">irIstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#47"><b class="cmd">::kinetcl::gesture</b></a></li>
-<li><a href="#48"><i class="arg">gestureInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#49"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <i class="arg">box</i></a></li>
-<li><a href="#50"><i class="arg">gestureInstanceCmd</i> <b class="method">remove-gesture</b> <i class="arg">gesture</i></a></li>
-<li><a href="#51"><i class="arg">gestureInstanceCmd</i> <b class="method">is-gesture</b> <i class="arg">gesture</i></a></li>
-<li><a href="#52"><i class="arg">gestureInstanceCmd</i> <b class="method">gesture-has-progress</b> <i class="arg">gesture</i></a></li>
-<li><a href="#53"><i class="arg">gestureInstanceCmd</i> <b class="method">all-gestures</b></a></li>
-<li><a href="#54"><i class="arg">gestureInstanceCmd</i> <b class="method">active-gestures</b></a></li>
-<li><a href="#55"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureRecognized</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#56"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureRecognized</b></a></li>
-<li><a href="#57"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureProgress</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#58"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureProgress</b></a></li>
-<li><a href="#59"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureChange</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#60"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureChange</b></a></li>
-<li><a href="#61"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageComplete</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#62"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageComplete</b></a></li>
-<li><a href="#63"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageReadyForNext</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#64"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageReadyForNext</b></a></li>
-<li><a href="#65"><b class="cmd">::kinetcl::scene</b></a></li>
-<li><a href="#66"><i class="arg">sceneInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#67"><i class="arg">sceneInstanceCmd</i> <b class="method">meta</b></a></li>
-<li><a href="#68"><i class="arg">sceneInstanceCmd</i> <b class="method">map</b></a></li>
-<li><a href="#69"><b class="cmd">::kinetcl::user</b></a></li>
-<li><a href="#70"><i class="arg">userInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#71"><i class="arg">userInstanceCmd</i> <b class="method">count</b></a></li>
-<li><a href="#72"><i class="arg">userInstanceCmd</i> <b class="method">users</b></a></li>
-<li><a href="#73"><i class="arg">userInstanceCmd</i> <b class="method">centerof</b> <i class="arg">id</i></a></li>
-<li><a href="#74"><i class="arg">userInstanceCmd</i> <b class="method">pixelsof</b> <i class="arg">id</i></a></li>
-<li><a href="#75"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-enter</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#76"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-enter</b></a></li>
-<li><a href="#77"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-exit</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#78"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-exit</b></a></li>
-<li><a href="#79"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-new</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#80"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-new</b></a></li>
-<li><a href="#81"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-lost</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#82"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-lost</b></a></li>
-<li><a href="#83"><b class="cmd">::kinetcl::hands</b></a></li>
-<li><a href="#84"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#85"><b class="cmd">::kinetcl::audio</b></a></li>
-<li><a href="#86"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#87"><b class="cmd">::kinetcl::recorder</b></a></li>
-<li><a href="#88"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#89"><b class="cmd">::kinetcl::player</b></a></li>
-<li><a href="#90"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#91"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></li>
-<li><a href="#92"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></li>
-<li><a href="#93"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></li>
-<li><a href="#94"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></li>
-<li><a href="#95"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></li>
-<li><a href="#96"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></li>
-<li><a href="#97"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#98"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></li>
-<li><a href="#99"><b class="cmd">::kinetcl::script</b></a></li>
-<li><a href="#100"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#101"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></li>
-<li><a href="#102"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></li>
-<li><a href="#103"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
-<li><a href="#104"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
-<li><a href="#105"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></li>
-<li><a href="#106"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
-<li><a href="#107"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#108"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></li>
-<li><a href="#109"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#110"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></li>
-<li><a href="#111"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#112"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></li>
-<li><a href="#113"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#114"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></li>
-<li><a href="#115"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></li>
-<li><a href="#116"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></li>
-<li><a href="#117"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></li>
-<li><a href="#118"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></li>
-<li><a href="#119"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#120"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#121"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#122"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#123"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></li>
-<li><a href="#124"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></li>
-<li><a href="#125"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></li>
-<li><a href="#126"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></li>
-<li><a href="#127"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
-<li><a href="#128"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
-<li><a href="#129"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
-<li><a href="#130"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
-<li><a href="#131"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></li>
-<li><a href="#132"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></li>
-<li><a href="#133"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></li>
-<li><a href="#134"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></li>
-<li><a href="#135"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></li>
-<li><a href="#136"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></li>
-<li><a href="#137"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></li>
-<li><a href="#138"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#139"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></li>
-<li><a href="#140"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#141"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></li>
-<li><a href="#142"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#143"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></li>
-<li><a href="#144"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#145"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></li>
+<li><a href="#1"><b class="cmd">::kinetcl estart</b></a></li>
+<li><a href="#2"><b class="cmd">::kinetcl estop</b></a></li>
+<li><a href="#3"><b class="cmd">::kinetcl start</b></a></li>
+<li><a href="#4"><b class="cmd">::kinetcl stop</b></a></li>
+<li><a href="#5"><b class="cmd">::kinetcl waitUpdate</b></a></li>
+<li><a href="#6"><b class="cmd">::kinetcl waitAnyUpdate</b></a></li>
+<li><a href="#7"><b class="cmd">::kinetcl waitNoneUpdate</b></a></li>
+<li><a href="#8"><b class="cmd">::kinetcl waitOneUpdate</b> <i class="arg">node</i></a></li>
+<li><a href="#9"><b class="cmd">::kinetcl errorstate</b></a></li>
+<li><a href="#10"><b class="cmd">::kinetcl mirror</b> <span class="opt">?<i class="arg">bool</i>?</span></a></li>
+<li><a href="#11"><b class="cmd">::kinetcl::base</b> <b class="method">new</b></a></li>
+<li><a href="#12"><b class="cmd">::kinetcl::base</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
+<li><a href="#13"><i class="arg">baseInstanceCmd</i> <b class="method">capabilities</b> <span class="opt">?<b class="option">-all</b>?</span></a></li>
+<li><a href="#14"><i class="arg">baseInstanceCmd</i> <b class="method">is-capable-of</b> <i class="arg">capability</i></a></li>
+<li><a href="#15"><i class="arg">baseInstanceCmd</i> <b class="method">node-info</b></a></li>
+<li><a href="#16"><i class="arg">baseInstanceCmd</i> <b class="method">node-name</b></a></li>
+<li><a href="#17"><b class="cmd">::kinetcl::generator</b> <b class="method">new</b></a></li>
+<li><a href="#18"><b class="cmd">::kinetcl::generator</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
+<li><a href="#19"><i class="arg">generatorInstanceCmd</i> <b class="method">start</b></a></li>
+<li><a href="#20"><i class="arg">generatorInstanceCmd</i> <b class="method">stop</b></a></li>
+<li><a href="#21"><i class="arg">generatorInstanceCmd</i> <b class="method">active</b></a></li>
+<li><a href="#22"><i class="arg">generatorInstanceCmd</i> <b class="method">update</b></a></li>
+<li><a href="#23"><i class="arg">generatorInstanceCmd</i> <b class="method">hasNew</b></a></li>
+<li><a href="#24"><i class="arg">generatorInstanceCmd</i> <b class="method">isNew</b></a></li>
+<li><a href="#25"><i class="arg">generatorInstanceCmd</i> <b class="method">frame</b></a></li>
+<li><a href="#26"><i class="arg">generatorInstanceCmd</i> <b class="method">time</b></a></li>
+<li><a href="#27"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-active</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#28"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-active</b></a></li>
+<li><a href="#29"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-newdata</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#30"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-newdata</b></a></li>
+<li><a href="#31"><b class="cmd">::kinetcl::map</b> <b class="method">new</b></a></li>
+<li><a href="#32"><b class="cmd">::kinetcl::map</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
+<li><a href="#33"><i class="arg">mapInstanceCmd</i> <b class="method">bytes-per-pixel</b></a></li>
+<li><a href="#34"><i class="arg">mapInstanceCmd</i> <b class="method">modes</b></a></li>
+<li><a href="#35"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b></a></li>
+<li><a href="#36"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b> <i class="arg">xres</i> <i class="arg">yres</i> <i class="arg">fps</i></a></li>
+<li><a href="#37"><i class="arg">mapInstanceCmd</i> <b class="method">set-callback-mode</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#38"><i class="arg">mapInstanceCmd</i> <b class="method">unset-callback-mode</b></a></li>
+<li><a href="#39"><b class="cmd">::kinetcl::depth</b></a></li>
+<li><a href="#40"><i class="arg">depthInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#41"><i class="arg">depthInstanceCmd</i> <b class="method">max-depth</b></a></li>
+<li><a href="#42"><i class="arg">depthInstanceCmd</i> <b class="method">fov</b></a></li>
+<li><a href="#43"><i class="arg">depthInstanceCmd</i> <b class="method">meta</b></a></li>
+<li><a href="#44"><i class="arg">depthInstanceCmd</i> <b class="method">map</b></a></li>
+<li><a href="#45"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-depthfov</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#46"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-depthfov</b></a></li>
+<li><a href="#47"><b class="cmd">::kinetcl::image</b></a></li>
+<li><a href="#48"><i class="arg">imageInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#49"><i class="arg">imageInstanceCmd</i> <b class="method">formats</b></a></li>
+<li><a href="#50"><i class="arg">imageInstanceCmd</i> <b class="method">format</b> <span class="opt">?<i class="arg">format</i>?</span></a></li>
+<li><a href="#51"><i class="arg">imageInstanceCmd</i> <b class="method">meta</b></a></li>
+<li><a href="#52"><i class="arg">imageInstanceCmd</i> <b class="method">map</b></a></li>
+<li><a href="#53"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-pixelformat</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#54"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-pixelformat</b></a></li>
+<li><a href="#55"><b class="cmd">::kinetcl::ir</b></a></li>
+<li><a href="#56"><i class="arg">irIstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#57"><b class="cmd">::kinetcl::gesture</b></a></li>
+<li><a href="#58"><i class="arg">gestureInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#59"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <i class="arg">box</i></a></li>
+<li><a href="#60"><i class="arg">gestureInstanceCmd</i> <b class="method">remove-gesture</b> <i class="arg">gesture</i></a></li>
+<li><a href="#61"><i class="arg">gestureInstanceCmd</i> <b class="method">is-gesture</b> <i class="arg">gesture</i></a></li>
+<li><a href="#62"><i class="arg">gestureInstanceCmd</i> <b class="method">gesture-has-progress</b> <i class="arg">gesture</i></a></li>
+<li><a href="#63"><i class="arg">gestureInstanceCmd</i> <b class="method">all-gestures</b></a></li>
+<li><a href="#64"><i class="arg">gestureInstanceCmd</i> <b class="method">active-gestures</b></a></li>
+<li><a href="#65"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureRecognized</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#66"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureRecognized</b></a></li>
+<li><a href="#67"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureProgress</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#68"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureProgress</b></a></li>
+<li><a href="#69"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureChange</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#70"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureChange</b></a></li>
+<li><a href="#71"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageComplete</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#72"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageComplete</b></a></li>
+<li><a href="#73"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageReadyForNext</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#74"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageReadyForNext</b></a></li>
+<li><a href="#75"><b class="cmd">::kinetcl::scene</b></a></li>
+<li><a href="#76"><i class="arg">sceneInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#77"><i class="arg">sceneInstanceCmd</i> <b class="method">meta</b></a></li>
+<li><a href="#78"><i class="arg">sceneInstanceCmd</i> <b class="method">map</b></a></li>
+<li><a href="#79"><b class="cmd">::kinetcl::user</b></a></li>
+<li><a href="#80"><i class="arg">userInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#81"><i class="arg">userInstanceCmd</i> <b class="method">count</b></a></li>
+<li><a href="#82"><i class="arg">userInstanceCmd</i> <b class="method">users</b></a></li>
+<li><a href="#83"><i class="arg">userInstanceCmd</i> <b class="method">centerof</b> <i class="arg">id</i></a></li>
+<li><a href="#84"><i class="arg">userInstanceCmd</i> <b class="method">pixelsof</b> <i class="arg">id</i></a></li>
+<li><a href="#85"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-enter</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#86"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-enter</b></a></li>
+<li><a href="#87"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-exit</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#88"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-exit</b></a></li>
+<li><a href="#89"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-new</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#90"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-new</b></a></li>
+<li><a href="#91"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-lost</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#92"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-lost</b></a></li>
+<li><a href="#93"><b class="cmd">::kinetcl::hands</b></a></li>
+<li><a href="#94"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#95"><b class="cmd">::kinetcl::audio</b></a></li>
+<li><a href="#96"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#97"><b class="cmd">::kinetcl::recorder</b></a></li>
+<li><a href="#98"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#99"><b class="cmd">::kinetcl::player</b></a></li>
+<li><a href="#100"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#101"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></li>
+<li><a href="#102"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></li>
+<li><a href="#103"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></li>
+<li><a href="#104"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></li>
+<li><a href="#105"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></li>
+<li><a href="#106"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></li>
+<li><a href="#107"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#108"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></li>
+<li><a href="#109"><b class="cmd">::kinetcl::script</b></a></li>
+<li><a href="#110"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></li>
+<li><a href="#111"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></li>
+<li><a href="#112"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></li>
+<li><a href="#113"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
+<li><a href="#114"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
+<li><a href="#115"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></li>
+<li><a href="#116"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
+<li><a href="#117"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#118"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></li>
+<li><a href="#119"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#120"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></li>
+<li><a href="#121"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#122"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></li>
+<li><a href="#123"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#124"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></li>
+<li><a href="#125"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></li>
+<li><a href="#126"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></li>
+<li><a href="#127"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></li>
+<li><a href="#128"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></li>
+<li><a href="#129"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#130"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#131"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#132"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#133"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></li>
+<li><a href="#134"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></li>
+<li><a href="#135"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></li>
+<li><a href="#136"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></li>
+<li><a href="#137"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
+<li><a href="#138"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
+<li><a href="#139"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
+<li><a href="#140"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
+<li><a href="#141"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></li>
+<li><a href="#142"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></li>
+<li><a href="#143"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></li>
+<li><a href="#144"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></li>
+<li><a href="#145"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></li>
+<li><a href="#146"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></li>
+<li><a href="#147"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></li>
+<li><a href="#148"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#149"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></li>
+<li><a href="#150"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#151"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></li>
+<li><a href="#152"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#153"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></li>
+<li><a href="#154"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#155"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></li>
 </ul>
 </div>
 </div>
@@ -372,14 +383,61 @@ Tcl with access to MS Kinect (tm), and related sensor systems.</p>
 </div>
 <div id="section2" class="section"><h2><a name="section2">API</a></h2>
 </div>
-<div id="section3" class="section"><h2><a name="section3">Base</a></h2>
+<div id="section3" class="section"><h2><a name="section3">Global commands</a></h2>
+<p>This sections documents the global commands in the
+<b class="namespace">::kinetcl</b> namespace and ensemble.</p>
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">::kinetcl estart</b></a></dt>
+<dd><p>This command deactivates the event deferal, aka lockout mode.
+Any OpenNI/kinetcl events which were prevented from entering Tcl's
+event queue are now moved into it.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="2"><b class="cmd">::kinetcl estop</b></a></dt>
+<dd><p>This command activates the event deferal, aka lockout mode.
+Any OpenNI/kinetcl events occuring while this mode is active are
+prevented from entering Tcl's event queue until the next invokation of
+<b class="cmd">::kinetcl estop</b>.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="3"><b class="cmd">::kinetcl start</b></a></dt>
+<dd><p>This command activates data processing and generation in all known
+generator nodes.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="4"><b class="cmd">::kinetcl stop</b></a></dt>
+<dd><p>This command deactivates data processing and generation in all known
+generator nodes.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="5"><b class="cmd">::kinetcl waitUpdate</b></a></dt>
+<dd><p>This command waits for all generator nodes to have new data and then
+updates them all.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="6"><b class="cmd">::kinetcl waitAnyUpdate</b></a></dt>
+<dd><p>This command waits for any of the generator nodes to have new data and
+then updates them all.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="7"><b class="cmd">::kinetcl waitNoneUpdate</b></a></dt>
+<dd><p>This command updates all generator nodes, without any waiting.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="8"><b class="cmd">::kinetcl waitOneUpdate</b> <i class="arg">node</i></a></dt>
+<dd><p>This command waits for the specified generator <i class="arg">node</i> to have new
+data and then updates all nodes.</p>
+<p>The result of the command is the empty string.</p></dd>
+<dt><a name="9"><b class="cmd">::kinetcl errorstate</b></a></dt>
+<dd><p>This command returns the global error state of OpenNI as string.</p></dd>
+<dt><a name="10"><b class="cmd">::kinetcl mirror</b> <span class="opt">?<i class="arg">bool</i>?</span></a></dt>
+<dd><p>This command returns the current value of the global mirror flag.
+If the argument is specified the global mirror flag is set to its
+value, and all existing nodes supporting mirroring are reconfigured to
+reflect the new state.</p></dd>
+</dl>
+</div>
+<div id="section4" class="section"><h2><a name="section4">Base</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::base</b>, the (abstract) base
 class for all OpenNI production nodes.</p>
 <div id="subsection1" class="subsection"><h3><a name="subsection1">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="1"><b class="cmd">::kinetcl::base</b> <b class="method">new</b></a></dt>
+<dt><a name="11"><b class="cmd">::kinetcl::base</b> <b class="method">new</b></a></dt>
 <dd></dd>
-<dt><a name="2"><b class="cmd">::kinetcl::base</b> <b class="method">create</b> <i class="arg">objname</i></a></dt>
+<dt><a name="12"><b class="cmd">::kinetcl::base</b> <b class="method">create</b> <i class="arg">objname</i></a></dt>
 <dd><p>This command creates a new instance of the base.
 Note that it is <em>impossible</em> to create such an instance on its
 own. It can be done only as part of constructing the instance of a
@@ -390,16 +448,16 @@ and their semantics is described in the next subsection.</p></dd>
 </div>
 <div id="subsection2" class="subsection"><h3><a name="subsection2">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="3"><i class="arg">baseInstanceCmd</i> <b class="method">capabilities</b> <span class="opt">?<b class="option">-all</b>?</span></a></dt>
+<dt><a name="13"><i class="arg">baseInstanceCmd</i> <b class="method">capabilities</b> <span class="opt">?<b class="option">-all</b>?</span></a></dt>
 <dd><p>This method returns the capabilities of the instance, or, if option
 <b class="option">-all</b> was specified, the set of all possible capabilities.</p>
 <p>The result is a list containing the names of the capabilities.</p></dd>
-<dt><a name="4"><i class="arg">baseInstanceCmd</i> <b class="method">is-capable-of</b> <i class="arg">capability</i></a></dt>
+<dt><a name="14"><i class="arg">baseInstanceCmd</i> <b class="method">is-capable-of</b> <i class="arg">capability</i></a></dt>
 <dd><p>This method checks if the named capability is supported by the
 instance or not.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the capability
 is supported, and <b class="const">false</b> else.</p></dd>
-<dt><a name="5"><i class="arg">baseInstanceCmd</i> <b class="method">node-info</b></a></dt>
+<dt><a name="15"><i class="arg">baseInstanceCmd</i> <b class="method">node-info</b></a></dt>
 <dd><p>This method returns a dictionary containing OpenNI's description of the
 node. They keys of the dictinary, and the associated values are</p>
 <dl class="definitions">
@@ -439,21 +497,21 @@ number, maintenance id, and build number, in this order.</p></dd>
 <dt><b class="const">create</b></dt>
 <dd><p>The node's creation detail information.</p></dd>
 </dl></dd>
-<dt><a name="6"><i class="arg">baseInstanceCmd</i> <b class="method">node-name</b></a></dt>
+<dt><a name="16"><i class="arg">baseInstanceCmd</i> <b class="method">node-name</b></a></dt>
 <dd><p>This method returns a string holding the OpenNI name of the node.</p></dd>
 </dl>
 </div>
 </div>
-<div id="section4" class="section"><h2><a name="section4">Generator</a></h2>
+<div id="section5" class="section"><h2><a name="section5">Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::generator</b>, the (abstract) base
 class for all OpenNI generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::base</b>. See section
-<span class="sectref"><a href="#section3">Base</a></span>.</p>
+<span class="sectref"><a href="#section4">Base</a></span>.</p>
 <div id="subsection3" class="subsection"><h3><a name="subsection3">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="7"><b class="cmd">::kinetcl::generator</b> <b class="method">new</b></a></dt>
+<dt><a name="17"><b class="cmd">::kinetcl::generator</b> <b class="method">new</b></a></dt>
 <dd></dd>
-<dt><a name="8"><b class="cmd">::kinetcl::generator</b> <b class="method">create</b> <i class="arg">objname</i></a></dt>
+<dt><a name="18"><b class="cmd">::kinetcl::generator</b> <b class="method">create</b> <i class="arg">objname</i></a></dt>
 <dd><p>This command creates a new instance of the generator.
 Note that it is <em>impossible</em> to create such an instance on its
 own. It can be done only as part of constructing the instance of a
@@ -464,47 +522,47 @@ and their semantics is described in the next subsection.</p></dd>
 </div>
 <div id="subsection4" class="subsection"><h3><a name="subsection4">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="9"><i class="arg">generatorInstanceCmd</i> <b class="method">start</b></a></dt>
+<dt><a name="19"><i class="arg">generatorInstanceCmd</i> <b class="method">start</b></a></dt>
 <dd><p>This method causes the instance to start generating output. It implies
 the activation of all dependencies as well.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="10"><i class="arg">generatorInstanceCmd</i> <b class="method">stop</b></a></dt>
+<dt><a name="20"><i class="arg">generatorInstanceCmd</i> <b class="method">stop</b></a></dt>
 <dd><p>This method causes the instance to stop generating output.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="11"><i class="arg">generatorInstanceCmd</i> <b class="method">active</b></a></dt>
+<dt><a name="21"><i class="arg">generatorInstanceCmd</i> <b class="method">active</b></a></dt>
 <dd><p>This method tests if the instance is generating output.</p>
 <p>The result of the method is a boolean value, <b class="const">true</b> if the
 instance is generating output, and <b class="const">false</b> else.</p></dd>
-<dt><a name="12"><i class="arg">generatorInstanceCmd</i> <b class="method">update</b></a></dt>
+<dt><a name="22"><i class="arg">generatorInstanceCmd</i> <b class="method">update</b></a></dt>
 <dd><p>This method causes the instance to update its output to the newest
 available. If no new output was available the method blocks until this
 happens.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="13"><i class="arg">generatorInstanceCmd</i> <b class="method">hasNew</b></a></dt>
+<dt><a name="23"><i class="arg">generatorInstanceCmd</i> <b class="method">hasNew</b></a></dt>
 <dd><p>This method tests if the instance has new output available it could be
 updated to.  I.e. it checks if the method <b class="method">update</b> would block
 or not.</p>
 <p>The result of the method is a boolean value, <b class="const">true</b> if
 the instance has new data (i.e. <b class="method">update</b> would not block), and
 <b class="const">false</b> else.</p></dd>
-<dt><a name="14"><i class="arg">generatorInstanceCmd</i> <b class="method">isNew</b></a></dt>
+<dt><a name="24"><i class="arg">generatorInstanceCmd</i> <b class="method">isNew</b></a></dt>
 <dd><p>This method tests if the instance's current input frame is new,
 i.e. unchanged since the last call to method <b class="method">update</b>.</p>
 <p>The result of the method is a boolean value, <b class="const">true</b> if
 the instance if the current frame is still new, and <b class="const">false</b>
 else.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="15"><i class="arg">generatorInstanceCmd</i> <b class="method">frame</b></a></dt>
+<dt><a name="25"><i class="arg">generatorInstanceCmd</i> <b class="method">frame</b></a></dt>
 <dd><p>This method returns the id of the input frame currently handled by the
 instance.</p>
 <p>The result of the method is an integer number.</p></dd>
-<dt><a name="16"><i class="arg">generatorInstanceCmd</i> <b class="method">time</b></a></dt>
+<dt><a name="26"><i class="arg">generatorInstanceCmd</i> <b class="method">time</b></a></dt>
 <dd><p>This method returns the time of the input frame currently handled by
 the instance, in microseconds.</p>
 <p>The result of the method is an integer number.</p></dd>
-<dt><a name="17"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-active</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="27"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-active</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="18"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-active</b></a></dt>
+<dt><a name="28"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-active</b></a></dt>
 <dd><p>These methods define and remove a callback responding to activity
 events, i.e. the instance starting and stopping the generation of
 output.</p>
@@ -517,9 +575,9 @@ the instance. If this information is required then it is the
 callback's responsibility to query the state, using the interogatory
 method <b class="method">active</b>.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="19"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-newdata</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="29"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-newdata</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="20"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-newdata</b></a></dt>
+<dt><a name="30"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-newdata</b></a></dt>
 <dd><p>These methods define and remove a callback responding to data
 events, i.e. the instance having new output available.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -530,16 +588,16 @@ and the word &quot;newdata&quot;, in this order.</p>
 </dl>
 </div>
 </div>
-<div id="section5" class="section"><h2><a name="section5">Map Generator</a></h2>
+<div id="section6" class="section"><h2><a name="section6">Map Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::map</b>, the (abstract) base
 class for all OpenNI map generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::generator</b> and its
-superclasses. See section <span class="sectref"><a href="#section4">Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section5">Generator</a></span>.</p>
 <div id="subsection5" class="subsection"><h3><a name="subsection5">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="21"><b class="cmd">::kinetcl::map</b> <b class="method">new</b></a></dt>
+<dt><a name="31"><b class="cmd">::kinetcl::map</b> <b class="method">new</b></a></dt>
 <dd></dd>
-<dt><a name="22"><b class="cmd">::kinetcl::map</b> <b class="method">create</b> <i class="arg">objname</i></a></dt>
+<dt><a name="32"><b class="cmd">::kinetcl::map</b> <b class="method">create</b> <i class="arg">objname</i></a></dt>
 <dd><p>This command creates a new instance of the map generator.
 Note that it is <em>impossible</em> to create such an instance on its
 own. It can be done only as part of constructing the instance of a
@@ -550,27 +608,27 @@ and their semantics is described in the next subsection.</p></dd>
 </div>
 <div id="subsection6" class="subsection"><h3><a name="subsection6">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="23"><i class="arg">mapInstanceCmd</i> <b class="method">bytes-per-pixel</b></a></dt>
+<dt><a name="33"><i class="arg">mapInstanceCmd</i> <b class="method">bytes-per-pixel</b></a></dt>
 <dd><p>This method returns the number of bytes per pixel in the map.</p></dd>
-<dt><a name="24"><i class="arg">mapInstanceCmd</i> <b class="method">modes</b></a></dt>
+<dt><a name="34"><i class="arg">mapInstanceCmd</i> <b class="method">modes</b></a></dt>
 <dd><p>This method returns the map output modes supported by the instance.</p>
 <p>The result of the method is a list of modes. Each mode is a
 3-element list reporting the x- and y-resolution of the map in pixels,
 and the associated frame rate in frames per second, in this order. All
 elements are integer numbers.</p></dd>
-<dt><a name="25"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b></a></dt>
+<dt><a name="35"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b></a></dt>
 <dd><p>This form of the method reports the currently set map output mode.</p>
 <p>The result of the method is a 3-element list reporting the x-
 and y-resolution of the map in pixels, and the associated frame rate
 in frames per second, in this order. All elements are integer numbers.</p></dd>
-<dt><a name="26"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b> <i class="arg">xres</i> <i class="arg">yres</i> <i class="arg">fps</i></a></dt>
+<dt><a name="36"><i class="arg">mapInstanceCmd</i> <b class="method">mode</b> <i class="arg">xres</i> <i class="arg">yres</i> <i class="arg">fps</i></a></dt>
 <dd><p>This form of the method changes the map output mode to the specified
 resolution and frame rate. The method throws an error if the
 combination is not supported by the instance.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="27"><i class="arg">mapInstanceCmd</i> <b class="method">set-callback-mode</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="37"><i class="arg">mapInstanceCmd</i> <b class="method">set-callback-mode</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="28"><i class="arg">mapInstanceCmd</i> <b class="method">unset-callback-mode</b></a></dt>
+<dt><a name="38"><i class="arg">mapInstanceCmd</i> <b class="method">unset-callback-mode</b></a></dt>
 <dd><p>These methods define and remove a callback responding to mode change
 events, i.e. the instance changing the its output mode.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -581,17 +639,17 @@ and the word &quot;mode&quot;, in this order.</p>
 </dl>
 </div>
 </div>
-<div id="section6" class="section"><h2><a name="section6">Depth Generator</a></h2>
+<div id="section7" class="section"><h2><a name="section7">Depth Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::generator</b>, the
 concrete class for all OpenNI depth generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::generator</b> and its
-superclasses. See section <span class="sectref"><a href="#section4">Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section5">Generator</a></span>.</p>
 <p>A depth generator is a generator providing depth maps,
 i.e. images where each pixel value describes the distance of the pixel
 from the sensor.</p>
 <div id="subsection7" class="subsection"><h3><a name="subsection7">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="29"><b class="cmd">::kinetcl::depth</b></a></dt>
+<dt><a name="39"><b class="cmd">::kinetcl::depth</b></a></dt>
 <dd><p>This command creates a new depth generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -600,20 +658,20 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection8" class="subsection"><h3><a name="subsection8">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="30"><i class="arg">depthInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="40"><i class="arg">depthInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the depth generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
 instance using them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="31"><i class="arg">depthInstanceCmd</i> <b class="method">max-depth</b></a></dt>
+<dt><a name="41"><i class="arg">depthInstanceCmd</i> <b class="method">max-depth</b></a></dt>
 <dd><p>This method returns the max depth the node is able to generate. The
 result is an integer number.</p></dd>
-<dt><a name="32"><i class="arg">depthInstanceCmd</i> <b class="method">fov</b></a></dt>
+<dt><a name="42"><i class="arg">depthInstanceCmd</i> <b class="method">fov</b></a></dt>
 <dd><p>This method returns the field of view the node is able to generate, in
 radians. The result is a 2-element list containing the horizontal and
 vertical fields of view, in this order.</p></dd>
-<dt><a name="33"><i class="arg">depthInstanceCmd</i> <b class="method">meta</b></a></dt>
+<dt><a name="43"><i class="arg">depthInstanceCmd</i> <b class="method">meta</b></a></dt>
 <dd><p>This method returns a dictionary holding information about the depth
 maps produced by the node. The keys found in this dictionary, and the
 associated values are:</p>
@@ -679,13 +737,13 @@ This is the same value as returned by method <b class="method">max-depth</b>.</p
 </dl>
 <p>Notes:</p>
 <p>Depth maps are in pixel format <b class="const">grey16</b>.</p></dd>
-<dt><a name="34"><i class="arg">depthInstanceCmd</i> <b class="method">map</b></a></dt>
+<dt><a name="44"><i class="arg">depthInstanceCmd</i> <b class="method">map</b></a></dt>
 <dd><p>This method returns a <b class="package">crimp</b> image of type <b class="const">grey16</b>
 where the value of each pixel represents the distance of the pixel
 from the sensor.</p></dd>
-<dt><a name="35"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-depthfov</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="45"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-depthfov</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="36"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-depthfov</b></a></dt>
+<dt><a name="46"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-depthfov</b></a></dt>
 <dd><p>These methods define and remove a callback responding to changes in
 the field of view of the node.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -700,16 +758,16 @@ method <b class="method">fov</b>.</p>
 </dl>
 </div>
 </div>
-<div id="section7" class="section"><h2><a name="section7">Image Generator</a></h2>
+<div id="section8" class="section"><h2><a name="section8">Image Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::image</b>, the
 concrete class for all OpenNI image generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::map</b> and its
-superclasses. See section <span class="sectref"><a href="#section5">Map Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section6">Map Generator</a></span>.</p>
 <p>An image generator is a map generator providing plain images,
 where each pixel value describes the color (or luminance) of the pixel.</p>
 <div id="subsection9" class="subsection"><h3><a name="subsection9">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="37"><b class="cmd">::kinetcl::image</b></a></dt>
+<dt><a name="47"><b class="cmd">::kinetcl::image</b></a></dt>
 <dd><p>This command creates a new image generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -718,23 +776,23 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection10" class="subsection"><h3><a name="subsection10">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="38"><i class="arg">imageInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="48"><i class="arg">imageInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the image generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
 instance using them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="39"><i class="arg">imageInstanceCmd</i> <b class="method">formats</b></a></dt>
+<dt><a name="49"><i class="arg">imageInstanceCmd</i> <b class="method">formats</b></a></dt>
 <dd><p>This method returns a list of the pixel formats supported by the node.</p>
 <p>For the list of possible pixel formats see below, under method
 <b class="method">meta</b>.</p></dd>
-<dt><a name="40"><i class="arg">imageInstanceCmd</i> <b class="method">format</b> <span class="opt">?<i class="arg">format</i>?</span></a></dt>
+<dt><a name="50"><i class="arg">imageInstanceCmd</i> <b class="method">format</b> <span class="opt">?<i class="arg">format</i>?</span></a></dt>
 <dd><p>This method returns the name of the currently active pixel format.
 If the argument <i class="arg">format</i> is present the node is reconfigured to 
 report the images in the specified format.</p>
 <p>For the list of possible pixel formats see below, under method
 <b class="method">meta</b>.</p></dd>
-<dt><a name="41"><i class="arg">imageInstanceCmd</i> <b class="method">meta</b></a></dt>
+<dt><a name="51"><i class="arg">imageInstanceCmd</i> <b class="method">meta</b></a></dt>
 <dd><p>This method returns a dictionary holding information about the image
 maps produced by the node. The keys found in this dictionary, and the
 associated values are:</p>
@@ -797,7 +855,7 @@ resolution in pixels, in this order.</p></dd>
 </dl>
 <p>Notes:</p>
 <p>Image maps are usually in pixel format <b class="const">rgb24</b>.</p></dd>
-<dt><a name="42"><i class="arg">imageInstanceCmd</i> <b class="method">map</b></a></dt>
+<dt><a name="52"><i class="arg">imageInstanceCmd</i> <b class="method">map</b></a></dt>
 <dd><p>This method returns a <b class="package">crimp</b> image containing the current
 image map. The crimp type of the image depends on the currently active
 pixel format:</p>
@@ -809,9 +867,9 @@ pixel format:</p>
 <dt><b class="const">grey16</b></dt>
 <dd><p>--&gt; <b class="const">grey16</b></p></dd>
 </dl></dd>
-<dt><a name="43"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-pixelformat</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="53"><i class="arg">generatorInstanceCmd</i> <b class="method">set-callback-pixelformat</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="44"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-pixelformat</b></a></dt>
+<dt><a name="54"><i class="arg">generatorInstanceCmd</i> <b class="method">unset-callback-pixelformat</b></a></dt>
 <dd><p>These methods define and remove a callback responding to changes in
 the active pixel format of the node.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -826,16 +884,16 @@ method <b class="method">format</b>.</p>
 </dl>
 </div>
 </div>
-<div id="section8" class="section"><h2><a name="section8">IR Generator</a></h2>
+<div id="section9" class="section"><h2><a name="section9">IR Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::ir</b>, the
 concrete class for all OpenNI IR image generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::map</b> and its
-superclasses. See section <span class="sectref"><a href="#section5">Map Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section6">Map Generator</a></span>.</p>
 <p>An IR image generator is a map generator providing infrared
 images.</p>
 <div id="subsection11" class="subsection"><h3><a name="subsection11">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="45"><b class="cmd">::kinetcl::ir</b></a></dt>
+<dt><a name="55"><b class="cmd">::kinetcl::ir</b></a></dt>
 <dd><p>This command creates a new ir image generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -844,7 +902,7 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection12" class="subsection"><h3><a name="subsection12">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="46"><i class="arg">irIstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="56"><i class="arg">irIstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the ir image generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
@@ -853,16 +911,16 @@ instance using them is destroyed.</p>
 </dl>
 </div>
 </div>
-<div id="section9" class="section"><h2><a name="section9">Gesture Generator</a></h2>
+<div id="section10" class="section"><h2><a name="section10">Gesture Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::gesture</b>, the
 concrete class for all OpenNI gesture generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::generator</b> and its
-superclasses. See section <span class="sectref"><a href="#section4">Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section5">Generator</a></span>.</p>
 <p>A genestur generator identifies and tracks gestures performed
 by the users within the field of view of the sensor.</p>
 <div id="subsection13" class="subsection"><h3><a name="subsection13">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="47"><b class="cmd">::kinetcl::gesture</b></a></dt>
+<dt><a name="57"><b class="cmd">::kinetcl::gesture</b></a></dt>
 <dd><p>This command creates a new gesture generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -871,13 +929,13 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection14" class="subsection"><h3><a name="subsection14">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="48"><i class="arg">gestureInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="58"><i class="arg">gestureInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the gesture generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
 instance using them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="49"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <i class="arg">box</i></a></dt>
+<dt><a name="59"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <i class="arg">box</i></a></dt>
 <dd><p>This method activates the gesture, i.e. causes the instance to start
 looking for it in the input.</p>
 <p>The <i class="arg">box</i> describes the area where to look for it, in
@@ -886,28 +944,28 @@ x-, y-, and z-coordinates. The 1st 3D coordinate describes the
 left-bottom-near corner of the box, whereas the 2nd describes the
 right-top-far corner.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="50"><i class="arg">gestureInstanceCmd</i> <b class="method">remove-gesture</b> <i class="arg">gesture</i></a></dt>
+<dt><a name="60"><i class="arg">gestureInstanceCmd</i> <b class="method">remove-gesture</b> <i class="arg">gesture</i></a></dt>
 <dd><p>This method deactivates the gesture, i.e. causes the instance to stop
 looking for it in the input.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="51"><i class="arg">gestureInstanceCmd</i> <b class="method">is-gesture</b> <i class="arg">gesture</i></a></dt>
+<dt><a name="61"><i class="arg">gestureInstanceCmd</i> <b class="method">is-gesture</b> <i class="arg">gesture</i></a></dt>
 <dd><p>This method tests if the named <i class="arg">gesture</i> is supported by the instance.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the gesture is
 supported, and <b class="const">false</b> else.</p></dd>
-<dt><a name="52"><i class="arg">gestureInstanceCmd</i> <b class="method">gesture-has-progress</b> <i class="arg">gesture</i></a></dt>
+<dt><a name="62"><i class="arg">gestureInstanceCmd</i> <b class="method">gesture-has-progress</b> <i class="arg">gesture</i></a></dt>
 <dd><p>This method tests if the named <i class="arg">gesture</i> supports progess
 reporting during recognition.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the gesture
 supports progress reporting, and <b class="const">false</b> else.</p></dd>
-<dt><a name="53"><i class="arg">gestureInstanceCmd</i> <b class="method">all-gestures</b></a></dt>
+<dt><a name="63"><i class="arg">gestureInstanceCmd</i> <b class="method">all-gestures</b></a></dt>
 <dd><p>This method returns a list containing the names of all gestures
 supported by the instance.</p></dd>
-<dt><a name="54"><i class="arg">gestureInstanceCmd</i> <b class="method">active-gestures</b></a></dt>
+<dt><a name="64"><i class="arg">gestureInstanceCmd</i> <b class="method">active-gestures</b></a></dt>
 <dd><p>This method returns a list containing the names of all gestures
 that are currently active.</p></dd>
-<dt><a name="55"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureRecognized</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="65"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureRecognized</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="56"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureRecognized</b></a></dt>
+<dt><a name="66"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureRecognized</b></a></dt>
 <dd><p>These methods define and remove a callback responding to gesture
 recognition events.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -918,9 +976,9 @@ the word &quot;gestureRecognized&quot;, the name of the recognized gesture, the
 the location of the hand which performed the gesture at the end of the
 gesture, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="57"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureProgress</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="67"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureProgress</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="58"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureProgress</b></a></dt>
+<dt><a name="68"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureProgress</b></a></dt>
 <dd><p>These methods define and remove a callback responding to gesture
 progress events.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -930,9 +988,9 @@ the word &quot;gestureProgress&quot;, the name of the gesture progressing, the
 current 3D coordinates of the hand performing the gesture, and the
 percentage of the gesture already performed, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="59"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureChange</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="69"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureChange</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="60"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureChange</b></a></dt>
+<dt><a name="70"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureChange</b></a></dt>
 <dd><p>These methods define and remove a callback responding to gesture
 change events, i.e when gestures are (de)activated.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -940,9 +998,9 @@ change events, i.e when gestures are (de)activated.</p>
 will be invoked with two arguments added to it, the instance command,
 and the word &quot;gestureChange&quot;, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="61"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageComplete</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="71"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageComplete</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="62"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageComplete</b></a></dt>
+<dt><a name="72"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageComplete</b></a></dt>
 <dd><p>These methods define and remove a callback responding to gesture
 stage completion events.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -952,9 +1010,9 @@ the word &quot;gestureStageComplete&quot;, the name of the gesture which
 complete one of its stages, and the current 3D coordinates of the hand
 performing the gesture, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="63"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageReadyForNext</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="73"><i class="arg">gestureInstanceCmd</i> <b class="method">set-callback-gestureStageReadyForNext</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="64"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageReadyForNext</b></a></dt>
+<dt><a name="74"><i class="arg">gestureInstanceCmd</i> <b class="method">unset-callback-gestureStageReadyForNext</b></a></dt>
 <dd><p>These methods define and remove a callback responding to gesture
 stage readiness events.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -967,16 +1025,16 @@ ready for the recognition of the next of its stages, and the current
 </dl>
 </div>
 </div>
-<div id="section10" class="section"><h2><a name="section10">Scene Analyzer</a></h2>
+<div id="section11" class="section"><h2><a name="section11">Scene Analyzer</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::scene</b>, the concrete
 class for all OpenNI scene analyzer nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::map</b> and its
-superclasses. See section <span class="sectref"><a href="#section5">Map Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section6">Map Generator</a></span>.</p>
 <p>A scene analyzer segments a scene, identifying the floor and
 other connected areas (i.e. users) in the view of the sensor.</p>
 <div id="subsection15" class="subsection"><h3><a name="subsection15">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="65"><b class="cmd">::kinetcl::scene</b></a></dt>
+<dt><a name="75"><b class="cmd">::kinetcl::scene</b></a></dt>
 <dd><p>This command creates a new scene analyzer instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -985,13 +1043,13 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection16" class="subsection"><h3><a name="subsection16">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="66"><i class="arg">sceneInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="76"><i class="arg">sceneInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the scene analyzer instance and releases all
 associated resources, including the instance command.  Note that
 resources used by multiple instances are released only when the last
 instance using them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="67"><i class="arg">sceneInstanceCmd</i> <b class="method">meta</b></a></dt>
+<dt><a name="77"><i class="arg">sceneInstanceCmd</i> <b class="method">meta</b></a></dt>
 <dd><p>This method returns a dictionary holding information about the scene
 segmentation produced by the node. The keys found in this dictionary,
 and the associated values are:</p>
@@ -1054,18 +1112,18 @@ resolution in pixels, in this order.</p></dd>
 </dl>
 <p>Notes:</p>
 <p>Scene segmentations are in pixel format <b class="const">grey16</b>.</p></dd>
-<dt><a name="68"><i class="arg">sceneInstanceCmd</i> <b class="method">map</b></a></dt>
+<dt><a name="78"><i class="arg">sceneInstanceCmd</i> <b class="method">map</b></a></dt>
 <dd><p>This method returns a <b class="package">crimp</b> image of type <b class="const">grey16</b>
 containing the current scene segmentation. Each pixel is labeled with
 the id of the user it belongs to, or <b class="const">0</b> if it is background.</p></dd>
 </dl>
 </div>
 </div>
-<div id="section11" class="section"><h2><a name="section11">User Generator</a></h2>
+<div id="section12" class="section"><h2><a name="section12">User Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::user</b>, the concrete
 class for all OpenNI user generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::generator</b> and its
-superclasses. See section <span class="sectref"><a href="#section4">Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section5">Generator</a></span>.</p>
 <p>A user generator identifies and tracks users within the field
 of view of the sensor.</p>
 <p>They may have the following capabilities:</p>
@@ -1076,7 +1134,7 @@ of view of the sensor.</p>
 </ol>
 <div id="subsection17" class="subsection"><h3><a name="subsection17">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="69"><b class="cmd">::kinetcl::user</b></a></dt>
+<dt><a name="79"><b class="cmd">::kinetcl::user</b></a></dt>
 <dd><p>This command creates a new user generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1085,30 +1143,30 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection18" class="subsection"><h3><a name="subsection18">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="70"><i class="arg">userInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="80"><i class="arg">userInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the user generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
 instance using them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="71"><i class="arg">userInstanceCmd</i> <b class="method">count</b></a></dt>
+<dt><a name="81"><i class="arg">userInstanceCmd</i> <b class="method">count</b></a></dt>
 <dd><p>This method returns the number of users currently tracked by the
 user generator instance.</p></dd>
-<dt><a name="72"><i class="arg">userInstanceCmd</i> <b class="method">users</b></a></dt>
+<dt><a name="82"><i class="arg">userInstanceCmd</i> <b class="method">users</b></a></dt>
 <dd><p>This method returns a list containing the ids of the users currently
 tracked by the user generator instance.</p></dd>
-<dt><a name="73"><i class="arg">userInstanceCmd</i> <b class="method">centerof</b> <i class="arg">id</i></a></dt>
+<dt><a name="83"><i class="arg">userInstanceCmd</i> <b class="method">centerof</b> <i class="arg">id</i></a></dt>
 <dd><p>This method returns the center location for the user specified by its
 id, as a 3-element list, i.e. vector, of floating point coordinates.
 The coordinates are specified in the order of X, Y, and Z.</p>
 <p>The method will throw an error if the user id is not valid.</p></dd>
-<dt><a name="74"><i class="arg">userInstanceCmd</i> <b class="method">pixelsof</b> <i class="arg">id</i></a></dt>
+<dt><a name="84"><i class="arg">userInstanceCmd</i> <b class="method">pixelsof</b> <i class="arg">id</i></a></dt>
 <dd><p>This method returns a <b class="package">crimp</b> image of type <b class="const">grey16</b>
 where all pixels representing the user are set to the user's id, and
 everything else set to <b class="const">0</b>.</p></dd>
-<dt><a name="75"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-enter</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="85"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-enter</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="76"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-enter</b></a></dt>
+<dt><a name="86"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-enter</b></a></dt>
 <dd><p>These methods define and remove a callback responding to re-entry
 events, i.e. a user re-entering the scene after exiting it.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1117,9 +1175,9 @@ will be invoked with three arguments added to it, the instance
 command, the word &quot;enter&quot;, and the (numerical) id of the user
 re-entering, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="77"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-exit</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="87"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-exit</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="78"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-exit</b></a></dt>
+<dt><a name="88"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-exit</b></a></dt>
 <dd><p>These methods define and remove a callback responding to exit events,
 i.e. a user exiting the scene.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1128,9 +1186,9 @@ will be invoked with three arguments added to it, the instance
 command, the word &quot;exit&quot;, and the (numerical) id of the user exiting,
 in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="79"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-new</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="89"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-new</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="80"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-new</b></a></dt>
+<dt><a name="90"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-new</b></a></dt>
 <dd><p>These methods define and remove a callback responding to &quot;new user&quot;
 events, i.e. when a new user is identified.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1139,9 +1197,9 @@ will be invoked with three arguments added to it, the instance
 command, the word &quot;new&quot;, and the (numerical) id of the newly
 identified user, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="81"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-lost</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="91"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-lost</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="82"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-lost</b></a></dt>
+<dt><a name="92"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-lost</b></a></dt>
 <dd><p>These methods define and remove a callback responding to &quot;lost user&quot;
 events, i.e. when a user is no longer identified.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1153,16 +1211,16 @@ this order.</p>
 </dl>
 </div>
 </div>
-<div id="section12" class="section"><h2><a name="section12">Hands Generator</a></h2>
+<div id="section13" class="section"><h2><a name="section13">Hands Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::hands</b>, the concrete
 class for all OpenNI hand generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::generator</b> and its
-superclasses. See section <span class="sectref"><a href="#section4">Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section5">Generator</a></span>.</p>
 <p>A hand generator identifies and tracks the hands of the users
 within the field of view of the sensor.</p>
 <div id="subsection19" class="subsection"><h3><a name="subsection19">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="83"><b class="cmd">::kinetcl::hands</b></a></dt>
+<dt><a name="93"><b class="cmd">::kinetcl::hands</b></a></dt>
 <dd><p>This command creates a new hands generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1171,7 +1229,7 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection20" class="subsection"><h3><a name="subsection20">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="84"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="94"><i class="arg">handsInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the hands generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
@@ -1180,16 +1238,16 @@ instance using them is destroyed.</p>
 </dl>
 </div>
 </div>
-<div id="section13" class="section"><h2><a name="section13">Audio Generator</a></h2>
+<div id="section14" class="section"><h2><a name="section14">Audio Generator</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::audio</b>, the concrete
 class for all OpenNI audio generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::generator</b> and its
-superclasses. See section <span class="sectref"><a href="#section4">Generator</a></span>.</p>
+superclasses. See section <span class="sectref"><a href="#section5">Generator</a></span>.</p>
 <p>An audio generator provides access to the stream of sound data
 from the sensor.</p>
 <div id="subsection21" class="subsection"><h3><a name="subsection21">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="85"><b class="cmd">::kinetcl::audio</b></a></dt>
+<dt><a name="95"><b class="cmd">::kinetcl::audio</b></a></dt>
 <dd><p>This command creates a new audio generator instance and returns the
 fully qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1198,7 +1256,7 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection22" class="subsection"><h3><a name="subsection22">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="86"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="96"><i class="arg">audioInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the audio generator instance and releases all
 associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
@@ -1207,17 +1265,17 @@ instance using them is destroyed.</p>
 </dl>
 </div>
 </div>
-<div id="section14" class="section"><h2><a name="section14">Recorder Node</a></h2>
+<div id="section15" class="section"><h2><a name="section15">Recorder Node</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::recorder</b>, the
 concrete class for all OpenNI recorder nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::base</b>. See section
-<span class="sectref"><a href="#section3">Base</a></span>.</p>
+<span class="sectref"><a href="#section4">Base</a></span>.</p>
 <p>A recorder watches the stream of sensor information in the
 system and serializes it to a file. A player node may in the future
 read this information and replay it.</p>
 <div id="subsection23" class="subsection"><h3><a name="subsection23">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="87"><b class="cmd">::kinetcl::recorder</b></a></dt>
+<dt><a name="97"><b class="cmd">::kinetcl::recorder</b></a></dt>
 <dd><p>This command creates a new recorder instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1226,7 +1284,7 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection24" class="subsection"><h3><a name="subsection24">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="88"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="98"><i class="arg">recorderInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the recorder instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
@@ -1235,16 +1293,16 @@ them is destroyed.</p>
 </dl>
 </div>
 </div>
-<div id="section15" class="section"><h2><a name="section15">Player Node</a></h2>
+<div id="section16" class="section"><h2><a name="section16">Player Node</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::player</b>, the
 concrete class for all OpenNI player nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::base</b>. See section
-<span class="sectref"><a href="#section3">Base</a></span>.</p>
+<span class="sectref"><a href="#section4">Base</a></span>.</p>
 <p>A player read a stream of sensor information from a file and
 injects it into the system, faking the existence of a sensor.</p>
 <div id="subsection25" class="subsection"><h3><a name="subsection25">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="89"><b class="cmd">::kinetcl::player</b></a></dt>
+<dt><a name="99"><b class="cmd">::kinetcl::player</b></a></dt>
 <dd><p>This command creates a new player instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1253,42 +1311,42 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection26" class="subsection"><h3><a name="subsection26">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="90"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="100"><i class="arg">playerInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the player instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
 them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="91"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></dt>
+<dt><a name="101"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b> <i class="arg">speed</i></a></dt>
 <dd><p>This method sets the speed of playback as a ratio of the time passed
 in the recording. I.e. a speed of <b class="const">1</b> implies playback at the
 same frame/rate as recorded, whereas a speed &lt; 1 causes slow-motion,
 and a speed &gt; 1 fast-forward.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="92"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></dt>
+<dt><a name="102"><i class="arg">playerInstanceCmd</i> <b class="method">speed</b></a></dt>
 <dd><p>This method returns the speed of playback, as a ratio of the time
 passed in the recording.</p>
 <p>The result of the method is a floating point number.</p></dd>
-<dt><a name="93"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></dt>
+<dt><a name="103"><i class="arg">playerInstanceCmd</i> <b class="method">repeat</b> <i class="arg">bool</i></a></dt>
 <dd><p>This method activates or deactivates repeating mode. If repeating is
 activated (<i class="arg">bool</i> is <b class="const">true</b>) the player will automatically
 rewind to the beginning of the recording when reaching the end, and
 continue playing.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="94"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></dt>
+<dt><a name="104"><i class="arg">playerInstanceCmd</i> <b class="method">eof</b></a></dt>
 <dd><p>This method tests if the player has reached the end of the recording,
 or not. Note that this is never <b class="const">true</b> when the player is in
 repeating mode, however &quot;eof&quot; events are still triggered.</p>
 <p>The result of the method is boolean value, <b class="const">true</b> if the
 player is at the end of the recording, and <b class="const">false</b> else.</p></dd>
-<dt><a name="95"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></dt>
+<dt><a name="105"><i class="arg">playerInstanceCmd</i> <b class="method">format</b></a></dt>
 <dd><p>This method returns the name of the format supported by the player instance.</p></dd>
-<dt><a name="96"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></dt>
+<dt><a name="106"><i class="arg">playerInstanceCmd</i> <b class="method">next</b></a></dt>
 <dd><p>This method causes the player to explicitly advance to the next frame.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="97"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="107"><i class="arg">userInstanceCmd</i> <b class="method">set-callback-eof</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="98"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></dt>
+<dt><a name="108"><i class="arg">userInstanceCmd</i> <b class="method">unset-callback-eof</b></a></dt>
 <dd><p>These methods define and remove a callback responding to &quot;eof&quot; events,
 i.e. when the end of the recording was reached.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1299,16 +1357,16 @@ command, and the word &quot;eof&quot;, in this order.</p>
 </dl>
 </div>
 </div>
-<div id="section16" class="section"><h2><a name="section16">Script Node</a></h2>
+<div id="section17" class="section"><h2><a name="section17">Script Node</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl::script</b>, the
 concrete class for all OpenNI recorder nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl::base</b>. See section
-<span class="sectref"><a href="#section3">Base</a></span>.</p>
+<span class="sectref"><a href="#section4">Base</a></span>.</p>
 <p>A script node can run scripts (sic!), and manages the life-time
 of all nodes created by such.</p>
 <div id="subsection27" class="subsection"><h3><a name="subsection27">Class API</a></h3>
 <dl class="definitions">
-<dt><a name="99"><b class="cmd">::kinetcl::script</b></a></dt>
+<dt><a name="109"><b class="cmd">::kinetcl::script</b></a></dt>
 <dd><p>This command creates a new script instance and returns the fully
 qualified name of the instance command. The API provided by that
 command, i.e. the set of available methods and their semantics is
@@ -1317,7 +1375,7 @@ described in the next subsection.</p></dd>
 </div>
 <div id="subsection28" class="subsection"><h3><a name="subsection28">Instance API</a></h3>
 <dl class="definitions">
-<dt><a name="100"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></dt>
+<dt><a name="110"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></dt>
 <dd><p>This method destroys the script instance and releases all associated
 resources, including the instance command. Note that resources used
 by multiple instances are released only when the last instance using
@@ -1326,7 +1384,7 @@ them is destroyed.</p>
 </dl>
 </div>
 </div>
-<div id="section17" class="section"><h2><a name="section17">Capabilities</a></h2>
+<div id="section18" class="section"><h2><a name="section18">Capabilities</a></h2>
 <p>This sections documents the various capabilities a production node may have.
 The main classes will all refer to the sub-sections found here.</p>
 <div id="subsection29" class="subsection"><h3><a name="subsection29">Instance Pose Detection API</a></h3>
@@ -1336,26 +1394,26 @@ This support can checked by invoking the inherited method
 <b class="method">is-capable-of</b> for the capability name
 <b class="const">user-pose-detection</b>.</p>
 <dl class="definitions">
-<dt><a name="101"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></dt>
+<dt><a name="111"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></dt>
 <dd><p>This method returns a list containing the names of the supported user
 poses.</p></dd>
-<dt><a name="102"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></dt>
+<dt><a name="112"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></dt>
 <dd><p>This method tests if the named user pose is supported by the instance.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the pose is
 supported, and <b class="const">false</b> else.</p></dd>
-<dt><a name="103"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
+<dt><a name="113"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
 <dd><p>This method activates the detection of the named <i class="arg">pose</i> for the
 specified <i class="arg">user</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="104"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
+<dt><a name="114"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
 <dd><p>This method deactivates the detection of the named <i class="arg">pose</i> for the
 specified <i class="arg">user</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="105"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></dt>
+<dt><a name="115"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></dt>
 <dd><p>This method deactivates the detection of any poses for the specified
 <i class="arg">user</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="106"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
+<dt><a name="116"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
 <dd><p>This method queries the status of the detection of the named <i class="arg">pose</i>
 for the specified <i class="arg">user</i>.</p>
 <p>The result of the method is 3-element string containing, in the named order</p>
@@ -1367,9 +1425,9 @@ one of <b class="const">in</b>, <b class="const">out</b>, or <b class="const">un
 in the pose. If the user is out of the pose <b class="const">0</b> is returned
 here.</p></li>
 </ol></dd>
-<dt><a name="107"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="117"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="108"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></dt>
+<dt><a name="118"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></dt>
 <dd><p>These methods define and remove a callback responding to pose entry
 events, i.e. a user entering a pose.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1378,9 +1436,9 @@ will be invoked with four arguments added to it, the instance command,
 the word &quot;poseEnter&quot;, the name of the pose entered and the (numerical)
 id of the user entering it, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="109"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="119"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="110"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></dt>
+<dt><a name="120"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></dt>
 <dd><p>These methods define and remove a callback responding to pose exit
 events, i.e. a user existing a pose.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1389,9 +1447,9 @@ will be invoked with four arguments added to it, the instance command,
 the word &quot;poseExit&quot;, the name of pose, and the (numerical) id of the
 user exiting it, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="111"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="121"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="112"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></dt>
+<dt><a name="122"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></dt>
 <dd><p>These methods define and remove a callback responding to pose progress
 events, i.e. the steps of the engine for detecting user poses.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1409,9 +1467,9 @@ This support can checked by invoking the inherited method
 <b class="method">is-capable-of</b> for the capability name
 <b class="const">hand-touching-fov-edge</b>.</p>
 <dl class="definitions">
-<dt><a name="113"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="123"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="114"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></dt>
+<dt><a name="124"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></dt>
 <dd><p>These methods define and remove a callback responding to edge touch
 events, i.e. a hand coming into contact with the edge of the field of
 view (a box).</p>
@@ -1444,14 +1502,14 @@ This support can checked by invoking the inherited method
 <b class="method">is-capable-of</b> for the capability name
 <b class="const">user-skeleton</b>.</p>
 <dl class="definitions">
-<dt><a name="115"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></dt>
+<dt><a name="125"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></dt>
 <dd><p>This method tests if the skeleton tracking requires the user to enter
 a pose for calibration.</p>
 <p>The result is a boolean value, <b class="const">true</b> if entering a pose
 is required, and <b class="const">false</b> else.
 <em>NOTE</em>: XXX. The C API to query the name of the required pose
 looks to be borken, or underspecified. Research required.</p></dd>
-<dt><a name="116"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></dt>
+<dt><a name="126"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></dt>
 <dd><p>This method tests if the skeleton tracking supports the named
 <i class="arg">profile</i>.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the profile is
@@ -1464,82 +1522,82 @@ supported, and <b class="const">false</b> else.</p>
 <li><p><b class="const">lower</b></p></li>
 <li><p><b class="const">heads-hands</b></p></li>
 </ol></dd>
-<dt><a name="117"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></dt>
+<dt><a name="127"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></dt>
 <dd><p>This method activates the named <i class="arg">profile</i>. This will result in
 joints getting activated or deactivated, as per the profile.</p>
 <p>The accepted profile names are described above, at
 <b class="method">is-profile-available</b>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="118"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></dt>
+<dt><a name="128"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></dt>
 <dd><p>This method sets the skeleton smoothing <i class="arg">factor</i>, a floating point
 value.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="119"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="129"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method activates the tracking of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="120"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="130"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method stops tracking of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="121"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="131"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method discards the calibration of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="122"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="132"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method tests if the skeleton for the user <i class="arg">id</i> is currently
 tracked.</p>
 <p>The result is a boolean value, <b class="const">true</b> if tracking is
 active, and <b class="const">false</b> else.</p></dd>
-<dt><a name="123"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></dt>
+<dt><a name="133"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></dt>
 <dd><p>This method tests if the skeleton for the user <i class="arg">id</i> is calibrated.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the skeleton is
 calbrated, and <b class="const">false</b> else.</p></dd>
-<dt><a name="124"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></dt>
+<dt><a name="134"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></dt>
 <dd><p>This method tests if calibration of the skeleton for the user <i class="arg">id</i>
 is currently in progress.</p>
 <p>The result is a boolean value, <b class="const">true</b> if calibration is
 in progress, and <b class="const">false</b> else.</p></dd>
-<dt><a name="125"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></dt>
+<dt><a name="135"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></dt>
 <dd><p>This method requests calibration of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p>
 <p>If the boolean flag <i class="arg">force</i> is set any previous calibration
 data is discarded.</p></dd>
-<dt><a name="126"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></dt>
+<dt><a name="136"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></dt>
 <dd><p>This method stops a calibration in progress, for the user specified by
 the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="127"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
+<dt><a name="137"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
 <dd><p>This method saves the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> into the file <i class="arg">path</i>. The format of the
 calibration data is not documented.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="128"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
+<dt><a name="138"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
 <dd><p>This method loads the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> from the file <i class="arg">path</i>. The format of the
 calibration data is not documented.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="129"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
+<dt><a name="139"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
 <dd><p>This method saves the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> into the in-memory storage identified by the
 <i class="arg">slot</i> number.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="130"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
+<dt><a name="140"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
 <dd><p>This method loads the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> from the in-memory storage identified by the
 <i class="arg">slot</i> number.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="131"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></dt>
+<dt><a name="141"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></dt>
 <dd><p>This method clears the in-memory calibration data storage identified
 by the <i class="arg">slot</i> number.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="132"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></dt>
+<dt><a name="142"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></dt>
 <dd><p>This method tests if the in-memory storage identified by the
 <i class="arg">slot</i> number contains skeleton calibration data.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the slot is
 occupied, and <b class="const">false</b> else.</p></dd>
-<dt><a name="133"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></dt>
+<dt><a name="143"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></dt>
 <dd><p>This method tests if the skeleton tracking supports the named
 <i class="arg">joint</i>.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the joint is
@@ -1571,23 +1629,23 @@ supported, and <b class="const">false</b> else.</p>
 <li><p><b class="const">right-ankle</b></p></li>
 <li><p><b class="const">right-foot</b></p></li>
 </ol></dd>
-<dt><a name="134"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></dt>
+<dt><a name="144"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></dt>
 <dd><p>This method tests if the the named <i class="arg">joint</i> is actively tracked.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the joint is
 active, and <b class="const">false</b> else.</p>
 <p>The accepted joint names are described above, at
 <b class="method">is-joint-available</b>.</p></dd>
-<dt><a name="135"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></dt>
+<dt><a name="145"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></dt>
 <dd><p>This method (de)activates the named <i class="arg">joint</i>.</p>
 <p>The accepted joint names are described above, at
 <b class="method">is-joint-available</b>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="136"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></dt>
+<dt><a name="146"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></dt>
 <dd><p>This method returns a list containig the names of all currently active
 joints.</p>
 <p>The possible joint names are described above, at
 <b class="method">is-joint-available</b>.</p></dd>
-<dt><a name="137"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></dt>
+<dt><a name="147"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></dt>
 <dd><p>This method retrieves position and orientation data for the user
 specified by <i class="arg">id</i> and the named <i class="arg">joint</i>.</p>
 <p>The accepted joint names are described above, at
@@ -1616,9 +1674,9 @@ confidence in the orientation information.</p></dd>
 representating the rotation matrix for the joint.</p></dd>
 </dl></dd>
 </dl></dd>
-<dt><a name="138"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="148"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="139"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></dt>
+<dt><a name="149"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></dt>
 <dd><p>These methods define and remove a callback responding to joint
 configration changes, i.e. when joints are (de)activated.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1626,9 +1684,9 @@ configration changes, i.e. when joints are (de)activated.</p>
 will be invoked with two arguments added to it, the instance command,
 and the word &quot;jointConfigChange&quot;, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="140"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="150"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="141"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></dt>
+<dt><a name="151"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></dt>
 <dd><p>These methods define and remove a callback responding to the start of
 a calibration.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1637,9 +1695,9 @@ will be invoked with three arguments added to it, the instance
 command, the word &quot;calibrationStart&quot;, and the (numerical) id of the
 user for whom calibration has started, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="142"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="152"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="143"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></dt>
+<dt><a name="153"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></dt>
 <dd><p>These methods define and remove a callback responding to the
 completion of calibrations.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1663,9 +1721,9 @@ whom calibration completed, and the completion status, in this order.</p>
 <li><p><b class="const">manual-reset</b></p></li>
 <li><p><b class="const">timeout</b></p></li>
 </ol></dd>
-<dt><a name="144"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="154"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="145"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></dt>
+<dt><a name="155"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></dt>
 <dd><p>These methods define and remove a callback responding to calibration
 progress events.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1679,7 +1737,7 @@ stati described above.</p></dd>
 </dl>
 </div>
 </div>
-<div id="section18" class="section"><h2><a name="section18">Bugs, Ideas, Feedback</a></h2>
+<div id="section19" class="section"><h2><a name="section19">Bugs, Ideas, Feedback</a></h2>
 <p>This document, and the package it describes, will undoubtedly contain
 bugs and other problems.
 Please report such at the <a href="http://chiselapp.com/user/andreas_kupries/repository/KineTcl">KineTcl Tracker</a>.
