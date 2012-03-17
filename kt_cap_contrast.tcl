@@ -3,15 +3,7 @@
 
 critcl::class def ::kinetcl::CapContrast {
     # # ## ### ##### ######## #############
-    ::kt_abstract_class
-
-    # XXX TODO Implement the API.
-
-    # # ## ### ##### ######## #############
-
-    # # ## ### ##### ######## #############
-
-    # # ## ### ##### ######## #############
+    ::kt_cap_integer contrast Contrast
 
     # # ## ### ##### ######## #############
 }

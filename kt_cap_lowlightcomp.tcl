@@ -3,15 +3,7 @@
 
 critcl::class def ::kinetcl::CapLowlightCompensation {
     # # ## ### ##### ######## #############
-    ::kt_abstract_class
-
-    # XXX TODO Implement the API.
-
-    # # ## ### ##### ######## #############
-
-    # # ## ### ##### ######## #############
-
-    # # ## ### ##### ######## #############
+    ::kt_cap_integer lowlight-compensation LowLightCompensation
 
     # # ## ### ##### ######## #############
 }

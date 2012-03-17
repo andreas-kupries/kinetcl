@@ -10,16 +10,21 @@
 
 # # ## ### ##### ######## #############
 
-proc kt_callback {name consfunction destfunction signature body {mode all}} {
+proc kt_callback {name consfunction destfunction signature body {mode all} {detail {}}} {
     set cname [string totitle $name]
 
     # Define the raw callback processing.
     uplevel 1 [list kt_cbhandler $name $name $cname $signature $body $mode]
 
+    if {$detail ne {}} {
+	set detail " \"$detail\","
+    }
+
     lappend map @@cname@@         $cname 
     lappend map @@name@@          $name
     lappend map @@consfunction@@  $consfunction
     lappend map @@destfunction@@  $destfunction
+    lappend map @@detail@@        $detail
 
     uplevel 1 [string map $map {
 	field XnCallbackHandle callback@@cname@@ {Handle for @@name@@ callbacks}
@@ -60,7 +65,7 @@ proc kt_callback {name consfunction destfunction signature body {mode all}} {
 	    {
 		if (!instance->callback@@cname@@) return;
 
-		@@destfunction@@ (instance->handle, instance->callback@@cname@@);
+		@@destfunction@@ (instance->handle,@@detail@@ instance->callback@@cname@@);
 
 		Tcl_DecrRefCount (instance->command@@cname@@);
 		instance->callback@@cname@@ = NULL;
@@ -78,7 +83,7 @@ proc kt_callback {name consfunction destfunction signature body {mode all}} {
 		XnStatus s;
 		Tcl_Interp* interp = instance->interp;
 
-		s = @@consfunction@@ (instance->handle,
+		s = @@consfunction@@ (instance->handle,@@detail@@
 				      @stem@_callback_@@cname@@_handler,
 				      instance,
 				      &callback);

@@ -161,6 +161,67 @@ critcl::ccode {
 	Tcl_MutexUnlock (&c->eventLockMutex);
 	return locked;
     }
+
+    static int
+    kinetcl_cap_integer_rw (XnNodeHandle handle, char* cap,
+			    Tcl_Interp* interp, int objc, Tcl_Obj** objv)
+    {
+	if (objc == 2) { /* Syntax: <instance> .capname. */
+	    XnStatus s;
+	    XnInt32 value;
+
+	    s = xnGetGeneralIntValue (handle, cap, &value);
+	    CHECK_STATUS_RETURN;
+
+	    Tcl_SetObjResult (interp, Tcl_NewIntObj (value));
+	    return TCL_OK;
+	}
+
+	if (objc == 3) { /* Syntax: <instance> .capname. */
+	    XnStatus s;
+	    int value;
+
+	    if (Tcl_GetIntFromObj (interp, objv [2], &value) != TCL_OK) {
+		return TCL_ERROR;
+	    }
+
+	    s = xnSetGeneralIntValue (handle, cap, value);
+	    CHECK_STATUS_RETURN;
+
+	    return TCL_OK;
+	}
+
+	Tcl_WrongNumArgs (interp, 2, objv, "?n?");
+	return TCL_ERROR;
+    }
+
+    static int
+    kinetcl_cap_integer_range (XnNodeHandle handle, char* cap,
+			       Tcl_Interp* interp, int objc, Tcl_Obj** objv)
+    {
+	XnStatus s;
+	XnInt32 vmin, vmax, vstep, vdefault;
+	XnBool hasAuto;
+	Tcl_Obj* res;
+
+	/* Syntax: <instance> .capname.-range */
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	s = xnGetGeneralIntRange (handle, cap, &vmin, &vmax, &vstep, &vdefault, &hasAuto);
+	CHECK_STATUS_RETURN;
+
+	res = Tcl_NewDictObj ();
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("min",-1), Tcl_NewIntObj (vmin));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("max",-1), Tcl_NewIntObj (vmax));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("step",-1), Tcl_NewIntObj (vstep));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("auto",-1), Tcl_NewIntObj (hasAuto));
+
+	Tcl_SetObjResult (interp, res);
+	return TCL_OK;
+    }
 }
 
 # # ## ### ##### ######## #############

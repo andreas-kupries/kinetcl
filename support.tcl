@@ -12,6 +12,7 @@
 
 critcl::source support_classes.tcl
 critcl::source support_callbacks.tcl
+critcl::source support_cap_integer.tcl
 
 # # ## ### ##### ######## #############
 return
