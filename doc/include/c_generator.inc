@@ -5,6 +5,13 @@ class for all OpenNI generator nodes.
 [para] This class inherits from [cmd {::kinetcl base}]. See section
 [sectref {Base}].
 
+[para] They may have the following capabilities:
+[list_begin enumerated]
+[enum] [sectref {Alternative Viewpoint}]
+[enum] [sectref {Frame Synchronization}]
+[enum] [sectref {Mirror}]
+[list_end]
+
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]

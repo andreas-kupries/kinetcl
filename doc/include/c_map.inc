@@ -5,6 +5,12 @@ class for all OpenNI map generator nodes.
 [para] This class inherits from [cmd {::kinetcl generator}] and its
 superclasses. See section [sectref {Generator}].
 
+[para] They may have the following capabilities:
+[list_begin enumerated]
+[enum] [sectref {Anti-Flicker}]
+[enum] [sectref {Cropping}]
+[list_end]
+
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]

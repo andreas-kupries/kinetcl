@@ -283,7 +283,7 @@ representating the rotation matrix for the joint.
 [call [arg instanceCmd] [method unset-callback-jointConfigChange]]
 
 These methods define and remove a callback responding to joint
-configration changes, i.e. when joints are (de)activated.
+configuration changes, i.e. when joints are (de)activated.
 
 [para] Setting a callback implicitly removes any previous callback set.
 

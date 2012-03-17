@@ -201,9 +201,14 @@
 </li>
 <li class="section"><a href="#section18">Capabilities</a>
 <ul>
-<li class="subsection"><a href="#subsection29">Instance Pose Detection API</a></li>
-<li class="subsection"><a href="#subsection30">Instance Hand Touching FOV Edge API</a></li>
-<li class="subsection"><a href="#subsection31">Instance Skeleton/Joint API</a></li>
+<li class="subsection"><a href="#subsection29">Alternative Viewpoint</a></li>
+<li class="subsection"><a href="#subsection30">Anti-Flicker</a></li>
+<li class="subsection"><a href="#subsection31">Cropping</a></li>
+<li class="subsection"><a href="#subsection32">Frame Synchronization</a></li>
+<li class="subsection"><a href="#subsection33">Instance Hand Touching FOV Edge API</a></li>
+<li class="subsection"><a href="#subsection34">Mirror</a></li>
+<li class="subsection"><a href="#subsection35">Instance Pose Detection API</a></li>
+<li class="subsection"><a href="#subsection36">Instance Skeleton/Joint API</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section19">Bugs, Ideas, Feedback</a></li>
@@ -349,51 +354,76 @@
 <li><a href="#128"><b class="cmd">::kinetcl script</b> <b class="method">new</b></a></li>
 <li><a href="#129"><b class="cmd">::kinetcl script</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
 <li><a href="#130"><i class="arg">scriptInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#131"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></li>
-<li><a href="#132"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></li>
-<li><a href="#133"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
-<li><a href="#134"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
-<li><a href="#135"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></li>
-<li><a href="#136"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
-<li><a href="#137"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#138"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></li>
-<li><a href="#139"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#140"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></li>
-<li><a href="#141"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#142"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></li>
-<li><a href="#143"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#144"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></li>
-<li><a href="#145"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></li>
-<li><a href="#146"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></li>
-<li><a href="#147"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></li>
-<li><a href="#148"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></li>
-<li><a href="#149"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#150"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#151"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#152"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></li>
-<li><a href="#153"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></li>
-<li><a href="#154"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></li>
-<li><a href="#155"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></li>
-<li><a href="#156"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></li>
-<li><a href="#157"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
-<li><a href="#158"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
-<li><a href="#159"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
-<li><a href="#160"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
-<li><a href="#161"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></li>
-<li><a href="#162"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></li>
-<li><a href="#163"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></li>
-<li><a href="#164"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></li>
-<li><a href="#165"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></li>
-<li><a href="#166"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></li>
-<li><a href="#167"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></li>
-<li><a href="#168"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#169"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></li>
-<li><a href="#170"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#171"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></li>
-<li><a href="#172"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#173"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></li>
-<li><a href="#174"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></li>
-<li><a href="#175"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></li>
+<li><a href="#131"><i class="arg">instanceCmd</i> <b class="method">supports-view</b> <i class="arg">node</i></a></li>
+<li><a href="#132"><i class="arg">instanceCmd</i> <b class="method">set-view</b> <i class="arg">node</i></a></li>
+<li><a href="#133"><i class="arg">instanceCmd</i> <b class="method">reset-view</b></a></li>
+<li><a href="#134"><i class="arg">instanceCmd</i> <b class="method">using-view</b> <i class="arg">node</i></a></li>
+<li><a href="#135"><i class="arg">instanceCmd</i> <b class="method">set-callback-viewpoint</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#136"><i class="arg">instanceCmd</i> <b class="method">unset-callback-viewpoint</b></a></li>
+<li><a href="#137"><i class="arg">instanceCmd</i> <b class="method">frequency</b></a></li>
+<li><a href="#138"><i class="arg">instanceCmd</i> <b class="method">crop</b> <i class="arg">frequency</i></a></li>
+<li><a href="#139"><i class="arg">instanceCmd</i> <b class="method">set-callback-frequency</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#140"><i class="arg">instanceCmd</i> <b class="method">unset-callback-frequency</b></a></li>
+<li><a href="#141"><i class="arg">instanceCmd</i> <b class="method">crop</b></a></li>
+<li><a href="#142"><i class="arg">instanceCmd</i> <b class="method">crop</b> <i class="arg">x</i> <i class="arg">y</i> <i class="arg">w</i> <i class="arg">h</i></a></li>
+<li><a href="#143"><i class="arg">instanceCmd</i> <b class="method">uncrop</b></a></li>
+<li><a href="#144"><i class="arg">instanceCmd</i> <b class="method">set-callback-cropping</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#145"><i class="arg">instanceCmd</i> <b class="method">unset-callback-cropping</b></a></li>
+<li><a href="#146"><i class="arg">instanceCmd</i> <b class="method">can-sync-with</b> <i class="arg">node</i></a></li>
+<li><a href="#147"><i class="arg">instanceCmd</i> <b class="method">start-sync-with</b> <i class="arg">node</i></a></li>
+<li><a href="#148"><i class="arg">instanceCmd</i> <b class="method">stop-sync-with</b> <i class="arg">node</i></a></li>
+<li><a href="#149"><i class="arg">instanceCmd</i> <b class="method">synced-with</b> <i class="arg">node</i></a></li>
+<li><a href="#150"><i class="arg">instanceCmd</i> <b class="method">set-callback-framesync</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#151"><i class="arg">instanceCmd</i> <b class="method">unset-callback-framesync</b></a></li>
+<li><a href="#152"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#153"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></li>
+<li><a href="#154"><i class="arg">instanceCmd</i> <b class="method">mirror</b></a></li>
+<li><a href="#155"><i class="arg">instanceCmd</i> <b class="method">mirror</b> <i class="arg">bool</i></a></li>
+<li><a href="#156"><i class="arg">instanceCmd</i> <b class="method">set-callback-mirror</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#157"><i class="arg">instanceCmd</i> <b class="method">unset-callback-mirror</b></a></li>
+<li><a href="#158"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></li>
+<li><a href="#159"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></li>
+<li><a href="#160"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
+<li><a href="#161"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
+<li><a href="#162"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></li>
+<li><a href="#163"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></li>
+<li><a href="#164"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#165"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></li>
+<li><a href="#166"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#167"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></li>
+<li><a href="#168"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#169"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></li>
+<li><a href="#170"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></li>
+<li><a href="#171"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></li>
+<li><a href="#172"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></li>
+<li><a href="#173"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></li>
+<li><a href="#174"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#175"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#176"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#177"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></li>
+<li><a href="#178"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></li>
+<li><a href="#179"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></li>
+<li><a href="#180"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></li>
+<li><a href="#181"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></li>
+<li><a href="#182"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
+<li><a href="#183"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></li>
+<li><a href="#184"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
+<li><a href="#185"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></li>
+<li><a href="#186"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></li>
+<li><a href="#187"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></li>
+<li><a href="#188"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></li>
+<li><a href="#189"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></li>
+<li><a href="#190"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></li>
+<li><a href="#191"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></li>
+<li><a href="#192"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></li>
+<li><a href="#193"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#194"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></li>
+<li><a href="#195"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#196"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></li>
+<li><a href="#197"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#198"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></li>
+<li><a href="#199"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#200"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></li>
 </ul>
 </div>
 </div>
@@ -527,6 +557,12 @@ number, maintenance id, and build number, in this order.</p></dd>
 class for all OpenNI generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl base</b>. See section
 <span class="sectref"><a href="#section4">Base</a></span>.</p>
+<p>They may have the following capabilities:</p>
+<ol class="enumerated">
+<li><p><span class="sectref"><a href="#subsection29">Alternative Viewpoint</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection32">Frame Synchronization</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection34">Mirror</a></span></p></li>
+</ol>
 <div id="subsection3" class="subsection"><h3><a name="subsection3">Class API</a></h3>
 <dl class="definitions">
 <dt><a name="17"><b class="cmd">::kinetcl generator</b> <b class="method">new</b></a></dt>
@@ -613,6 +649,11 @@ and the word &quot;newdata&quot;, in this order.</p>
 class for all OpenNI map generator nodes.</p>
 <p>This class inherits from <b class="cmd">::kinetcl generator</b> and its
 superclasses. See section <span class="sectref"><a href="#section5">Generator</a></span>.</p>
+<p>They may have the following capabilities:</p>
+<ol class="enumerated">
+<li><p><span class="sectref"><a href="#subsection30">Anti-Flicker</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection31">Cropping</a></span></p></li>
+</ol>
 <div id="subsection5" class="subsection"><h3><a name="subsection5">Class API</a></h3>
 <dl class="definitions">
 <dt><a name="31"><b class="cmd">::kinetcl map</b> <b class="method">new</b></a></dt>
@@ -1156,9 +1197,9 @@ superclasses. See section <span class="sectref"><a href="#section5">Generator</a
 of view of the sensor.</p>
 <p>They may have the following capabilities:</p>
 <ol class="enumerated">
-<li><p><span class="sectref"><a href="#subsection29">Instance Pose Detection API</a></span></p></li>
-<li><p><span class="sectref"><a href="#subsection30">Instance Hand Touching FOV Edge API</a></span></p></li>
-<li><p><span class="sectref"><a href="#subsection31">Instance Skeleton/Joint API</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection35">Instance Pose Detection API</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection33">Instance Hand Touching FOV Edge API</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection36">Instance Skeleton/Joint API</a></span></p></li>
 </ol>
 <div id="subsection17" class="subsection"><h3><a name="subsection17">Class API</a></h3>
 <dl class="definitions">
@@ -1480,89 +1521,155 @@ them is destroyed.</p>
 <div id="section18" class="section"><h2><a name="section18">Capabilities</a></h2>
 <p>This sections documents the various capabilities a production node may have.
 The main classes will all refer to the sub-sections found here.</p>
-<div id="subsection29" class="subsection"><h3><a name="subsection29">Instance Pose Detection API</a></h3>
-<p>Should a production node support the pose detection API the following
-methods become available.
+<div id="subsection29" class="subsection"><h3><a name="subsection29">Alternative Viewpoint</a></h3>
+<p>Should a production node support the alternate viewpoint API the
+following methods become available.
 This support can checked by invoking the inherited method
 <b class="method">is-capable-of</b> for the capability name
-<b class="const">user-pose-detection</b>.</p>
+<b class="const">alternative-viewpoint</b>.</p>
 <dl class="definitions">
-<dt><a name="131"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></dt>
-<dd><p>This method returns a list containing the names of the supported user
-poses.</p></dd>
-<dt><a name="132"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></dt>
-<dd><p>This method tests if the named user pose is supported by the instance.</p>
-<p>The result is a boolean value, <b class="const">true</b> if the pose is
-supported, and <b class="const">false</b> else.</p></dd>
-<dt><a name="133"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
-<dd><p>This method activates the detection of the named <i class="arg">pose</i> for the
-specified <i class="arg">user</i>.</p>
+<dt><a name="131"><i class="arg">instanceCmd</i> <b class="method">supports-view</b> <i class="arg">node</i></a></dt>
+<dd><p>This method tests if the instance is able to use the viewpoint of the
+the other production <i class="arg">node</i>. This argument is the object command
+of another kinetcl instance.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the viewpoint of
+<i class="arg">node</i> is supported, and <b class="const">false</b> else.</p></dd>
+<dt><a name="132"><i class="arg">instanceCmd</i> <b class="method">set-view</b> <i class="arg">node</i></a></dt>
+<dd><p>This method sets the instance's viewpoint to the view of the other
+production <i class="arg">node</i>. This argument is the object command of another
+kinetcl instance.</p>
+<p>The result of the method is an empty string. An error is
+thrown if the <i class="arg">node</i>'s viewpoint is not supported.</p></dd>
+<dt><a name="133"><i class="arg">instanceCmd</i> <b class="method">reset-view</b></a></dt>
+<dd><p>This method sets the instance's viewpoint back to its own viewpoint.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="134"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
-<dd><p>This method deactivates the detection of the named <i class="arg">pose</i> for the
-specified <i class="arg">user</i>.</p>
-<p>The result of the method is an empty string.</p></dd>
-<dt><a name="135"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></dt>
-<dd><p>This method deactivates the detection of any poses for the specified
-<i class="arg">user</i>.</p>
-<p>The result of the method is an empty string.</p></dd>
-<dt><a name="136"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
-<dd><p>This method queries the status of the detection of the named <i class="arg">pose</i>
-for the specified <i class="arg">user</i>.</p>
-<p>The result of the method is 3-element string containing, in the named order</p>
-<ol class="enumerated">
-<li><p>The state of the user with respect to the pose,
-one of <b class="const">in</b>, <b class="const">out</b>, or <b class="const">unkown</b></p></li>
-<li><p>The status of the detection progress.</p></li>
-<li><p>A timestamp telling us when the user entered the pose, if it is
-in the pose. If the user is out of the pose <b class="const">0</b> is returned
-here.</p></li>
-</ol></dd>
-<dt><a name="137"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="134"><i class="arg">instanceCmd</i> <b class="method">using-view</b> <i class="arg">node</i></a></dt>
+<dd><p>This method tests if the instance is currently using the viewpoint of
+the other production <i class="arg">node</i>. This argument is the object command
+of another kinetcl instance.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the viewpoint of
+<i class="arg">node</i> is in use, and <b class="const">false</b> else.</p></dd>
+<dt><a name="135"><i class="arg">instanceCmd</i> <b class="method">set-callback-viewpoint</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="138"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></dt>
-<dd><p>These methods define and remove a callback responding to pose entry
-events, i.e. a user entering a pose.</p>
+<dt><a name="136"><i class="arg">instanceCmd</i> <b class="method">unset-callback-viewpoint</b></a></dt>
+<dd><p>These methods define and remove a callback responding to viewpoint
+configuration changes, i.e. when the viewpoint of a node is changed.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
 <p>The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word &quot;poseEnter&quot;, the name of the pose entered and the (numerical)
-id of the user entering it, in this order.</p>
-<p>The result of the methods is an empty string.</p></dd>
-<dt><a name="139"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></dt>
-<dd></dd>
-<dt><a name="140"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></dt>
-<dd><p>These methods define and remove a callback responding to pose exit
-events, i.e. a user existing a pose.</p>
-<p>Setting a callback implicitly removes any previous callback set.</p>
-<p>The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word &quot;poseExit&quot;, the name of pose, and the (numerical) id of the
-user exiting it, in this order.</p>
-<p>The result of the methods is an empty string.</p></dd>
-<dt><a name="141"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></dt>
-<dd></dd>
-<dt><a name="142"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></dt>
-<dd><p>These methods define and remove a callback responding to pose progress
-events, i.e. the steps of the engine for detecting user poses.</p>
-<p>Setting a callback implicitly removes any previous callback set.</p>
-<p>The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word &quot;poseProgress&quot;, the name of pose, the (numerical) id of the
-user, and the status of the detection engine, in this order.</p>
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;viewpoint&quot;, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
 </dl>
 </div>
-<div id="subsection30" class="subsection"><h3><a name="subsection30">Instance Hand Touching FOV Edge API</a></h3>
+<div id="subsection30" class="subsection"><h3><a name="subsection30">Anti-Flicker</a></h3>
+<p>Should a production node support the anti-flicker API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">antiflicker</b>.</p>
+<dl class="definitions">
+<dt><a name="137"><i class="arg">instanceCmd</i> <b class="method">frequency</b></a></dt>
+<dd><p>In this form the method returns the current anti-flicker settings.</p>
+<p>The result is either the string <b class="const">off</b>, or the powerline
+frequency the node is synchronized to.</p></dd>
+<dt><a name="138"><i class="arg">instanceCmd</i> <b class="method">crop</b> <i class="arg">frequency</i></a></dt>
+<dd><p>In this form the method changes the anit-flicker settings.
+The allowed values for <i class="arg">frequency</i> are <b class="const">50</b>, <b class="const">60</b>, and
+<b class="const">off</b>. The latter disables the anti-flicker system.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="139"><i class="arg">instanceCmd</i> <b class="method">set-callback-frequency</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="140"><i class="arg">instanceCmd</i> <b class="method">unset-callback-frequency</b></a></dt>
+<dd><p>These methods define and remove a callback responding to anti-flicker
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;frequency&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection31" class="subsection"><h3><a name="subsection31">Cropping</a></h3>
+<p>Should a production node support the cropping API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">cropping</b>.</p>
+<dl class="definitions">
+<dt><a name="141"><i class="arg">instanceCmd</i> <b class="method">crop</b></a></dt>
+<dd><p>In this form the method returns the current crop settings.</p>
+<p>The result is a list of 4-elements containing the x- and
+y-offset of the crop rectangle, and its horizontal and vertical
+dimensions, in this order.</p></dd>
+<dt><a name="142"><i class="arg">instanceCmd</i> <b class="method">crop</b> <i class="arg">x</i> <i class="arg">y</i> <i class="arg">w</i> <i class="arg">h</i></a></dt>
+<dd><p>In this form the method sets the crop rectangle to the specified x-
+and y-offset of the crop rectangle, and its horizontal and vertical
+dimensions</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="143"><i class="arg">instanceCmd</i> <b class="method">uncrop</b></a></dt>
+<dd><p>This method deactivates any croppping set on the instance.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="144"><i class="arg">instanceCmd</i> <b class="method">set-callback-cropping</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="145"><i class="arg">instanceCmd</i> <b class="method">unset-callback-cropping</b></a></dt>
+<dd><p>These methods define and remove a callback responding to cropping
+configuration changes, i.e. when the instance's crop settings change.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;cropping&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection32" class="subsection"><h3><a name="subsection32">Frame Synchronization</a></h3>
+<p>Should a production node support the frame synchronization API the
+following methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">framesync</b>.</p>
+<dl class="definitions">
+<dt><a name="146"><i class="arg">instanceCmd</i> <b class="method">can-sync-with</b> <i class="arg">node</i></a></dt>
+<dd><p>This method tests if the instance is able to synchronize its
+generation of frames with the the other production <i class="arg">node</i>. This
+argument is the object command of another kinetcl instance.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the viewpoint of
+<i class="arg">node</i> is supported, and <b class="const">false</b> else.</p></dd>
+<dt><a name="147"><i class="arg">instanceCmd</i> <b class="method">start-sync-with</b> <i class="arg">node</i></a></dt>
+<dd><p>This method causes the instance's to synchronize its frame generation
+with the other production <i class="arg">node</i>. This argument is the object
+command of another kinetcl instance.</p>
+<p>The result of the method is an empty string. An error is thrown
+if the instance is not able to synchronize with <i class="arg">node</i>.</p></dd>
+<dt><a name="148"><i class="arg">instanceCmd</i> <b class="method">stop-sync-with</b> <i class="arg">node</i></a></dt>
+<dd><p>This method causes the instance's to decouple its frame generation
+from the other production <i class="arg">node</i>. This argument is the object
+command of another kinetcl instance.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="149"><i class="arg">instanceCmd</i> <b class="method">synced-with</b> <i class="arg">node</i></a></dt>
+<dd><p>This method tests if the instance is currently synchronized to the
+other production <i class="arg">node</i>. This argument is the object command of
+another kinetcl instance.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the instance is
+synchronized to <i class="arg">node</i>, and <b class="const">false</b> else.</p></dd>
+<dt><a name="150"><i class="arg">instanceCmd</i> <b class="method">set-callback-framesync</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="151"><i class="arg">instanceCmd</i> <b class="method">unset-callback-framesync</b></a></dt>
+<dd><p>These methods define and remove a callback responding to frame synchronization
+changes, i.e. when a node starts or stops synchronization with another node.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;framesync&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection33" class="subsection"><h3><a name="subsection33">Instance Hand Touching FOV Edge API</a></h3>
 <p>Should a production node support the API for &quot;Hand Touching FOV Edge&quot;
 events the following methods become available.
 This support can checked by invoking the inherited method
 <b class="method">is-capable-of</b> for the capability name
 <b class="const">hand-touching-fov-edge</b>.</p>
 <dl class="definitions">
-<dt><a name="143"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="152"><i class="arg">instanceCmd</i> <b class="method">set-callback-fovEdge</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="144"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></dt>
+<dt><a name="153"><i class="arg">instanceCmd</i> <b class="method">unset-callback-fovEdge</b></a></dt>
 <dd><p>These methods define and remove a callback responding to edge touch
 events, i.e. a hand coming into contact with the edge of the field of
 view (a box).</p>
@@ -1588,21 +1695,121 @@ containing the x-, y-, and z-coordinates, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
 </dl>
 </div>
-<div id="subsection31" class="subsection"><h3><a name="subsection31">Instance Skeleton/Joint API</a></h3>
+<div id="subsection34" class="subsection"><h3><a name="subsection34">Mirror</a></h3>
+<p>Should a production node support the mirror API the following methods
+become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">mirror</b>.</p>
+<dl class="definitions">
+<dt><a name="154"><i class="arg">instanceCmd</i> <b class="method">mirror</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+mirror flag.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the instance
+generates mirrored frames, and <b class="const">false</b> else.</p></dd>
+<dt><a name="155"><i class="arg">instanceCmd</i> <b class="method">mirror</b> <i class="arg">bool</i></a></dt>
+<dd><p>In this form the method (un)sets the instance's mirror flag.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="156"><i class="arg">instanceCmd</i> <b class="method">set-callback-mirror</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="157"><i class="arg">instanceCmd</i> <b class="method">unset-callback-mirror</b></a></dt>
+<dd><p>These methods define and remove a callback responding to mirror
+configuration changes, i.e. when the instance's mirror flag is
+reconfigured.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;mirror&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection35" class="subsection"><h3><a name="subsection35">Instance Pose Detection API</a></h3>
+<p>Should a production node support the pose detection API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name
+<b class="const">user-pose-detection</b>.</p>
+<dl class="definitions">
+<dt><a name="158"><i class="arg">instanceCmd</i> <b class="method">poses</b></a></dt>
+<dd><p>This method returns a list containing the names of the supported user
+poses.</p></dd>
+<dt><a name="159"><i class="arg">instanceCmd</i> <b class="method">is-supported</b> <i class="arg">pose</i></a></dt>
+<dd><p>This method tests if the named user pose is supported by the instance.</p>
+<p>The result is a boolean value, <b class="const">true</b> if the pose is
+supported, and <b class="const">false</b> else.</p></dd>
+<dt><a name="160"><i class="arg">instanceCmd</i> <b class="method">start-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
+<dd><p>This method activates the detection of the named <i class="arg">pose</i> for the
+specified <i class="arg">user</i>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="161"><i class="arg">instanceCmd</i> <b class="method">stop-detection</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
+<dd><p>This method deactivates the detection of the named <i class="arg">pose</i> for the
+specified <i class="arg">user</i>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="162"><i class="arg">instanceCmd</i> <b class="method">stop-all-detection</b> <i class="arg">user</i></a></dt>
+<dd><p>This method deactivates the detection of any poses for the specified
+<i class="arg">user</i>.</p>
+<p>The result of the method is an empty string.</p></dd>
+<dt><a name="163"><i class="arg">instanceCmd</i> <b class="method">status</b> <i class="arg">user</i> <i class="arg">pose</i></a></dt>
+<dd><p>This method queries the status of the detection of the named <i class="arg">pose</i>
+for the specified <i class="arg">user</i>.</p>
+<p>The result of the method is 3-element string containing, in the named order</p>
+<ol class="enumerated">
+<li><p>The state of the user with respect to the pose,
+one of <b class="const">in</b>, <b class="const">out</b>, or <b class="const">unkown</b></p></li>
+<li><p>The status of the detection progress.</p></li>
+<li><p>A timestamp telling us when the user entered the pose, if it is
+in the pose. If the user is out of the pose <b class="const">0</b> is returned
+here.</p></li>
+</ol></dd>
+<dt><a name="164"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseEnter</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="165"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseEnter</b></a></dt>
+<dd><p>These methods define and remove a callback responding to pose entry
+events, i.e. a user entering a pose.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word &quot;poseEnter&quot;, the name of the pose entered and the (numerical)
+id of the user entering it, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+<dt><a name="166"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseExit</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="167"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseExit</b></a></dt>
+<dd><p>These methods define and remove a callback responding to pose exit
+events, i.e. a user existing a pose.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with four arguments added to it, the instance command,
+the word &quot;poseExit&quot;, the name of pose, and the (numerical) id of the
+user exiting it, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+<dt><a name="168"><i class="arg">instanceCmd</i> <b class="method">set-callback-poseProgress</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="169"><i class="arg">instanceCmd</i> <b class="method">unset-callback-poseProgress</b></a></dt>
+<dd><p>These methods define and remove a callback responding to pose progress
+events, i.e. the steps of the engine for detecting user poses.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with five arguments added to it, the instance command,
+the word &quot;poseProgress&quot;, the name of pose, the (numerical) id of the
+user, and the status of the detection engine, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection36" class="subsection"><h3><a name="subsection36">Instance Skeleton/Joint API</a></h3>
 <p>Should a production node support the skeleton API the following
 methods become available.
 This support can checked by invoking the inherited method
 <b class="method">is-capable-of</b> for the capability name
 <b class="const">user-skeleton</b>.</p>
 <dl class="definitions">
-<dt><a name="145"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></dt>
+<dt><a name="170"><i class="arg">instanceCmd</i> <b class="method">need-pose</b></a></dt>
 <dd><p>This method tests if the skeleton tracking requires the user to enter
 a pose for calibration.</p>
 <p>The result is a boolean value, <b class="const">true</b> if entering a pose
 is required, and <b class="const">false</b> else.
 <em>NOTE</em>: XXX. The C API to query the name of the required pose
 looks to be borken, or underspecified. Research required.</p></dd>
-<dt><a name="146"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></dt>
+<dt><a name="171"><i class="arg">instanceCmd</i> <b class="method">is-profile-available</b> <i class="arg">profile</i></a></dt>
 <dd><p>This method tests if the skeleton tracking supports the named
 <i class="arg">profile</i>.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the profile is
@@ -1615,82 +1822,82 @@ supported, and <b class="const">false</b> else.</p>
 <li><p><b class="const">lower</b></p></li>
 <li><p><b class="const">heads-hands</b></p></li>
 </ol></dd>
-<dt><a name="147"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></dt>
+<dt><a name="172"><i class="arg">instanceCmd</i> <b class="method">set-profile</b> <i class="arg">profile</i></a></dt>
 <dd><p>This method activates the named <i class="arg">profile</i>. This will result in
 joints getting activated or deactivated, as per the profile.</p>
 <p>The accepted profile names are described above, at
 <b class="method">is-profile-available</b>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="148"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></dt>
+<dt><a name="173"><i class="arg">instanceCmd</i> <b class="method">set-smoothing</b> <i class="arg">factor</i></a></dt>
 <dd><p>This method sets the skeleton smoothing <i class="arg">factor</i>, a floating point
 value.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="149"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="174"><i class="arg">instanceCmd</i> <b class="method">start-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method activates the tracking of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="150"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="175"><i class="arg">instanceCmd</i> <b class="method">stop-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method stops tracking of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="151"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="176"><i class="arg">instanceCmd</i> <b class="method">reset-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method discards the calibration of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="152"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></dt>
+<dt><a name="177"><i class="arg">instanceCmd</i> <b class="method">is-tracking</b> <i class="arg">id</i></a></dt>
 <dd><p>This method tests if the skeleton for the user <i class="arg">id</i> is currently
 tracked.</p>
 <p>The result is a boolean value, <b class="const">true</b> if tracking is
 active, and <b class="const">false</b> else.</p></dd>
-<dt><a name="153"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></dt>
+<dt><a name="178"><i class="arg">instanceCmd</i> <b class="method">is-calibrated</b> <i class="arg">id</i></a></dt>
 <dd><p>This method tests if the skeleton for the user <i class="arg">id</i> is calibrated.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the skeleton is
 calbrated, and <b class="const">false</b> else.</p></dd>
-<dt><a name="154"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></dt>
+<dt><a name="179"><i class="arg">instanceCmd</i> <b class="method">is-calibrating</b> <i class="arg">id</i></a></dt>
 <dd><p>This method tests if calibration of the skeleton for the user <i class="arg">id</i>
 is currently in progress.</p>
 <p>The result is a boolean value, <b class="const">true</b> if calibration is
 in progress, and <b class="const">false</b> else.</p></dd>
-<dt><a name="155"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></dt>
+<dt><a name="180"><i class="arg">instanceCmd</i> <b class="method">request-calibration</b> <i class="arg">id</i> <i class="arg">force</i></a></dt>
 <dd><p>This method requests calibration of the skeleton for the user
 specified by the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p>
 <p>If the boolean flag <i class="arg">force</i> is set any previous calibration
 data is discarded.</p></dd>
-<dt><a name="156"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></dt>
+<dt><a name="181"><i class="arg">instanceCmd</i> <b class="method">abort-calibration</b> <i class="arg">id</i></a></dt>
 <dd><p>This method stops a calibration in progress, for the user specified by
 the <i class="arg">id</i>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="157"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
+<dt><a name="182"><i class="arg">instanceCmd</i> <b class="method">save-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
 <dd><p>This method saves the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> into the file <i class="arg">path</i>. The format of the
 calibration data is not documented.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="158"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
+<dt><a name="183"><i class="arg">instanceCmd</i> <b class="method">load-calibration-file</b> <i class="arg">id</i> <i class="arg">path</i></a></dt>
 <dd><p>This method loads the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> from the file <i class="arg">path</i>. The format of the
 calibration data is not documented.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="159"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
+<dt><a name="184"><i class="arg">instanceCmd</i> <b class="method">save-calibration</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
 <dd><p>This method saves the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> into the in-memory storage identified by the
 <i class="arg">slot</i> number.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="160"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
+<dt><a name="185"><i class="arg">instanceCmd</i> <b class="method">load-calibration-slot</b> <i class="arg">id</i> <i class="arg">slot</i></a></dt>
 <dd><p>This method loads the calibration data for the skeleton of the user
 specified by the <i class="arg">id</i> from the in-memory storage identified by the
 <i class="arg">slot</i> number.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="161"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></dt>
+<dt><a name="186"><i class="arg">instanceCmd</i> <b class="method">clear-calibration-slot</b> <i class="arg">slot</i></a></dt>
 <dd><p>This method clears the in-memory calibration data storage identified
 by the <i class="arg">slot</i> number.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="162"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></dt>
+<dt><a name="187"><i class="arg">instanceCmd</i> <b class="method">is-calibration-slot</b> <i class="arg">slot</i></a></dt>
 <dd><p>This method tests if the in-memory storage identified by the
 <i class="arg">slot</i> number contains skeleton calibration data.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the slot is
 occupied, and <b class="const">false</b> else.</p></dd>
-<dt><a name="163"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></dt>
+<dt><a name="188"><i class="arg">instanceCmd</i> <b class="method">is-joint-available</b> <i class="arg">joint</i></a></dt>
 <dd><p>This method tests if the skeleton tracking supports the named
 <i class="arg">joint</i>.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the joint is
@@ -1722,23 +1929,23 @@ supported, and <b class="const">false</b> else.</p>
 <li><p><b class="const">right-ankle</b></p></li>
 <li><p><b class="const">right-foot</b></p></li>
 </ol></dd>
-<dt><a name="164"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></dt>
+<dt><a name="189"><i class="arg">instanceCmd</i> <b class="method">is-joint-active</b> <i class="arg">joint</i></a></dt>
 <dd><p>This method tests if the the named <i class="arg">joint</i> is actively tracked.</p>
 <p>The result is a boolean value, <b class="const">true</b> if the joint is
 active, and <b class="const">false</b> else.</p>
 <p>The accepted joint names are described above, at
 <b class="method">is-joint-available</b>.</p></dd>
-<dt><a name="165"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></dt>
+<dt><a name="190"><i class="arg">instanceCmd</i> <b class="method">set-joint-active</b> <i class="arg">joint</i> <i class="arg">active</i></a></dt>
 <dd><p>This method (de)activates the named <i class="arg">joint</i>.</p>
 <p>The accepted joint names are described above, at
 <b class="method">is-joint-available</b>.</p>
 <p>The result of the method is an empty string.</p></dd>
-<dt><a name="166"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></dt>
+<dt><a name="191"><i class="arg">instanceCmd</i> <b class="method">active-joints</b></a></dt>
 <dd><p>This method returns a list containig the names of all currently active
 joints.</p>
 <p>The possible joint names are described above, at
 <b class="method">is-joint-available</b>.</p></dd>
-<dt><a name="167"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></dt>
+<dt><a name="192"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></dt>
 <dd><p>This method retrieves position and orientation data for the user
 specified by <i class="arg">id</i> and the named <i class="arg">joint</i>.</p>
 <p>The accepted joint names are described above, at
@@ -1767,19 +1974,19 @@ confidence in the orientation information.</p></dd>
 representating the rotation matrix for the joint.</p></dd>
 </dl></dd>
 </dl></dd>
-<dt><a name="168"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="193"><i class="arg">instanceCmd</i> <b class="method">set-callback-jointConfigChange</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="169"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></dt>
+<dt><a name="194"><i class="arg">instanceCmd</i> <b class="method">unset-callback-jointConfigChange</b></a></dt>
 <dd><p>These methods define and remove a callback responding to joint
-configration changes, i.e. when joints are (de)activated.</p>
+configuration changes, i.e. when joints are (de)activated.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
 <p>The callback to invoke is specified as a command prefix, and
 will be invoked with two arguments added to it, the instance command,
 and the word &quot;jointConfigChange&quot;, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="170"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="195"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationStart</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="171"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></dt>
+<dt><a name="196"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationStart</b></a></dt>
 <dd><p>These methods define and remove a callback responding to the start of
 a calibration.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1788,9 +1995,9 @@ will be invoked with three arguments added to it, the instance
 command, the word &quot;calibrationStart&quot;, and the (numerical) id of the
 user for whom calibration has started, in this order.</p>
 <p>The result of the methods is an empty string.</p></dd>
-<dt><a name="172"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="197"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationComplete</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="173"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></dt>
+<dt><a name="198"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></dt>
 <dd><p>These methods define and remove a callback responding to the
 completion of calibrations.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>
@@ -1814,9 +2021,9 @@ whom calibration completed, and the completion status, in this order.</p>
 <li><p><b class="const">manual-reset</b></p></li>
 <li><p><b class="const">timeout</b></p></li>
 </ol></dd>
-<dt><a name="174"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></dt>
+<dt><a name="199"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></dt>
 <dd></dd>
-<dt><a name="175"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></dt>
+<dt><a name="200"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></dt>
 <dd><p>These methods define and remove a callback responding to calibration
 progress events.</p>
 <p>Setting a callback implicitly removes any previous callback set.</p>

@@ -11,6 +11,11 @@ superclasses. See section [sectref {Generator}].
 i.e. images where each pixel value describes the distance of the pixel
 from the sensor.
 
+[comment {[para] They may have the following capabilities:
+[list_begin enumerated]
+[enum] [sectref {User Position}]
+[list_end]}]
+
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
