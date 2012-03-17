@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapAntiflicker {
 
     # # ## ### ##### ######## #############
 
-    mdef frequency { /* Syntax: <instance> frequency ?f? */
+    mdef frequency { /* Syntax: <instance> frequency ?f|off? */
 	if (objc == 2) { /* Syntax: <instance> frequency */
 	    Tcl_Obj* res;
 	    XnPowerLineFrequency f = xnGetPowerLineFrequency (instance->handle);
@@ -55,7 +55,7 @@ critcl::class def ::kinetcl::CapAntiflicker {
 
     # # ## ### ##### ######## #############
 
-    kt_callback powerlinefrequency \
+    kt_callback frequency \
 	xnRegisterToPowerLineFrequencyChange \
 	xnUnregisterFromPowerLineFrequencyChange \
     {} {}
