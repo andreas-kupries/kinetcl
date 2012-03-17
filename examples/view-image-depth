@@ -5,7 +5,6 @@
 
 package require kinetcl
 package require crimp::ppm
-package require crimp::pgm
 package require crimp::tk
 
 # # ## ### ##### ######## ############# #####################
@@ -33,7 +32,7 @@ proc usage {} {
 }
 
 proc setup {} {
-    global tracedir iphoto dphoto
+    global tracedir iphoto dphoto sat
     file mkdir $tracedir
 
     kinetcl image create I
@@ -50,6 +49,8 @@ proc setup {} {
 
     crimp write 2tk $iphoto [crimp blank rgb   {*}$isize 0 0 0]
     crimp write 2tk $dphoto [crimp blank grey8 {*}$dsize 0]
+
+    set sat [crimp blank grey8 {*}$dsize 128]
 
     ttk::frame  .show
     ttk::label  .image -image $iphoto
@@ -103,20 +104,27 @@ proc newimage {args} {
 }
 
 proc newdepth {args} {
-    global tracedir dphoto
+    global tracedir dphoto sat
     set s [clock milliseconds]
 
     set image [D map]
     set frame [D frame]
 
-    # Currently the crimp pgm doesn't accept grey16, although the
-    # format might be able to.  Because of that we compress to grey8,
-    # and try to keep as much of the range as possible. Of course, we
-    # also need the compressed version for display with Tk.
+    # New way of visualizing the grey16 depth image: Split its pixels
+    # into msb and lsb.  Then make MSB the hue, and LSB the inverted
+    # value of a HSV, use a fixed saturation. Convert this to RGB.
+    #
+    # Now large depth changes are color coded, with the details in the
+    # luminance.
 
-    set image [crimp::FITFLOAT [crimp convert 2float $image]]
+    lassign [crimp split $image] msb lsb
+    set image [crimp convert 2rgb \
+		   [crimp join 2hsv \
+			$msb \
+			$sat \
+			[crimp invert $lsb]]]
 
-    crimp write 2file pgm-raw $tracedir/depth-[format %04d $frame].pgm $image
+    crimp write 2file ppm-raw $tracedir/depth-[format %04d $frame].ppm $image
     crimp write 2tk $dphoto $image
     .depth configure -image $dphoto
 

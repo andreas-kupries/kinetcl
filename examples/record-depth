@@ -4,7 +4,7 @@
 ## Requirements
 
 package require kinetcl
-package require crimp::pgm
+package require crimp::ppm
 
 # # ## ### ##### ######## ############# #####################
 
@@ -31,8 +31,12 @@ proc usage {} {
 }
 
 proc setup {} {
-    global tracedir
+    global tracedir sat
     kinetcl depth create K
+
+    set size [dict get [K meta] map res]
+    set sat  [crimp blank grey8 {*}$size 128]
+
     file mkdir $tracedir
     return
 }
@@ -54,19 +58,28 @@ proc ping {text} {
 # # ## ### ##### ######## ############# #####################
 
 proc record {} {
-    global tracedir
+    global tracedir sat
     set s [clock milliseconds]
 
     kinetcl waitUpdate
     set image [K map]
     set frame [K frame]
 
-    # Currently the crimp pgm doesn't accept grey16, although the
-    # format might be able to.  Because of that we compress to grey8,
-    # and try to keep as much of the range as possible.
-    set image [crimp::FITFLOAT [crimp convert 2float $image]]
+    # New way of visualizing the grey16 depth image: Split its pixels
+    # into msb and lsb.  Then make MSB the hue, and LSB the inverted
+    # value of a HSV, use a fixed saturation. Convert this to RGB.
+    #
+    # Now large depth changes are color coded, with the details in the
+    # luminance.
 
-    crimp write 2file pgm-raw $tracedir/depth-[format %04d $frame].pgm $image
+    lassign [crimp split $image] msb lsb
+    set image [crimp convert 2rgb \
+		   [crimp join 2hsv \
+			$msb \
+			$sat \
+			[crimp invert $lsb]]]
+
+    crimp write 2file ppm-raw $tracedir/depth-[format %04d $frame].ppm $image
 
     set e [clock milliseconds]
     ping "[expr {$e - $s}] $frame        "
