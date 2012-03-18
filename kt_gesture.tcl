@@ -146,8 +146,14 @@ critcl::class def ::kinetcl::Gesture {
 	n = xnGetNumberOfAvailableGestures (instance->handle);
 	gesture = (XnChar**) ckalloc (n * sizeof (XnChar*));
 
-	s = xnEnumerateGestures (instance->handle, gesture, &n);
-	CHECK_STATUS_RETURN;
+	for (i=0; i < n; i++) {
+            /* Pray that this is enough space per gesture name.
+	     */
+	    gesture [i] = ckalloc (50);
+	}
+
+	s = xnEnumerateAllGestures (instance->handle, gesture, 50, &n);
+	CHECK_STATUS_GOTO;
 
 	glist = Tcl_NewListObj (0,NULL);
 	for (i=0; i < n; i++) {
@@ -163,6 +169,7 @@ critcl::class def ::kinetcl::Gesture {
       error:
 	res = TCL_ERROR;
       done:
+	for (i=0; i < n; i++) { ckfree (gesture [i]); }
 	ckfree ((char*) gesture);
 	return res;
     }
@@ -182,8 +189,14 @@ critcl::class def ::kinetcl::Gesture {
 	n = xnGetNumberOfAvailableGestures (instance->handle);
 	gesture = (XnChar**) ckalloc (n * sizeof (XnChar*));
 
-	s = xnGetActiveGestures (instance->handle, gesture, &n);
-	CHECK_STATUS_RETURN;
+	for (i=0; i < n; i++) {
+            /* Pray that this is enough space per gesture name.
+	     */
+	    gesture [i] = ckalloc (50);
+	}
+
+	s = xnGetAllActiveGestures (instance->handle, gesture, 50, &n);
+	CHECK_STATUS_GOTO;
 
 	glist = Tcl_NewListObj (0,NULL);
 	for (i=0; i < n; i++) {
@@ -199,6 +212,7 @@ critcl::class def ::kinetcl::Gesture {
       error:
 	res = TCL_ERROR;
       done:
+	for (i=0; i < n; i++) { ckfree (gesture [i]); }
 	ckfree ((char*) gesture);
 	return res;
     }
