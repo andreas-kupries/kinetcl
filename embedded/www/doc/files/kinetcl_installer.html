@@ -117,7 +117,8 @@
 <ul>
 <li class="subsection"><a href="#subsection1">Tcl</a></li>
 <li class="subsection"><a href="#subsection2">CriTcl</a></li>
-<li class="subsection"><a href="#subsection3">OpenNI / NITE</a></li>
+<li class="subsection"><a href="#subsection3">Crimp</a></li>
+<li class="subsection"><a href="#subsection4">OpenNI / NITE</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section3">Build &amp; Installation</a></li>
@@ -185,18 +186,28 @@ can be found at</p>
 build KineTcl, either as an application found in the PATH, or as a Tcl
 package available to the <b class="cmd">tclsh</b> used to run KineTcl's
 <span class="sectref"><a href="#section3">Build &amp; Installation</a></span> process.</p>
-<p>Version 3.1 is required, or higher, and the utility package
-       <b class="package">critcl::class</b>. This is currently only available on
-       the <b class="const">dev31</b> branch of the critcl repository at github
-       linked to in the previous paragraph.</p>
-<p>The link for critcl goes it its official website which explains how to
-get its sources. The starkit at the site is <em>not</em> useable, as it
-provides only critcl 3, nor the utility package we need.</p>
-<p>When not using a starkit as is required here for the moment, you have
-to get and install the sources per the instructions at the site,
-i.e. <a href="http://jcw.github.com/critcl">http://jcw.github.com/critcl</a>.</p>
+<p>The not-yet-released version 3.1 is required, or higher, and
+       the utility package <b class="package">critcl::class</b>. This is currently
+       only available on the <b class="const">dev31</b> branch of the critcl
+       repository at github linked to in the previous paragraph.</p>
+<p>Please make sure to use at least commit [fe814d4977], or
+later.</p>
+<p>The link for critcl goes to its official website which explains how to
+get the sources, and how to install them. Note that the starkit at the
+site is <em>not</em> useable, as it provides only critcl 3, nor the
+utility package we need.</p>
 </div>
-<div id="subsection3" class="subsection"><h3><a name="subsection3">OpenNI / NITE</a></h3>
+<div id="subsection3" class="subsection"><h3><a name="subsection3">Crimp</a></h3>
+<p>The image processing package
+<a href="http://chiselapp.com/user/andreas_kupries/repository/crimp/home">CRIMP</a>
+is required to build and use KineTcl.</p>
+<p>Note that the currently released version of crimp does not have
+       all the operations used by KineTcl. Please make sure to use at
+       least commit [795374375f], or later.</p>
+<p>The link for crimp goes to its official website which explains how to
+get the sources and how to install them.</p>
+</div>
+<div id="subsection4" class="subsection"><h3><a name="subsection4">OpenNI / NITE</a></h3>
 <p>KineTcl is, despite its name, not a direct binding to the Kinect
 itself. It actually is a binding to the more general OpenNI
 framework. This framework provides a set of generic APIs for sensors,

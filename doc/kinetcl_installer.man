@@ -27,6 +27,7 @@ available in a directory of your choice.
 [section Requisites]
 [include include/rq_tcl.inc]
 [include include/rq_critcl.inc]
+[include include/rq_crimp.inc]
 [include include/rq_openni.inc]
 
 [section {Build & Installation}]

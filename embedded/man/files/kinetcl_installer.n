@@ -312,18 +312,29 @@ build KineTcl, either as an application found in the PATH, or as a Tcl
 package available to the \fBtclsh\fR used to run KineTcl's
 \fBBuild & Installation\fR process.
 .PP
-Version 3.1 is required, or higher, and the utility package
-\fBcritcl::class\fR. This is currently only available on
-the \fBdev31\fR branch of the critcl repository at github
-linked to in the previous paragraph.
+The not-yet-released version 3.1 is required, or higher, and
+the utility package \fBcritcl::class\fR. This is currently
+only available on the \fBdev31\fR branch of the critcl
+repository at github linked to in the previous paragraph.
 .PP
-The link for critcl goes it its official website which explains how to
-get its sources. The starkit at the site is \fInot\fR useable, as it
-provides only critcl 3, nor the utility package we need.
+Please make sure to use at least commit [fe814d4977], or
+later.
 .PP
-When not using a starkit as is required here for the moment, you have
-to get and install the sources per the instructions at the site,
-i.e. \fIhttp://jcw.github.com/critcl\fR.
+The link for critcl goes to its official website which explains how to
+get the sources, and how to install them. Note that the starkit at the
+site is \fInot\fR useable, as it provides only critcl 3, nor the
+utility package we need.
+.SS CRIMP
+The image processing package
+\fICRIMP\fR [http://chiselapp.com/user/andreas_kupries/repository/crimp/home]
+is required to build and use KineTcl.
+.PP
+Note that the currently released version of crimp does not have
+all the operations used by KineTcl. Please make sure to use at
+least commit [795374375f], or later.
+.PP
+The link for crimp goes to its official website which explains how to
+get the sources and how to install them.
 .SS "OPENNI / NITE"
 KineTcl is, despite its name, not a direct binding to the Kinect
 itself. It actually is a binding to the more general OpenNI
