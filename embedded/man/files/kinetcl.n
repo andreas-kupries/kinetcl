@@ -648,6 +648,176 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBunset-callback-calibrationProgress\fR
 .sp
+\fIinstanceCmd\fR \fBbacklight-compensation\fR
+.sp
+\fIinstanceCmd\fR \fBbacklight-compensation\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBbacklight-compensation-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-backlightCompensation\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-backlightCompensation\fR
+.sp
+\fIinstanceCmd\fR \fBbrightness\fR
+.sp
+\fIinstanceCmd\fR \fBbrightness\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBbrightness-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-brightness\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-brightness\fR
+.sp
+\fIinstanceCmd\fR \fBcolor-temperature\fR
+.sp
+\fIinstanceCmd\fR \fBcolor-temperature\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBcolor-temperature-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-colorTemperature\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-colorTemperature\fR
+.sp
+\fIinstanceCmd\fR \fBcontrast\fR
+.sp
+\fIinstanceCmd\fR \fBcontrast\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBcontrast-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-contrast\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-contrast\fR
+.sp
+\fIinstanceCmd\fR \fBexposure\fR
+.sp
+\fIinstanceCmd\fR \fBexposure\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBexposure-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-exposure\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-exposure\fR
+.sp
+\fIinstanceCmd\fR \fBfocus\fR
+.sp
+\fIinstanceCmd\fR \fBfocus\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBfocus-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-focus\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-focus\fR
+.sp
+\fIinstanceCmd\fR \fBgain\fR
+.sp
+\fIinstanceCmd\fR \fBgain\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBgain-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-gain\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-gain\fR
+.sp
+\fIinstanceCmd\fR \fBgamma\fR
+.sp
+\fIinstanceCmd\fR \fBgamma\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBgamma-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-gamma\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-gamma\fR
+.sp
+\fIinstanceCmd\fR \fBhue\fR
+.sp
+\fIinstanceCmd\fR \fBhue\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBhue-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-hue\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-hue\fR
+.sp
+\fIinstanceCmd\fR \fBiris\fR
+.sp
+\fIinstanceCmd\fR \fBiris\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBiris-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-iris\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-iris\fR
+.sp
+\fIinstanceCmd\fR \fBlowlight-compensation\fR
+.sp
+\fIinstanceCmd\fR \fBlowlight-compensation\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBlowlight-compensation-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-lowlightCompensation\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-lowlightCompensation\fR
+.sp
+\fIinstanceCmd\fR \fBpan\fR
+.sp
+\fIinstanceCmd\fR \fBpan\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBpan-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-pan\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-pan\fR
+.sp
+\fIinstanceCmd\fR \fBroll\fR
+.sp
+\fIinstanceCmd\fR \fBroll\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBroll-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-roll\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-roll\fR
+.sp
+\fIinstanceCmd\fR \fBsaturation\fR
+.sp
+\fIinstanceCmd\fR \fBsaturation\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBsaturation-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-saturation\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-saturation\fR
+.sp
+\fIinstanceCmd\fR \fBsharpness\fR
+.sp
+\fIinstanceCmd\fR \fBsharpness\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBsharpness-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-sharpness\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-sharpness\fR
+.sp
+\fIinstanceCmd\fR \fBtilt\fR
+.sp
+\fIinstanceCmd\fR \fBtilt\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBtilt-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-tilt\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-tilt\fR
+.sp
+\fIinstanceCmd\fR \fBzoom\fR
+.sp
+\fIinstanceCmd\fR \fBzoom\fR \fIvalue\fR
+.sp
+\fIinstanceCmd\fR \fBzoom-range\fR
+.sp
+\fIinstanceCmd\fR \fBset-callback-zoom\fR \fIcmd\fR...
+.sp
+\fIinstanceCmd\fR \fBunset-callback-zoom\fR
+.sp
 .BE
 .SH DESCRIPTION
 .PP
@@ -720,6 +890,43 @@ reflect the new state.
 .SH BASE
 This sections documents the class \fB::kinetcl base\fR, the (abstract) base
 class for all OpenNI production nodes.
+.PP
+They may have the following capabilities:
+.IP [1]
+\fBBacklight Compensation\fR
+.IP [2]
+\fBBrightness\fR
+.IP [3]
+\fBColor Temperature\fR
+.IP [4]
+\fBContrast\fR
+.IP [5]
+\fBExposure\fR
+.IP [6]
+\fBFocus\fR
+.IP [7]
+\fBGain\fR
+.IP [8]
+\fBGamma\fR
+.IP [9]
+\fBHue\fR
+.IP [10]
+\fBIris\fR
+.IP [11]
+\fBLowlight compensation\fR
+.IP [12]
+\fBPan\fR
+.IP [13]
+\fBRoll\fR
+.IP [14]
+\fBSaturation\fR
+.IP [15]
+\fBSharpness\fR
+.IP [16]
+\fBTilt\fR
+.IP [17]
+\fBZoom\fR
+.PP
 .SS "CLASS API"
 .TP
 \fB::kinetcl base\fR \fBnew\fR
@@ -2700,6 +2907,1026 @@ The result of the methods is an empty string.
 .sp
 The possible progress stati are identical to the completion
 stati described above.
+.PP
+.SS "BACKLIGHT COMPENSATION"
+Should a production node support the backlight-compensation API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBbacklight-compensation\fR.
+.TP
+\fIinstanceCmd\fR \fBbacklight-compensation\fR
+In this form the method returns the current state of the instance's
+backlight-compensation setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBbacklight-compensation\fR \fIvalue\fR
+In this form the method changes the instance's backlight-compensation setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBbacklight-compensation-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-backlightCompensation\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-backlightCompensation\fR
+These methods define and remove a callback responding to backlightCompensation
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "backlightCompensation", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS BRIGHTNESS
+Should a production node support the brightness API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBbrightness\fR.
+.TP
+\fIinstanceCmd\fR \fBbrightness\fR
+In this form the method returns the current state of the instance's
+brightness setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBbrightness\fR \fIvalue\fR
+In this form the method changes the instance's brightness setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBbrightness-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-brightness\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-brightness\fR
+These methods define and remove a callback responding to brightness
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "brightness", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS "COLOR TEMPERATURE"
+Should a production node support the color-temperature API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBcolor-temperature\fR.
+.TP
+\fIinstanceCmd\fR \fBcolor-temperature\fR
+In this form the method returns the current state of the instance's
+color-temperature setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBcolor-temperature\fR \fIvalue\fR
+In this form the method changes the instance's color-temperature setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBcolor-temperature-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-colorTemperature\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-colorTemperature\fR
+These methods define and remove a callback responding to colorTemperature
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "colorTemperature", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS CONTRAST
+Should a production node support the contrast API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBcontrast\fR.
+.TP
+\fIinstanceCmd\fR \fBcontrast\fR
+In this form the method returns the current state of the instance's
+contrast setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBcontrast\fR \fIvalue\fR
+In this form the method changes the instance's contrast setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBcontrast-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-contrast\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-contrast\fR
+These methods define and remove a callback responding to contrast
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "contrast", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS EXPOSURE
+Should a production node support the exposure API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBexposure\fR.
+.TP
+\fIinstanceCmd\fR \fBexposure\fR
+In this form the method returns the current state of the instance's
+exposure setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBexposure\fR \fIvalue\fR
+In this form the method changes the instance's exposure setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBexposure-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-exposure\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-exposure\fR
+These methods define and remove a callback responding to exposure
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "exposure", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS FOCUS
+Should a production node support the focus API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBfocus\fR.
+.TP
+\fIinstanceCmd\fR \fBfocus\fR
+In this form the method returns the current state of the instance's
+focus setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBfocus\fR \fIvalue\fR
+In this form the method changes the instance's focus setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBfocus-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-focus\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-focus\fR
+These methods define and remove a callback responding to focus
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "focus", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS GAIN
+Should a production node support the gain API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBgain\fR.
+.TP
+\fIinstanceCmd\fR \fBgain\fR
+In this form the method returns the current state of the instance's
+gain setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBgain\fR \fIvalue\fR
+In this form the method changes the instance's gain setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBgain-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-gain\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-gain\fR
+These methods define and remove a callback responding to gain
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "gain", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS GAMMA
+Should a production node support the gamma API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBgamma\fR.
+.TP
+\fIinstanceCmd\fR \fBgamma\fR
+In this form the method returns the current state of the instance's
+gamma setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBgamma\fR \fIvalue\fR
+In this form the method changes the instance's gamma setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBgamma-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-gamma\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-gamma\fR
+These methods define and remove a callback responding to gamma
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "gamma", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS HUE
+Should a production node support the hue API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBhue\fR.
+.TP
+\fIinstanceCmd\fR \fBhue\fR
+In this form the method returns the current state of the instance's
+hue setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBhue\fR \fIvalue\fR
+In this form the method changes the instance's hue setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBhue-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-hue\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-hue\fR
+These methods define and remove a callback responding to hue
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "hue", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS IRIS
+Should a production node support the iris API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBiris\fR.
+.TP
+\fIinstanceCmd\fR \fBiris\fR
+In this form the method returns the current state of the instance's
+iris setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBiris\fR \fIvalue\fR
+In this form the method changes the instance's iris setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBiris-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-iris\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-iris\fR
+These methods define and remove a callback responding to iris
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "iris", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS "LOWLIGHT COMPENSATION"
+Should a production node support the lowlight-compensation API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBlowlight-compensation\fR.
+.TP
+\fIinstanceCmd\fR \fBlowlight-compensation\fR
+In this form the method returns the current state of the instance's
+lowlight-compensation setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBlowlight-compensation\fR \fIvalue\fR
+In this form the method changes the instance's lowlight-compensation setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBlowlight-compensation-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-lowlightCompensation\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-lowlightCompensation\fR
+These methods define and remove a callback responding to lowlightCompensation
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "lowlightCompensation", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS PAN
+Should a production node support the pan API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBpan\fR.
+.TP
+\fIinstanceCmd\fR \fBpan\fR
+In this form the method returns the current state of the instance's
+pan setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBpan\fR \fIvalue\fR
+In this form the method changes the instance's pan setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBpan-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-pan\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-pan\fR
+These methods define and remove a callback responding to pan
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "pan", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS ROLL
+Should a production node support the roll API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBroll\fR.
+.TP
+\fIinstanceCmd\fR \fBroll\fR
+In this form the method returns the current state of the instance's
+roll setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBroll\fR \fIvalue\fR
+In this form the method changes the instance's roll setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBroll-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-roll\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-roll\fR
+These methods define and remove a callback responding to roll
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "roll", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS SATURATION
+Should a production node support the saturation API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBsaturation\fR.
+.TP
+\fIinstanceCmd\fR \fBsaturation\fR
+In this form the method returns the current state of the instance's
+saturation setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBsaturation\fR \fIvalue\fR
+In this form the method changes the instance's saturation setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBsaturation-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-saturation\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-saturation\fR
+These methods define and remove a callback responding to saturation
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "saturation", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS SHARPNESS
+Should a production node support the sharpness API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBsharpness\fR.
+.TP
+\fIinstanceCmd\fR \fBsharpness\fR
+In this form the method returns the current state of the instance's
+sharpness setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBsharpness\fR \fIvalue\fR
+In this form the method changes the instance's sharpness setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBsharpness-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-sharpness\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-sharpness\fR
+These methods define and remove a callback responding to sharpness
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "sharpness", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS TILT
+Should a production node support the tilt API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBtilt\fR.
+.TP
+\fIinstanceCmd\fR \fBtilt\fR
+In this form the method returns the current state of the instance's
+tilt setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBtilt\fR \fIvalue\fR
+In this form the method changes the instance's tilt setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBtilt-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-tilt\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-tilt\fR
+These methods define and remove a callback responding to tilt
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "tilt", in this order.
+.sp
+The result of the methods is an empty string.
+.PP
+.SS ZOOM
+Should a production node support the zoom API the following
+methods become available.
+This support can checked by invoking the inherited method
+\fBis-capable-of\fR for the capability name \fBzoom\fR.
+.TP
+\fIinstanceCmd\fR \fBzoom\fR
+In this form the method returns the current state of the instance's
+zoom setting.
+.sp
+The result is an integer.
+.TP
+\fIinstanceCmd\fR \fBzoom\fR \fIvalue\fR
+In this form the method changes the instance's zoom setting
+to the specified \fIvalue\fR.
+.sp
+The result is an empty string.
+.TP
+\fIinstanceCmd\fR \fBzoom-range\fR
+This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:
+.RS
+.TP
+\fBmin\fR
+The value is an integer number, the minimal value the setting is
+allowed to have.
+.TP
+\fBmax\fR
+The value is an integer number, the maximal value the setting is
+allowed to have.
+.TP
+\fBdefault\fR
+The value is an integer number, the default value the setting will
+have after node construction.
+.TP
+\fBstep\fR
+The value is an integer number, the difference between two legal
+values of the setting.
+The difference between \fBmin\fR and \fBmax\fR is a multiple of
+this value.
+.TP
+\fBauto\fR
+A boolean value. If \fBtrue\fR the setting supports automatic
+adjustment during operation of the node, otherwise not.
+.RE
+.TP
+\fIinstanceCmd\fR \fBset-callback-zoom\fR \fIcmd\fR...
+.TP
+\fIinstanceCmd\fR \fBunset-callback-zoom\fR
+These methods define and remove a callback responding to zoom
+configuration changes.
+.sp
+Setting a callback implicitly removes any previous callback set.
+.sp
+The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word "zoom", in this order.
+.sp
+The result of the methods is an empty string.
 .PP
 .SH "BUGS, IDEAS, FEEDBACK"
 This document, and the package it describes, will undoubtedly contain

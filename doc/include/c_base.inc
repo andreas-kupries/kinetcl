@@ -2,6 +2,27 @@
 This sections documents the class [cmd {::kinetcl base}], the (abstract) base
 class for all OpenNI production nodes.
 
+[para] They may have the following capabilities:
+[list_begin enumerated]
+[enum][sectref {Backlight Compensation}]
+[enum][sectref Brightness]
+[enum][sectref {Color Temperature}]
+[enum][sectref Contrast]
+[enum][sectref Exposure]
+[enum][sectref Focus]
+[enum][sectref Gain]
+[enum][sectref Gamma]
+[enum][sectref Hue]
+[enum][sectref Iris]
+[enum][sectref {Lowlight compensation}]
+[enum][sectref Pan]
+[enum][sectref Roll]
+[enum][sectref Saturation]
+[enum][sectref Sharpness]
+[enum][sectref Tilt]
+[enum][sectref Zoom]
+[list_end]
+
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]

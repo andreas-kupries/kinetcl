@@ -209,6 +209,23 @@
 <li class="subsection"><a href="#subsection34">Mirror</a></li>
 <li class="subsection"><a href="#subsection35">Instance Pose Detection API</a></li>
 <li class="subsection"><a href="#subsection36">Instance Skeleton/Joint API</a></li>
+<li class="subsection"><a href="#subsection37">Backlight Compensation</a></li>
+<li class="subsection"><a href="#subsection38">Brightness</a></li>
+<li class="subsection"><a href="#subsection39">Color Temperature</a></li>
+<li class="subsection"><a href="#subsection40">Contrast</a></li>
+<li class="subsection"><a href="#subsection41">Exposure</a></li>
+<li class="subsection"><a href="#subsection42">Focus</a></li>
+<li class="subsection"><a href="#subsection43">Gain</a></li>
+<li class="subsection"><a href="#subsection44">Gamma</a></li>
+<li class="subsection"><a href="#subsection45">Hue</a></li>
+<li class="subsection"><a href="#subsection46">Iris</a></li>
+<li class="subsection"><a href="#subsection47">Lowlight compensation</a></li>
+<li class="subsection"><a href="#subsection48">Pan</a></li>
+<li class="subsection"><a href="#subsection49">Roll</a></li>
+<li class="subsection"><a href="#subsection50">Saturation</a></li>
+<li class="subsection"><a href="#subsection51">Sharpness</a></li>
+<li class="subsection"><a href="#subsection52">Tilt</a></li>
+<li class="subsection"><a href="#subsection53">Zoom</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section19">Bugs, Ideas, Feedback</a></li>
@@ -424,6 +441,91 @@
 <li><a href="#198"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationComplete</b></a></li>
 <li><a href="#199"><i class="arg">instanceCmd</i> <b class="method">set-callback-calibrationProgress</b> <i class="arg">cmd</i>...</a></li>
 <li><a href="#200"><i class="arg">instanceCmd</i> <b class="method">unset-callback-calibrationProgress</b></a></li>
+<li><a href="#201"><i class="arg">instanceCmd</i> <b class="method">backlight-compensation</b></a></li>
+<li><a href="#202"><i class="arg">instanceCmd</i> <b class="method">backlight-compensation</b> <i class="arg">value</i></a></li>
+<li><a href="#203"><i class="arg">instanceCmd</i> <b class="method">backlight-compensation-range</b></a></li>
+<li><a href="#204"><i class="arg">instanceCmd</i> <b class="method">set-callback-backlightCompensation</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#205"><i class="arg">instanceCmd</i> <b class="method">unset-callback-backlightCompensation</b></a></li>
+<li><a href="#206"><i class="arg">instanceCmd</i> <b class="method">brightness</b></a></li>
+<li><a href="#207"><i class="arg">instanceCmd</i> <b class="method">brightness</b> <i class="arg">value</i></a></li>
+<li><a href="#208"><i class="arg">instanceCmd</i> <b class="method">brightness-range</b></a></li>
+<li><a href="#209"><i class="arg">instanceCmd</i> <b class="method">set-callback-brightness</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#210"><i class="arg">instanceCmd</i> <b class="method">unset-callback-brightness</b></a></li>
+<li><a href="#211"><i class="arg">instanceCmd</i> <b class="method">color-temperature</b></a></li>
+<li><a href="#212"><i class="arg">instanceCmd</i> <b class="method">color-temperature</b> <i class="arg">value</i></a></li>
+<li><a href="#213"><i class="arg">instanceCmd</i> <b class="method">color-temperature-range</b></a></li>
+<li><a href="#214"><i class="arg">instanceCmd</i> <b class="method">set-callback-colorTemperature</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#215"><i class="arg">instanceCmd</i> <b class="method">unset-callback-colorTemperature</b></a></li>
+<li><a href="#216"><i class="arg">instanceCmd</i> <b class="method">contrast</b></a></li>
+<li><a href="#217"><i class="arg">instanceCmd</i> <b class="method">contrast</b> <i class="arg">value</i></a></li>
+<li><a href="#218"><i class="arg">instanceCmd</i> <b class="method">contrast-range</b></a></li>
+<li><a href="#219"><i class="arg">instanceCmd</i> <b class="method">set-callback-contrast</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#220"><i class="arg">instanceCmd</i> <b class="method">unset-callback-contrast</b></a></li>
+<li><a href="#221"><i class="arg">instanceCmd</i> <b class="method">exposure</b></a></li>
+<li><a href="#222"><i class="arg">instanceCmd</i> <b class="method">exposure</b> <i class="arg">value</i></a></li>
+<li><a href="#223"><i class="arg">instanceCmd</i> <b class="method">exposure-range</b></a></li>
+<li><a href="#224"><i class="arg">instanceCmd</i> <b class="method">set-callback-exposure</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#225"><i class="arg">instanceCmd</i> <b class="method">unset-callback-exposure</b></a></li>
+<li><a href="#226"><i class="arg">instanceCmd</i> <b class="method">focus</b></a></li>
+<li><a href="#227"><i class="arg">instanceCmd</i> <b class="method">focus</b> <i class="arg">value</i></a></li>
+<li><a href="#228"><i class="arg">instanceCmd</i> <b class="method">focus-range</b></a></li>
+<li><a href="#229"><i class="arg">instanceCmd</i> <b class="method">set-callback-focus</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#230"><i class="arg">instanceCmd</i> <b class="method">unset-callback-focus</b></a></li>
+<li><a href="#231"><i class="arg">instanceCmd</i> <b class="method">gain</b></a></li>
+<li><a href="#232"><i class="arg">instanceCmd</i> <b class="method">gain</b> <i class="arg">value</i></a></li>
+<li><a href="#233"><i class="arg">instanceCmd</i> <b class="method">gain-range</b></a></li>
+<li><a href="#234"><i class="arg">instanceCmd</i> <b class="method">set-callback-gain</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#235"><i class="arg">instanceCmd</i> <b class="method">unset-callback-gain</b></a></li>
+<li><a href="#236"><i class="arg">instanceCmd</i> <b class="method">gamma</b></a></li>
+<li><a href="#237"><i class="arg">instanceCmd</i> <b class="method">gamma</b> <i class="arg">value</i></a></li>
+<li><a href="#238"><i class="arg">instanceCmd</i> <b class="method">gamma-range</b></a></li>
+<li><a href="#239"><i class="arg">instanceCmd</i> <b class="method">set-callback-gamma</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#240"><i class="arg">instanceCmd</i> <b class="method">unset-callback-gamma</b></a></li>
+<li><a href="#241"><i class="arg">instanceCmd</i> <b class="method">hue</b></a></li>
+<li><a href="#242"><i class="arg">instanceCmd</i> <b class="method">hue</b> <i class="arg">value</i></a></li>
+<li><a href="#243"><i class="arg">instanceCmd</i> <b class="method">hue-range</b></a></li>
+<li><a href="#244"><i class="arg">instanceCmd</i> <b class="method">set-callback-hue</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#245"><i class="arg">instanceCmd</i> <b class="method">unset-callback-hue</b></a></li>
+<li><a href="#246"><i class="arg">instanceCmd</i> <b class="method">iris</b></a></li>
+<li><a href="#247"><i class="arg">instanceCmd</i> <b class="method">iris</b> <i class="arg">value</i></a></li>
+<li><a href="#248"><i class="arg">instanceCmd</i> <b class="method">iris-range</b></a></li>
+<li><a href="#249"><i class="arg">instanceCmd</i> <b class="method">set-callback-iris</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#250"><i class="arg">instanceCmd</i> <b class="method">unset-callback-iris</b></a></li>
+<li><a href="#251"><i class="arg">instanceCmd</i> <b class="method">lowlight-compensation</b></a></li>
+<li><a href="#252"><i class="arg">instanceCmd</i> <b class="method">lowlight-compensation</b> <i class="arg">value</i></a></li>
+<li><a href="#253"><i class="arg">instanceCmd</i> <b class="method">lowlight-compensation-range</b></a></li>
+<li><a href="#254"><i class="arg">instanceCmd</i> <b class="method">set-callback-lowlightCompensation</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#255"><i class="arg">instanceCmd</i> <b class="method">unset-callback-lowlightCompensation</b></a></li>
+<li><a href="#256"><i class="arg">instanceCmd</i> <b class="method">pan</b></a></li>
+<li><a href="#257"><i class="arg">instanceCmd</i> <b class="method">pan</b> <i class="arg">value</i></a></li>
+<li><a href="#258"><i class="arg">instanceCmd</i> <b class="method">pan-range</b></a></li>
+<li><a href="#259"><i class="arg">instanceCmd</i> <b class="method">set-callback-pan</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#260"><i class="arg">instanceCmd</i> <b class="method">unset-callback-pan</b></a></li>
+<li><a href="#261"><i class="arg">instanceCmd</i> <b class="method">roll</b></a></li>
+<li><a href="#262"><i class="arg">instanceCmd</i> <b class="method">roll</b> <i class="arg">value</i></a></li>
+<li><a href="#263"><i class="arg">instanceCmd</i> <b class="method">roll-range</b></a></li>
+<li><a href="#264"><i class="arg">instanceCmd</i> <b class="method">set-callback-roll</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#265"><i class="arg">instanceCmd</i> <b class="method">unset-callback-roll</b></a></li>
+<li><a href="#266"><i class="arg">instanceCmd</i> <b class="method">saturation</b></a></li>
+<li><a href="#267"><i class="arg">instanceCmd</i> <b class="method">saturation</b> <i class="arg">value</i></a></li>
+<li><a href="#268"><i class="arg">instanceCmd</i> <b class="method">saturation-range</b></a></li>
+<li><a href="#269"><i class="arg">instanceCmd</i> <b class="method">set-callback-saturation</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#270"><i class="arg">instanceCmd</i> <b class="method">unset-callback-saturation</b></a></li>
+<li><a href="#271"><i class="arg">instanceCmd</i> <b class="method">sharpness</b></a></li>
+<li><a href="#272"><i class="arg">instanceCmd</i> <b class="method">sharpness</b> <i class="arg">value</i></a></li>
+<li><a href="#273"><i class="arg">instanceCmd</i> <b class="method">sharpness-range</b></a></li>
+<li><a href="#274"><i class="arg">instanceCmd</i> <b class="method">set-callback-sharpness</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#275"><i class="arg">instanceCmd</i> <b class="method">unset-callback-sharpness</b></a></li>
+<li><a href="#276"><i class="arg">instanceCmd</i> <b class="method">tilt</b></a></li>
+<li><a href="#277"><i class="arg">instanceCmd</i> <b class="method">tilt</b> <i class="arg">value</i></a></li>
+<li><a href="#278"><i class="arg">instanceCmd</i> <b class="method">tilt-range</b></a></li>
+<li><a href="#279"><i class="arg">instanceCmd</i> <b class="method">set-callback-tilt</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#280"><i class="arg">instanceCmd</i> <b class="method">unset-callback-tilt</b></a></li>
+<li><a href="#281"><i class="arg">instanceCmd</i> <b class="method">zoom</b></a></li>
+<li><a href="#282"><i class="arg">instanceCmd</i> <b class="method">zoom</b> <i class="arg">value</i></a></li>
+<li><a href="#283"><i class="arg">instanceCmd</i> <b class="method">zoom-range</b></a></li>
+<li><a href="#284"><i class="arg">instanceCmd</i> <b class="method">set-callback-zoom</b> <i class="arg">cmd</i>...</a></li>
+<li><a href="#285"><i class="arg">instanceCmd</i> <b class="method">unset-callback-zoom</b></a></li>
 </ul>
 </div>
 </div>
@@ -483,6 +585,26 @@ reflect the new state.</p></dd>
 <div id="section4" class="section"><h2><a name="section4">Base</a></h2>
 <p>This sections documents the class <b class="cmd">::kinetcl base</b>, the (abstract) base
 class for all OpenNI production nodes.</p>
+<p>They may have the following capabilities:</p>
+<ol class="enumerated">
+<li><p><span class="sectref"><a href="#subsection37">Backlight Compensation</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection38">Brightness</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection39">Color Temperature</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection40">Contrast</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection41">Exposure</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection42">Focus</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection43">Gain</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection44">Gamma</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection45">Hue</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection46">Iris</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection47">Lowlight compensation</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection48">Pan</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection49">Roll</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection50">Saturation</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection51">Sharpness</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection52">Tilt</a></span></p></li>
+<li><p><span class="sectref"><a href="#subsection53">Zoom</a></span></p></li>
+</ol>
 <div id="subsection1" class="subsection"><h3><a name="subsection1">Class API</a></h3>
 <dl class="definitions">
 <dt><a name="11"><b class="cmd">::kinetcl base</b> <b class="method">new</b></a></dt>
@@ -2034,6 +2156,822 @@ calibration progreess status, in this order.</p>
 <p>The result of the methods is an empty string.</p>
 <p>The possible progress stati are identical to the completion
 stati described above.</p></dd>
+</dl>
+</div>
+<div id="subsection37" class="subsection"><h3><a name="subsection37">Backlight Compensation</a></h3>
+<p>Should a production node support the backlight-compensation API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">backlight-compensation</b>.</p>
+<dl class="definitions">
+<dt><a name="201"><i class="arg">instanceCmd</i> <b class="method">backlight-compensation</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+backlight-compensation setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="202"><i class="arg">instanceCmd</i> <b class="method">backlight-compensation</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's backlight-compensation setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="203"><i class="arg">instanceCmd</i> <b class="method">backlight-compensation-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="204"><i class="arg">instanceCmd</i> <b class="method">set-callback-backlightCompensation</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="205"><i class="arg">instanceCmd</i> <b class="method">unset-callback-backlightCompensation</b></a></dt>
+<dd><p>These methods define and remove a callback responding to backlightCompensation
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;backlightCompensation&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection38" class="subsection"><h3><a name="subsection38">Brightness</a></h3>
+<p>Should a production node support the brightness API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">brightness</b>.</p>
+<dl class="definitions">
+<dt><a name="206"><i class="arg">instanceCmd</i> <b class="method">brightness</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+brightness setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="207"><i class="arg">instanceCmd</i> <b class="method">brightness</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's brightness setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="208"><i class="arg">instanceCmd</i> <b class="method">brightness-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="209"><i class="arg">instanceCmd</i> <b class="method">set-callback-brightness</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="210"><i class="arg">instanceCmd</i> <b class="method">unset-callback-brightness</b></a></dt>
+<dd><p>These methods define and remove a callback responding to brightness
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;brightness&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection39" class="subsection"><h3><a name="subsection39">Color Temperature</a></h3>
+<p>Should a production node support the color-temperature API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">color-temperature</b>.</p>
+<dl class="definitions">
+<dt><a name="211"><i class="arg">instanceCmd</i> <b class="method">color-temperature</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+color-temperature setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="212"><i class="arg">instanceCmd</i> <b class="method">color-temperature</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's color-temperature setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="213"><i class="arg">instanceCmd</i> <b class="method">color-temperature-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="214"><i class="arg">instanceCmd</i> <b class="method">set-callback-colorTemperature</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="215"><i class="arg">instanceCmd</i> <b class="method">unset-callback-colorTemperature</b></a></dt>
+<dd><p>These methods define and remove a callback responding to colorTemperature
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;colorTemperature&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection40" class="subsection"><h3><a name="subsection40">Contrast</a></h3>
+<p>Should a production node support the contrast API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">contrast</b>.</p>
+<dl class="definitions">
+<dt><a name="216"><i class="arg">instanceCmd</i> <b class="method">contrast</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+contrast setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="217"><i class="arg">instanceCmd</i> <b class="method">contrast</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's contrast setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="218"><i class="arg">instanceCmd</i> <b class="method">contrast-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="219"><i class="arg">instanceCmd</i> <b class="method">set-callback-contrast</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="220"><i class="arg">instanceCmd</i> <b class="method">unset-callback-contrast</b></a></dt>
+<dd><p>These methods define and remove a callback responding to contrast
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;contrast&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection41" class="subsection"><h3><a name="subsection41">Exposure</a></h3>
+<p>Should a production node support the exposure API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">exposure</b>.</p>
+<dl class="definitions">
+<dt><a name="221"><i class="arg">instanceCmd</i> <b class="method">exposure</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+exposure setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="222"><i class="arg">instanceCmd</i> <b class="method">exposure</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's exposure setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="223"><i class="arg">instanceCmd</i> <b class="method">exposure-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="224"><i class="arg">instanceCmd</i> <b class="method">set-callback-exposure</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="225"><i class="arg">instanceCmd</i> <b class="method">unset-callback-exposure</b></a></dt>
+<dd><p>These methods define and remove a callback responding to exposure
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;exposure&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection42" class="subsection"><h3><a name="subsection42">Focus</a></h3>
+<p>Should a production node support the focus API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">focus</b>.</p>
+<dl class="definitions">
+<dt><a name="226"><i class="arg">instanceCmd</i> <b class="method">focus</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+focus setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="227"><i class="arg">instanceCmd</i> <b class="method">focus</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's focus setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="228"><i class="arg">instanceCmd</i> <b class="method">focus-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="229"><i class="arg">instanceCmd</i> <b class="method">set-callback-focus</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="230"><i class="arg">instanceCmd</i> <b class="method">unset-callback-focus</b></a></dt>
+<dd><p>These methods define and remove a callback responding to focus
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;focus&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection43" class="subsection"><h3><a name="subsection43">Gain</a></h3>
+<p>Should a production node support the gain API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">gain</b>.</p>
+<dl class="definitions">
+<dt><a name="231"><i class="arg">instanceCmd</i> <b class="method">gain</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+gain setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="232"><i class="arg">instanceCmd</i> <b class="method">gain</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's gain setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="233"><i class="arg">instanceCmd</i> <b class="method">gain-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="234"><i class="arg">instanceCmd</i> <b class="method">set-callback-gain</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="235"><i class="arg">instanceCmd</i> <b class="method">unset-callback-gain</b></a></dt>
+<dd><p>These methods define and remove a callback responding to gain
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;gain&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection44" class="subsection"><h3><a name="subsection44">Gamma</a></h3>
+<p>Should a production node support the gamma API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">gamma</b>.</p>
+<dl class="definitions">
+<dt><a name="236"><i class="arg">instanceCmd</i> <b class="method">gamma</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+gamma setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="237"><i class="arg">instanceCmd</i> <b class="method">gamma</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's gamma setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="238"><i class="arg">instanceCmd</i> <b class="method">gamma-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="239"><i class="arg">instanceCmd</i> <b class="method">set-callback-gamma</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="240"><i class="arg">instanceCmd</i> <b class="method">unset-callback-gamma</b></a></dt>
+<dd><p>These methods define and remove a callback responding to gamma
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;gamma&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection45" class="subsection"><h3><a name="subsection45">Hue</a></h3>
+<p>Should a production node support the hue API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">hue</b>.</p>
+<dl class="definitions">
+<dt><a name="241"><i class="arg">instanceCmd</i> <b class="method">hue</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+hue setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="242"><i class="arg">instanceCmd</i> <b class="method">hue</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's hue setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="243"><i class="arg">instanceCmd</i> <b class="method">hue-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="244"><i class="arg">instanceCmd</i> <b class="method">set-callback-hue</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="245"><i class="arg">instanceCmd</i> <b class="method">unset-callback-hue</b></a></dt>
+<dd><p>These methods define and remove a callback responding to hue
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;hue&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection46" class="subsection"><h3><a name="subsection46">Iris</a></h3>
+<p>Should a production node support the iris API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">iris</b>.</p>
+<dl class="definitions">
+<dt><a name="246"><i class="arg">instanceCmd</i> <b class="method">iris</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+iris setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="247"><i class="arg">instanceCmd</i> <b class="method">iris</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's iris setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="248"><i class="arg">instanceCmd</i> <b class="method">iris-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="249"><i class="arg">instanceCmd</i> <b class="method">set-callback-iris</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="250"><i class="arg">instanceCmd</i> <b class="method">unset-callback-iris</b></a></dt>
+<dd><p>These methods define and remove a callback responding to iris
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;iris&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection47" class="subsection"><h3><a name="subsection47">Lowlight compensation</a></h3>
+<p>Should a production node support the lowlight-compensation API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">lowlight-compensation</b>.</p>
+<dl class="definitions">
+<dt><a name="251"><i class="arg">instanceCmd</i> <b class="method">lowlight-compensation</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+lowlight-compensation setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="252"><i class="arg">instanceCmd</i> <b class="method">lowlight-compensation</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's lowlight-compensation setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="253"><i class="arg">instanceCmd</i> <b class="method">lowlight-compensation-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="254"><i class="arg">instanceCmd</i> <b class="method">set-callback-lowlightCompensation</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="255"><i class="arg">instanceCmd</i> <b class="method">unset-callback-lowlightCompensation</b></a></dt>
+<dd><p>These methods define and remove a callback responding to lowlightCompensation
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;lowlightCompensation&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection48" class="subsection"><h3><a name="subsection48">Pan</a></h3>
+<p>Should a production node support the pan API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">pan</b>.</p>
+<dl class="definitions">
+<dt><a name="256"><i class="arg">instanceCmd</i> <b class="method">pan</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+pan setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="257"><i class="arg">instanceCmd</i> <b class="method">pan</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's pan setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="258"><i class="arg">instanceCmd</i> <b class="method">pan-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="259"><i class="arg">instanceCmd</i> <b class="method">set-callback-pan</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="260"><i class="arg">instanceCmd</i> <b class="method">unset-callback-pan</b></a></dt>
+<dd><p>These methods define and remove a callback responding to pan
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;pan&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection49" class="subsection"><h3><a name="subsection49">Roll</a></h3>
+<p>Should a production node support the roll API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">roll</b>.</p>
+<dl class="definitions">
+<dt><a name="261"><i class="arg">instanceCmd</i> <b class="method">roll</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+roll setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="262"><i class="arg">instanceCmd</i> <b class="method">roll</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's roll setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="263"><i class="arg">instanceCmd</i> <b class="method">roll-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="264"><i class="arg">instanceCmd</i> <b class="method">set-callback-roll</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="265"><i class="arg">instanceCmd</i> <b class="method">unset-callback-roll</b></a></dt>
+<dd><p>These methods define and remove a callback responding to roll
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;roll&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection50" class="subsection"><h3><a name="subsection50">Saturation</a></h3>
+<p>Should a production node support the saturation API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">saturation</b>.</p>
+<dl class="definitions">
+<dt><a name="266"><i class="arg">instanceCmd</i> <b class="method">saturation</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+saturation setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="267"><i class="arg">instanceCmd</i> <b class="method">saturation</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's saturation setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="268"><i class="arg">instanceCmd</i> <b class="method">saturation-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="269"><i class="arg">instanceCmd</i> <b class="method">set-callback-saturation</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="270"><i class="arg">instanceCmd</i> <b class="method">unset-callback-saturation</b></a></dt>
+<dd><p>These methods define and remove a callback responding to saturation
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;saturation&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection51" class="subsection"><h3><a name="subsection51">Sharpness</a></h3>
+<p>Should a production node support the sharpness API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">sharpness</b>.</p>
+<dl class="definitions">
+<dt><a name="271"><i class="arg">instanceCmd</i> <b class="method">sharpness</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+sharpness setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="272"><i class="arg">instanceCmd</i> <b class="method">sharpness</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's sharpness setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="273"><i class="arg">instanceCmd</i> <b class="method">sharpness-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="274"><i class="arg">instanceCmd</i> <b class="method">set-callback-sharpness</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="275"><i class="arg">instanceCmd</i> <b class="method">unset-callback-sharpness</b></a></dt>
+<dd><p>These methods define and remove a callback responding to sharpness
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;sharpness&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection52" class="subsection"><h3><a name="subsection52">Tilt</a></h3>
+<p>Should a production node support the tilt API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">tilt</b>.</p>
+<dl class="definitions">
+<dt><a name="276"><i class="arg">instanceCmd</i> <b class="method">tilt</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+tilt setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="277"><i class="arg">instanceCmd</i> <b class="method">tilt</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's tilt setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="278"><i class="arg">instanceCmd</i> <b class="method">tilt-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="279"><i class="arg">instanceCmd</i> <b class="method">set-callback-tilt</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="280"><i class="arg">instanceCmd</i> <b class="method">unset-callback-tilt</b></a></dt>
+<dd><p>These methods define and remove a callback responding to tilt
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;tilt&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection53" class="subsection"><h3><a name="subsection53">Zoom</a></h3>
+<p>Should a production node support the zoom API the following
+methods become available.
+This support can checked by invoking the inherited method
+<b class="method">is-capable-of</b> for the capability name <b class="const">zoom</b>.</p>
+<dl class="definitions">
+<dt><a name="281"><i class="arg">instanceCmd</i> <b class="method">zoom</b></a></dt>
+<dd><p>In this form the method returns the current state of the instance's
+zoom setting.</p>
+<p>The result is an integer.</p></dd>
+<dt><a name="282"><i class="arg">instanceCmd</i> <b class="method">zoom</b> <i class="arg">value</i></a></dt>
+<dd><p>In this form the method changes the instance's zoom setting
+to the specified <i class="arg">value</i>.</p>
+<p>The result is an empty string.</p></dd>
+<dt><a name="283"><i class="arg">instanceCmd</i> <b class="method">zoom-range</b></a></dt>
+<dd><p>This method returns a dictionary describing the allowed domain of
+values for the capability. The keys and associated values are:</p>
+<dl class="definitions">
+<dt><b class="const">min</b></dt>
+<dd><p>The value is an integer number, the minimal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">max</b></dt>
+<dd><p>The value is an integer number, the maximal value the setting is
+allowed to have.</p></dd>
+<dt><b class="const">default</b></dt>
+<dd><p>The value is an integer number, the default value the setting will
+have after node construction.</p></dd>
+<dt><b class="const">step</b></dt>
+<dd><p>The value is an integer number, the difference between two legal
+values of the setting.
+The difference between <b class="const">min</b> and <b class="const">max</b> is a multiple of
+this value.</p></dd>
+<dt><b class="const">auto</b></dt>
+<dd><p>A boolean value. If <b class="const">true</b> the setting supports automatic
+adjustment during operation of the node, otherwise not.</p></dd>
+</dl></dd>
+<dt><a name="284"><i class="arg">instanceCmd</i> <b class="method">set-callback-zoom</b> <i class="arg">cmd</i>...</a></dt>
+<dd></dd>
+<dt><a name="285"><i class="arg">instanceCmd</i> <b class="method">unset-callback-zoom</b></a></dt>
+<dd><p>These methods define and remove a callback responding to zoom
+configuration changes.</p>
+<p>Setting a callback implicitly removes any previous callback set.</p>
+<p>The callback to invoke is specified as a command prefix, and
+will be invoked with two arguments added to it, the instance command,
+and the word &quot;zoom&quot;, in this order.</p>
+<p>The result of the methods is an empty string.</p></dd>
 </dl>
 </div>
 </div>

@@ -12,4 +12,5 @@ The main classes will all refer to the sub-sections found here.
 [include c_cap_mirror.inc]
 [include c_cap_pose.inc]
 [include c_cap_skeleton.inc]
+[include c_cap_general_int.inc]
 
