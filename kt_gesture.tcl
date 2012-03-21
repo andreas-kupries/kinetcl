@@ -32,7 +32,7 @@ critcl::class def ::kinetcl::Gesture {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_ListObjGetElements (interp, objv[4], &lc, &lv) != TCL_OK) {
+	if (Tcl_ListObjGetElements (interp, objv[3], &lc, &lv) != TCL_OK) {
 	    return TCL_ERROR;
 	} else if (lc != 2) {
 	    Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
@@ -41,15 +41,15 @@ critcl::class def ::kinetcl::Gesture {
 
 	if (Tcl_ListObjGetElements (interp, lv[0], &lbnc, &lbnv) != TCL_OK) {
 	    return TCL_ERROR;
-	} else if (lbnc != 2) {
-	    Tcl_AppendResult (interp, "Expected 3 coordinates in left bottom near point)", NULL);
+	} else if (lbnc != 3) {
+	    Tcl_AppendResult (interp, "Expected 3 coordinates in left bottom near point", NULL);
 	    return TCL_ERROR;
 	}
 
 	if (Tcl_ListObjGetElements (interp, lv[1], &rtfc, &rtfv) != TCL_OK) {
 	    return TCL_ERROR;
-	} else if (rtfc != 2) {
-	    Tcl_AppendResult (interp, "Expected 3 coordinates in right top far point)", NULL);
+	} else if (rtfc != 3) {
+	    Tcl_AppendResult (interp, "Expected 3 coordinates in right top far point", NULL);
 	    return TCL_ERROR;
 	}
 
