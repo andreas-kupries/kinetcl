@@ -80,7 +80,27 @@ Notes:
 
 This method returns a [package crimp] image of type [const grey16]
 where the value of each pixel represents the distance of the pixel
-from the sensor.
+from the sensor, in millimeters.
+
+[comment ===============================================================]
+[call [arg depthInstanceCmd] [method projective2world] [arg point]...]
+
+This method converts one or more 3D points from sensor coordinates to
+real world coordinates.
+
+[para] The result of the method is a list holding the conversion
+results. Each point in both arguments and result is a 3-element list
+containing the point's X-, Y-, and Z-coordinates, in this order.
+
+[comment ===============================================================]
+[call [arg depthInstanceCmd] [method world2projective] [arg point]...]
+
+This method converts one or more 3D points from real world coordinates
+to sensor coordinates.
+
+[para] The result of the method is a list holding the conversion
+results. Each point in both arguments and result is a 3-element list
+containing the point's X-, Y-, and Z-coordinates, in this order.
 
 [comment ===============================================================]
 [call [arg generatorInstanceCmd] [method set-callback-depthfov] [arg cmd]...]

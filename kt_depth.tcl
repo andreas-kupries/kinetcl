@@ -104,6 +104,122 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
+    mdef projective2world { /* Syntax: <instance> 2world point... */
+	XnStatus s;
+	int i, lc, pc, res = TCL_ERROR;
+	double v;
+	Tcl_Obj** lv;
+	Tcl_Obj *p, *rv;
+	Tcl_Obj** pv;
+	XnPoint3D* aprojective;
+	XnPoint3D* aworld;
+
+	if (objc == 2) {
+	    return TCL_OK;
+	}
+
+	lc = objc - 2;
+	lv = objv + 2;
+
+	/* Check input for proper format */
+
+	for (i = 0; i < lc; i++) {
+	    if ((Tcl_ListObjGetElements (interp, lv[i], &pc, &pv) != TCL_OK) || (pc != 3)) {
+		return TCL_ERROR;
+	    }
+	    if (Tcl_GetDoubleFromObj (interp, pv [0], &v) != TCL_OK) { return TCL_ERROR; }
+	    if (Tcl_GetDoubleFromObj (interp, pv [1], &v) != TCL_OK) { return TCL_ERROR; }
+	    if (Tcl_GetDoubleFromObj (interp, pv [2], &v) != TCL_OK) { return TCL_ERROR; }
+	}
+
+	aprojective = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
+	aworld      = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
+
+	for (i = 0; i < lc; i++) {
+	    Tcl_ListObjGetElements (interp, lv[i], &pc, &pv);
+	    Tcl_GetDoubleFromObj (interp, pv [0], &v); aprojective [i].X = v;
+	    Tcl_GetDoubleFromObj (interp, pv [1], &v); aprojective [i].Y = v;
+	    Tcl_GetDoubleFromObj (interp, pv [2], &v); aprojective [i].Z = v;
+	}
+
+	s = xnConvertProjectiveToRealWorld (instance->handle, lc, aprojective, aworld);
+	CHECK_STATUS_GOTO;
+
+	rv = Tcl_NewListObj (0, NULL);
+	for (i = 0; i < lc; i++) {
+	    p = Tcl_NewListObj (0, NULL);
+	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aworld [i].X));
+	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aworld [i].Y));
+	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aworld [i].Z));
+	    Tcl_ListObjAppendElement (interp, rv, p);
+	}
+
+	Tcl_SetObjResult (interp, rv);
+	res = TCL_OK;
+    error:
+	ckfree ((char*) aprojective);
+	ckfree ((char*) aworld);
+	return res;
+    }
+
+    mdef world2projective { /* Syntax: <instance> 2projective point... */
+	XnStatus s;
+	int i, lc, pc, res = TCL_ERROR;
+	double v;
+	Tcl_Obj** lv;
+	Tcl_Obj *p, *rv;
+	Tcl_Obj** pv;
+	XnPoint3D* aworld;
+	XnPoint3D* aprojective;
+
+	if (objc == 2) {
+	    return TCL_OK;
+	}
+
+	lc = objc - 2;
+	lv = objv + 2;
+
+	/* Check input for proper format */
+
+	for (i = 0; i < lc; i++) {
+	    if ((Tcl_ListObjGetElements (interp, lv[i], &pc, &pv) != TCL_OK) || (pc != 3)) {
+		return TCL_ERROR;
+	    }
+	    if (Tcl_GetDoubleFromObj (interp, pv [0], &v) != TCL_OK) { return TCL_ERROR; }
+	    if (Tcl_GetDoubleFromObj (interp, pv [1], &v) != TCL_OK) { return TCL_ERROR; }
+	    if (Tcl_GetDoubleFromObj (interp, pv [2], &v) != TCL_OK) { return TCL_ERROR; }
+	}
+
+	aworld = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
+	aprojective      = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
+
+	for (i = 0; i < lc; i++) {
+	    Tcl_ListObjGetElements (interp, lv[i], &pc, &pv);
+	    Tcl_GetDoubleFromObj (interp, pv [0], &v); aworld [i].X = v;
+	    Tcl_GetDoubleFromObj (interp, pv [1], &v); aworld [i].Y = v;
+	    Tcl_GetDoubleFromObj (interp, pv [2], &v); aworld [i].Z = v;
+	}
+
+	s = xnConvertRealWorldToProjective (instance->handle, lc, aworld, aprojective);
+	CHECK_STATUS_GOTO;
+
+	rv = Tcl_NewListObj (0, NULL);
+	for (i = 0; i < lc; i++) {
+	    p = Tcl_NewListObj (0, NULL);
+	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aprojective [i].X));
+	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aprojective [i].Y));
+	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aprojective [i].Z));
+	    Tcl_ListObjAppendElement (interp, rv, p);
+	}
+
+	Tcl_SetObjResult (interp, rv);
+	res = TCL_OK;
+    error:
+	ckfree ((char*) aworld);
+	ckfree ((char*) aprojective);
+	return res;
+    }
+
     # # ## ### ##### ######## #############
 
     ::kt_callback depthfov \
@@ -132,18 +248,3 @@ critcl::class def ::kinetcl::Depth {
 }
 
 # # ## ### ##### ######## #############
-if 0 {
-
-XnStatus
-xnConvertProjectiveToRealWorld
- (XnNodeHandle hInstance,
- XnUInt32 nCount,
- const XnPoint3D *aProjective, XnPoint3D *aRealWorld)
-
-XnStatus
-xnConvertRealWorldToProjective
- (XnNodeHandle hInstance,
- XnUInt32 nCount,
- const XnPoint3D *aRealWorld, XnPoint3D *aProjective)
-
-}
