@@ -1,0 +1,288 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require Tk
+package require crimp::tk
+package require crimp
+
+# # ## ### ##### ######## ############# #####################
+
+# Data structures explanation.
+#
+# S = global dictionary holding all user skeleton data.
+#
+#   S <user> joints <joint>            --> joint confidence and real-world position.
+#   S <user> canvas <joint>            --> canvas item representing the joint (dot)
+#   S <user> canvas <jointA>,<jointB>  --> canvas item representing the line between
+#                                          two joints (segment).
+#   S <user> at     <joint>            --> joint position in projective coordinates
+#
+# Canvas items:
+#             What    Attributes                  Tags
+#             ====    ==========                  ====
+#   Joints:   Circle  red, radius, see [setup]    u,<user> p,<user>,<joint>
+#   Segments: Line    green, width=radius         u,<user> l,<user>,<jointA>,<jointB>
+#             ====    ==========                  ====
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv]} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    global photo radius
+    set radius 5
+
+    kinetcl user create K
+    K set-callback-new   usernew
+    K set-callback-exit  userexit
+    K set-callback-lost  userlost
+    K set-callback-calibrationComplete calibration
+    K set-profile all
+
+    kinetcl depth create D
+    set size [dict get [D meta] map res]
+    lassign $size w h
+    #D destroy - No. We need this for coordinate
+    #            conversion world -> screen also.
+
+    puts [join $size { x }]
+
+    set photo [image create photo]
+    crimp write 2tk $photo [crimp blank grey8 $w $h 0]
+
+    canvas      .image \
+	-scrollregion [list 0 0 $w $h] \
+	-width $w -height $h
+    ttk::button .exit -text Exit -command ::exit
+
+    # More buttons: stop/start recording
+    pack .image -side top -expand 1 -fill both
+    pack .exit  -side left
+
+    bind all <q> ::exit
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc usernew {obj event user} {
+    puts "$event $user"
+    K request-calibration $user 0
+    return
+}
+
+proc userexit {obj event user} {
+    global S
+    puts "$event $user"
+    catch { dict unset S $user }
+    .image delete u,$user
+    return
+}
+
+proc userlost {obj event user} {
+    global S
+    puts "$event $user"
+    catch { dict unset S $user }
+    .image delete u,$user
+    return
+}
+
+proc calibration {obj event user status} {
+    puts "$event $user : $status"
+    if {$status eq "ok"} {
+	K start-tracking $user
+    } else {
+	K request-calibration $user 0
+    }
+    return
+}
+
+proc skeleton {} {
+    foreach user [K users] {
+	skeletonfor $user
+    }
+    return
+}
+
+proc skeletonfor {user} {
+    global S
+    if {![K is-tracking $user]} return
+    puts "update $user"
+    dict set S $user joints [K get-skeleton $user]
+    draw $user
+    return
+}
+
+proc draw {user} {
+    drawpoints $user
+    drawlines  $user
+}
+
+proc drawpoints {user} {
+    global S
+    array set joint [dict get $S $user joints]
+    catch {
+	array set canvas [dict get $S $user canvas]
+    }
+
+    foreach j [array names joint] {
+	lassign [lindex $joint($j) 0] confidence point
+
+	if {$confidence < 0.5} {
+	    .image delete p,$user,$j
+	    catch { dict unset S $user canvas $j }
+	    catch { dict unset S $user at $j }
+	} else {
+	    if {![info exists canvas($j)]} {
+		set dot [dot .image 0 0 -tags [list p,$user,$j u,$user]]
+		dict set S $user canvas $j $dot
+	    }
+	    set p [lindex [D world2projective $point] 0]
+	    dict set S $user at $j $p
+	    #puts "($user $j): $point --> $p"
+	    lassign $p x y z
+	    place-dot .image p,$user,$j $x $y
+	}
+    }
+    return
+}
+
+proc drawlines {user} {
+    global S
+    array set canvas {}
+    catch {
+	array set canvas [dict get $S $user canvas]
+    }
+    array set at {}
+    catch {
+	array set at [dict get $S $user at]
+    }
+
+    # not used: fingertip, wrist, ankle, collars, waist
+    foreach {s e} {
+	left-hand       left-elbow
+	left-elbow      left-shoulder
+	left-shoulder   torso
+	left-shoulder   neck
+
+	left-foot       left-knee
+	left-knee       left-hip
+	left-hip        torso
+
+	right-hand      right-elbow
+	right-elbow     right-shoulder
+	right-shoulder  torso
+	right-shoulder  neck
+
+	right-foot      right-knee
+	right-knee      right-hip
+	right-hip       torso
+
+	head            neck
+	left-hip        right-hip
+    } {
+	if {![info exists canvas($s)] ||
+	    ![info exists canvas($e)]} {
+	    .image delete l,$user,$s,$e
+	    catch { dict unset S $user canvas $s,$e }
+	} else {
+	    lassign $at($s) x0 y0
+	    lassign $at($e) x1 y1
+	    if {![info exists canvas($s,$e)]} {
+		set segment [segment .image $x0 $y0 $x1 $y1 -tags [list l,$user,$s,$e u,$user]]
+		dict set S $user canvas $s,$e $segment
+	    }
+	    place-segment .image l,$user,$s,$e $x0 $y0 $x1 $y1
+	}
+    }
+    return
+}
+
+proc place-dot {c item x y} {
+    global radius
+    set w [expr {$x - $radius}]
+    set n [expr {$y - $radius}]
+    set e [expr {$x + $radius}]
+    set s [expr {$y + $radius}]
+    $c coords $item $w $n $e $s
+    return
+}
+
+proc dot {c x y args} {
+    global radius
+    # Create a circle centered on the chosen location, red filled
+    # with black border.
+    set w [expr {$x - $radius}]
+    set n [expr {$y - $radius}]
+    set e [expr {$x + $radius}]
+    set s [expr {$y + $radius}]
+    return [$c create oval $w $n $e $s \
+		-width   1   \
+		-outline red \
+		-fill    red \
+		{*}$args]
+}
+
+proc place-segment {c item x0 y0 x1 y1} {
+    $c coords $item $x0 $y0 $x1 $y1
+    return
+}
+
+proc segment {c x0 y0 x1 y1 args} {
+    global radius
+    return [$c create line $x0 $y0 $x1 $y1 \
+		-width $radius \
+		-fill green \
+		{*}$args]
+}
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    skeleton
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
