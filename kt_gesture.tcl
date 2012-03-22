@@ -32,6 +32,8 @@ critcl::class def ::kinetcl::Gesture {
 	    return TCL_ERROR;
 	}
 
+	/* TODO : Write general code for tcl -> 3d point conversion */
+
 	if (Tcl_ListObjGetElements (interp, objv[3], &lc, &lv) != TCL_OK) {
 	    return TCL_ERROR;
 	} else if (lc != 2) {
@@ -229,34 +231,17 @@ critcl::class def ::kinetcl::Gesture {
 	    {const XnPoint3D* pIDPosition}
 	    {const XnPoint3D* pEndPosition}
 	} {
-	    Tcl_Obj* coord [3];
-
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-
-	    coord [0] = Tcl_NewDoubleObj (pIDPosition->X);
-	    coord [1] = Tcl_NewDoubleObj (pIDPosition->Y);
-	    coord [2] = Tcl_NewDoubleObj (pIDPosition->Z);
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
-
-	    coord [0] = Tcl_NewDoubleObj (pEndPosition->X);
-	    coord [1] = Tcl_NewDoubleObj (pEndPosition->Y);
-	    coord [2] = Tcl_NewDoubleObj (pEndPosition->Z);
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
+	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pIDPosition));
+	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pEndPosition));
 	} \
 	gestureProgress {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fProgress}
 	} {
-	    Tcl_Obj* coord [3];
-
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-
-	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
-	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
-	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
-
+	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fProgress));
 	}
 
@@ -272,14 +257,8 @@ critcl::class def ::kinetcl::Gesture {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pPosition}
 	} {
-	    Tcl_Obj* coord [3];
-
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-
-	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
-	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
-	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
+	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
 	}
 
     ::kt_callback gestureStageReadyForNext \
@@ -289,14 +268,8 @@ critcl::class def ::kinetcl::Gesture {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pPosition}
 	} {
-	    Tcl_Obj* coord [3];
-
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-
-	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
-	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
-	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
+	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
 	}
 
     # # ## ### ##### ######## #############

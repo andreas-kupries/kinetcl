@@ -624,7 +624,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    int k;
 	    XnStatus s;
 	    XnSkeletonJointTransformation t;
-	    Tcl_Obj* coord  [3];
 	    Tcl_Obj* matrix [9];
 	    Tcl_Obj* pos [2];
 	    Tcl_Obj* ori [2];
@@ -633,19 +632,13 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    s = xnGetSkeletonJoint (instance->handle, userid, joint+1, &t);
 	    CHECK_STATUS_RETURN_NULL;
 
-	    /* t.position.position.X         */
-	    /* t.position.position.Y         */
-	    /* t.position.position.Z         */
+	    /* t.position.position       3D  */
 	    /* t.position.fConfidence        */
 	    /* t.orientation.orientation [9] */
 	    /* t.orientation.fConfidence     */
 
-	    coord [0] = Tcl_NewDoubleObj (t.position.position.X);
-	    coord [1] = Tcl_NewDoubleObj (t.position.position.Y);
-	    coord [2] = Tcl_NewDoubleObj (t.position.position.Z);
-
 	    pos [0] = Tcl_NewDoubleObj (t.position.fConfidence);
-	    pos [1] = Tcl_NewListObj (3, coord);
+	    pos [1] = kinetcl_convert_3d (&t.position.position);
 
 	    for (k = 0; k < 9; k++) {
 	        matrix [k] = Tcl_NewDoubleObj (t.orientation.orientation.elements [k]);

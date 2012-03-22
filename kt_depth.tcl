@@ -147,11 +147,7 @@ critcl::class def ::kinetcl::Depth {
 
 	rv = Tcl_NewListObj (0, NULL);
 	for (i = 0; i < lc; i++) {
-	    p = Tcl_NewListObj (0, NULL);
-	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aworld [i].X));
-	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aworld [i].Y));
-	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aworld [i].Z));
-	    Tcl_ListObjAppendElement (interp, rv, p);
+	    Tcl_ListObjAppendElement (interp, rv, kinetcl_convert_3d (&aworld [i]));
 	}
 
 	Tcl_SetObjResult (interp, rv);
@@ -205,11 +201,7 @@ critcl::class def ::kinetcl::Depth {
 
 	rv = Tcl_NewListObj (0, NULL);
 	for (i = 0; i < lc; i++) {
-	    p = Tcl_NewListObj (0, NULL);
-	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aprojective [i].X));
-	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aprojective [i].Y));
-	    Tcl_ListObjAppendElement (interp, p, Tcl_NewDoubleObj (aprojective [i].Z));
-	    Tcl_ListObjAppendElement (interp, rv, p);
+	    Tcl_ListObjAppendElement (interp, rv, kinetcl_convert_3d (&aprojective [i]));
 	}
 
 	Tcl_SetObjResult (interp, rv);

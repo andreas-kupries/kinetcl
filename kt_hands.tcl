@@ -53,6 +53,8 @@ critcl::class def ::kinetcl::Hands {
 	    return TCL_ERROR;
 	}
 
+	/* TODO : Write general code for tcl -> 3d point conversion */
+
 	if (Tcl_GetDoubleFromObj (interp, pv [0], &px) != TCL_OK) {
 	    return TCL_ERROR;
 	}
@@ -116,15 +118,9 @@ critcl::class def ::kinetcl::Hands {
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fTime}
 	} {
-	    Tcl_Obj* coord [3];
-
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-
-	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
-	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
-	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
+	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
-
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
 	} \
 	handUpdate {
@@ -132,15 +128,8 @@ critcl::class def ::kinetcl::Hands {
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fTime}
 	} {
-	    Tcl_Obj* coord [3];
-
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-
-	    coord [0] = Tcl_NewDoubleObj (pPosition->X);
-	    coord [1] = Tcl_NewDoubleObj (pPosition->Y);
-	    coord [2] = Tcl_NewDoubleObj (pPosition->Z);
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
-
+	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
 	} \
 	handDestroy {
