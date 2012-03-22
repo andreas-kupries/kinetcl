@@ -20,19 +20,11 @@ critcl::class def ::kinetcl::Gesture {
 	XnStatus s;
 	int lc;
 	Tcl_Obj** lv;
-	int lbnc;
-	Tcl_Obj** lbnv;
-	int rtfc;
-	Tcl_Obj** rtfv;
-	double lbn_x, lbn_y, lbn_z;
-	double rtf_x, rtf_y, rtf_z;
 
 	if (objc != 4) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "gesture box");
 	    return TCL_ERROR;
 	}
-
-	/* TODO : Write general code for tcl -> 3d point conversion */
 
 	if (Tcl_ListObjGetElements (interp, objv[3], &lc, &lv) != TCL_OK) {
 	    return TCL_ERROR;
@@ -41,46 +33,13 @@ critcl::class def ::kinetcl::Gesture {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_ListObjGetElements (interp, lv[0], &lbnc, &lbnv) != TCL_OK) {
-	    return TCL_ERROR;
-	} else if (lbnc != 3) {
-	    Tcl_AppendResult (interp, "Expected 3 coordinates in left bottom near point", NULL);
+	if (kinetcl_convert_to3d (interp, lv [0], &box.LeftBottomNear) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_ListObjGetElements (interp, lv[1], &rtfc, &rtfv) != TCL_OK) {
-	    return TCL_ERROR;
-	} else if (rtfc != 3) {
-	    Tcl_AppendResult (interp, "Expected 3 coordinates in right top far point", NULL);
+	if (kinetcl_convert_to3d (interp, lv [1], &box.RightTopFar) != TCL_OK) {
 	    return TCL_ERROR;
 	}
-
-	if (Tcl_GetDoubleFromObj (interp, lbnv[0], &lbn_x) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-	if (Tcl_GetDoubleFromObj (interp, lbnv[1], &lbn_y) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-	if (Tcl_GetDoubleFromObj (interp, lbnv[2], &lbn_z) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetDoubleFromObj (interp, rtfv[0], &rtf_x) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-	if (Tcl_GetDoubleFromObj (interp, rtfv[1], &rtf_y) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-	if (Tcl_GetDoubleFromObj (interp, rtfv[2], &rtf_z) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	box.LeftBottomNear.X = lbn_x;
-	box.LeftBottomNear.Y = lbn_y;
-	box.LeftBottomNear.Z = lbn_z;
-	box.RightTopFar.X    = rtf_x;
-	box.RightTopFar.Y    = rtf_y;
-	box.RightTopFar.Z    = rtf_z;
 
 	s = xnAddGesture (instance->handle, Tcl_GetString (objv [2]), &box);
 	CHECK_STATUS_RETURN;

@@ -46,28 +46,9 @@ critcl::class def ::kinetcl::Hands {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_ListObjGetElements (interp, objv[2], &pc, &pv) != TCL_OK) {
-	    return TCL_ERROR;
-	} else if (pc != 3) {
-	    Tcl_AppendResult (interp, "Expected point (3 coordinates)", NULL);
+	if (kinetcl_covnert_to3d (interp, objv [2], &p) != TCL_OK) {
 	    return TCL_ERROR;
 	}
-
-	/* TODO : Write general code for tcl -> 3d point conversion */
-
-	if (Tcl_GetDoubleFromObj (interp, pv [0], &px) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-	if (Tcl_GetDoubleFromObj (interp, pv [1], &py) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-	if (Tcl_GetDoubleFromObj (interp, pv [2], &pz) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	p.X = px;
-	p.Y = py;
-	p.Z = pz;
 
 	s = xnStartTracking (instance->handle, &p);
 	CHECK_STATUS_RETURN;

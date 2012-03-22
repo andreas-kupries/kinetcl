@@ -222,6 +222,35 @@ critcl::class def ::kinetcl::Base {
 
 	    return Tcl_NewListObj (3, coords);
 	}
+
+	static int
+	kinetcl_convert_to3d (Tcl_Interp* interp, Tcl_Obj* ivec, XnVector3D* vec)
+	{
+	    Tcl_Obj* v;
+	    int n;
+	    double x, y, z;
+
+	    if (Tcl_ListObjGetElements (interp, ivec, &n, &v) != TCL_OK) {
+		Tcl_AppendResult (interp, "Expected coordinate list", NULL);
+		return TCL_ERROR;
+	    }
+	    if (n != 3) {
+		Tcl_AppendResult (interp, "Expected 3 coordinates", NULL);
+		return TCL_ERROR;
+	    }
+
+	    if (Tcl_GetDoubleFromObj (interp, v [0], &x) != TCL_OK) { return TCL_ERROR; }
+	    if (Tcl_GetDoubleFromObj (interp, v [1], &y) != TCL_OK) { return TCL_ERROR; }
+	    if (Tcl_GetDoubleFromObj (interp, v [2], &x) != TCL_OK) { return TCL_ERROR; }
+
+	    if (vec) {
+		vec->X = x;
+		vec->Y = y;
+		vec->Z = zl;
+	    }
+
+	    return TCL_OK;
+	}
     }
 
     # # ## ### ##### ######## #############

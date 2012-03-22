@@ -122,27 +122,19 @@ critcl::class def ::kinetcl::Depth {
 	lv = objv + 2;
 
 	/* Check input for proper format */
+	aprojective = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
 
 	for (i = 0; i < lc; i++) {
-	    if ((Tcl_ListObjGetElements (interp, lv[i], &pc, &pv) != TCL_OK) || (pc != 3)) {
+	    if (kinetcl_convert_to3d (interp, lv [i], &aprojective [i]) != TCL_OK) {
+		ckfree ((char*) aprojective);
 		return TCL_ERROR;
 	    }
-	    if (Tcl_GetDoubleFromObj (interp, pv [0], &v) != TCL_OK) { return TCL_ERROR; }
-	    if (Tcl_GetDoubleFromObj (interp, pv [1], &v) != TCL_OK) { return TCL_ERROR; }
-	    if (Tcl_GetDoubleFromObj (interp, pv [2], &v) != TCL_OK) { return TCL_ERROR; }
 	}
 
-	aprojective = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
-	aworld      = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
-
-	for (i = 0; i < lc; i++) {
-	    Tcl_ListObjGetElements (interp, lv[i], &pc, &pv);
-	    Tcl_GetDoubleFromObj (interp, pv [0], &v); aprojective [i].X = v;
-	    Tcl_GetDoubleFromObj (interp, pv [1], &v); aprojective [i].Y = v;
-	    Tcl_GetDoubleFromObj (interp, pv [2], &v); aprojective [i].Z = v;
-	}
-
+	aworld = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
 	s = xnConvertProjectiveToRealWorld (instance->handle, lc, aprojective, aworld);
+	ckfree ((char*) aprojective);
+
 	CHECK_STATUS_GOTO;
 
 	rv = Tcl_NewListObj (0, NULL);
@@ -153,7 +145,6 @@ critcl::class def ::kinetcl::Depth {
 	Tcl_SetObjResult (interp, rv);
 	res = TCL_OK;
     error:
-	ckfree ((char*) aprojective);
 	ckfree ((char*) aworld);
 	return res;
     }
@@ -176,27 +167,20 @@ critcl::class def ::kinetcl::Depth {
 	lv = objv + 2;
 
 	/* Check input for proper format */
+	aworld = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
 
 	for (i = 0; i < lc; i++) {
-	    if ((Tcl_ListObjGetElements (interp, lv[i], &pc, &pv) != TCL_OK) || (pc != 3)) {
+	    if (kinetcl_convert_to3d (interp, lv [i], &world [i]) != TCL_OK) {
+		ckfree ((char*) aprojective);
 		return TCL_ERROR;
 	    }
-	    if (Tcl_GetDoubleFromObj (interp, pv [0], &v) != TCL_OK) { return TCL_ERROR; }
-	    if (Tcl_GetDoubleFromObj (interp, pv [1], &v) != TCL_OK) { return TCL_ERROR; }
-	    if (Tcl_GetDoubleFromObj (interp, pv [2], &v) != TCL_OK) { return TCL_ERROR; }
 	}
 
-	aworld = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
-	aprojective      = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
-
-	for (i = 0; i < lc; i++) {
-	    Tcl_ListObjGetElements (interp, lv[i], &pc, &pv);
-	    Tcl_GetDoubleFromObj (interp, pv [0], &v); aworld [i].X = v;
-	    Tcl_GetDoubleFromObj (interp, pv [1], &v); aworld [i].Y = v;
-	    Tcl_GetDoubleFromObj (interp, pv [2], &v); aworld [i].Z = v;
-	}
+	aprojective = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
 
 	s = xnConvertRealWorldToProjective (instance->handle, lc, aworld, aprojective);
+	ckfree ((char*) aworld);
+
 	CHECK_STATUS_GOTO;
 
 	rv = Tcl_NewListObj (0, NULL);
@@ -207,7 +191,6 @@ critcl::class def ::kinetcl::Depth {
 	Tcl_SetObjResult (interp, rv);
 	res = TCL_OK;
     error:
-	ckfree ((char*) aworld);
 	ckfree ((char*) aprojective);
 	return res;
     }
