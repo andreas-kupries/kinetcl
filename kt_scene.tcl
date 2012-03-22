@@ -66,6 +66,29 @@ critcl::class def ::kinetcl::Scene {
 	return TCL_OK;
     }
 
+    mdef floor { /* Syntax: <instance> floor */
+	XnPlane3D floor;
+	XnStatus s;
+	Tcl_Obj* res;
+
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_ERROR;
+	}
+
+	s = xnGetFloor (instance->handle, &floor);
+	CHECK_STATUS_RETURN;
+
+	res = Tcl_NewDictObj ();
+	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("point",-1),
+			kinetcl_convert_3d (&floor.ptPoint));
+	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("normal",-1),
+			kinetcl_convert_3d (&floor.vNormal));
+
+	Tcl_SetObjResult (interp, res);
+	return TCL_OK;
+    }
+
     # # ## ### ##### ######## #############
 
     support {
