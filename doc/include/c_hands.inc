@@ -39,7 +39,8 @@ instance using them is destroyed.
 [call [arg instanceCmd] [method set-smoothing] [arg factor]]
 
 This method sets the smoothing [arg factor] for hand tracking, a
-floating point value.
+floating point value between [const 0] and [const 1]. The former
+disables smoothing, the latter implies infinite smoothing.
 
 [para] The result of the method is an empty string.
 
@@ -56,8 +57,7 @@ coordinates, in this order.
 [comment ===============================================================]
 [call [arg instanceCmd] [method stop-tracking] [arg id]]
 
-This method stops tracking of the hand(s) for the user specified by
-the [arg id].
+This method stops tracking of the hand specified by the [arg id].
 
 [para] The result of the method is an empty string.
 
@@ -79,8 +79,8 @@ events, i.e. the node starting to track an additional hand.
 
 [para] The callback to invoke is specified as a command prefix, and
 will be invoked with five arguments added to it, the instance command,
-the word "handCreate", the id of the user the hand belongs to, the
-location of the hand, and a timestamp, in this order.
+the word "handCreate", the id of the hand, the location of the hand,
+and a timestamp, in this order.
 
 [para] The location is a 3-element list containing the X, Y, and Z
 coordinates of the hand, in this order.
@@ -98,8 +98,8 @@ events, i.e. when a tracked hand moves to a new location.
 
 [para] The callback to invoke is specified as a command prefix, and
 will be invoked with five arguments added to it, the instance command,
-the word "handUpdate", the id of the user the hand belongs to, the new
-location of the hand, and a timestamp, in this order.
+the word "handUpdate", the id of the hand, the new location of the
+hand, and a timestamp, in this order.
 
 [para] The location is a 3-element list containing the X, Y, and Z
 coordinates of the hand, in this order.
@@ -117,8 +117,8 @@ destruction events, i.e. when a tracked hand disappears.
 
 [para] The callback to invoke is specified as a command prefix, and
 will be invoked with four arguments added to it, the instance command,
-the word "handDestroy", the id of the user the destroyed hand belonged
-to, and a timestamp, in this order.
+the word "handDestroy", the id of the destroyed hand, and a timestamp,
+in this order.
 
 [para] The result of the methods is an empty string.
 
