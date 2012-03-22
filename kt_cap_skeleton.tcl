@@ -188,7 +188,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
     mdef is-tracking { /* Syntax: <instance> is-tracking <id> */
 	int id;
-	XnStatus s;
+	XnBool tracking;
 
 	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "id");
@@ -199,15 +199,15 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	s = xnIsSkeletonTracking (instance->handle, id);
-	CHECK_STATUS_RETURN;
+	tracking = xnIsSkeletonTracking (instance->handle, id);
 
+	Tcl_SetObjResult (interp, Tcl_NewIntObj (tracking));
 	return TCL_OK;
     }
 
     mdef is-calibrated { /* Syntax: <instance> is-calibrated <id> */
 	int id;
-	XnStatus s;
+	XnBool calibrated;
 
 	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "id");
@@ -218,28 +218,28 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	s = xnIsSkeletonCalibrated (instance->handle, id);
-	CHECK_STATUS_RETURN;
+	calibrated = xnIsSkeletonCalibrated (instance->handle, id);
 
+	Tcl_SetObjResult (interp, Tcl_NewIntObj (calibrated));
 	return TCL_OK;
     }
 
     mdef is-calibrating { /* Syntax: <instance> is-calibrating <id> */
 	int id;
-	XnStatus s;
+	XnBool calibrating;
 
 	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "id");
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_GetIntFromObj (interp, objv[1], &id) != TCL_OK) {
+	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
-	s = xnIsSkeletonCalibrating (instance->handle, id);
-	CHECK_STATUS_RETURN;
+	calibrating = xnIsSkeletonCalibrating (instance->handle, id);
 
+	Tcl_SetObjResult (interp, Tcl_NewIntObj (calibrating));
 	return TCL_OK;
     }
 
@@ -252,11 +252,11 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_GetIntFromObj (interp, objv[1], &id) != TCL_OK) {
+	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_GetBooleanFromObj (interp, objv[1], &force) != TCL_OK) {
+	if (Tcl_GetBooleanFromObj (interp, objv[3], &force) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -275,7 +275,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_GetIntFromObj (interp, objv[1], &id) != TCL_OK) {
+	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -425,7 +425,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	available = xnIsJointAvailable (instance->handle, joint);
+	available = xnIsJointAvailable (instance->handle, joint+1);
 
 	Tcl_SetObjResult (interp, Tcl_NewIntObj (available));
 	return TCL_OK;
@@ -502,21 +502,15 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     }
 
     mdef get-joint { /* Syntax: <instance> get-joint <user> <joint> */
-	int active, joint, id, k;
-	XnStatus s;
-	XnSkeletonJointTransformation t;
-	Tcl_Obj* coord  [3];
-	Tcl_Obj* matrix [9];
-	Tcl_Obj* pos [2];
-	Tcl_Obj* ori [2];
-	Tcl_Obj* result [2];
+	Tcl_Obj* result;
+	int userid, joint;
 
 	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "joint");
+	    Tcl_WrongNumArgs (interp, 2, objv, "user joint");
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
+	if (Tcl_GetIntFromObj (interp, objv[2], &userid) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -526,34 +520,34 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	s = xnGetSkeletonJoint (instance->handle, id, joint+1, &t);
-	CHECK_STATUS_RETURN;
+	result = @stem@_get_joint (interp, instance, userid, joint);
+	if (!result) {
+	    return TCL_ERROR;
+	}
 
-	/* t.position.position.X         */
-	/* t.position.position.Y         */
-	/* t.position.position.Z         */
-	/* t.position.fConfidence        */
-	/* t.orientation.orientation [9] */
-	/* t.orientation.fConfidence     */
+	Tcl_SetObjResult (interp, result);
+	return TCL_OK;
+    }
 
-	coord [0] = Tcl_NewDoubleObj (t.position.position.X);
-	coord [1] = Tcl_NewDoubleObj (t.position.position.Y);
-	coord [2] = Tcl_NewDoubleObj (t.position.position.Z);
+    mdef get-skeleton { /* Syntax: <instance> get-skeleton <user> */
+	Tcl_Obj* result;
+	int userid;
 
-	pos [0] = Tcl_NewDoubleObj (t.position.fConfidence);
-	pos [1] = Tcl_NewListObj (3, coord);
+	if (objc != 3) {
+	    Tcl_WrongNumArgs (interp, 2, objv, "user");
+	    return TCL_ERROR;
+	}
 
-	for (k = 0; k < 9; k++) {
-	    matrix [k] = Tcl_NewDoubleObj (t.orientation.orientation.elements [k]);
-        }
+	if (Tcl_GetIntFromObj (interp, objv[2], &userid) != TCL_OK) {
+	    return TCL_ERROR;
+	}
 
-	ori [0] = Tcl_NewDoubleObj (t.orientation.fConfidence);
-	ori [1] = Tcl_NewListObj (9, matrix);
+	result = @stem@_get_skeleton (interp, instance, userid);
+	if (!result) {
+	    return TCL_ERROR;
+	}
 
-	result [0] = Tcl_NewListObj (2, pos);
-	result [1] = Tcl_NewListObj (2, ori);
-
-	Tcl_SetObjResult (interp, Tcl_NewListObj (2, result));
+	Tcl_SetObjResult (interp, result);
 	return TCL_OK;
     }
 
@@ -620,6 +614,78 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    "timeout",		/* XN_CALIBRATION_STATUS_TIMEOUT_FAIL */
 	    NULL
 	};
+
+	static Tcl_Obj*
+	@stem@_get_joint (Tcl_Interp* interp,
+			  @instancetype@ instance,
+			  int userid,
+			  int joint)
+	{
+	    int k;
+	    XnStatus s;
+	    XnSkeletonJointTransformation t;
+	    Tcl_Obj* coord  [3];
+	    Tcl_Obj* matrix [9];
+	    Tcl_Obj* pos [2];
+	    Tcl_Obj* ori [2];
+	    Tcl_Obj* result [2];
+
+	    s = xnGetSkeletonJoint (instance->handle, userid, joint+1, &t);
+	    CHECK_STATUS_RETURN_NULL;
+
+	    /* t.position.position.X         */
+	    /* t.position.position.Y         */
+	    /* t.position.position.Z         */
+	    /* t.position.fConfidence        */
+	    /* t.orientation.orientation [9] */
+	    /* t.orientation.fConfidence     */
+
+	    coord [0] = Tcl_NewDoubleObj (t.position.position.X);
+	    coord [1] = Tcl_NewDoubleObj (t.position.position.Y);
+	    coord [2] = Tcl_NewDoubleObj (t.position.position.Z);
+
+	    pos [0] = Tcl_NewDoubleObj (t.position.fConfidence);
+	    pos [1] = Tcl_NewListObj (3, coord);
+
+	    for (k = 0; k < 9; k++) {
+	        matrix [k] = Tcl_NewDoubleObj (t.orientation.orientation.elements [k]);
+	    }
+
+	    ori [0] = Tcl_NewDoubleObj (t.orientation.fConfidence);
+	    ori [1] = Tcl_NewListObj (9, matrix);
+
+	    result [0] = Tcl_NewListObj (2, pos);
+	    result [1] = Tcl_NewListObj (2, ori);
+
+	    return Tcl_NewListObj (2, result);
+	}
+
+	static Tcl_Obj*
+	@stem@_get_skeleton (Tcl_Interp* interp,
+			     @instancetype@ instance,
+			     int userid)
+	{
+	    Tcl_Obj* jres;
+	    Tcl_Obj* res = Tcl_NewDictObj ();
+	    int joint;
+
+	    for (joint = 0; joint < XN_SKEL_RIGHT_FOOT; joint ++)
+	    {
+	        if (!xnIsJointAvailable (instance->handle, joint+1)) continue;
+		if (!xnIsJointActive    (instance->handle, joint+1)) continue;
+
+	        jres = @stem@_get_joint (interp, instance, userid, joint);
+		if (!jres) goto error;
+		Tcl_DictObjPut (interp, res,
+				Tcl_NewStringObj (@stem@_skeleton_joint[joint],-1),
+				jres);
+	    }
+
+	    return res;
+        error:
+	    Tcl_DecrRefCount (res);
+	    return 0;
+	}
     }
 
     # # ## ### ##### ######## #############

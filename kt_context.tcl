@@ -30,6 +30,12 @@ critcl::ccode {
 	    goto error; \
 	}
 
+#define CHECK_STATUS_RETURN_NULL \
+	if (s != XN_STATUS_OK) { \
+	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL); \
+	    return NULL; \
+	}
+
 	/* Common event fields for kinetcl callback events. Tcl's
 	 * information, plus a pointer to an event-specific cleanup
 	 * function, to enable cleanup without knowing anything of

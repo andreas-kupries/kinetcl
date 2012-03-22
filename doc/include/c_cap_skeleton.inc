@@ -276,7 +276,19 @@ representating the rotation matrix for the joint.
 [list_end]
 [list_end]
 
+[comment ===============================================================]
+[call [arg instanceCmd] [method get-skeleton] [arg user]]
 
+This method retrieves the position and orientation data for all joints
+of the user specified by [arg id]. In other words, the whole skeleton,
+as available and active.
+
+[para] The result of the method is a dictionary mapping joint names to
+position and orientation, given in the format returned by method
+[method get-joint].
+
+[para] Joints which are either not available or not actively tracked
+will not be found in the dictionary.
 
 [comment ===============================================================]
 [call [arg instanceCmd] [method set-callback-jointConfigChange] [arg cmd]...]

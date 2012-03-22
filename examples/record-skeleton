@@ -1,0 +1,99 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv]} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    kinetcl user create K
+    #K set-callback-newdata newframe
+    K set-callback-new   usernew
+    K set-callback-lost  userlost
+    K set-callback-calibrationComplete calibration
+    K set-profile all
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc usernew {obj event user} {
+    puts "$event $user"
+    K request-calibration $user 0
+    return
+}
+
+proc calibration {obj event user status} {
+    puts "$event $user : $status"
+    if {$status eq "ok"} {
+	K start-tracking $user
+    } else {
+	K request-calibration $user 0
+    }
+    return
+}
+
+proc skeleton {} {
+    foreach user [K users] {
+	skeletonfor $user
+    }
+    return
+}
+
+proc skeletonfor {user} {
+    if {![K is-tracking $user]} return
+    array set $user [K get-skeleton $user]
+    puts "skeleton $user ____________________________________"
+    parray $user
+    return
+}
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    skeleton
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
