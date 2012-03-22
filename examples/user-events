@@ -17,19 +17,14 @@ proc main {} {
 # # ## ### ##### ######## ############# #####################
 
 proc cmdline {} {
-    global argv pose
-    if {![llength $argv]} usage
-    lassign $argv pose
+    global argv
+    if {[llength $argv]} usage
     return
 }
 
 proc usage {} {
     global argv0
-
-    kinetcl user create K
-    set p [K poses]
-    K destroy
-    puts stderr "usage: $argv0 [join $p |]"
+    puts stderr "usage: $argv0"
     exit 1
 }
 
@@ -44,18 +39,13 @@ proc setup {} {
     K set-callback-calibrationStart    calibration
     K set-callback-calibrationComplete calibration
     K set-callback-calibrationProgress calibration
-
-    K set-callback-poseEnter    pose
-    K set-callback-poseExit     pose
-    K set-callback-poseProgress pose
     return
 }
 
 proc run {} {
-    global pose
     ping start...
     kinetcl start
-    ping process($pose)...
+    ping process...
     while {1} record
     return
 }
@@ -73,23 +63,15 @@ proc calibration {obj event user {status {}}} {
     return
 }
 
-proc pose {obj event pose user {status {}}} {
-    puts "\t$event $pose $user : $status"
-    return
-}
-
 proc userchange {obj event user} {
-global pose
     puts "$event $user"
 
     switch -- $event {
 	new - enter {
 	    K start-tracking $user
-	    K start-detection $user $pose
 	}
 	exit {
 	    K stop-tracking $user
-	    K stop-detection $user $pose
 	}
     }
     return
