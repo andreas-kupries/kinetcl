@@ -46,7 +46,7 @@ critcl::class def ::kinetcl::Hands {
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_ListObjGetElements (interp, objv[3], &pc, &pv) != TCL_OK) {
+	if (Tcl_ListObjGetElements (interp, objv[2], &pc, &pv) != TCL_OK) {
 	    return TCL_ERROR;
 	} else if (pc != 3) {
 	    Tcl_AppendResult (interp, "Expected point (3 coordinates)", NULL);
