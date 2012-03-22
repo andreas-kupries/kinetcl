@@ -210,6 +210,18 @@ critcl::class def ::kinetcl::Base {
 	    "script",	  /* XN_NODE_TYPE_SCRIPT          = 16	*/
 	    NULL
 	};
+
+	static Tcl_Obj*
+	kinetcl_convert_3d (XnVector3D* vec)
+	{
+	    Tcl_Obj* coords [3];
+
+	    coords [0] = Tcl_NewDoubleObj (vec->X);
+	    coords [1] = Tcl_NewDoubleObj (vec->Y);
+	    coords [2] = Tcl_NewDoubleObj (vec->Z);
+
+	    return Tcl_NewListObj (3, coords);
+	}
     }
 
     # # ## ### ##### ######## #############
