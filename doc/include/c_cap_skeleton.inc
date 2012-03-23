@@ -1,8 +1,8 @@
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
-[subsection {Instance Skeleton/Joint API}]
+[subsection {Skeleton/Joint Tracking}]
 
-Should a production node support the skeleton API the following
+Should an instance support skeleton and joint tracking the following
 methods become available.
 
 This support can checked by invoking the inherited method
@@ -290,86 +290,33 @@ position and orientation, given in the format returned by method
 [para] Joints which are either not available or not actively tracked
 will not be found in the dictionary.
 
-[comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-jointConfigChange] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-jointConfigChange]]
-
-These methods define and remove a callback responding to joint
-configuration changes, i.e. when joints are (de)activated.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "jointConfigChange", in this order.
-
-[para] The result of the methods is an empty string.
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-calibrationStart] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-calibrationStart]]
-
-These methods define and remove a callback responding to the start of
-a calibration.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "calibrationStart", and the (numerical) id of the
-user for whom calibration has started, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME joint]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {joint changes, i.e. the (de)activation of specific joints.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-calibrationComplete] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-calibrationComplete]]
-
-These methods define and remove a callback responding to the
-completion of calibrations.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "calibrationComplete", the (numerical) id of the user for
-whom calibration completed, and the completion status, in this order.
-
-[para] The result of the methods is an empty string.
-
-[para] The possible completion stati are
-[list_begin enumerated]
-[enum][const ok]
-[enum][const no-user]
-[enum][const arm]
-[enum][const leg]
-[enum][const head]
-[enum][const torso]
-[enum][const top-fov]
-[enum][const side-fov]
-[enum][const pose]
-[enum][const manual-abort]
-[enum][const manual-reset]
-[enum][const timeout]
-[list_end]
+[vset NAME calibration-start]
+[vset NUM 3]
+[vset EARGS user]
+[vset DESC {the start of skeleton calibration for a user.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-calibrationProgress] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-calibrationProgress]]
+[vset NAME calibration-complete]
+[vset NUM 4]
+[vset EARGS skel]
+[vset DESC {the completion of skeleton calibration for a user.}]
+[include callback.inc]
 
-These methods define and remove a callback responding to calibration
-progress events.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "calibrationProgress", the (numerical) id of the user, and the
-calibration progreess status, in this order.
-
-[para] The result of the methods is an empty string.
-
-[para] The possible progress stati are identical to the completion
-stati described above.
+[comment ===============================================================]
+[vset NAME calibration-progress]
+[vset NUM 4]
+[vset EARGS skel]
+[vset DESC {the system's progress in the calibration of the skeleton for a user.}]
+[include callback.inc]
 
 [list_end]

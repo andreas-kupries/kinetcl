@@ -2,7 +2,7 @@
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Anti-Flicker}]
 
-Should a production node support the anti-flicker API the following
+Should an instance support anti-flicker behaviour the following
 methods become available.
 
 This support can checked by invoking the inherited method
@@ -28,18 +28,10 @@ The allowed values for [arg frequency] are [const 50], [const 60], and
 [para] The result is an empty string.
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-frequency] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-frequency]]
-
-These methods define and remove a callback responding to anti-flicker
-configuration changes.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "frequency", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME frequency]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {reconfiguration of the instance's powerline frequency setting.}]
+[include callback.inc]
 
 [list_end]

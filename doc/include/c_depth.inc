@@ -103,23 +103,10 @@ results. Each point in both arguments and result is a 3-element list
 containing the point's X-, Y-, and Z-coordinates, in this order.
 
 [comment ===============================================================]
-[call [arg generatorInstanceCmd] [method set-callback-depthfov] [arg cmd]...]
-[call [arg generatorInstanceCmd] [method unset-callback-depthfov]]
-
-These methods define and remove a callback responding to changes in
-the field of view of the node.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "depthfov", in this order.
-
-[para] [emph Note] that the callback is not told the actual state of
-the instance. If this information is required then it is the
-callback's responsibility to query the state, using the interogatory
-method [method fov].
-
-[para] The result of the methods is an empty string.
+[vset NAME depthfov]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {depthfov changes, i.e. reconfiguration of the device's field of view.}]
+[include callback.inc]
 
 [list_end]

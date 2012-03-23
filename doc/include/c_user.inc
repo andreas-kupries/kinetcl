@@ -10,9 +10,9 @@ of view of the sensor.
 
 [para] They may have the following capabilities:
 [list_begin enumerated]
-[enum] [sectref {Instance Pose Detection API}]
-[enum] [sectref {Instance Hand Touching FOV Edge API}]
-[enum] [sectref {Instance Skeleton/Joint API}]
+[enum] [sectref {Pose Detection}]
+[enum] [sectref {Hand Touching FOV Edge}]
+[enum] [sectref {Skeleton/Joint Tracking}]
 [list_end]
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
@@ -71,67 +71,31 @@ where all pixels representing the user are set to the user's id, and
 everything else set to [const 0].
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-enter] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-enter]]
-
-These methods define and remove a callback responding to re-entry
-events, i.e. a user re-entering the scene after exiting it.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "enter", and the (numerical) id of the user
-re-entering, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME user-enter]
+[vset NUM 3]
+[vset EARGS user]
+[vset DESC {a user re-entering the scene.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-exit] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-exit]]
-
-These methods define and remove a callback responding to exit events,
-i.e. a user exiting the scene.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "exit", and the (numerical) id of the user exiting,
-in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME user-exit]
+[vset NUM 3]
+[vset EARGS user]
+[vset DESC {a user existing the scene.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-new] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-new]]
-
-These methods define and remove a callback responding to "new user"
-events, i.e. when a new user is identified.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "new", and the (numerical) id of the newly
-identified user, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME user-new]
+[vset NUM 3]
+[vset EARGS user]
+[vset DESC {the recognition of a new user.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-lost] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-lost]]
-
-These methods define and remove a callback responding to "lost user"
-events, i.e. when a user is no longer identified.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "lost", and the (numerical) id of the lost user, in
-this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME user-lost]
+[vset NUM 3]
+[vset EARGS user]
+[vset DESC {the loss of a user (after exiting the scene).}]
+[include callback.inc]
 
 [list_end]

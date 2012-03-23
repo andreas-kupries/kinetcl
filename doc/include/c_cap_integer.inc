@@ -2,7 +2,7 @@
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection [vset CAPTITLE]]
 
-Should a production node support the [vset CAPNAME] API the following
+Should an instance support the [vset CAPNAME] setting the following
 methods become available.
 
 This support can checked by invoking the inherited method
@@ -58,18 +58,10 @@ adjustment during operation of the node, otherwise not.
 [list_end]
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-[vset CAPEVENT]] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-[vset CAPEVENT]]]
-
-These methods define and remove a callback responding to [vset CAPEVENT]
-configuration changes.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "[vset CAPEVENT]", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME [vset CAPEVENT]]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC "[vset CAPEVENT] changes, i.e. reconfiguration of the instance's [vset CAPEVENT] setting."]
+[include callback.inc]
 
 [list_end]

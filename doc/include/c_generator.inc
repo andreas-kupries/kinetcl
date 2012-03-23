@@ -115,39 +115,17 @@ the instance, in microseconds.
 }]
 
 [comment ===============================================================]
-[call [arg generatorInstanceCmd] [method set-callback-active] [arg cmd]...]
-[call [arg generatorInstanceCmd] [method unset-callback-active]]
-
-These methods define and remove a callback responding to activity
-events, i.e. the instance starting and stopping the generation of
-output.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "active", in this order.
-
-[para] [emph Note] that the callback is not told the actual state of
-the instance. If this information is required then it is the
-callback's responsibility to query the state, using the interogatory
-method [method active].
-
-[para] The result of the methods is an empty string.
+[vset NAME active]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {activity changes, i.e. the instance starting and stopping the generation of output}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg generatorInstanceCmd] [method set-callback-newdata] [arg cmd]...]
-[call [arg generatorInstanceCmd] [method unset-callback-newdata]]
-
-These methods define and remove a callback responding to data
-events, i.e. the instance having new output available.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "newdata", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME newdata]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {the availability of new data, i.e the instance having new output available for the user.}]
+[include callback.inc]
 
 [list_end]

@@ -188,7 +188,7 @@ error:
 
     # # ## ### ##### ######## #############
 
-    ::kt_callback poseEnter \
+    ::kt_callback pose-enter \
 	xnRegisterToPoseDetected \
 	xnUnregisterFromPoseDetected \
 	{
@@ -199,7 +199,7 @@ error:
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	}
 
-    ::kt_callback poseExit \
+    ::kt_callback pose-exit \
 	xnRegisterToOutOfPose \
 	xnUnregisterFromOutOfPose \
 	{
@@ -210,7 +210,7 @@ error:
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	}
 
-    ::kt_callback poseProgress \
+    ::kt_callback pose-progress \
 	xnRegisterToPoseDetectionInProgress \
 	xnUnregisterFromPoseDetectionInProgress \
 	{

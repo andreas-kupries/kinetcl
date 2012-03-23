@@ -87,86 +87,38 @@ This method returns a list containing the names of all gestures
 that are currently active.
 
 [comment ===============================================================]
-[call [arg gestureInstanceCmd] [method set-callback-gestureRecognized] [arg cmd]...]
-[call [arg gestureInstanceCmd] [method unset-callback-gestureRecognized]]
-
-These methods define and remove a callback responding to gesture
-recognition events.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "gestureRecognized", the name of the recognized gesture, the
-3D coordinates of the location where the gesture was recognized, and
-the location of the hand which performed the gesture at the end of the
-gesture, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME gesture-recognized]
+[vset NUM 5]
+[vset EARGS gesture_r]
+[vset DESC {the recognition of named a gesture.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg gestureInstanceCmd] [method set-callback-gestureProgress] [arg cmd]...]
-[call [arg gestureInstanceCmd] [method unset-callback-gestureProgress]]
-
-These methods define and remove a callback responding to gesture
-progress events.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "gestureProgress", the name of the gesture progressing, the
-current 3D coordinates of the hand performing the gesture, and the
-percentage of the gesture already performed, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME gesture-progress]
+[vset NUM 5]
+[vset EARGS gesture_p]
+[vset DESC {the system's progress in recognizing a gesture.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg gestureInstanceCmd] [method set-callback-gestureChange] [arg cmd]...]
-[call [arg gestureInstanceCmd] [method unset-callback-gestureChange]]
-
-These methods define and remove a callback responding to gesture
-change events, i.e when gestures are (de)activated.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "gestureChange", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME gesture]
+[vset NUM 3]
+[vset EARGS null]
+[vset DESC {the (de)activation of the recognition of named gestures.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg gestureInstanceCmd] [method set-callback-gestureStageComplete] [arg cmd]...]
-[call [arg gestureInstanceCmd] [method unset-callback-gestureStageComplete]]
-
-These methods define and remove a callback responding to gesture
-stage completion events.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "gestureStageComplete", the name of the gesture which
-complete one of its stages, and the current 3D coordinates of the hand
-performing the gesture, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME gesture-stage-complete]
+[vset NUM 4]
+[vset EARGS gesture_s]
+[vset DESC {the completion of stages in a gesture's recognition}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg gestureInstanceCmd] [method set-callback-gestureStageReadyForNext] [arg cmd]...]
-[call [arg gestureInstanceCmd] [method unset-callback-gestureStageReadyForNext]]
+[vset NAME gesture-stage-ready-for-next]
+[vset NUM 4]
+[vset EARGS gesture_s]
+[vset DESC {the system's readiness to enter the next stage in the recognition of a gesture.}]
+[include callback.inc]
 
-These methods define and remove a callback responding to gesture
-stage readiness events.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "gestureStageReadyForNext", the name of the gesture which is
-ready for the recognition of the next of its stages, and the current
-3D coordinates of the hand performing the gesture, in this order.
-
-[para] The result of the methods is an empty string.
 [list_end]

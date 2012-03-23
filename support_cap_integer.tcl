@@ -12,14 +12,9 @@
 # # ## ### ##### ######## #############
 
 proc kt_cap_integer {capname nicapname} {
-	set parts [lassign [split $capname -] cb]
-	foreach c $parts {
-	    append cb [string totitle $c]
-	}
-
     lappend map @@capname@@     $capname 
     lappend map @@nicapname@@   $nicapname
-    lappend map @@capcallback@@ $cb
+    lappend map @@capcallback@@ $capname
 
     uplevel 1 [string map $map {
 	# # ## ### ##### ######## #############

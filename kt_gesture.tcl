@@ -224,7 +224,7 @@ critcl::class def ::kinetcl::Gesture {
     ::kt_2callback gesture \
 	xnRegisterGestureCallbacks \
 	xnUnregisterGestureCallbacks \
-	gestureRecognized {
+	gesture-recognized {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pIDPosition}
 	    {const XnPoint3D* pEndPosition}
@@ -243,7 +243,7 @@ critcl::class def ::kinetcl::Gesture {
 	    coord [2] = Tcl_NewDoubleObj (pEndPosition->Z);
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
 	} \
-	gestureProgress {
+	gesture-progress {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fProgress}
@@ -260,12 +260,12 @@ critcl::class def ::kinetcl::Gesture {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fProgress));
 	}
 
-    ::kt_callback gestureChange \
+    ::kt_callback gesture-change \
 	xnRegisterToGestureChange \
 	xnUnregisterFromGestureChange \
 	{} {}
 
-    ::kt_callback gestureStageComplete \
+    ::kt_callback gesture-stage-complete \
 	xnRegisterToGestureIntermediateStageCompleted \
 	xnUnregisterFromGestureIntermediateStageCompleted \
 	{
@@ -282,7 +282,7 @@ critcl::class def ::kinetcl::Gesture {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
 	}
 
-    ::kt_callback gestureStageReadyForNext \
+    ::kt_callback gesture-stage-ready-for-next \
 	xnRegisterToGestureReadyForNextIntermediateStage \
 	xnUnregisterFromGestureReadyForNextIntermediateStage \
 	{

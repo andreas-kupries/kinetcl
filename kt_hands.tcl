@@ -111,7 +111,7 @@ critcl::class def ::kinetcl::Hands {
     ::kt_3callback hand \
 	xnRegisterHandCallbacks \
 	xnUnregisterHandCallbacks \
-	handCreate {
+	hand-create {
 	    {XnUserID         user}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fTime}
@@ -127,7 +127,7 @@ critcl::class def ::kinetcl::Hands {
 
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
 	} \
-	handUpdate {
+	hand-update {
 	    {XnUserID         user}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fTime}
@@ -143,7 +143,7 @@ critcl::class def ::kinetcl::Hands {
 
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
 	} \
-	handDestroy {
+	hand-destroy {
 	    {XnUserID         user}
 	    {XnFloat          fTime}
 	} {

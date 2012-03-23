@@ -22,7 +22,7 @@ critcl::class def ::kinetcl::CapHandTouchingFovEdge {
 
     # # ## ### ##### ######## #############
 
-    ::kt_callback fovEdge \
+    ::kt_callback fov-edge \
 	xnRegisterToHandTouchingFOVEdge \
 	xnUnregisterFromHandTouchingFOVEdge \
 	{
