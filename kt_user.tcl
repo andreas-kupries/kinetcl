@@ -137,14 +137,14 @@ critcl::class def ::kinetcl::User {
     # # ## ### ##### ######## #############
     ## Callbacks: enter, exit, new/lost
 
-    ::kt_callback enter \
+    ::kt_callback user-enter \
 	xnRegisterToUserReEnter \
 	xnUnregisterFromUserReEnter \
 	{{XnUserID u}} {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	}
 
-    ::kt_callback exit \
+    ::kt_callback user-exit \
 	xnRegisterToUserExit \
 	xnUnregisterFromUserExit \
 	{{XnUserID u}} {
@@ -154,10 +154,10 @@ critcl::class def ::kinetcl::User {
     ::kt_2callback newlost \
 	xnRegisterUserCallbacks \
 	xnUnregisterUserCallbacks \
-	new {{XnUserID u}} {
+	user-new {{XnUserID u}} {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	} \
-	lost {{XnUserID u}} {
+	user-lost {{XnUserID u}} {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
 	}
 

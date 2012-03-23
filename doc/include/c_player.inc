@@ -85,18 +85,10 @@ This method causes the player to explicitly advance to the next frame.
 [para] The result of the method is the empty string.
 
 [comment ===============================================================]
-[call [arg userInstanceCmd] [method set-callback-eof] [arg cmd]...]
-[call [arg userInstanceCmd] [method unset-callback-eof]]
-
-These methods define and remove a callback responding to "eof" events,
-i.e. when the end of the recording was reached.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, and the word "eof", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME eof]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {the player reaching the end of the recording (even when it loops).}]
+[include callback.inc]
 
 [list_end]

@@ -11,7 +11,7 @@
 # # ## ### ##### ######## #############
 
 proc kt_callback {name consfunction destfunction signature body {mode all} {detail {}}} {
-    set cname [string totitle $name]
+    set cname [kt_cbcname $name]
 
     # Define the raw callback processing.
     uplevel 1 [list kt_cbhandler $name $name $cname $signature $body $mode]

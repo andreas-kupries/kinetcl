@@ -2,8 +2,8 @@
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Frame Synchronization}]
 
-Should a production node support the frame synchronization API the
-following methods become available.
+Should an instance support frame synchronization the following methods
+become available.
 
 This support can checked by invoking the inherited method
 [method is-capable-of] for the capability name [const framesync].
@@ -49,18 +49,10 @@ another kinetcl instance.
 synchronized to [arg node], and [const false] else.
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-framesync] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-framesync]]
-
-These methods define and remove a callback responding to frame synchronization
-changes, i.e. when a node starts or stops synchronization with another node.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "framesync", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME framesync]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {frame synchronization changes, i.e. when the instance starts or stops synchronization with another node.}]
+[include callback.inc]
 
 [list_end]

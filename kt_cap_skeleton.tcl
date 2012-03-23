@@ -684,19 +684,19 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     # # ## ### ##### ######## #############
     ## Callbacks, joint configuration changes, calibration process events
 
-    ::kt_callback jointConfigChange \
+    ::kt_callback joint \
 	xnRegisterToJointConfigurationChange \
 	xnUnregisterFromJointConfigurationChange \
 	{} {}
 
-    ::kt_callback calibrationStart \
+    ::kt_callback calibration-start \
 	xnRegisterToCalibrationStart \
 	xnUnregisterFromCalibrationStart \
 	{{XnUserID user}} {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
 	}
 
-    ::kt_callback calibrationComplete \
+    ::kt_callback calibration-complete \
 	xnRegisterToCalibrationComplete \
 	xnUnregisterFromCalibrationComplete \
 	{
@@ -708,7 +708,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 				      Tcl_NewStringObj (@stem@_skeleton_calibration [cStatus],-1));
 	}
 
-    ::kt_callback calibrationProgress \
+    ::kt_callback calibration-progress \
 	xnRegisterToCalibrationInProgress \
 	xnUnregisterFromCalibrationInProgress \
 	{

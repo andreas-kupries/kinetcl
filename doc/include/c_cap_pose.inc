@@ -1,9 +1,9 @@
 
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
-[subsection {Instance Pose Detection API}]
+[subsection {Pose Detection}]
 
-Should a production node support the pose detection API the following
-methods become available.
+Should an instance support pose detection the following methods become
+available.
 
 This support can checked by invoking the inherited method
 [method is-capable-of] for the capability name
@@ -60,9 +60,18 @@ for the specified [arg user].
 [list_begin enumerated]
 
 [enum] The state of the user with respect to the pose,
-one of [const in], [const out], or [const unkown]
+one of [const in], [const out], or [const undefined]
 
 [enum] The status of the detection progress.
+[para] The possible stati are
+[list_begin enumerated]
+[enum][const ok]
+[enum][const no-user]
+[enum][const top-fov]
+[enum][const side-fov]
+[enum][const error]
+[enum][const no-tracking]
+[list_end]
 
 [enum] A timestamp telling us when the user entered the pose, if it is
 in the pose. If the user is out of the pose [const 0] is returned
@@ -71,51 +80,24 @@ here.
 [list_end]
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-poseEnter] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-poseEnter]]
-
-These methods define and remove a callback responding to pose entry
-events, i.e. a user entering a pose.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "poseEnter", the name of the pose entered and the (numerical)
-id of the user entering it, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME pose-enter]
+[vset NUM 4]
+[vset EARGS pose]
+[vset DESC {a user entering a pose.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-poseExit] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-poseExit]]
-
-These methods define and remove a callback responding to pose exit
-events, i.e. a user existing a pose.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "poseExit", the name of pose, and the (numerical) id of the
-user exiting it, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME pose-exit]
+[vset NUM 4]
+[vset EARGS pose]
+[vset DESC {a user exiting a pose.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-poseProgress] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-poseProgress]]
-
-These methods define and remove a callback responding to pose progress
-events, i.e. the steps of the engine for detecting user poses.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "poseProgress", the name of pose, the (numerical) id of the
-user, and the status of the detection engine, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME pose-progress]
+[vset NUM 5]
+[vset EARGS posep]
+[vset DESC {the system's progress in the detection of a pose for a user.}]
+[include callback.inc]
 
 [list_end]

@@ -2,8 +2,8 @@
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Alternative Viewpoint}]
 
-Should a production node support the alternate viewpoint API the
-following methods become available.
+Should an instance support alternate viewpoints the following methods
+become available.
 
 This support can checked by invoking the inherited method
 [method is-capable-of] for the capability name
@@ -48,18 +48,10 @@ of another kinetcl instance.
 [arg node] is in use, and [const false] else.
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-viewpoint] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-viewpoint]]
-
-These methods define and remove a callback responding to viewpoint
-configuration changes, i.e. when the viewpoint of a node is changed.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "viewpoint", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME viewpoint]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {viewpoint changes, i.e. when the instance takes or drops the viewpoint of another node.}]
+[include callback.inc]
 
 [list_end]

@@ -89,12 +89,11 @@ proc newframe {args} {
     # Now large depth changes are color coded, with the details in the
     # luminance.
 
+    #set image [crimp scale $image 2]
     lassign [crimp split $image] msb lsb
-    set image [crimp convert 2rgb \
-		   [crimp join 2hsv \
-			$msb \
-			$sat \
-			[crimp invert $lsb]]]
+    set msb [crimp scale $msb 16]
+    set lsb [crimp invert $lsb]
+    set image [crimp convert 2rgb [crimp join 2hsv $msb $sat $lsb]]
 
     crimp write 2file ppm-raw $tracedir/depth-[format %04d $frame].ppm $image
 

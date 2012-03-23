@@ -13,9 +13,9 @@
 # # ## ### ##### ######## #############
 
 proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb signatureb bodyb} {
-    set cname  [string totitle $name]
-    set cnamea [string totitle $namea]
-    set cnameb [string totitle $nameb]
+    set cname  [kt_cbcname $name]
+    set cnamea [kt_cbcname $namea]
+    set cnameb [kt_cbcname $nameb]
 
     # Define the raw callback processing.
     uplevel 1 [list kt_cbhandler $name $namea $cnamea $signaturea $bodya]

@@ -69,57 +69,24 @@ This method stops the tracking of all hands known to the node.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [arg generatorInstanceCmd] [method set-callback-handCreate] [arg cmd]...]
-[call [arg generatorInstanceCmd] [method unset-callback-handCreate]]
-
-These methods define and remove a callback responding to hand creation
-events, i.e. the node starting to track an additional hand.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "handCreate", the id of the hand, the location of the hand,
-and a timestamp, in this order.
-
-[para] The location is a 3-element list containing the X, Y, and Z
-coordinates of the hand, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME hand-create]
+[vset NUM 5]
+[vset EARGS hand]
+[vset DESC {the creation of a new tracked hand.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg generatorInstanceCmd] [method set-callback-handUpdate] [arg cmd]...]
-[call [arg generatorInstanceCmd] [method unset-callback-handUpdate]]
-
-These methods define and remove a callback responding to hand update
-events, i.e. when a tracked hand moves to a new location.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "handUpdate", the id of the hand, the new location of the
-hand, and a timestamp, in this order.
-
-[para] The location is a 3-element list containing the X, Y, and Z
-coordinates of the hand, in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME hand-update]
+[vset NUM 5]
+[vset EARGS hand]
+[vset DESC {the movement of an existing tracked hand.}]
+[include callback.inc]
 
 [comment ===============================================================]
-[call [arg generatorInstanceCmd] [method set-callback-handDestroy] [arg cmd]...]
-[call [arg generatorInstanceCmd] [method unset-callback-handDestroy]]
-
-These methods define and remove a callback responding to hand
-destruction events, i.e. when a tracked hand disappears.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "handDestroy", the id of the destroyed hand, and a timestamp,
-in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME hand-destroy]
+[vset NUM 4]
+[vset EARGS hand_d]
+[vset DESC {the removal of a hand from tracking.}]
+[include callback.inc]
 
 [list_end]

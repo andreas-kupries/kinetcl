@@ -2,8 +2,8 @@
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Cropping}]
 
-Should a production node support the cropping API the following
-methods become available.
+Should an instance support cropping the following methods become
+available.
 
 This support can checked by invoking the inherited method
 [method is-capable-of] for the capability name [const cropping].
@@ -35,18 +35,10 @@ This method deactivates any croppping set on the instance.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [arg instanceCmd] [method set-callback-cropping] [arg cmd]...]
-[call [arg instanceCmd] [method unset-callback-cropping]]
-
-These methods define and remove a callback responding to cropping
-configuration changes, i.e. when the instance's crop settings change.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "cropping", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME cropping]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {reconfiguration of the instance's crop region.}]
+[include callback.inc]
 
 [list_end]

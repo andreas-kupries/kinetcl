@@ -51,14 +51,17 @@ proc usage {} {
 }
 
 proc setup {} {
-    global photo radius
+    global photo radius dotc segc textc
     set radius 5
+    set dotc red
+    set segc lightblue
+    set textc green
 
     kinetcl user create K
-    K set-callback-new   usernew
-    K set-callback-exit  userexit
-    K set-callback-lost  userlost
-    K set-callback-calibrationComplete calibration
+    K set-callback-user-new             usernew
+    K set-callback-user-exit            userexit
+    K set-callback-user-lost            userlost
+    K set-callback-calibration-complete calibration
     K set-profile all
 
     kinetcl depth create D
@@ -133,13 +136,13 @@ proc newframe {args} {
     return
 }
 
-proc usernew {obj event user} {
+proc usernew {event obj user} {
     puts "$event $user"
     K request-calibration $user 0
     return
 }
 
-proc userexit {obj event user} {
+proc userexit {event obj user} {
     global S
     puts "$event $user"
     catch { dict unset S $user }
@@ -147,7 +150,7 @@ proc userexit {obj event user} {
     return
 }
 
-proc userlost {obj event user} {
+proc userlost {event obj user} {
     global S
     puts "$event $user"
     catch { dict unset S $user }
@@ -155,7 +158,7 @@ proc userlost {obj event user} {
     return
 }
 
-proc calibration {obj event user status} {
+proc calibration {event obj user status} {
     puts "$event $user : $status"
     if {$status eq "ok"} {
 	K start-tracking $user
@@ -167,6 +170,7 @@ proc calibration {obj event user status} {
 
 proc skeleton {} {
     foreach user [K users] {
+	labeluser $user
 	skeletonfor $user
     }
     return
@@ -176,9 +180,35 @@ proc skeletonfor {user} {
     global S
     if {![K is-tracking $user]} return
     puts "update $user"
+    #puts @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    #memory validate on
     dict set S $user joints [K get-skeleton $user]
     draw $user
+    #memory validate off
     return
+}
+
+proc labeluser {user} {
+    global S
+    set at [lrange [lindex [D world2projective [K centerof $user]] 0] 0 1]
+    if {![info exists S] || ![dict exists $S $user canvas label]} {
+	set label [make-text .image {*}$at -tags [list t,$user u,$user]]
+	dict set S $user canvas label $label
+    }
+    .image itemconfigure t,$user -text [getlabel $user]
+    place-text .image t,$user {*}$at
+    return
+}
+
+proc getlabel {user} {
+    set text "User $user"
+    if {[K is-tracking $user]} {
+	append text " tracking"
+    } elseif {[K is-calibrated $user]} {
+	append text " calibrated"
+    } elseif {[K is-calibrating $user]} {
+	append text " calibrating"
+    }
 }
 
 proc draw {user} {
@@ -205,9 +235,11 @@ proc drawpoints {user} {
 		set dot [dot .image 0 0 -tags [list p,$user,$j u,$user]]
 		dict set S $user canvas $j $dot
 	    }
+	    #puts ==================================================
+	    #puts "($user $j): W $point"
 	    set p [lindex [D world2projective $point] 0]
 	    dict set S $user at $j $p
-	    #puts "($user $j): $point --> $p"
+	    #puts "($user $j): S $p"
 	    lassign $p x y z
 	    place-dot .image p,$user,$j $x $y
 	}
@@ -277,7 +309,7 @@ proc place-dot {c item x y} {
 }
 
 proc dot {c x y args} {
-    global radius
+    global radius dotc
     # Create a circle centered on the chosen location, red filled
     # with black border.
     set w [expr {$x - $radius}]
@@ -286,8 +318,8 @@ proc dot {c x y args} {
     set s [expr {$y + $radius}]
     return [$c create oval $w $n $e $s \
 		-width   1   \
-		-outline red \
-		-fill    red \
+		-outline $dotc \
+		-fill    $dotc \
 		{*}$args]
 }
 
@@ -297,10 +329,22 @@ proc place-segment {c item x0 y0 x1 y1} {
 }
 
 proc segment {c x0 y0 x1 y1 args} {
-    global radius
+    global radius segc
     return [$c create line $x0 $y0 $x1 $y1 \
 		-width $radius \
-		-fill green \
+		-fill $segc \
+		{*}$args]
+}
+
+proc place-text {c item x y} {
+    $c coords $item $x $y
+    return
+}
+
+proc make-text {c x y args} {
+    global textc
+    return [$c create text $x $y \
+		-fill $textc -text {} \
 		{*}$args]
 }
 

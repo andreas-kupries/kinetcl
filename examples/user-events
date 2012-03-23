@@ -30,15 +30,14 @@ proc usage {} {
 
 proc setup {} {
     kinetcl user create K
-    #K set-callback-newdata newframe
-    K set-callback-enter userchange
-    K set-callback-exit  userchange
-    K set-callback-new   userchange
-    K set-callback-lost  userchange
+    K set-callback-user-enter userchange
+    K set-callback-user-exit  userchange
+    K set-callback-user-new   userchange
+    K set-callback-user-lost  userchange
 
-    K set-callback-calibrationStart    calibration
-    K set-callback-calibrationComplete calibration
-    K set-callback-calibrationProgress calibration
+    K set-callback-calibration-start    calibration
+    K set-callback-calibration-complete calibration
+    #K set-callback-calibration-progress calibration
     return
 }
 
@@ -58,19 +57,26 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc calibration {obj event user {status {}}} {
+proc calibration {event obj user {status {}}} {
     puts "\t$event $user : $status"
+    if {$event ne "calibration-complete"} return
+    if {$status ne "ok"} {
+	K request-calibration $user 0
+	return
+    }
+    K start-tracking $user
     return
 }
 
-proc userchange {obj event user} {
+proc userchange {event obj user} {
     puts "$event $user"
 
     switch -- $event {
-	new - enter {
-	    K start-tracking $user
+	user-new -
+	user-enter {
+	    K request-calibration $user 0
 	}
-	exit {
+	user-exit {
 	    K stop-tracking $user
 	}
     }

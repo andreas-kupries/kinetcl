@@ -65,18 +65,10 @@ combination is not supported by the instance.
 [para] The result of the method is an empty string.
 
 [comment ===============================================================]
-[call [arg mapInstanceCmd] [method set-callback-mode] [arg cmd]...]
-[call [arg mapInstanceCmd] [method unset-callback-mode]]
-
-These methods define and remove a callback responding to mode change
-events, i.e. the instance changing the its output mode.
-
-[para] Setting a callback implicitly removes any previous callback set.
-
-[para] The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "mode", in this order.
-
-[para] The result of the methods is an empty string.
+[vset NAME mode]
+[vset NUM 2]
+[vset EARGS null]
+[vset DESC {mode changes, i.e. reconfiguration of the instance's output mode.}]
+[include callback.inc]
 
 [list_end]

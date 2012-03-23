@@ -320,9 +320,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fImapInstanceCmd\fR \fBmode\fR \fIxres\fR \fIyres\fR \fIfps\fR
 .sp
-\fImapInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
 .sp
-\fImapInstanceCmd\fR \fBunset-callback-mode\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-mode\fR
 .sp
 \fB::kinetcl depth\fR \fBnew\fR
 .sp
@@ -337,6 +337,10 @@ package require \fBkinetcl  ?0.1?\fR
 \fIdepthInstanceCmd\fR \fBmeta\fR
 .sp
 \fIdepthInstanceCmd\fR \fBmap\fR
+.sp
+\fIdepthInstanceCmd\fR \fBprojective2world\fR \fIpoint\fR...
+.sp
+\fIdepthInstanceCmd\fR \fBworld2projective\fR \fIpoint\fR...
 .sp
 \fIgeneratorInstanceCmd\fR \fBset-callback-depthfov\fR \fIcmd\fR...
 .sp
@@ -384,25 +388,25 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgestureInstanceCmd\fR \fBactive-gestures\fR
 .sp
-\fIgestureInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-recognized\fR \fIcmd\fR...
 .sp
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-recognized\fR
 .sp
-\fIgestureInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-progress\fR \fIcmd\fR...
 .sp
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureProgress\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-progress\fR
 .sp
-\fIgestureInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture\fR \fIcmd\fR...
 .sp
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureChange\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture\fR
 .sp
-\fIgestureInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-stage-complete\fR \fIcmd\fR...
 .sp
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-stage-complete\fR
 .sp
-\fIgestureInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-stage-ready-for-next\fR \fIcmd\fR...
 .sp
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-stage-ready-for-next\fR
 .sp
 \fB::kinetcl scene\fR
 .sp
@@ -426,21 +430,21 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIuserInstanceCmd\fR \fBpixelsof\fR \fIid\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-enter\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-enter\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-enter\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-enter\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-exit\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-exit\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-exit\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-exit\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-new\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-new\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-new\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-new\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-lost\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-lost\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-lost\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-lost\fR
 .sp
 \fB::kinetcl hands\fR \fBnew\fR
 .sp
@@ -456,17 +460,17 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBstop-tracking-all\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBset-callback-handCreate\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-hand-create\fR \fIcmd\fR...
 .sp
-\fIgeneratorInstanceCmd\fR \fBunset-callback-handCreate\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hand-create\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBset-callback-handUpdate\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-hand-update\fR \fIcmd\fR...
 .sp
-\fIgeneratorInstanceCmd\fR \fBunset-callback-handUpdate\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hand-update\fR
 .sp
-\fIgeneratorInstanceCmd\fR \fBset-callback-handDestroy\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-hand-destroy\fR \fIcmd\fR...
 .sp
-\fIgeneratorInstanceCmd\fR \fBunset-callback-handDestroy\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hand-destroy\fR
 .sp
 \fB::kinetcl audio\fR \fBnew\fR
 .sp
@@ -498,9 +502,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIplayerInstanceCmd\fR \fBnext\fR
 .sp
-\fIuserInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
 .sp
-\fIuserInstanceCmd\fR \fBunset-callback-eof\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-eof\fR
 .sp
 \fB::kinetcl script\fR \fBnew\fR
 .sp
@@ -516,17 +520,17 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBusing-view\fR \fInode\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-viewpoint\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-viewpoint\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-viewpoint\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-viewpoint\fR
 .sp
 \fIinstanceCmd\fR \fBfrequency\fR
 .sp
 \fIinstanceCmd\fR \fBcrop\fR \fIfrequency\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-frequency\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-frequency\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-frequency\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-frequency\fR
 .sp
 \fIinstanceCmd\fR \fBcrop\fR
 .sp
@@ -534,9 +538,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBuncrop\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-cropping\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-cropping\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-cropping\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-cropping\fR
 .sp
 \fIinstanceCmd\fR \fBcan-sync-with\fR \fInode\fR
 .sp
@@ -546,21 +550,21 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBsynced-with\fR \fInode\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-framesync\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-framesync\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-framesync\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-framesync\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-fov-edge\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-fovEdge\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-fov-edge\fR
 .sp
 \fIinstanceCmd\fR \fBmirror\fR
 .sp
 \fIinstanceCmd\fR \fBmirror\fR \fIbool\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-mirror\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-mirror\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-mirror\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-mirror\fR
 .sp
 \fIinstanceCmd\fR \fBposes\fR
 .sp
@@ -574,17 +578,17 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBstatus\fR \fIuser\fR \fIpose\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-pose-enter\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-poseEnter\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pose-enter\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-pose-exit\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-poseExit\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pose-exit\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-pose-progress\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-poseProgress\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pose-progress\fR
 .sp
 \fIinstanceCmd\fR \fBneed-pose\fR
 .sp
@@ -632,21 +636,23 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBget-joint\fR \fIuser\fR \fIjoint\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBget-skeleton\fR \fIuser\fR
 .sp
-\fIinstanceCmd\fR \fBunset-callback-jointConfigChange\fR
+\fIgeneratorInstanceCmd\fR \fBset-callback-joint\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBunset-callback-joint\fR
 .sp
-\fIinstanceCmd\fR \fBunset-callback-calibrationStart\fR
+\fIgeneratorInstanceCmd\fR \fBset-callback-calibration-start\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBunset-callback-calibration-start\fR
 .sp
-\fIinstanceCmd\fR \fBunset-callback-calibrationComplete\fR
+\fIgeneratorInstanceCmd\fR \fBset-callback-calibration-complete\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBunset-callback-calibration-complete\fR
 .sp
-\fIinstanceCmd\fR \fBunset-callback-calibrationProgress\fR
+\fIgeneratorInstanceCmd\fR \fBset-callback-calibration-progress\fR \fIcmd\fR...
+.sp
+\fIgeneratorInstanceCmd\fR \fBunset-callback-calibration-progress\fR
 .sp
 \fIinstanceCmd\fR \fBbacklight-compensation\fR
 .sp
@@ -654,9 +660,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBbacklight-compensation-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-backlightCompensation\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-backlight-compensation\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-backlightCompensation\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-backlight-compensation\fR
 .sp
 \fIinstanceCmd\fR \fBbrightness\fR
 .sp
@@ -664,9 +670,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBbrightness-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-brightness\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-brightness\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-brightness\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-brightness\fR
 .sp
 \fIinstanceCmd\fR \fBcolor-temperature\fR
 .sp
@@ -674,9 +680,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBcolor-temperature-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-colorTemperature\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-color-temperature\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-colorTemperature\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-color-temperature\fR
 .sp
 \fIinstanceCmd\fR \fBcontrast\fR
 .sp
@@ -684,9 +690,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBcontrast-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-contrast\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-contrast\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-contrast\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-contrast\fR
 .sp
 \fIinstanceCmd\fR \fBexposure\fR
 .sp
@@ -694,9 +700,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBexposure-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-exposure\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-exposure\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-exposure\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-exposure\fR
 .sp
 \fIinstanceCmd\fR \fBfocus\fR
 .sp
@@ -704,9 +710,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBfocus-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-focus\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-focus\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-focus\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-focus\fR
 .sp
 \fIinstanceCmd\fR \fBgain\fR
 .sp
@@ -714,9 +720,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBgain-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-gain\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gain\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-gain\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gain\fR
 .sp
 \fIinstanceCmd\fR \fBgamma\fR
 .sp
@@ -724,9 +730,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBgamma-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-gamma\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gamma\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-gamma\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gamma\fR
 .sp
 \fIinstanceCmd\fR \fBhue\fR
 .sp
@@ -734,9 +740,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBhue-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-hue\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-hue\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-hue\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hue\fR
 .sp
 \fIinstanceCmd\fR \fBiris\fR
 .sp
@@ -744,9 +750,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBiris-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-iris\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-iris\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-iris\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-iris\fR
 .sp
 \fIinstanceCmd\fR \fBlowlight-compensation\fR
 .sp
@@ -754,9 +760,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBlowlight-compensation-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-lowlightCompensation\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-lowlight-compensation\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-lowlightCompensation\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-lowlight-compensation\fR
 .sp
 \fIinstanceCmd\fR \fBpan\fR
 .sp
@@ -764,9 +770,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBpan-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-pan\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-pan\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-pan\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pan\fR
 .sp
 \fIinstanceCmd\fR \fBroll\fR
 .sp
@@ -774,9 +780,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBroll-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-roll\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-roll\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-roll\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-roll\fR
 .sp
 \fIinstanceCmd\fR \fBsaturation\fR
 .sp
@@ -784,9 +790,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBsaturation-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-saturation\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-saturation\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-saturation\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-saturation\fR
 .sp
 \fIinstanceCmd\fR \fBsharpness\fR
 .sp
@@ -794,9 +800,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBsharpness-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-sharpness\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-sharpness\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-sharpness\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-sharpness\fR
 .sp
 \fIinstanceCmd\fR \fBtilt\fR
 .sp
@@ -804,9 +810,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBtilt-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-tilt\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-tilt\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-tilt\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-tilt\fR
 .sp
 \fIinstanceCmd\fR \fBzoom\fR
 .sp
@@ -814,9 +820,9 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBzoom-range\fR
 .sp
-\fIinstanceCmd\fR \fBset-callback-zoom\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-zoom\fR \fIcmd\fR...
 .sp
-\fIinstanceCmd\fR \fBunset-callback-zoom\fR
+\fIgeneratorInstanceCmd\fR \fBunset-callback-zoom\fR
 .sp
 .BE
 .SH DESCRIPTION
@@ -1106,38 +1112,62 @@ the instance, in microseconds.
 The result of the method is an integer number.
 .TP
 \fIgeneratorInstanceCmd\fR \fBset-callback-active\fR \fIcmd\fR...
+This method defines a callback responding to
+activity changes, i.e. the instance starting and stopping the generation of output
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBactive\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
 .TP
 \fIgeneratorInstanceCmd\fR \fBunset-callback-active\fR
-These methods define and remove a callback responding to activity
-events, i.e. the instance starting and stopping the generation of
-output.
+This method removes the callback set with method
+\fBset-callback-active\fR.
 .sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "active", in this order.
-.sp
-\fINote\fR that the callback is not told the actual state of
-the instance. If this information is required then it is the
-callback's responsibility to query the state, using the interogatory
-method \fBactive\fR.
-.sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .TP
 \fIgeneratorInstanceCmd\fR \fBset-callback-newdata\fR \fIcmd\fR...
+This method defines a callback responding to
+the availability of new data, i.e the instance having new output available for the user.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBnewdata\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
 .TP
 \fIgeneratorInstanceCmd\fR \fBunset-callback-newdata\fR
-These methods define and remove a callback responding to data
-events, i.e. the instance having new output available.
+This method removes the callback set with method
+\fBset-callback-newdata\fR.
 .sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "newdata", in this order.
-.sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SH "MAP GENERATOR"
 This sections documents the class \fB::kinetcl map\fR, the (abstract) base
@@ -1191,19 +1221,34 @@ combination is not supported by the instance.
 .sp
 The result of the method is an empty string.
 .TP
-\fImapInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-mode\fR \fIcmd\fR...
+This method defines a callback responding to
+mode changes, i.e. reconfiguration of the instance's output mode.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fImapInstanceCmd\fR \fBunset-callback-mode\fR
-These methods define and remove a callback responding to mode change
-events, i.e. the instance changing the its output mode.
+\fBmode\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "mode", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-mode\fR
+This method removes the callback set with method
+\fBset-callback-mode\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SH "DEPTH GENERATOR"
 This sections documents the class \fB::kinetcl generator\fR, the
@@ -1334,26 +1379,52 @@ Depth maps are in pixel format \fBgrey16\fR.
 \fIdepthInstanceCmd\fR \fBmap\fR
 This method returns a \fBcrimp\fR image of type \fBgrey16\fR
 where the value of each pixel represents the distance of the pixel
-from the sensor.
+from the sensor, in millimeters.
+.TP
+\fIdepthInstanceCmd\fR \fBprojective2world\fR \fIpoint\fR...
+This method converts one or more 3D points from sensor coordinates to
+real world coordinates.
+.sp
+The result of the method is a list holding the conversion
+results. Each point in both arguments and result is a 3-element list
+containing the point's X-, Y-, and Z-coordinates, in this order.
+.TP
+\fIdepthInstanceCmd\fR \fBworld2projective\fR \fIpoint\fR...
+This method converts one or more 3D points from real world coordinates
+to sensor coordinates.
+.sp
+The result of the method is a list holding the conversion
+results. Each point in both arguments and result is a 3-element list
+containing the point's X-, Y-, and Z-coordinates, in this order.
 .TP
 \fIgeneratorInstanceCmd\fR \fBset-callback-depthfov\fR \fIcmd\fR...
+This method defines a callback responding to
+depthfov changes, i.e. reconfiguration of the device's field of view.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBdepthfov\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
 .TP
 \fIgeneratorInstanceCmd\fR \fBunset-callback-depthfov\fR
-These methods define and remove a callback responding to changes in
-the field of view of the node.
+This method removes the callback set with method
+\fBset-callback-depthfov\fR.
 .sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "depthfov", in this order.
-.sp
-\fINote\fR that the callback is not told the actual state of
-the instance. If this information is required then it is the
-callback's responsibility to query the state, using the interogatory
-method \fBfov\fR.
-.sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SH "IMAGE GENERATOR"
 This sections documents the class \fB::kinetcl image\fR, the
@@ -1498,23 +1569,33 @@ pixel format:
 .RE
 .TP
 \fIgeneratorInstanceCmd\fR \fBset-callback-pixelformat\fR \fIcmd\fR...
+This method defines a callback responding to
+changes of the pixel format used for the images generated by the instance.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBpixelformat\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
 .TP
 \fIgeneratorInstanceCmd\fR \fBunset-callback-pixelformat\fR
-These methods define and remove a callback responding to changes in
-the active pixel format of the node.
+This method removes the callback set with method
+\fBset-callback-pixelformat\fR.
 .sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "pixelformat", in this order.
-.sp
-\fINote\fR that the callback is not told the actual state of
-the instance. If this information is required then it is the
-callback's responsibility to query the state, using the interogatory
-method \fBformat\fR.
-.sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SH "IR GENERATOR"
 This sections documents the class \fB::kinetcl ir\fR, the
@@ -1613,84 +1694,194 @@ supported by the instance.
 This method returns a list containing the names of all gestures
 that are currently active.
 .TP
-\fIgestureInstanceCmd\fR \fBset-callback-gestureRecognized\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-recognized\fR \fIcmd\fR...
+This method defines a callback responding to
+the recognition of named a gesture.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+5 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureRecognized\fR
-These methods define and remove a callback responding to gesture
-recognition events.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "gestureRecognized", the name of the recognized gesture, the
-3D coordinates of the location where the gesture was recognized, and
-the location of the hand which performed the gesture at the end of the
-gesture, in this order.
-.sp
-The result of the methods is an empty string.
+\fBgesture-recognized\fR
+The name of the event
 .TP
-\fIgestureInstanceCmd\fR \fBset-callback-gestureProgress\fR \fIcmd\fR...
+\fIinstanceCmd\fR
+The instance generating the event
 .TP
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureProgress\fR
-These methods define and remove a callback responding to gesture
-progress events.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "gestureProgress", the name of the gesture progressing, the
-current 3D coordinates of the hand performing the gesture, and the
-percentage of the gesture already performed, in this order.
-.sp
-The result of the methods is an empty string.
+\fIgesture\fR
+The name of the gesture which was recognized
 .TP
-\fIgestureInstanceCmd\fR \fBset-callback-gestureChange\fR \fIcmd\fR...
+\fIidPosition\fR
+The position where the gesture was recognized. This is a 3-element
+list of floating point values containing the \fIreal world\fR
+x-, y-, and z-coordinates of the position, in this order.
 .TP
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureChange\fR
-These methods define and remove a callback responding to gesture
-change events, i.e when gestures are (de)activated.
+\fIendPosition\fR
+The position of the hand at the end of the gesture. This is a
+3-element list of floating point values containing the
+\fIreal world\fR x-, y-, and z-coordinates of the position, in this
+order.
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "gestureChange", in this order.
-.sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .TP
-\fIgestureInstanceCmd\fR \fBset-callback-gestureStageComplete\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-recognized\fR
+This method removes the callback set with method
+\fBset-callback-gesture-recognized\fR.
+.sp
+The result of the method is an empty string.
 .TP
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageComplete\fR
-These methods define and remove a callback responding to gesture
-stage completion events.
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-progress\fR \fIcmd\fR...
+This method defines a callback responding to
+the system's progress in recognizing a gesture.
 .sp
-Setting a callback implicitly removes any previous callback set.
+Note that setting the callback removes any previously set callback.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "gestureStageComplete", the name of the gesture which
-complete one of its stages, and the current 3D coordinates of the hand
-performing the gesture, in this order.
-.sp
-The result of the methods is an empty string.
+The callback is a command prefix and will be invoked with
+5 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIgestureInstanceCmd\fR \fBset-callback-gestureStageReadyForNext\fR \fIcmd\fR...
+\fBgesture-progress\fR
+The name of the event
 .TP
-\fIgestureInstanceCmd\fR \fBunset-callback-gestureStageReadyForNext\fR
-These methods define and remove a callback responding to gesture
-stage readiness events.
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIgesture\fR
+The name of the gesture whose recognition is in progress.
+.TP
+\fIposition\fR
+The current position of the hand performing the gesture. This is a
+3-element list of floating point values containing the
+\fIreal world\fR x-, y-, and z-coordinates of the position, in this
+order.
+.TP
+\fIpercent\fR
+The percentage of the gesture already performed.
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "gestureStageReadyForNext", the name of the gesture which is
-ready for the recognition of the next of its stages, and the current
-3D coordinates of the hand performing the gesture, in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-progress\fR
+This method removes the callback set with method
+\fBset-callback-gesture-progress\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture\fR \fIcmd\fR...
+This method defines a callback responding to
+the (de)activation of the recognition of named gestures.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+3 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBgesture\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture\fR
+This method removes the callback set with method
+\fBset-callback-gesture\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-stage-complete\fR \fIcmd\fR...
+This method defines a callback responding to
+the completion of stages in a gesture's recognition
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+4 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBgesture-stage-complete\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIgesture\fR
+The name of the gesture whose recognition is in progress.
+.TP
+\fIposition\fR
+The current position of the hand performing the gesture. This is a
+3-element list of floating point values containing the
+\fIreal world\fR x-, y-, and z-coordinates of the position, in this
+order.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-stage-complete\fR
+This method removes the callback set with method
+\fBset-callback-gesture-stage-complete\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-gesture-stage-ready-for-next\fR \fIcmd\fR...
+This method defines a callback responding to
+the system's readiness to enter the next stage in the recognition of a gesture.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+4 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBgesture-stage-ready-for-next\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIgesture\fR
+The name of the gesture whose recognition is in progress.
+.TP
+\fIposition\fR
+The current position of the hand performing the gesture. This is a
+3-element list of floating point values containing the
+\fIreal world\fR x-, y-, and z-coordinates of the position, in this
+order.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gesture-stage-ready-for-next\fR
+This method removes the callback set with method
+\fBset-callback-gesture-stage-ready-for-next\fR.
+.sp
+The result of the method is an empty string.
 .PP
 .SH "SCENE ANALYZER"
 This sections documents the class \fB::kinetcl scene\fR, the concrete
@@ -1819,11 +2010,11 @@ of view of the sensor.
 .PP
 They may have the following capabilities:
 .IP [1]
-\fBInstance Pose Detection API\fR
+\fBPose Detection\fR
 .IP [2]
-\fBInstance Hand Touching FOV Edge API\fR
+\fBHand Touching FOV Edge\fR
 .IP [3]
-\fBInstance Skeleton/Joint API\fR
+\fBSkeleton/Joint Tracking\fR
 .PP
 .SS "CLASS API"
 .TP
@@ -1865,65 +2056,133 @@ This method returns a \fBcrimp\fR image of type \fBgrey16\fR
 where all pixels representing the user are set to the user's id, and
 everything else set to \fB0\fR.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-enter\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-enter\fR \fIcmd\fR...
+This method defines a callback responding to
+a user re-entering the scene.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+3 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-enter\fR
-These methods define and remove a callback responding to re-entry
-events, i.e. a user re-entering the scene after exiting it.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "enter", and the (numerical) id of the user
-re-entering, in this order.
-.sp
-The result of the methods is an empty string.
+\fBuser-enter\fR
+The name of the event
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-exit\fR \fIcmd\fR...
+\fIinstanceCmd\fR
+The instance generating the event
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-exit\fR
-These methods define and remove a callback responding to exit events,
-i.e. a user exiting the scene.
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "exit", and the (numerical) id of the user exiting,
-in this order.
-.sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-new\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-enter\fR
+This method removes the callback set with method
+\fBset-callback-user-enter\fR.
+.sp
+The result of the method is an empty string.
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-new\fR
-These methods define and remove a callback responding to "new user"
-events, i.e. when a new user is identified.
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-exit\fR \fIcmd\fR...
+This method defines a callback responding to
+a user existing the scene.
 .sp
-Setting a callback implicitly removes any previous callback set.
+Note that setting the callback removes any previously set callback.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "new", and the (numerical) id of the newly
-identified user, in this order.
-.sp
-The result of the methods is an empty string.
+The callback is a command prefix and will be invoked with
+3 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-lost\fR \fIcmd\fR...
+\fBuser-exit\fR
+The name of the event
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-lost\fR
-These methods define and remove a callback responding to "lost user"
-events, i.e. when a user is no longer identified.
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "lost", and the (numerical) id of the lost user, in
-this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-exit\fR
+This method removes the callback set with method
+\fBset-callback-user-exit\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-new\fR \fIcmd\fR...
+This method defines a callback responding to
+the recognition of a new user.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+3 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBuser-new\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-new\fR
+This method removes the callback set with method
+\fBset-callback-user-new\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-user-lost\fR \fIcmd\fR...
+This method defines a callback responding to
+the loss of a user (after exiting the scene).
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+3 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBuser-lost\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-user-lost\fR
+This method removes the callback set with method
+\fBset-callback-user-lost\fR.
+.sp
+The result of the method is an empty string.
 .PP
 .SH "HANDS GENERATOR"
 This sections documents the class \fB::kinetcl hands\fR, the concrete
@@ -1956,7 +2215,8 @@ The result of the method is the empty string.
 .TP
 \fIinstanceCmd\fR \fBset-smoothing\fR \fIfactor\fR
 This method sets the smoothing \fIfactor\fR for hand tracking, a
-floating point value.
+floating point value between \fB0\fR and \fB1\fR. The former
+disables smoothing, the latter implies infinite smoothing.
 .sp
 The result of the method is an empty string.
 .TP
@@ -1968,8 +2228,7 @@ coordinates, in this order.
 The result of the method is an empty string.
 .TP
 \fIinstanceCmd\fR \fBstop-tracking\fR \fIid\fR
-This method stops tracking of the hand(s) for the user specified by
-the \fIid\fR.
+This method stops tracking of the hand specified by the \fIid\fR.
 .sp
 The result of the method is an empty string.
 .TP
@@ -1978,56 +2237,120 @@ This method stops the tracking of all hands known to the node.
 .sp
 The result of the method is an empty string.
 .TP
-\fIgeneratorInstanceCmd\fR \fBset-callback-handCreate\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-hand-create\fR \fIcmd\fR...
+This method defines a callback responding to
+the creation of a new tracked hand.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+5 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIgeneratorInstanceCmd\fR \fBunset-callback-handCreate\fR
-These methods define and remove a callback responding to hand creation
-events, i.e. the node starting to track an additional hand.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "handCreate", the id of the user the hand belongs to, the
-location of the hand, and a timestamp, in this order.
-.sp
-The location is a 3-element list containing the X, Y, and Z
-coordinates of the hand, in this order.
-.sp
-The result of the methods is an empty string.
+\fBhand-create\fR
+The name of the event
 .TP
-\fIgeneratorInstanceCmd\fR \fBset-callback-handUpdate\fR \fIcmd\fR...
+\fIinstanceCmd\fR
+The instance generating the event
 .TP
-\fIgeneratorInstanceCmd\fR \fBunset-callback-handUpdate\fR
-These methods define and remove a callback responding to hand update
-events, i.e. when a tracked hand moves to a new location.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "handUpdate", the id of the user the hand belongs to, the new
-location of the hand, and a timestamp, in this order.
-.sp
-The location is a 3-element list containing the X, Y, and Z
-coordinates of the hand, in this order.
-.sp
-The result of the methods is an empty string.
+\fIid\fR
+The id of the tracked hand.
 .TP
-\fIgeneratorInstanceCmd\fR \fBset-callback-handDestroy\fR \fIcmd\fR...
+\fIposition\fR
+The position of the hand. This is a 3-element list of floating point
+values containing the \fIreal world\fR x-, y-, and z-coordinates of
+the position, in this order.
 .TP
-\fIgeneratorInstanceCmd\fR \fBunset-callback-handDestroy\fR
-These methods define and remove a callback responding to hand
-destruction events, i.e. when a tracked hand disappears.
+\fItime\fR
+A timestamp.
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "handDestroy", the id of the user the destroyed hand belonged
-to, and a timestamp, in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hand-create\fR
+This method removes the callback set with method
+\fBset-callback-hand-create\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-hand-update\fR \fIcmd\fR...
+This method defines a callback responding to
+the movement of an existing tracked hand.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+5 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBhand-update\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIid\fR
+The id of the tracked hand.
+.TP
+\fIposition\fR
+The position of the hand. This is a 3-element list of floating point
+values containing the \fIreal world\fR x-, y-, and z-coordinates of
+the position, in this order.
+.TP
+\fItime\fR
+A timestamp.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hand-update\fR
+This method removes the callback set with method
+\fBset-callback-hand-update\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-hand-destroy\fR \fIcmd\fR...
+This method defines a callback responding to
+the removal of a hand from tracking.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+4 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBhand-destroy\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIid\fR
+The id of the lost hand.
+.TP
+\fItime\fR
+A timestamp.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hand-destroy\fR
+This method removes the callback set with method
+\fBset-callback-hand-destroy\fR.
+.sp
+The result of the method is an empty string.
 .PP
 .SH "AUDIO GENERATOR"
 This sections documents the class \fB::kinetcl audio\fR, the concrete
@@ -2155,19 +2478,34 @@ This method causes the player to explicitly advance to the next frame.
 .sp
 The result of the method is the empty string.
 .TP
-\fIuserInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-eof\fR \fIcmd\fR...
+This method defines a callback responding to
+the player reaching the end of the recording (even when it loops).
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIuserInstanceCmd\fR \fBunset-callback-eof\fR
-These methods define and remove a callback responding to "eof" events,
-i.e. when the end of the recording was reached.
+\fBeof\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, and the word "eof", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-eof\fR
+This method removes the callback set with method
+\fBset-callback-eof\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SH "SCRIPT NODE"
 This sections documents the class \fB::kinetcl script\fR, the
@@ -2202,8 +2540,8 @@ The result of the method is the empty string.
 This sections documents the various capabilities a production node may have.
 The main classes will all refer to the sub-sections found here.
 .SS "ALTERNATIVE VIEWPOINT"
-Should a production node support the alternate viewpoint API the
-following methods become available.
+Should an instance support alternate viewpoints the following methods
+become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
 \fBalternative-viewpoint\fR.
@@ -2237,22 +2575,37 @@ of another kinetcl instance.
 The result is a boolean value, \fBtrue\fR if the viewpoint of
 \fInode\fR is in use, and \fBfalse\fR else.
 .TP
-\fIinstanceCmd\fR \fBset-callback-viewpoint\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-viewpoint\fR \fIcmd\fR...
+This method defines a callback responding to
+viewpoint changes, i.e. when the instance takes or drops the viewpoint of another node.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-viewpoint\fR
-These methods define and remove a callback responding to viewpoint
-configuration changes, i.e. when the viewpoint of a node is changed.
+\fBviewpoint\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "viewpoint", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-viewpoint\fR
+This method removes the callback set with method
+\fBset-callback-viewpoint\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS ANTI-FLICKER
-Should a production node support the anti-flicker API the following
+Should an instance support anti-flicker behaviour the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBantiflicker\fR.
@@ -2270,23 +2623,38 @@ The allowed values for \fIfrequency\fR are \fB50\fR, \fB60\fR, and
 .sp
 The result is an empty string.
 .TP
-\fIinstanceCmd\fR \fBset-callback-frequency\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-frequency\fR \fIcmd\fR...
+This method defines a callback responding to
+reconfiguration of the instance's powerline frequency setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-frequency\fR
-These methods define and remove a callback responding to anti-flicker
-configuration changes.
+\fBfrequency\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "frequency", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-frequency\fR
+This method removes the callback set with method
+\fBset-callback-frequency\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS CROPPING
-Should a production node support the cropping API the following
-methods become available.
+Should an instance support cropping the following methods become
+available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBcropping\fR.
 .TP
@@ -2309,23 +2677,38 @@ This method deactivates any croppping set on the instance.
 .sp
 The result of the method is an empty string.
 .TP
-\fIinstanceCmd\fR \fBset-callback-cropping\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-cropping\fR \fIcmd\fR...
+This method defines a callback responding to
+reconfiguration of the instance's crop region.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-cropping\fR
-These methods define and remove a callback responding to cropping
-configuration changes, i.e. when the instance's crop settings change.
+\fBcropping\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "cropping", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-cropping\fR
+This method removes the callback set with method
+\fBset-callback-cropping\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS "FRAME SYNCHRONIZATION"
-Should a production node support the frame synchronization API the
-following methods become available.
+Should an instance support frame synchronization the following methods
+become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBframesync\fR.
 .TP
@@ -2360,47 +2743,70 @@ another kinetcl instance.
 The result is a boolean value, \fBtrue\fR if the instance is
 synchronized to \fInode\fR, and \fBfalse\fR else.
 .TP
-\fIinstanceCmd\fR \fBset-callback-framesync\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-framesync\fR \fIcmd\fR...
+This method defines a callback responding to
+frame synchronization changes, i.e. when the instance starts or stops synchronization with another node.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-framesync\fR
-These methods define and remove a callback responding to frame synchronization
-changes, i.e. when a node starts or stops synchronization with another node.
+\fBframesync\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "framesync", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-framesync\fR
+This method removes the callback set with method
+\fBset-callback-framesync\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
-.SS "INSTANCE HAND TOUCHING FOV EDGE API"
-Should a production node support the API for "Hand Touching FOV Edge"
-events the following methods become available.
+.SS "HAND TOUCHING FOV EDGE"
+Should an instance support the events for hands touching the edge of
+the field of view the following methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
 \fBhand-touching-fov-edge\fR.
 .TP
-\fIinstanceCmd\fR \fBset-callback-fovEdge\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-fov-edge\fR \fIcmd\fR...
+This method defines a callback responding to
+hands coming into contact with the edge of the field of view (a box).
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+6 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-fovEdge\fR
-These methods define and remove a callback responding to edge touch
-events, i.e. a hand coming into contact with the edge of the field of
-view (a box).
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "fovEdge", The id of the hand? (user?) causing the event, the
-position of the hand in space, a timestamp, and the direction of the
-edge that is touched on.
-.sp
-The 3D-position is a 3-element list of floating point values
-containing the x-, y-, and z-coordinates, in this order.
-.sp
+\fBfov-edge\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIhandid\fR
+The numerical id of the hand the event was generated for.
+.TP
+\fIposition\fR
+The position of the hand when it touched the edge. This is a 3-element
+list of floating point values containing the \fIreal world\fR
+x-, y-, and z-coordinates of the position, in this order.
+.TP
+\fItimestamp\fR
 The timestamp is a floating point value in seconds.
-.sp
+.TP
+\fIdirection\fR
 The direction is one of
 .RS
 .IP [1]
@@ -2418,12 +2824,23 @@ The direction is one of
 .IP [7]
 \fBbackward\fR
 .RE
+.RE
 .sp
-The result of the methods is an empty string.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-fov-edge\fR
+This method removes the callback set with method
+\fBset-callback-fov-edge\fR.
+.sp
+The result of the method is an empty string.
 .PP
 .SS MIRROR
-Should a production node support the mirror API the following methods
-become available.
+Should an instance support mirroring the following methods become
+available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBmirror\fR.
 .TP
@@ -2439,24 +2856,38 @@ In this form the method (un)sets the instance's mirror flag.
 .sp
 The result is an empty string.
 .TP
-\fIinstanceCmd\fR \fBset-callback-mirror\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-mirror\fR \fIcmd\fR...
+This method defines a callback responding to
+reconfiguration of the instance's mirror flag.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-mirror\fR
-These methods define and remove a callback responding to mirror
-configuration changes, i.e. when the instance's mirror flag is
-reconfigured.
+\fBmirror\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "mirror", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-mirror\fR
+This method removes the callback set with method
+\fBset-callback-mirror\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
-.SS "INSTANCE POSE DETECTION API"
-Should a production node support the pose detection API the following
-methods become available.
+.SS "POSE DETECTION"
+Should an instance support pose detection the following methods become
+available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
 \fBuser-pose-detection\fR.
@@ -2497,62 +2928,157 @@ The result of the method is 3-element string containing, in the named order
 .RS
 .IP [1]
 The state of the user with respect to the pose,
-one of \fBin\fR, \fBout\fR, or \fBunkown\fR
+one of \fBin\fR, \fBout\fR, or \fBundefined\fR
 .IP [2]
 The status of the detection progress.
+.sp
+The possible stati are
+.RS
+.IP [1]
+\fBok\fR
+.IP [2]
+\fBno-user\fR
+.IP [3]
+\fBtop-fov\fR
+.IP [4]
+\fBside-fov\fR
+.IP [5]
+\fBerror\fR
+.IP [6]
+\fBno-tracking\fR
+.RE
 .IP [3]
 A timestamp telling us when the user entered the pose, if it is
 in the pose. If the user is out of the pose \fB0\fR is returned
 here.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-poseEnter\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-pose-enter\fR \fIcmd\fR...
+This method defines a callback responding to
+a user entering a pose.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+4 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-poseEnter\fR
-These methods define and remove a callback responding to pose entry
-events, i.e. a user entering a pose.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "poseEnter", the name of the pose entered and the (numerical)
-id of the user entering it, in this order.
-.sp
-The result of the methods is an empty string.
+\fBpose-enter\fR
+The name of the event
 .TP
-\fIinstanceCmd\fR \fBset-callback-poseExit\fR \fIcmd\fR...
+\fIinstanceCmd\fR
+The instance generating the event
 .TP
-\fIinstanceCmd\fR \fBunset-callback-poseExit\fR
-These methods define and remove a callback responding to pose exit
-events, i.e. a user existing a pose.
-.sp
-Setting a callback implicitly removes any previous callback set.
-.sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "poseExit", the name of pose, and the (numerical) id of the
-user exiting it, in this order.
-.sp
-The result of the methods is an empty string.
+\fIpose\fR
+The name of the pose the event was generated for.
 .TP
-\fIinstanceCmd\fR \fBset-callback-poseProgress\fR \fIcmd\fR...
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
 .TP
-\fIinstanceCmd\fR \fBunset-callback-poseProgress\fR
-These methods define and remove a callback responding to pose progress
-events, i.e. the steps of the engine for detecting user poses.
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pose-enter\fR
+This method removes the callback set with method
+\fBset-callback-pose-enter\fR.
 .sp
-Setting a callback implicitly removes any previous callback set.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-pose-exit\fR \fIcmd\fR...
+This method defines a callback responding to
+a user exiting a pose.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with five arguments added to it, the instance command,
-the word "poseProgress", the name of pose, the (numerical) id of the
-user, and the status of the detection engine, in this order.
+Note that setting the callback removes any previously set callback.
 .sp
-The result of the methods is an empty string.
+The callback is a command prefix and will be invoked with
+4 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBpose-exit\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIpose\fR
+The name of the pose the event was generated for.
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pose-exit\fR
+This method removes the callback set with method
+\fBset-callback-pose-exit\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-pose-progress\fR \fIcmd\fR...
+This method defines a callback responding to
+the system's progress in the detection of a pose for a user.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+5 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBpose-progress\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIpose\fR
+The name of the pose the event was generated for.
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.TP
+\fIstatus\fR
+The status of the pose detection engine.
+.sp
+The possible stati are
+.RS
+.IP [1]
+\fBok\fR
+.IP [2]
+\fBno-user\fR
+.IP [3]
+\fBtop-fov\fR
+.IP [4]
+\fBside-fov\fR
+.IP [5]
+\fBerror\fR
+.IP [6]
+\fBno-tracking\fR
+.RE
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pose-progress\fR
+This method removes the callback set with method
+\fBset-callback-pose-progress\fR.
+.sp
+The result of the method is an empty string.
 .PP
-.SS "INSTANCE SKELETON/JOINT API"
-Should a production node support the skeleton API the following
+.SS "SKELETON/JOINT TRACKING"
+Should an instance support skeleton and joint tracking the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name
@@ -2818,51 +3344,102 @@ representating the rotation matrix for the joint.
 .RE
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-jointConfigChange\fR \fIcmd\fR...
+\fIinstanceCmd\fR \fBget-skeleton\fR \fIuser\fR
+This method retrieves the position and orientation data for all joints
+of the user specified by \fIid\fR. In other words, the whole skeleton,
+as available and active.
+.sp
+The result of the method is a dictionary mapping joint names to
+position and orientation, given in the format returned by method
+\fBget-joint\fR.
+.sp
+Joints which are either not available or not actively tracked
+will not be found in the dictionary.
 .TP
-\fIinstanceCmd\fR \fBunset-callback-jointConfigChange\fR
-These methods define and remove a callback responding to joint
-configuration changes, i.e. when joints are (de)activated.
+\fIgeneratorInstanceCmd\fR \fBset-callback-joint\fR \fIcmd\fR...
+This method defines a callback responding to
+joint changes, i.e. the (de)activation of specific joints.
 .sp
-Setting a callback implicitly removes any previous callback set.
+Note that setting the callback removes any previously set callback.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "jointConfigChange", in this order.
-.sp
-The result of the methods is an empty string.
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBset-callback-calibrationStart\fR \fIcmd\fR...
+\fBjoint\fR
+The name of the event
 .TP
-\fIinstanceCmd\fR \fBunset-callback-calibrationStart\fR
-These methods define and remove a callback responding to the start of
-a calibration.
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with three arguments added to it, the instance
-command, the word "calibrationStart", and the (numerical) id of the
-user for whom calibration has started, in this order.
-.sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .TP
-\fIinstanceCmd\fR \fBset-callback-calibrationComplete\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBunset-callback-joint\fR
+This method removes the callback set with method
+\fBset-callback-joint\fR.
+.sp
+The result of the method is an empty string.
 .TP
-\fIinstanceCmd\fR \fBunset-callback-calibrationComplete\fR
-These methods define and remove a callback responding to the
-completion of calibrations.
+\fIgeneratorInstanceCmd\fR \fBset-callback-calibration-start\fR \fIcmd\fR...
+This method defines a callback responding to
+the start of skeleton calibration for a user.
 .sp
-Setting a callback implicitly removes any previous callback set.
+Note that setting the callback removes any previously set callback.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "calibrationComplete", the (numerical) id of the user for
-whom calibration completed, and the completion status, in this order.
+The callback is a command prefix and will be invoked with
+3 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBcalibration-start\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.RE
 .sp
-The result of the methods is an empty string.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The possible completion stati are
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-calibration-start\fR
+This method removes the callback set with method
+\fBset-callback-calibration-start\fR.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBset-callback-calibration-complete\fR \fIcmd\fR...
+This method defines a callback responding to
+the completion of skeleton calibration for a user.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+4 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBcalibration-complete\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.TP
+\fIstatus\fR
+The status of the calibration engine.
+.sp
+The possible stati are
 .RS
 .IP [1]
 \fBok\fR
@@ -2889,27 +3466,85 @@ The possible completion stati are
 .IP [12]
 \fBtimeout\fR
 .RE
+.RE
+.sp
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
 .TP
-\fIinstanceCmd\fR \fBset-callback-calibrationProgress\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBunset-callback-calibration-complete\fR
+This method removes the callback set with method
+\fBset-callback-calibration-complete\fR.
+.sp
+The result of the method is an empty string.
 .TP
-\fIinstanceCmd\fR \fBunset-callback-calibrationProgress\fR
-These methods define and remove a callback responding to calibration
-progress events.
+\fIgeneratorInstanceCmd\fR \fBset-callback-calibration-progress\fR \fIcmd\fR...
+This method defines a callback responding to
+the system's progress in the calibration of the skeleton for a user.
 .sp
-Setting a callback implicitly removes any previous callback set.
+Note that setting the callback removes any previously set callback.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with four arguments added to it, the instance command,
-the word "calibrationProgress", the (numerical) id of the user, and the
-calibration progreess status, in this order.
+The callback is a command prefix and will be invoked with
+4 additional arguments, which are, in the order below:
+.RS
+.TP
+\fBcalibration-progress\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.TP
+\fIuserid\fR
+The numerical id of the user the event was generated for.
+.TP
+\fIstatus\fR
+The status of the calibration engine.
 .sp
-The result of the methods is an empty string.
+The possible stati are
+.RS
+.IP [1]
+\fBok\fR
+.IP [2]
+\fBno-user\fR
+.IP [3]
+\fBarm\fR
+.IP [4]
+\fBleg\fR
+.IP [5]
+\fBhead\fR
+.IP [6]
+\fBtorso\fR
+.IP [7]
+\fBtop-fov\fR
+.IP [8]
+\fBside-fov\fR
+.IP [9]
+\fBpose\fR
+.IP [10]
+\fBmanual-abort\fR
+.IP [11]
+\fBmanual-reset\fR
+.IP [12]
+\fBtimeout\fR
+.RE
+.RE
 .sp
-The possible progress stati are identical to the completion
-stati described above.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
+.sp
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-calibration-progress\fR
+This method removes the callback set with method
+\fBset-callback-calibration-progress\fR.
+.sp
+The result of the method is an empty string.
 .PP
 .SS "BACKLIGHT COMPENSATION"
-Should a production node support the backlight-compensation API the following
+Should an instance support the backlight-compensation setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBbacklight-compensation\fR.
@@ -2954,22 +3589,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-backlightCompensation\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-backlight-compensation\fR \fIcmd\fR...
+This method defines a callback responding to
+backlight-compensation changes, i.e. reconfiguration of the instance's backlight-compensation setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-backlightCompensation\fR
-These methods define and remove a callback responding to backlightCompensation
-configuration changes.
+\fBbacklight-compensation\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "backlightCompensation", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-backlight-compensation\fR
+This method removes the callback set with method
+\fBset-callback-backlight-compensation\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS BRIGHTNESS
-Should a production node support the brightness API the following
+Should an instance support the brightness setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBbrightness\fR.
@@ -3014,22 +3664,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-brightness\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-brightness\fR \fIcmd\fR...
+This method defines a callback responding to
+brightness changes, i.e. reconfiguration of the instance's brightness setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-brightness\fR
-These methods define and remove a callback responding to brightness
-configuration changes.
+\fBbrightness\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "brightness", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-brightness\fR
+This method removes the callback set with method
+\fBset-callback-brightness\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS "COLOR TEMPERATURE"
-Should a production node support the color-temperature API the following
+Should an instance support the color-temperature setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBcolor-temperature\fR.
@@ -3074,22 +3739,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-colorTemperature\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-color-temperature\fR \fIcmd\fR...
+This method defines a callback responding to
+color-temperature changes, i.e. reconfiguration of the instance's color-temperature setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-colorTemperature\fR
-These methods define and remove a callback responding to colorTemperature
-configuration changes.
+\fBcolor-temperature\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "colorTemperature", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-color-temperature\fR
+This method removes the callback set with method
+\fBset-callback-color-temperature\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS CONTRAST
-Should a production node support the contrast API the following
+Should an instance support the contrast setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBcontrast\fR.
@@ -3134,22 +3814,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-contrast\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-contrast\fR \fIcmd\fR...
+This method defines a callback responding to
+contrast changes, i.e. reconfiguration of the instance's contrast setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-contrast\fR
-These methods define and remove a callback responding to contrast
-configuration changes.
+\fBcontrast\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "contrast", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-contrast\fR
+This method removes the callback set with method
+\fBset-callback-contrast\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS EXPOSURE
-Should a production node support the exposure API the following
+Should an instance support the exposure setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBexposure\fR.
@@ -3194,22 +3889,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-exposure\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-exposure\fR \fIcmd\fR...
+This method defines a callback responding to
+exposure changes, i.e. reconfiguration of the instance's exposure setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-exposure\fR
-These methods define and remove a callback responding to exposure
-configuration changes.
+\fBexposure\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "exposure", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-exposure\fR
+This method removes the callback set with method
+\fBset-callback-exposure\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS FOCUS
-Should a production node support the focus API the following
+Should an instance support the focus setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBfocus\fR.
@@ -3254,22 +3964,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-focus\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-focus\fR \fIcmd\fR...
+This method defines a callback responding to
+focus changes, i.e. reconfiguration of the instance's focus setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-focus\fR
-These methods define and remove a callback responding to focus
-configuration changes.
+\fBfocus\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "focus", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-focus\fR
+This method removes the callback set with method
+\fBset-callback-focus\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS GAIN
-Should a production node support the gain API the following
+Should an instance support the gain setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBgain\fR.
@@ -3314,22 +4039,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-gain\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gain\fR \fIcmd\fR...
+This method defines a callback responding to
+gain changes, i.e. reconfiguration of the instance's gain setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-gain\fR
-These methods define and remove a callback responding to gain
-configuration changes.
+\fBgain\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "gain", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gain\fR
+This method removes the callback set with method
+\fBset-callback-gain\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS GAMMA
-Should a production node support the gamma API the following
+Should an instance support the gamma setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBgamma\fR.
@@ -3374,22 +4114,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-gamma\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-gamma\fR \fIcmd\fR...
+This method defines a callback responding to
+gamma changes, i.e. reconfiguration of the instance's gamma setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-gamma\fR
-These methods define and remove a callback responding to gamma
-configuration changes.
+\fBgamma\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "gamma", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-gamma\fR
+This method removes the callback set with method
+\fBset-callback-gamma\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS HUE
-Should a production node support the hue API the following
+Should an instance support the hue setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBhue\fR.
@@ -3434,22 +4189,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-hue\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-hue\fR \fIcmd\fR...
+This method defines a callback responding to
+hue changes, i.e. reconfiguration of the instance's hue setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-hue\fR
-These methods define and remove a callback responding to hue
-configuration changes.
+\fBhue\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "hue", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-hue\fR
+This method removes the callback set with method
+\fBset-callback-hue\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS IRIS
-Should a production node support the iris API the following
+Should an instance support the iris setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBiris\fR.
@@ -3494,22 +4264,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-iris\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-iris\fR \fIcmd\fR...
+This method defines a callback responding to
+iris changes, i.e. reconfiguration of the instance's iris setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-iris\fR
-These methods define and remove a callback responding to iris
-configuration changes.
+\fBiris\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "iris", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-iris\fR
+This method removes the callback set with method
+\fBset-callback-iris\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS "LOWLIGHT COMPENSATION"
-Should a production node support the lowlight-compensation API the following
+Should an instance support the lowlight-compensation setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBlowlight-compensation\fR.
@@ -3554,22 +4339,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-lowlightCompensation\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-lowlight-compensation\fR \fIcmd\fR...
+This method defines a callback responding to
+lowlight-compensation changes, i.e. reconfiguration of the instance's lowlight-compensation setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-lowlightCompensation\fR
-These methods define and remove a callback responding to lowlightCompensation
-configuration changes.
+\fBlowlight-compensation\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "lowlightCompensation", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-lowlight-compensation\fR
+This method removes the callback set with method
+\fBset-callback-lowlight-compensation\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS PAN
-Should a production node support the pan API the following
+Should an instance support the pan setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBpan\fR.
@@ -3614,22 +4414,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-pan\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-pan\fR \fIcmd\fR...
+This method defines a callback responding to
+pan changes, i.e. reconfiguration of the instance's pan setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-pan\fR
-These methods define and remove a callback responding to pan
-configuration changes.
+\fBpan\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "pan", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-pan\fR
+This method removes the callback set with method
+\fBset-callback-pan\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS ROLL
-Should a production node support the roll API the following
+Should an instance support the roll setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBroll\fR.
@@ -3674,22 +4489,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-roll\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-roll\fR \fIcmd\fR...
+This method defines a callback responding to
+roll changes, i.e. reconfiguration of the instance's roll setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-roll\fR
-These methods define and remove a callback responding to roll
-configuration changes.
+\fBroll\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "roll", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-roll\fR
+This method removes the callback set with method
+\fBset-callback-roll\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS SATURATION
-Should a production node support the saturation API the following
+Should an instance support the saturation setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBsaturation\fR.
@@ -3734,22 +4564,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-saturation\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-saturation\fR \fIcmd\fR...
+This method defines a callback responding to
+saturation changes, i.e. reconfiguration of the instance's saturation setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-saturation\fR
-These methods define and remove a callback responding to saturation
-configuration changes.
+\fBsaturation\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "saturation", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-saturation\fR
+This method removes the callback set with method
+\fBset-callback-saturation\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS SHARPNESS
-Should a production node support the sharpness API the following
+Should an instance support the sharpness setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBsharpness\fR.
@@ -3794,22 +4639,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-sharpness\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-sharpness\fR \fIcmd\fR...
+This method defines a callback responding to
+sharpness changes, i.e. reconfiguration of the instance's sharpness setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-sharpness\fR
-These methods define and remove a callback responding to sharpness
-configuration changes.
+\fBsharpness\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "sharpness", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-sharpness\fR
+This method removes the callback set with method
+\fBset-callback-sharpness\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS TILT
-Should a production node support the tilt API the following
+Should an instance support the tilt setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBtilt\fR.
@@ -3854,22 +4714,37 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-tilt\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-tilt\fR \fIcmd\fR...
+This method defines a callback responding to
+tilt changes, i.e. reconfiguration of the instance's tilt setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-tilt\fR
-These methods define and remove a callback responding to tilt
-configuration changes.
+\fBtilt\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "tilt", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-tilt\fR
+This method removes the callback set with method
+\fBset-callback-tilt\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SS ZOOM
-Should a production node support the zoom API the following
+Should an instance support the zoom setting the following
 methods become available.
 This support can checked by invoking the inherited method
 \fBis-capable-of\fR for the capability name \fBzoom\fR.
@@ -3914,19 +4789,34 @@ A boolean value. If \fBtrue\fR the setting supports automatic
 adjustment during operation of the node, otherwise not.
 .RE
 .TP
-\fIinstanceCmd\fR \fBset-callback-zoom\fR \fIcmd\fR...
+\fIgeneratorInstanceCmd\fR \fBset-callback-zoom\fR \fIcmd\fR...
+This method defines a callback responding to
+zoom changes, i.e. reconfiguration of the instance's zoom setting.
+.sp
+Note that setting the callback removes any previously set callback.
+.sp
+The callback is a command prefix and will be invoked with
+2 additional arguments, which are, in the order below:
+.RS
 .TP
-\fIinstanceCmd\fR \fBunset-callback-zoom\fR
-These methods define and remove a callback responding to zoom
-configuration changes.
+\fBzoom\fR
+The name of the event
+.TP
+\fIinstanceCmd\fR
+The instance generating the event
+.RE
 .sp
-Setting a callback implicitly removes any previous callback set.
+\fINote\fR that callbacks are not told the actual state of the
+instance. If this information is required then it is the callback's
+responsibility to query the state using the appropriate query methods.
 .sp
-The callback to invoke is specified as a command prefix, and
-will be invoked with two arguments added to it, the instance command,
-and the word "zoom", in this order.
+The result of the method is an empty string.
+.TP
+\fIgeneratorInstanceCmd\fR \fBunset-callback-zoom\fR
+This method removes the callback set with method
+\fBset-callback-zoom\fR.
 .sp
-The result of the methods is an empty string.
+The result of the method is an empty string.
 .PP
 .SH "BUGS, IDEAS, FEEDBACK"
 This document, and the package it describes, will undoubtedly contain

@@ -11,6 +11,15 @@
 
 # # ## ### ##### ######## ############# #####################
 
+proc kt_cbcname {name} {
+    #puts |$name|
+    regsub -all -- {[^a-zA-Z0-9_]} $name {[scan {\0} %c]} cname
+    #puts |$cname|
+    set cname [subst $cname]
+    #puts |$cname|
+    return [string totitle $cname]
+}
+
 proc kt_cbhandler {group name cname signature body {mode all}} {
     set esignature [list {XnNodeHandle h} {*}$signature]
     set fsignature [list {XnNodeHandle h} {*}$signature {void* clientData}]
@@ -190,8 +199,8 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 
                 interp = instance->interp;
 		cmd = Tcl_DuplicateObj (instance->command@@cname@@);
-		Tcl_ListObjAppendElement (interp, cmd, instance->self);
 		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
+		Tcl_ListObjAppendElement (interp, cmd, instance->self);
 
 		{ @@body@@ }
                 @@edestructor@@
