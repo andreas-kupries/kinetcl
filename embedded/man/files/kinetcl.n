@@ -416,6 +416,8 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIsceneInstanceCmd\fR \fBmap\fR
 .sp
+\fIsceneInstanceCmd\fR \fBfloor\fR
+.sp
 \fB::kinetcl user\fR \fBnew\fR
 .sp
 \fB::kinetcl user\fR \fBcreate\fR \fIobjname\fR
@@ -1997,6 +1999,23 @@ Scene segmentations are in pixel format \fBgrey16\fR.
 This method returns a \fBcrimp\fR image of type \fBgrey16\fR
 containing the current scene segmentation. Each pixel is labeled with
 the id of the user it belongs to, or \fB0\fR if it is background.
+.TP
+\fIsceneInstanceCmd\fR \fBfloor\fR
+This method returns a dictionary describing the floor, as a
+combination of a point on the floor, plus the normal vector to specify
+orientation. The two keys in the dictionary are
+.RS
+.TP
+\fBpoint\fR
+A point on the floor, in \fIreal world\fR coordinates. The value is
+a 3-element list containing the x-, y-, and z-coordinates, in this
+order.
+.TP
+\fBnormal\fR
+The normal vector describing the orientation. The value is a 3-element
+list containing the \fIreal world\fR x-, y-, and z-coordinates, in
+this order.
+.RE
 .PP
 .SH "USER GENERATOR"
 This sections documents the class \fB::kinetcl user\fR, the concrete

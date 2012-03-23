@@ -55,4 +55,23 @@ This method returns a [package crimp] image of type [const grey16]
 containing the current scene segmentation. Each pixel is labeled with
 the id of the user it belongs to, or [const 0] if it is background.
 
+[comment ===============================================================]
+[call [arg sceneInstanceCmd] [method floor]]
+
+This method returns a dictionary describing the floor, as a
+combination of a point on the floor, plus the normal vector to specify
+orientation. The two keys in the dictionary are
+
+[list_begin definitions]
+[def [const point]]
+A point on the floor, in [term {real world}] coordinates. The value is
+a 3-element list containing the x-, y-, and z-coordinates, in this
+order.
+
+[def [const normal]]
+The normal vector describing the orientation. The value is a 3-element
+list containing the [term {real world}] x-, y-, and z-coordinates, in
+this order.
+
+[list_end]
 [list_end]
