@@ -226,7 +226,7 @@ critcl::class def ::kinetcl::Base {
 	static int
 	kinetcl_convert_to3d (Tcl_Interp* interp, Tcl_Obj* ivec, XnVector3D* vec)
 	{
-	    Tcl_Obj* v;
+	    Tcl_Obj** v;
 	    int n;
 	    double x, y, z;
 
@@ -241,12 +241,12 @@ critcl::class def ::kinetcl::Base {
 
 	    if (Tcl_GetDoubleFromObj (interp, v [0], &x) != TCL_OK) { return TCL_ERROR; }
 	    if (Tcl_GetDoubleFromObj (interp, v [1], &y) != TCL_OK) { return TCL_ERROR; }
-	    if (Tcl_GetDoubleFromObj (interp, v [2], &x) != TCL_OK) { return TCL_ERROR; }
+	    if (Tcl_GetDoubleFromObj (interp, v [2], &z) != TCL_OK) { return TCL_ERROR; }
 
 	    if (vec) {
 		vec->X = x;
 		vec->Y = y;
-		vec->Z = zl;
+		vec->Z = z;
 	    }
 
 	    return TCL_OK;

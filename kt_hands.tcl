@@ -46,7 +46,7 @@ critcl::class def ::kinetcl::Hands {
 	    return TCL_ERROR;
 	}
 
-	if (kinetcl_covnert_to3d (interp, objv [2], &p) != TCL_OK) {
+	if (kinetcl_convert_to3d (interp, objv [2], &p) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -101,7 +101,6 @@ critcl::class def ::kinetcl::Hands {
 	} {
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
 	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewListObj (3,coord));
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
 	} \
 	handUpdate {

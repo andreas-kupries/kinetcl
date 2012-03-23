@@ -170,7 +170,7 @@ critcl::class def ::kinetcl::Depth {
 	aworld = (XnPoint3D*) ckalloc (lc * sizeof (XnPoint3D));
 
 	for (i = 0; i < lc; i++) {
-	    if (kinetcl_convert_to3d (interp, lv [i], &world [i]) != TCL_OK) {
+	    if (kinetcl_convert_to3d (interp, lv [i], &aworld [i]) != TCL_OK) {
 		ckfree ((char*) aprojective);
 		return TCL_ERROR;
 	    }
