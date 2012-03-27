@@ -1,0 +1,229 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require Tk
+package require crimp::tk
+package require crimp
+
+# # ## ### ##### ######## ############# #####################
+
+# Eventflow
+#
+# K (user-lost) --> Kill data structures, kill drawing elements.
+#                   Tracking is implicitly stopped for the user.
+#
+# K (newframe) --> [newframe_user]
+#                  per-user: get/draw center of mass.
+#
+# D (newframe) --> get/update shown depth image.
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv]} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    global photo radius dotc textc
+    set radius 10
+    set dotc red
+    set textc green
+
+    kinetcl user create K
+    K set-callback-newdata   newframe_user
+    K set-callback-user-exit userexit
+    K set-callback-user-lost userlost
+
+    kinetcl depth create D
+    D set-callback-newdata newframe_depth
+
+    set size [dict get [D meta] map res]
+    lassign $size w h
+
+    puts [join $size { x }]
+
+    set photo [image create photo]
+    crimp write 2tk $photo [crimp blank grey8 $w $h 0]
+
+    canvas      .image \
+	-scrollregion [list 0 0 $w $h] \
+	-width $w -height $h
+    ttk::button .exit -text Exit -command ::exit
+
+    .image create image 0 0 -tags PHOTO -anchor nw
+    render
+
+    # More buttons: stop/start recording
+    pack .image -side top -expand 1 -fill both
+    pack .exit  -side left
+
+    bind all <q> ::exit
+
+    update idletasks
+    return
+}
+
+proc render {} {
+    global photo
+    .image itemconfigure PHOTO -image $photo
+    .image coords        PHOTO 0 0
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc newframe_depth {args} {
+    global photo
+    set s [clock milliseconds]
+
+    set image [D map]
+    set frame [D frame]
+
+    # Plain contrast compressed gray scale visualization.
+    set image [crimp::FITFLOAT [crimp convert 2float $image]] 
+
+    set size [crimp dimensions $image]
+
+    crimp write 2tk $photo $image
+    render
+
+    set e [clock milliseconds]
+    #ping "[expr {$e - $s}] $frame ($size)       "
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc userexit {event obj user} {
+    if {[catch {
+	puts "$event $user"
+	.image delete u,$user
+	puts "delete u,$user = ([.image find withtag u,$user])"
+    }]} { puts $::errorInfo }
+    return
+}
+
+proc userlost {event obj user} {
+    if {[catch {
+	puts "$event $user"
+	.image delete u,$user
+	puts "delete u,$user = ([.image find withtag u,$user])"
+    }]} { puts $::errorInfo }
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc newframe_user {args} {
+    puts "$args"
+    foreach user [K users] {
+	labeluser $user
+    }
+    return
+}
+
+proc labeluser {user} {
+    set at [lrange [lindex [D world2projective [K centerof $user]] 0] 0 1]
+    puts "$user = ($at)"
+    lassign $at x y
+
+    # Filter out NaNs.
+    if {![string is double -strict $x] || $x != $x } return
+    if {![string is double -strict $y] || $y != $y } return
+
+    if {![llength [.image find withtag u,$user]]} {
+	dot .image {*}$at -tags [list com,$user u,$user]
+	make-text .image {*}$at \
+	    -font {Helvetica 20} \
+	    -tags [list t,$user u,$user] \
+	    -text "User $user"
+    }
+    .image itemconfigure t,$user
+    place-text .image t,$user   {*}$at
+    place-dot  .image com,$user {*}$at
+    return
+}
+
+proc place-dot {c item x y} {
+    global radius
+    set w [expr {$x - $radius}]
+    set n [expr {$y - $radius}]
+    set e [expr {$x + $radius}]
+    set s [expr {$y + $radius}]
+    $c coords $item $w $n $e $s
+    return
+}
+
+proc dot {c x y args} {
+    global radius dotc
+    # Create a circle centered on the chosen location, red filled
+    # with black border.
+    set w [expr {$x - $radius}]
+    set n [expr {$y - $radius}]
+    set e [expr {$x + $radius}]
+    set s [expr {$y + $radius}]
+    return [$c create oval $w $n $e $s \
+		-width   1   \
+		-outline $dotc \
+		-fill    $dotc \
+		{*}$args]
+}
+
+proc place-text {c item x y} {
+    $c coords $item $x $y
+    return
+}
+
+proc make-text {c x y args} {
+    global textc
+    return [$c create text $x $y \
+		-anchor nw \
+		-fill $textc -text {} \
+		{*}$args]
+}
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
