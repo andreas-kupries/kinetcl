@@ -223,6 +223,7 @@ proc labeluser {user} {
     set at [lrange [lindex [D world2projective [K centerof $user]] 0] 0 1]
     if {![info exists S] || ![dict exists $S $user canvas label]} {
 	set label [make-text .image {*}$at \
+		       -anchor nw \
 		       -font {Helvetica 20} \
 		       -tags [list t,$user u,$user]]
 	dict set S $user canvas label $label
