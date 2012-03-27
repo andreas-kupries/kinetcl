@@ -36,7 +36,7 @@ instance using them is destroyed.
 [para] The result of the method is the empty string.
 
 [comment ===============================================================]
-[call [arg gestureInstanceCmd] [method add-gesture] [arg gesture] [arg box]]
+[call [arg gestureInstanceCmd] [method add-gesture] [arg gesture] [opt [arg box]]]
 
 This method activates the gesture, i.e. causes the instance to start
 looking for it in the input.
@@ -46,6 +46,8 @@ real-world coordinates. It is a 2-element list of 3-element lists of
 x-, y-, and z-coordinates. The 1st 3D coordinate describes the
 left-bottom-near corner of the box, whereas the 2nd describes the
 right-top-far corner.
+
+[para] If not specified the box encompasses the whole field of view.
 
 [para] The result of the method is the empty string.
 

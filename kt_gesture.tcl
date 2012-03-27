@@ -15,33 +15,40 @@ critcl::class def ::kinetcl::Gesture {
 
     # # ## ### ##### ######## #############
 
-    mdef add-gesture { /* Syntax: <instance> add-gesture <str> <box> */
+    mdef add-gesture { /* Syntax: <instance> add-gesture <str> ?<box>? */
 	XnBoundingBox3D box;
+	XnBoundingBox3D* thebox;
 	XnStatus s;
 	int lc;
 	Tcl_Obj** lv;
 
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "gesture box");
+	if ((objc < 3) || (objc > 4)) {
+	    Tcl_WrongNumArgs (interp, 2, objv, "gesture ?box?");
 	    return TCL_ERROR;
 	}
 
-	if (Tcl_ListObjGetElements (interp, objv[3], &lc, &lv) != TCL_OK) {
-	    return TCL_ERROR;
-	} else if (lc != 2) {
-	    Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
-	    return TCL_ERROR;
+	if (objc == 4) {
+	    if (Tcl_ListObjGetElements (interp, objv[3], &lc, &lv) != TCL_OK) {
+		return TCL_ERROR;
+	    } else if (lc != 2) {
+		Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
+		return TCL_ERROR;
+	    }
+
+	    if (kinetcl_convert_to3d (interp, lv [0], &box.LeftBottomNear) != TCL_OK) {
+		return TCL_ERROR;
+	    }
+
+	    if (kinetcl_convert_to3d (interp, lv [1], &box.RightTopFar) != TCL_OK) {
+		return TCL_ERROR;
+	    }
+
+	    thebox = &box;
+	} else {
+	    thebox = NULL;
 	}
 
-	if (kinetcl_convert_to3d (interp, lv [0], &box.LeftBottomNear) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_convert_to3d (interp, lv [1], &box.RightTopFar) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnAddGesture (instance->handle, Tcl_GetString (objv [2]), &box);
+	s = xnAddGesture (instance->handle, Tcl_GetString (objv [2]), thebox);
 	CHECK_STATUS_RETURN;
 
 	return TCL_OK;

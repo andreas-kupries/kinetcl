@@ -376,7 +376,7 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIgestureInstanceCmd\fR \fBdestroy\fR
 .sp
-\fIgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
+\fIgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR ?\fIbox\fR?
 .sp
 \fIgestureInstanceCmd\fR \fBremove-gesture\fR \fIgesture\fR
 .sp
@@ -1657,7 +1657,7 @@ instance using them is destroyed.
 .sp
 The result of the method is the empty string.
 .TP
-\fIgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR \fIbox\fR
+\fIgestureInstanceCmd\fR \fBadd-gesture\fR \fIgesture\fR ?\fIbox\fR?
 This method activates the gesture, i.e. causes the instance to start
 looking for it in the input.
 .sp
@@ -1666,6 +1666,8 @@ real-world coordinates. It is a 2-element list of 3-element lists of
 x-, y-, and z-coordinates. The 1st 3D coordinate describes the
 left-bottom-near corner of the box, whereas the 2nd describes the
 right-top-far corner.
+.sp
+If not specified the box encompasses the whole field of view.
 .sp
 The result of the method is the empty string.
 .TP

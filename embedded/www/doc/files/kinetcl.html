@@ -305,7 +305,7 @@
 <li><a href="#62"><b class="cmd">::kinetcl gesture</b> <b class="method">new</b></a></li>
 <li><a href="#63"><b class="cmd">::kinetcl gesture</b> <b class="method">create</b> <i class="arg">objname</i></a></li>
 <li><a href="#64"><i class="arg">gestureInstanceCmd</i> <b class="method">destroy</b></a></li>
-<li><a href="#65"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <i class="arg">box</i></a></li>
+<li><a href="#65"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <span class="opt">?<i class="arg">box</i>?</span></a></li>
 <li><a href="#66"><i class="arg">gestureInstanceCmd</i> <b class="method">remove-gesture</b> <i class="arg">gesture</i></a></li>
 <li><a href="#67"><i class="arg">gestureInstanceCmd</i> <b class="method">is-gesture</b> <i class="arg">gesture</i></a></li>
 <li><a href="#68"><i class="arg">gestureInstanceCmd</i> <b class="method">gesture-has-progress</b> <i class="arg">gesture</i></a></li>
@@ -1179,7 +1179,7 @@ associated resources, including the instance command. Note that
 resources used by multiple instances are released only when the last
 instance using them is destroyed.</p>
 <p>The result of the method is the empty string.</p></dd>
-<dt><a name="65"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <i class="arg">box</i></a></dt>
+<dt><a name="65"><i class="arg">gestureInstanceCmd</i> <b class="method">add-gesture</b> <i class="arg">gesture</i> <span class="opt">?<i class="arg">box</i>?</span></a></dt>
 <dd><p>This method activates the gesture, i.e. causes the instance to start
 looking for it in the input.</p>
 <p>The <i class="arg">box</i> describes the area where to look for it, in
@@ -1187,6 +1187,7 @@ real-world coordinates. It is a 2-element list of 3-element lists of
 x-, y-, and z-coordinates. The 1st 3D coordinate describes the
 left-bottom-near corner of the box, whereas the 2nd describes the
 right-top-far corner.</p>
+<p>If not specified the box encompasses the whole field of view.</p>
 <p>The result of the method is the empty string.</p></dd>
 <dt><a name="66"><i class="arg">gestureInstanceCmd</i> <b class="method">remove-gesture</b> <i class="arg">gesture</i></a></dt>
 <dd><p>This method deactivates the gesture, i.e. causes the instance to stop
