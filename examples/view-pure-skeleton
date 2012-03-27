@@ -27,6 +27,24 @@ package require crimp
 #   Segments: Line    green, width=radius         u,<user> l,<user>,<jointA>,<jointB>
 #             ====    ==========                  ====
 
+# Eventflow
+#
+# K (user-new) --> (*) [request-calibration]    <------\
+#                  --> K (calibration-complete) /!ok --/
+#                  --> K (calibration-complete) /ok 
+#                      --> [start-tracking] (*)
+#
+# K (user-exit) --> Kill data structures, kill drawing elements.
+#                   Tracking of the user, if active, continues
+#                   inside the system.
+#
+# K (user-lost) --> Kill data structures, kill drawing elements.
+#                   Tracking is implicitly stopped for the user.
+#
+# K (newframe) --> [newframe_user]
+#                  per-user: ignore !tracking (See *)
+#                  get/update skeletons and drawings.
+
 # # ## ### ##### ######## ############# #####################
 
 proc main {} {
@@ -51,7 +69,7 @@ proc usage {} {
 }
 
 proc setup {} {
-    global photo radius dotc segc textc
+    global radius dotc segc textc
     set radius 5
     set dotc red
     set segc lightblue
@@ -62,18 +80,15 @@ proc setup {} {
     K set-callback-user-exit            userexit
     K set-callback-user-lost            userlost
     K set-callback-calibration-complete calibration
+    K set-callback-newdata              newframe_user
     K set-profile all
 
     kinetcl depth create D
-    set size [dict get [D meta] map res]
-    lassign $size w h
+    lassign [dict get [D meta] map res] w h
     #D destroy - No. We need this for coordinate
     #            conversion world -> screen also.
 
-    puts [join $size { x }]
-
-    set photo [image create photo]
-    crimp write 2tk $photo [crimp blank grey8 $w $h 0]
+    puts "$w x $h"
 
     canvas      .image \
 	-scrollregion [list 0 0 $w $h] \
@@ -117,6 +132,7 @@ proc userexit {event obj user} {
     puts "$event $user"
     catch { dict unset S $user }
     .image delete u,$user
+    puts "delete u,$user = ([.image find withtag u,$user])"
     return
 }
 
@@ -125,8 +141,11 @@ proc userlost {event obj user} {
     puts "$event $user"
     catch { dict unset S $user }
     .image delete u,$user
+    puts "delete u,$user = ([.image find withtag u,$user])"
     return
 }
+
+# # ## ### ##### ######## ############# #####################
 
 proc calibration {event obj user status} {
     puts "$event $user : $status"
@@ -138,7 +157,10 @@ proc calibration {event obj user status} {
     return
 }
 
-proc skeleton {} {
+# # ## ### ##### ######## ############# #####################
+
+proc newframe_user {args} {
+    puts "$args"
     foreach user [K users] {
 	labeluser $user
 	skeletonfor $user
@@ -159,7 +181,9 @@ proc labeluser {user} {
     global S
     set at [lrange [lindex [D world2projective [K centerof $user]] 0] 0 1]
     if {![info exists S] || ![dict exists $S $user canvas label]} {
-	set label [make-text .image {*}$at -tags [list t,$user u,$user]]
+	set label [make-text .image {*}$at \
+		       -font {Helvetica 20} \
+		       -tags [list t,$user u,$user]]
 	dict set S $user canvas label $label
     }
     .image itemconfigure t,$user -text [getlabel $user]
@@ -176,6 +200,7 @@ proc getlabel {user} {
     } elseif {[K is-calibrating $user]} {
 	append text " calibrating"
     }
+    return $text
 }
 
 proc draw {user} {
@@ -194,11 +219,15 @@ proc drawpoints {user} {
 	lassign [lindex $joint($j) 0] confidence point
 
 	if {$confidence < 0.5} {
-	    .image delete p,$user,$j
-	    catch { dict unset S $user canvas $j }
-	    catch { dict unset S $user at $j }
+	    if {[llength [.image find withtag p,$user,$j]]} {
+		puts "\tdrop non-confident $user $j"
+		.image delete p,$user,$j
+		catch { dict unset S $user canvas $j }
+		catch { dict unset S $user at $j }
+	    }
 	} else {
 	    if {![info exists canvas($j)]} {
+		puts "\tadd confident $user $j"
 		set dot [dot .image 0 0 -tags [list p,$user,$j u,$user]]
 		dict set S $user canvas $j $dot
 	    }
@@ -316,7 +345,6 @@ proc make-text {c x y args} {
 proc record {} {
     kinetcl waitUpdate
     kinetcl estop
-    skeleton
     update
     kinetcl estart
     return
