@@ -1,0 +1,174 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require Tk
+package require crimp::tk
+package require crimp
+
+# # ## ### ##### ######## ############# #####################
+
+# Canvas items:
+#       What   Attributes  Tags
+#       ====   ==========  ====
+# Hand: Circle [see setup] h,<hand-id>
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv]} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    global photo radius dotc segc textc
+    set radius 10
+    set dotc red
+    set segc lightblue
+    set textc green
+
+    kinetcl hand create K
+    K set-smoothing 0.1
+    K set-callback-hand-create  newhand
+    K set-callback-hand-update  movehand
+    K set-callback-hand-destroy losthand
+
+    kinetcl depth create D
+    lassign [dict get [D meta] map res] w h
+    #D destroy - No. We need this for coordinate
+    #            conversion world -> screen also.
+
+    kinetcl gesture create G
+    G set-callback-gesture-recognized gesture
+    G add-gesture RaiseHand
+
+    puts "$w x $h"
+
+    canvas      .image \
+	-scrollregion [list 0 0 $w $h] \
+	-width $w -height $h
+    ttk::button .exit -text Exit -command ::exit
+
+    # More buttons: stop/start recording
+    pack .image -side top -expand 1 -fill both
+    pack .exit  -side left
+
+    bind all <q> ::exit
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc gesture {event obj which id end} {
+    puts "$event $which ($id) @($end)"
+    K start-tracking $end
+    G remove-gesture RaiseHand
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc newhand {event obj hid location time} {
+    puts "$event $hid @$location"
+
+    set p [lindex [D world2projective $location] 0]
+    lassign $p x y z
+    .image delete h,$hid
+    dot .image $x $y -tags [list h,$hid]
+    return
+}
+
+proc losthand {event obj hid time} {
+    puts "$event $hid"
+
+    # Drop hand.
+    .image delete h,$hid
+
+    # Start looking for the gesture to re-aquire the hand.
+    G add-gesture RaiseHand
+    return
+}
+
+proc movehand {event obj hid location time} {
+    puts "$event $hid @$location"
+
+    set p [lindex [D world2projective $location] 0]
+    lassign $p x y z
+    place-dot .image h,$hid $x $y
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc place-dot {c item x y} {
+    global radius
+    set w [expr {$x - $radius}]
+    set n [expr {$y - $radius}]
+    set e [expr {$x + $radius}]
+    set s [expr {$y + $radius}]
+    $c coords $item $w $n $e $s
+    return
+}
+
+proc dot {c x y args} {
+    global radius dotc
+    # Create a circle centered on the chosen location, red filled
+    # with black border.
+    set w [expr {$x - $radius}]
+    set n [expr {$y - $radius}]
+    set e [expr {$x + $radius}]
+    set s [expr {$y + $radius}]
+    return [$c create oval $w $n $e $s \
+		-width   1   \
+		-outline $dotc \
+		-fill    $dotc \
+		{*}$args]
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
