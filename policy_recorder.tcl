@@ -22,6 +22,7 @@ oo::class create ::kinetcl::recorder {
 	RECORDER @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf RECORDER
 	return
     }
 

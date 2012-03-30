@@ -22,6 +22,7 @@ oo::class create ::kinetcl::ir {
 	IR @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf IR
 	return
     }
 

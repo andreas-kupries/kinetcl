@@ -11,6 +11,8 @@
 
 package require TclOO
 
+# # ## ### ##### ######## #############
+
 namespace eval ::kinetcl {}
 
 # # ## ### ##### ######## #############
@@ -20,8 +22,13 @@ proc ::kinetcl::Publish {class component {exclude {}}} {
     set methods [uplevel 1 [list $class methods]]
     #puts "$class $component = ($methods)"
     foreach m $methods {
+	# introspection, destruction controlled by wrapper
 	if {$m in {destroy methods}} continue
+	# special methods must not be seen.
 	if {[string match @* $m]} continue
+	# callbacks are internal, managed to outside as events (uevent).
+	if {[string match unset-callback-* $m]} continue
+	if {[string match set-callback-* $m]} continue
 	if {$m in $exclude} continue
 	uplevel 1 [list forward $m $component $m]
     }
@@ -51,6 +58,8 @@ proc ::kinetcl::Valid {o} {
 # # ## ### ##### ######## #############
 
 oo::class create ::kinetcl::base {
+    superclass ::kinetcl::nodeevents
+
     # +-> error state
     # +-> general int
 
@@ -58,14 +67,16 @@ oo::class create ::kinetcl::base {
 	# Pulls C handle out of stash,
 	::kinetcl::Base create BASE
 	BASE @self [self]
+	my SetupEventsOf BASE
 
 	# Check the handle for capabilities, create their C instances,
 	# and expose all the provided methods
 	foreach cap [my capabilities] {
 	    set class [my CapabilityClass $cap]
 	    ::kinetcl::$class create I$class
-	    I$class @self [self]
 	    my CapabilityPublish     I$class
+	    my SetupEventsOf         I$class
+	    I$class @self [self]
 	}
 
 	# Remember the instance for validation
@@ -81,6 +92,26 @@ oo::class create ::kinetcl::base {
 	return
     }
 
+    # # ## ### ##### ######## #############
+    method capabilities {args} {
+	if {([llength $args] == 1) &&
+	    ([lindex $args 0] eq "-all")} {
+	    return [lsort -dict [BASE capabilities]]
+	}
+	if {[llength $args] == 0} {
+	    set result {}
+	    foreach c [BASE capabilities] {
+		if {![BASE is-capable-of $c]} continue
+		lappend result $c
+	    }
+	    return [lsort -dict $result]
+	}
+
+	return -code error \
+	    "wrong#args: expected [self] capabilities ?-all?"
+    }
+
+    # # ## ### ##### ######## #############
     method CapabilityClass {cap} {
 	set class Cap
 	foreach c [split $cap -] {
@@ -101,27 +132,12 @@ oo::class create ::kinetcl::base {
 	return
     }
 
-    method capabilities {args} {
-	if {([llength $args] == 1) &&
-	    ([lindex $args 0] eq "-all")} {
-	    return [lsort -dict [BASE capabilities]]
-	}
-	if {[llength $args] == 0} {
-	    set result {}
-	    foreach c [BASE capabilities] {
-		if {![BASE is-capable-of $c]} continue
-		lappend result $c
-	    }
-	    return [lsort -dict $result]
-	}
-
-	return -code error \
-	    "wrong#args: expected [self] capabilities ?-all?"
-    }
-
+    # # ## ### ##### ######## #############
     # Expose the base methods.
+
     kinetcl::Publish ::kinetcl::Base BASE \
 	{capabilities}
+    # # ## ### ##### ######## #############
 }
 
 # # ## ### ##### ######## #############

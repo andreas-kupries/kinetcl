@@ -25,6 +25,7 @@ oo::class create ::kinetcl::user {
 	USER @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf USER
 	return
     }
 

@@ -22,6 +22,7 @@ oo::class create ::kinetcl::scene {
 	SCENE @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf SCENE
 	return
     }
 

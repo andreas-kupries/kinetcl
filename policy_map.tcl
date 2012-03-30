@@ -23,6 +23,7 @@ oo::class create ::kinetcl::map {
 	::kinetcl::Map create MAP
 	MAP @self [self]
 	next
+	my SetupEventsOf MAP
 	return
     }
 
