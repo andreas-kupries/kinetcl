@@ -25,7 +25,6 @@ oo::class create ::kinetcl::nodeevents {
 
     constructor {} {
 	array set myeventmap  {}
-	array set myactivemap {}
 	next
 	return
     }
@@ -34,13 +33,16 @@ oo::class create ::kinetcl::nodeevents {
 
     # # ## ### ##### ######## #############
 
-    variable myeventmap myactivemap
+    variable myeventmap
 
     # # ## ### ##### ######## #############
+    ## Extract the events known to the C node class from the set of
+    ## its methods ((un)set-callback-*), and register them in the
+    ## base.
 
     method SetupEventsOf {node} {
 	set events {}
-	foreach m [$o methods] {
+	foreach m [$node methods] {
 	    if {![string match set-callback-* $m]} continue
 	    set event [string map {set-callback- {}} $m]
 	    lappend events $event
@@ -52,13 +54,13 @@ oo::class create ::kinetcl::nodeevents {
     }
 
     # # ## ### ##### ######## #############
-    ## Overridden event specific watchers.
-    ## Translation of event (non)observation into (de)activation of
-    ## their actual generating callbacks.
+    ## Event specific watchers, overriden from eventbase. Translate
+    ## from event (non)observation to the (de)activation of the
+    ## callback actually generating said event.
 
     method event-bound {e} {
 	set node $myeventmap($e)
-	$node set-callback-$e [mymethod Broadcast]
+	$node set-callback-$e {*}[mymethod Broadcast]
 	return
     }
 
@@ -68,8 +70,13 @@ oo::class create ::kinetcl::nodeevents {
 	return
     }
 
-    method Broadcast {event obj details} {
-	uevent generate $obj $event $details
+    # # ## ### ##### ######## #############
+    ## General callback receiver translating into a distributed
+    ## (u)event.
+
+    method Broadcast {event obj args} {
+	uevent generate $obj $event $args
+	return
     }
 
     # # ## ### ##### ######## #############

@@ -64,6 +64,8 @@ oo::class create ::kinetcl::base {
     # +-> general int
 
     constructor {} {
+	next
+
 	# Pulls C handle out of stash,
 	::kinetcl::Base create BASE
 	BASE @self [self]
