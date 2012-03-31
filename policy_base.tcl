@@ -14,7 +14,7 @@ package require TclOO
 namespace eval ::kinetcl {}
 
 # # ## ### ##### ######## #############
-## Required by the class defitinio(s), define before.
+## Required by the class definition(s), define before.
 
 proc ::kinetcl::Publish {class component {exclude {}}} {
     set methods [uplevel 1 [list $class methods]]
@@ -45,6 +45,14 @@ proc ::kinetcl::Valid {o} {
     # Directly access the instance internals to put the object's
     # OpenNI handle into the standard shared location.
     [info object namespace $o]::BASE @mark
+    return
+}
+
+# # ## ### ##### ######## #############
+
+proc ::kinetcl::validate {o} {
+    Valid $o   ; # validate as kinetcl node. Raises error on non-validation.
+    $o @unmark ; # clear C-level information left behind.
     return
 }
 
