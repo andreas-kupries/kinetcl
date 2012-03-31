@@ -77,16 +77,9 @@ proc setup {} {
     set segc lightblue
     set textc green
 
-    kinetcl user create K
-    K set-callback-user-new             usernew
-    K set-callback-user-exit            userexit
-    K set-callback-user-lost            userlost
-    K set-callback-calibration-complete calibration
-    K set-callback-newdata              newframe_user
-    K set-profile all
-
     kinetcl depth create D
-    D set-callback-newdata newframe_depth
+    kinetcl user  create K
+    K set-profile all
 
     set size [dict get [D meta] map res]
     lassign $size w h
@@ -107,6 +100,14 @@ proc setup {} {
     # More buttons: stop/start recording
     pack .image -side top -expand 1 -fill both
     pack .exit  -side left
+
+    uevent bind ::K user-new             usernew	   
+    uevent bind ::K user-exit            userexit   
+    uevent bind ::K user-lost            userlost   
+    uevent bind ::K calibration-complete calibration
+
+    uevent bind ::K newdata              newframe_user
+    uevent bind ::D newdata              newframe_depth
 
     bind all <q> ::exit
 

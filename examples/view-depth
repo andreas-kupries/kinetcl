@@ -36,7 +36,6 @@ proc setup {} {
     file mkdir $tracedir
 
     kinetcl depth create K
-    K set-callback-newdata newframe
 
     set size [dict get [K meta] map res]
 
@@ -53,6 +52,7 @@ proc setup {} {
     pack .image -side top
     pack .exit  -side left
 
+    uevent bind ::K newdata newframe_depth
     bind all <q> ::exit
 
     update idletasks
@@ -75,7 +75,7 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc newframe {args} {
+proc newframe_depth {args} {
     global tracedir photo sat
     set s [clock milliseconds]
 

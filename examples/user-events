@@ -30,14 +30,15 @@ proc usage {} {
 
 proc setup {} {
     kinetcl user create K
-    K set-callback-user-enter userchange
-    K set-callback-user-exit  userchange
-    K set-callback-user-new   userchange
-    K set-callback-user-lost  userchange
 
-    K set-callback-calibration-start    calibration
-    K set-callback-calibration-complete calibration
-    #K set-callback-calibration-progress calibration
+    uevent bind ::K user-enter userchange
+    uevent bind ::K user-exit  userchange
+    uevent bind ::K user-new   userchange
+    uevent bind ::K user-lost  userchange
+
+    uevent bind ::K calibration-start    calibration
+    uevent bind ::K calibration-complete calibration
+    #uevent bind ::K calibration-progress calibration
     return
 }
 

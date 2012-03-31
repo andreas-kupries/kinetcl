@@ -46,19 +46,15 @@ proc setup {} {
     set textc green
 
     kinetcl hand create K
-    K set-smoothing 0.1
-    K set-callback-hand-create  newhand
-    K set-callback-hand-update  movehand
-    K set-callback-hand-destroy losthand
-
     kinetcl depth create D
+    kinetcl gesture create G
+
+    K set-smoothing 0.1
+    G add-gesture RaiseHand
+
     lassign [dict get [D meta] map res] w h
     #D destroy - No. We need this for coordinate
     #            conversion world -> screen also.
-
-    kinetcl gesture create G
-    G set-callback-gesture-recognized gesture
-    G add-gesture RaiseHand
 
     puts "$w x $h"
 
@@ -70,6 +66,11 @@ proc setup {} {
     # More buttons: stop/start recording
     pack .image -side top -expand 1 -fill both
     pack .exit  -side left
+
+    uevent bind ::K hand-create        newhand	
+    uevent bind ::K hand-update        movehand
+    uevent bind ::K hand-destroy       losthand
+    uevent bind ::G gesture-recognized gesture
 
     bind all <q> ::exit
 
