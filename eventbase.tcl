@@ -36,7 +36,7 @@ oo::class create ::kinetcl::eventbase {
     ## Public per-instance binding API.
 
     method bind {event cmdprefix} {
-	return [uevent bind [self] $event $cmdprefix]
+	return [uevent bind [self] $event [mymethod Receive $cmdprefix]]
 	# May come back to us via Generator/Generate, to activate
 	# actual event generation when actually observed.
     }
@@ -106,6 +106,12 @@ oo::class create ::kinetcl::eventbase {
 
 	my event-$action $event
 	return
+    }
+
+    # # ## ### ##### ######## #############
+
+    method Receive {cmdprefix tag event details} {
+	uplevel 1 [linsert $cmdprefix end $event $tag $details]
     }
 
     # # ## ### ##### ######## #############
