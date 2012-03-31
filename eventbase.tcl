@@ -33,6 +33,21 @@ oo::class create ::kinetcl::eventbase {
     }
 
     # # ## ### ##### ######## #############
+    ## Public per-instance binding API.
+
+    method bind {event cmdprefix} {
+	return [uevent bind [self] $event $cmdprefix]
+	# May come back to us via Generator/Generate, to activate
+	# actual event generation when actually observed.
+    }
+
+    method unbind {token} {
+	return [uevent unbind $token]
+	# May come back to us via Generator/Generate, to deactivate
+	# actual event generation when not observed.
+    }
+
+    # # ## ### ##### ######## #############
     ## Public virtual methods.
     ## Override in subclasses.
     #

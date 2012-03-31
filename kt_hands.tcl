@@ -95,29 +95,29 @@ critcl::class def ::kinetcl::Hands {
 	xnRegisterHandCallbacks \
 	xnUnregisterHandCallbacks \
 	hand-create {
-	    {XnUserID         user}
+	    {XnUserID         hand}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fTime}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
+	    CB_DETAIL ("hand",     Tcl_NewIntObj (hand));
+	    CB_DETAIL ("position", kinetcl_convert_3d (pPosition));
+	    CB_DETAIL ("time",     Tcl_NewDoubleObj (fTime));
 	} \
 	hand-update {
-	    {XnUserID         user}
+	    {XnUserID         hand}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fTime}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
+	    CB_DETAIL ("hand",     Tcl_NewIntObj (hand));
+	    CB_DETAIL ("position", kinetcl_convert_3d (pPosition));
+	    CB_DETAIL ("time",     Tcl_NewDoubleObj (fTime));
 	} \
 	hand-destroy {
-	    {XnUserID         user}
+	    {XnUserID         hand}
 	    {XnFloat          fTime}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
+	    CB_DETAIL ("hand", Tcl_NewIntObj (hand));
+	    CB_DETAIL ("time", Tcl_NewDoubleObj (fTime));
 	}
 
     # # ## ### ##### ######## #############

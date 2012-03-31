@@ -104,28 +104,18 @@ the instance, in microseconds.
 
 [para] The result of the method is an integer number.
 
-[comment ===============================================================]
-[comment {
-	API unification - single callback for all events?
-	Single method to specify all callbacks, with sub-method
-	to specify which event is (un)bound.
+[list_end]
 
-	- Currently the C class methods are exposed. Any unification
-	- will be done in the Tcl(OO) wrappers.
-}]
+[include events.inc]
 
 [comment ===============================================================]
 [vset NAME active]
-[vset NUM 2]
 [vset EARGS null]
 [vset DESC {activity changes, i.e. the instance starting and stopping the generation of output}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME newdata]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {the availability of new data, i.e the instance having new output available for the user.}]
+[vset DESC {the availability of new data, i.e the instance having new output available for the user}]
 [include callback.inc]
-
-[list_end]

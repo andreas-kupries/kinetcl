@@ -70,32 +70,30 @@ This method returns a [package crimp] image of type [const grey16]
 where all pixels representing the user are set to the user's id, and
 everything else set to [const 0].
 
+[list_end]
+
+[include events.inc]
+
 [comment ===============================================================]
 [vset NAME user-enter]
-[vset NUM 3]
 [vset EARGS user]
-[vset DESC {a user re-entering the scene.}]
+[vset DESC {a user re-entering the scene}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME user-exit]
-[vset NUM 3]
 [vset EARGS user]
-[vset DESC {a user existing the scene.}]
+[vset DESC {a user existing the scene}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME user-new]
-[vset NUM 3]
 [vset EARGS user]
-[vset DESC {the recognition of a new user.}]
+[vset DESC {the recognition of a new user}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME user-lost]
-[vset NUM 3]
 [vset EARGS user]
-[vset DESC {the loss of a user (after exiting the scene).}]
+[vset DESC {the loss of a user (after exiting the scene)}]
 [include callback.inc]
-
-[list_end]

@@ -34,11 +34,12 @@ This method deactivates any croppping set on the instance.
 
 [para] The result of the method is an empty string.
 
+[list_end]
+
+[include cevents.inc]
+
 [comment ===============================================================]
 [vset NAME cropping]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {reconfiguration of the instance's crop region.}]
+[vset DESC {reconfiguration of the instance's crop region}]
 [include callback.inc]
-
-[list_end]

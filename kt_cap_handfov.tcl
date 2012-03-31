@@ -26,15 +26,15 @@ critcl::class def ::kinetcl::CapHandTouchingFovEdge {
 	xnRegisterToHandTouchingFOVEdge \
 	xnUnregisterFromHandTouchingFOVEdge \
 	{
-	    {XnUserID         user}
+	    {XnUserID         hand}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fTime}
 	    {XnDirection      eDir}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fTime));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (@stem@_direction [eDir],-1));
+	    CB_DETAIL ("hand",      Tcl_NewIntObj (hand));			 
+	    CB_DETAIL ("position",  kinetcl_convert_3d (pPosition));		
+	    CB_DETAIL ("time",      Tcl_NewDoubleObj (fTime));	      
+	    CB_DETAIL ("direction", Tcl_NewStringObj (@stem@_direction [eDir],-1));
 	}
 
     # # ## ### ##### ######## #############

@@ -25,11 +25,12 @@ In this form the method (un)sets the instance's mirror flag.
 
 [para] The result is an empty string.
 
+[list_end]
+
+[include cevents.inc]
+
 [comment ===============================================================]
 [vset NAME mirror]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {reconfiguration of the instance's mirror flag.}]
+[vset DESC {reconfiguration of the instance's mirror flag}]
 [include callback.inc]
-
-[list_end]

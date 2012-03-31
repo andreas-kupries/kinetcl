@@ -68,25 +68,24 @@ This method stops the tracking of all hands known to the node.
 
 [para] The result of the method is an empty string.
 
+[list_end]
+
+[include events.inc]
+
 [comment ===============================================================]
 [vset NAME hand-create]
-[vset NUM 5]
 [vset EARGS hand]
-[vset DESC {the creation of a new tracked hand.}]
+[vset DESC {the creation of a new tracked hand}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME hand-update]
-[vset NUM 5]
 [vset EARGS hand]
-[vset DESC {the movement of an existing tracked hand.}]
+[vset DESC {the movement of an existing tracked hand}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME hand-destroy]
-[vset NUM 4]
 [vset EARGS hand_d]
-[vset DESC {the removal of a hand from tracking.}]
+[vset DESC {the removal of a hand from tracking}]
 [include callback.inc]
-
-[list_end]

@@ -50,7 +50,7 @@ proc setup {} {
     pack .image -side top
     pack .exit  -side left
 
-    uevent bind ::K newdata newframe_scene
+    K bind newdata newframe_scene
     bind all <q> ::exit
 
     update idletasks

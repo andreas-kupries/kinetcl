@@ -72,10 +72,10 @@ proc setup {} {
     pack .image -side top -expand 1 -fill both
     pack .exit  -side left
 
-    uevent bind ::K user-exit userexit   
-    uevent bind ::K user-lost userlost   
-    uevent bind ::K newdata   newframe_user
-    uevent bind ::D newdata   newframe_depth
+    K bind user-exit userexit   
+    K bind user-lost userlost   
+    K bind newdata   newframe_user
+    D bind newdata   newframe_depth
 
     bind all <q> ::exit
 
@@ -128,7 +128,8 @@ proc newframe_depth {args} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc userexit {event obj user} {
+proc userexit {event obj details} {
+    dict with details {} ; # user
     if {[catch {
 	puts "$event $user"
 	.image delete u,$user
@@ -137,7 +138,8 @@ proc userexit {event obj user} {
     return
 }
 
-proc userlost {event obj user} {
+proc userlost {event obj details} {
+    dict with details {} ; # user
     if {[catch {
 	puts "$event $user"
 	.image delete u,$user

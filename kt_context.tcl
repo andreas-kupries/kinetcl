@@ -36,6 +36,8 @@ critcl::ccode {
 	    return NULL; \
 	}
 
+#define CB_DETAIL(s,o) Tcl_DictObjPut (interp, details, Tcl_NewStringObj (s, sizeof(s)), o)
+
 	/* Common event fields for kinetcl callback events. Tcl's
 	 * information, plus a pointer to an event-specific cleanup
 	 * function, to enable cleanup without knowing anything of

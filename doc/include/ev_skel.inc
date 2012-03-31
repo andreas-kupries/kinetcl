@@ -1,4 +1,8 @@
-[include ev_user.inc]
+The detail dictionary of this event contains:
+
+[list_begin definitions]
+[def [arg user]]
+The numerical id of the user the event was generated for.
 
 [def [arg status]]
 The status of the calibration engine.
@@ -17,4 +21,5 @@ The status of the calibration engine.
 [enum][const manual-abort]
 [enum][const manual-reset]
 [enum][const timeout]
+[list_end]
 [list_end]

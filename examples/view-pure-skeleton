@@ -94,11 +94,11 @@ proc setup {} {
     pack .image -side top -expand 1 -fill both
     pack .exit  -side left
 
-    uevent bind ::K user-new             usernew	   
-    uevent bind ::K user-exit            userexit   
-    uevent bind ::K user-lost            userlost   
-    uevent bind ::K calibration-complete calibration
-    uevent bind ::K newdata              newframe_user
+    K bind user-new             usernew	   
+    K bind user-exit            userexit   
+    K bind user-lost            userlost   
+    K bind calibration-complete calibration
+    K bind newdata              newframe_user
 
     bind all <q> ::exit
 
@@ -122,14 +122,16 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc usernew {event obj user} {
+proc usernew {event obj details} {
+    dict with details {} ; # user
     puts "$event $user"
     K request-calibration $user 0
     return
 }
 
-proc userexit {event obj user} {
+proc userexit {event obj details} {
     global S
+    dict with details {} ; # user
     puts "$event $user"
     catch { dict unset S $user }
     .image delete u,$user
@@ -137,8 +139,9 @@ proc userexit {event obj user} {
     return
 }
 
-proc userlost {event obj user} {
+proc userlost {event obj details} {
     global S
+    dict with details {} ; # user
     puts "$event $user"
     catch { dict unset S $user }
     .image delete u,$user
@@ -148,7 +151,8 @@ proc userlost {event obj user} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc calibration {event obj user status} {
+proc calibration {event obj details} {
+    dict with details {} ; # user status
     puts "$event $user : $status"
     if {$status eq "ok"} {
 	K start-tracking $user

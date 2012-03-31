@@ -60,7 +60,7 @@ oo::class create ::kinetcl::nodeevents {
 
     method event-bound {e} {
 	set node $myeventmap($e)
-	$node set-callback-$e {*}[mymethod Broadcast]
+	$node set-callback-$e [mymethod Broadcast]
 	return
     }
 
@@ -74,8 +74,8 @@ oo::class create ::kinetcl::nodeevents {
     ## General callback receiver translating into a distributed
     ## (u)event.
 
-    method Broadcast {event obj args} {
-	uevent generate $obj $event $args
+    method Broadcast {event obj details} {
+	uevent generate $obj $event $details
 	return
     }
 

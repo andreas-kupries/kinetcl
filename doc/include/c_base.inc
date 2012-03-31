@@ -61,8 +61,6 @@ instance or not.
 [para] The result is a boolean value, [const true] if the capability
 is supported, and [const false] else.
 
-
-
 [comment ===============================================================]
 [call [arg baseInstanceCmd] [method node-info]]
 
@@ -116,5 +114,49 @@ The node's creation detail information.
 [call [arg baseInstanceCmd] [method node-name]]
 
 This method returns a string holding the OpenNI name of the node.
+
+[comment ===============================================================]
+[call [arg baseInstanceCmd] [method bind] [arg event] [arg command]]
+
+This method associates the given [arg command] prefix with the named
+[arg event] and arranges for the execution of the command prefix when
+the event in question occurs.
+
+[para] The result of the method is an opaque token representing the
+binding. It can only be used as argument of method [method unbind],
+see below, to remove the binding again.
+
+[para] The command prefix is expected to have the following signature:
+
+[list_begin definitions]
+[call [cmd "{*}command"] [arg event] [arg obj] [arg details]]
+[list_begin arguments]
+[arg event]
+The name of the event itself, allowing it to be used as sub-method name.
+
+[arg obj]
+The name of the instance generating the event.
+
+[arg details]
+A dictionary holding more information about the event. The set of keys
+and their values depends on the event itself and is described with the
+event. See the sections named [const Events], at all the classes
+supporting one or more events.
+
+[list_end]
+[list_end]
+
+Each event supported by a specific node class is explained in the
+documentation of that class.
+
+[comment ===============================================================]
+[call [arg baseInstanceCmd] [method unbind] [arg token]]
+
+This method takes a [arg token] as returned by method [method bind]
+(see above), and removes the binding it represents. Afterward the
+command prefix from [method bind] is not invoked anymore when the
+event the binding was for occurs.
+
+[para] The result of the method is an empty string.
 
 [list_end]

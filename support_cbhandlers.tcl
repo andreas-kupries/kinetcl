@@ -173,6 +173,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 		@instancetype@ instance;
                 @@evardef@@
 		Tcl_Obj* cmd;
+		Tcl_Obj* details;
 		Tcl_Interp* interp;
 		/* ASSERT (h == instance->handle) ? */
 
@@ -198,12 +199,15 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
                 @@edecode@@
 
                 interp = instance->interp;
+
+		details = Tcl_NewDictObj ();
+		{ @@body@@ }
+                @@edestructor@@
+
 		cmd = Tcl_DuplicateObj (instance->command@@cname@@);
 		Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
 		Tcl_ListObjAppendElement (interp, cmd, instance->self);
-
-		{ @@body@@ }
-                @@edestructor@@
+		Tcl_ListObjAppendElement (interp, cmd, details);
 
 		/* Invoke "{*}$cmdprefix $self @@name@@ ..." */
 		kinetcl_invoke_callback (interp, cmd);

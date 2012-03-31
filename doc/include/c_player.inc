@@ -84,11 +84,12 @@ This method causes the player to explicitly advance to the next frame.
 
 [para] The result of the method is the empty string.
 
+[list_end]
+
+[include events.inc]
+
 [comment ===============================================================]
 [vset NAME eof]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {the player reaching the end of the recording (even when it loops).}]
+[vset DESC {the player reaching the end of the recording (even when it loops)}]
 [include callback.inc]
-
-[list_end]

@@ -1,4 +1,11 @@
-[include ev_pose.inc]
+The detail dictionary of this event contains:
+
+[list_begin definitions]
+[def [arg pose]]
+The name of the pose the event was generated for.
+
+[def [arg user]]
+The numerical id of the user the event was generated for.
 
 [def [arg status]]
 The status of the pose detection engine.
@@ -11,4 +18,5 @@ The status of the pose detection engine.
 [enum][const side-fov]
 [enum][const error]
 [enum][const no-tracking]
+[list_end]
 [list_end]

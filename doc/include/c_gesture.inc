@@ -88,39 +88,36 @@ supported by the instance.
 This method returns a list containing the names of all gestures
 that are currently active.
 
+[list_end]
+
+[include events.inc]
+
 [comment ===============================================================]
 [vset NAME gesture-recognized]
-[vset NUM 5]
 [vset EARGS gesture_r]
-[vset DESC {the recognition of named a gesture.}]
+[vset DESC {the recognition of named a gesture}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME gesture-progress]
-[vset NUM 5]
 [vset EARGS gesture_p]
-[vset DESC {the system's progress in recognizing a gesture.}]
+[vset DESC {the system's progress in recognizing a gesture}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME gesture]
-[vset NUM 3]
 [vset EARGS null]
-[vset DESC {the (de)activation of the recognition of named gestures.}]
+[vset DESC {the (de)activation of the recognition of named gestures}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME gesture-stage-complete]
-[vset NUM 4]
 [vset EARGS gesture_s]
 [vset DESC {the completion of stages in a gesture's recognition}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME gesture-stage-ready-for-next]
-[vset NUM 4]
 [vset EARGS gesture_s]
-[vset DESC {the system's readiness to enter the next stage in the recognition of a gesture.}]
+[vset DESC {the system's readiness to enter the next stage in the recognition of a gesture}]
 [include callback.inc]
-
-[list_end]

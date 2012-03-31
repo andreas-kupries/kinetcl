@@ -40,13 +40,13 @@ proc kt_callback {name consfunction destfunction signature body {mode all} {deta
 	    @stem@_callback_@@cname@@_unset (instance, 1);
 	}
 
-	mdef set-callback-@@name@@ { /* Syntax: <instance> set-callback-@@name@@ <cmd>... */
-	    if (objc < 3) {
+	mdef set-callback-@@name@@ { /* Syntax: <instance> set-callback-@@name@@ <cmdprefix> */
+	    if (objc != 3) {
 		Tcl_WrongNumArgs (interp, 2, objv, "cmd...");
 		return TCL_ERROR;
 	    }
 
-	    return @stem@_callback_@@cname@@_set (instance, objc-2, objv+2);
+	    return @stem@_callback_@@cname@@_set (instance, objv [2]);
 	}
 
 	mdef unset-callback-@@name@@ { /* Syntax: <instance> unset-callback-@@name@@ */
@@ -76,7 +76,7 @@ proc kt_callback {name consfunction destfunction signature body {mode all} {deta
 	    }
 
 	    static int
-	    @stem@_callback_@@cname@@_set (@instancetype@ instance, int objc, Tcl_Obj*const* objv)
+	    @stem@_callback_@@cname@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
 	    {
 		Tcl_Obj* cmd;
 		XnCallbackHandle callback;
@@ -92,7 +92,8 @@ proc kt_callback {name consfunction destfunction signature body {mode all} {deta
 		@stem@_callback_@@cname@@_unset (instance, 0);
 
 		instance->callback@@cname@@ = callback;
-		instance->command@@cname@@  = Tcl_NewListObj (objc, objv);
+		instance->command@@cname@@  = cmdprefix;
+		Tcl_IncrRefCount (cmdprefix);
 		return TCL_OK;
 	    }
 	}

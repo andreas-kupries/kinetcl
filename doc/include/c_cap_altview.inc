@@ -47,11 +47,12 @@ of another kinetcl instance.
 [para] The result is a boolean value, [const true] if the viewpoint of
 [arg node] is in use, and [const false] else.
 
+[list_end]
+
+[include cevents.inc]
+
 [comment ===============================================================]
 [vset NAME viewpoint]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {viewpoint changes, i.e. when the instance takes or drops the viewpoint of another node.}]
+[vset DESC {viewpoint changes, i.e. when the instance takes or drops the viewpoint of another node}]
 [include callback.inc]
-
-[list_end]

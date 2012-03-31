@@ -197,18 +197,18 @@ critcl::class def ::kinetcl::Gesture {
 	    {const XnPoint3D* pIDPosition}
 	    {const XnPoint3D* pEndPosition}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pIDPosition));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pEndPosition));
+	    CB_DETAIL ("gesture",      Tcl_NewStringObj (strGesture,-1));
+	    CB_DETAIL ("id_position",  kinetcl_convert_3d (pIDPosition));
+	    CB_DETAIL ("end_position", kinetcl_convert_3d (pEndPosition));
 	} \
 	gesture-progress {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pPosition}
 	    {XnFloat          fProgress}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewDoubleObj (fProgress));
+	    CB_DETAIL ("gesture",  Tcl_NewStringObj (strGesture,-1));
+	    CB_DETAIL ("position", kinetcl_convert_3d (pPosition));
+	    CB_DETAIL ("progress", Tcl_NewDoubleObj (fProgress));
 	}
 
     ::kt_callback gesture-change \
@@ -223,8 +223,8 @@ critcl::class def ::kinetcl::Gesture {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pPosition}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
+	    CB_DETAIL ("gesture",  Tcl_NewStringObj (strGesture,-1));
+	    CB_DETAIL ("position", kinetcl_convert_3d (pPosition));
 	}
 
     ::kt_callback gesture-stage-ready-for-next \
@@ -234,8 +234,8 @@ critcl::class def ::kinetcl::Gesture {
 	    {const XnChar*    strGesture}
 	    {const XnPoint3D* pPosition}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strGesture,-1));
-	    Tcl_ListObjAppendElement (interp, cmd, kinetcl_convert_3d (pPosition));
+	    CB_DETAIL ("gesture",  Tcl_NewStringObj (strGesture,-1));
+	    CB_DETAIL ("position", kinetcl_convert_3d (pPosition));
 	}
 
     # # ## ### ##### ######## #############

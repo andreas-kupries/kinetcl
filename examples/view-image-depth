@@ -62,8 +62,8 @@ proc setup {} {
     pack .depth .image -side left -in .show
     pack .exit  -side left
 
-    uevent bind ::I newdata newframe_image
-    uevent bind ::D newdata newframe_depth
+    I bind newdata newframe_image
+    D bind newdata newframe_depth
 
     bind all <q> ::exit
 

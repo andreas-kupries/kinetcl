@@ -693,7 +693,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	xnRegisterToCalibrationStart \
 	xnUnregisterFromCalibrationStart \
 	{{XnUserID user}} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
+	    CB_DETAIL ("user", Tcl_NewIntObj (user));
 	}
 
     ::kt_callback calibration-complete \
@@ -703,9 +703,8 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    {XnUserID            user}
 	    {XnCalibrationStatus cStatus}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-	    Tcl_ListObjAppendElement (interp, cmd,
-				      Tcl_NewStringObj (@stem@_skeleton_calibration [cStatus],-1));
+	    CB_DETAIL ("user",   Tcl_NewIntObj (user));
+	    CB_DETAIL ("status", Tcl_NewStringObj (@stem@_skeleton_calibration [cStatus],-1));
 	}
 
     ::kt_callback calibration-progress \
@@ -715,9 +714,8 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    {XnUserID            user}
 	    {XnCalibrationStatus cStatus}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (user));
-	    Tcl_ListObjAppendElement (interp, cmd,
-				      Tcl_NewStringObj (@stem@_skeleton_calibration [cStatus],-1));
+	    CB_DETAIL ("user",   Tcl_NewIntObj (user));
+	    CB_DETAIL ("status", Tcl_NewStringObj (@stem@_skeleton_calibration [cStatus],-1));
 	}
 
     # NOTE

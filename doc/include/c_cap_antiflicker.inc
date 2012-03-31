@@ -27,11 +27,12 @@ The allowed values for [arg frequency] are [const 50], [const 60], and
 
 [para] The result is an empty string.
 
+[list_end]
+
+[include cevents.inc]
+
 [comment ===============================================================]
 [vset NAME frequency]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {reconfiguration of the instance's powerline frequency setting.}]
+[vset DESC {reconfiguration of the instance's powerline frequency setting}]
 [include callback.inc]
-
-[list_end]

@@ -32,9 +32,9 @@ proc setup {} {
     kinetcl user create K
     K set-profile all
 
-    uevent bind ::K user-new             usernew	   
-    uevent bind ::K user-lost            userlost   
-    uevent bind ::K calibration-complete calibration
+    K bind user-new             usernew	   
+    K bind user-lost            userlost   
+    K bind calibration-complete calibration
     return
 }
 
@@ -54,18 +54,21 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc usernew {event obj user} {
+proc usernew {event obj details} {
+    dict with details {} ; # user
     puts "$event $user"
     K request-calibration $user 0
     return
 }
 
-proc userlost {event obj user} {
+proc userlost {event obj details} {
+    dict with details {} ; # user
     puts "$event $user"
     return
 }
 
-proc calibration {event obj user status} {
+proc calibration {event obj details} {
+    dict with details {} ; # user status
     puts "$event $user : $status"
     if {$status eq "ok"} {
 	K start-tracking $user

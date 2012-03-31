@@ -48,13 +48,13 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	    @stem@_callback_@@cnameb@@_unset (instance, 1);
 	}
 
-	mdef set-callback-@@namea@@ { /* Syntax: <instance> set-callback-@@namea@@ <cmd>... */
-	    if (objc < 3) {
-		Tcl_WrongNumArgs (interp, 2, objv, "cmd...");
+	mdef set-callback-@@namea@@ { /* Syntax: <instance> set-callback-@@namea@@ <cmdprefix> */
+	    if (objc != 3) {
+		Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
 		return TCL_ERROR;
 	    }
 
-	    return @stem@_callback_@@cnamea@@_set (instance, objc-2, objv+2);
+	    return @stem@_callback_@@cnamea@@_set (instance, objv [2]);
 	}
 
 	mdef unset-callback-@@namea@@ { /* Syntax: <instance> unset-callback-@@namea@@ */
@@ -67,13 +67,13 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	    return TCL_ERROR;
 	}
 
-	mdef set-callback-@@nameb@@ { /* Syntax: <instance> set-callback-@@nameb@@ <cmd>... */
-	    if (objc < 3) {
-		Tcl_WrongNumArgs (interp, 2, objv, "cmd...");
+	mdef set-callback-@@nameb@@ { /* Syntax: <instance> set-callback-@@nameb@@ <cmdprefix> */
+	    if (objc != 3) {
+		Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
 		return TCL_ERROR;
 	    }
 
-	    return @stem@_callback_@@cnameb@@_set (instance, objc-2, objv+2);
+	    return @stem@_callback_@@cnameb@@_set (instance, objv [2]);
 	}
 
 	mdef unset-callback-@@nameb@@ { /* Syntax: <instance> unset-callback-@@nameb@@ */
@@ -129,7 +129,7 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 
 
 	    static int
-	    @stem@_callback_@@cnamea@@_set (@instancetype@ instance, int objc, Tcl_Obj*const* objv)
+	    @stem@_callback_@@cnamea@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
 	    {
 		Tcl_Obj* cmd;
 
@@ -149,12 +149,13 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		}
 
 		@stem@_callback_@@cnamea@@_unset (instance, 0);
-		instance->command@@cnamea@@ = Tcl_NewListObj (objc, objv);
+		instance->command@@cnamea@@ = cmdprefix;
+		Tcl_IncrRefCount (cmdprefix);
 		return TCL_OK;
 	    }
 
 	    static int
-	    @stem@_callback_@@cnameb@@_set (@instancetype@ instance, int objc, Tcl_Obj*const* objv)
+	    @stem@_callback_@@cnameb@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
 	    {
 		Tcl_Obj* cmd;
 
@@ -174,7 +175,8 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 		}
 
 		@stem@_callback_@@cnameb@@_unset (instance, 0);
-		instance->command@@cnameb@@ = Tcl_NewListObj (objc, objv);
+		instance->command@@cnameb@@ = cmdprefix;
+		Tcl_IncrRefCount (cmdprefix);
 		return TCL_OK;
 	    }
 	}

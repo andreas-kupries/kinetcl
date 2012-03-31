@@ -290,33 +290,30 @@ position and orientation, given in the format returned by method
 [para] Joints which are either not available or not actively tracked
 will not be found in the dictionary.
 
+[list_end]
+
+[include cevents.inc]
 
 [comment ===============================================================]
 [vset NAME joint]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {joint changes, i.e. the (de)activation of specific joints.}]
+[vset DESC {joint changes, i.e. the (de)activation of specific joints}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME calibration-start]
-[vset NUM 3]
 [vset EARGS user]
-[vset DESC {the start of skeleton calibration for a user.}]
+[vset DESC {the start of skeleton calibration for a user}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME calibration-complete]
-[vset NUM 4]
 [vset EARGS skel]
-[vset DESC {the completion of skeleton calibration for a user.}]
+[vset DESC {the completion of skeleton calibration for a user}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME calibration-progress]
-[vset NUM 4]
 [vset EARGS skel]
-[vset DESC {the system's progress in the calibration of the skeleton for a user.}]
+[vset DESC {the system's progress in the calibration of the skeleton for a user}]
 [include callback.inc]
-
-[list_end]

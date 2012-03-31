@@ -50,7 +50,7 @@ proc setup {} {
 
     # More buttons: stop/start recording
 
-    uevent bind ::K newdata newframe_image
+    K bind newdata newframe_image
     bind all <q> ::exit
 
     update idletasks

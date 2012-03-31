@@ -48,11 +48,12 @@ another kinetcl instance.
 [para] The result is a boolean value, [const true] if the instance is
 synchronized to [arg node], and [const false] else.
 
+[list_end]
+
+[include cevents.inc]
+
 [comment ===============================================================]
 [vset NAME framesync]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {frame synchronization changes, i.e. when the instance starts or stops synchronization with another node.}]
+[vset DESC {frame synchronization changes, i.e. when the instance starts or stops synchronization with another node}]
 [include callback.inc]
-
-[list_end]
