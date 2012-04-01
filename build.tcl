@@ -6,6 +6,10 @@ set me [file normalize [info script]]
 set packages {
     kinetcl
 }
+set tclpackages {
+    kinetcl::canvas::joints   canvas_joints.tcl
+    kinetcl::canvas::skeleton canvas_skeleton.tcl
+}
 proc main {} {
     global argv tcl_platform tag
     set tag {}
@@ -120,7 +124,7 @@ proc _recipes {} {
 }
 proc Hdrop {} { return "?destination?\n\tUninstall all packages.\n\tdestination = path of package directory, default \[info library\]." }
 proc _drop {{ldir {}}} {
-    global packages
+    global packages tclpackages
     if {[llength [info level 0]] < 2} {
 	set ldir [info library]
 	set idir [file dirname [file dirname $ldir]]/include
@@ -136,6 +140,17 @@ proc _drop {{ldir {}}} {
 	puts -nonewline "Removed package:     "
 	tag ok
 	puts $ldir/$p$version
+    }
+
+    foreach {p file} $tclpackages {
+	set src     [file dirname $::me]/$file
+	set version [version $src]
+	set pdir    [string map {:: _} $p]
+
+	file delete -force $ldir/$pdir$version
+	puts -nonewline "Removed package:     "
+	tag ok
+	puts $ldir/$pdir$version
     }
     return
 }
@@ -195,6 +210,8 @@ proc _install {{ldir {}} {config {}}} {
 	puts $ldir/$p$version
 	puts ""
     }
+
+    Xinstalltclpackages $ldir
     return
 }
 proc Hdebug {} { return "?destination?\n\tInstall debug builds of all packages.\n\tdestination = path of package directory, default \[info library\]." }
@@ -229,6 +246,8 @@ proc _debug {{ldir {}} {config {}}} {
 	tag ok
 	puts $ldir/$p$version
     }
+
+    Xinstalltclpackages $ldir
     return
 }
 proc Hgui {} { return "\n\tInstall all packages.\n\tDone from a small GUI." }
@@ -345,6 +364,35 @@ proc _wrap4tea {{dst {}}} {
 	puts "Installed package:     $dst/$p$version"
 	puts ""
     }
+    return
+}
+
+proc Xinstalltclpackages {ldir} {
+    global tclpackages
+
+    foreach {p file} $tclpackages {
+	set src     [file dirname $::me]/$file
+	set version [version $src]
+	set pdir    [string map {:: _} $p]
+
+	file mkdir $ldir/$pdir
+	file copy $src $ldir/$pdir
+	Xindex $p $version $file $ldir/$pdir
+
+	file delete -force $ldir/$pdir$version
+	file rename        $ldir/$pdir $ldir/$pdir$version
+
+	puts -nonewline "Installed Tcl package:     "
+	tag ok
+	puts $ldir/$pdir$version
+    }
+    return
+}
+
+proc Xindex {name version pfile dstdir} {
+    set    c [open $dstdir/pkgIndex.tcl w]
+    puts  $c "package ifneeded $name $version \[list ::apply {{dir} {\n\tsource \$dir/$pfile\n}} \$dir\]"
+    close $c
     return
 }
 

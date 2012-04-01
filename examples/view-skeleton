@@ -4,48 +4,16 @@
 ## Requirements
 
 package require kinetcl
+package require kinetcl::canvas::joints
+package require kinetcl::canvas::skeleton
 package require Tk
 package require crimp::tk
 package require crimp
 
 # # ## ### ##### ######## ############# #####################
 
-# Data structures explanation.
-#
-# S = global dictionary holding all user skeleton data.
-#
-#   S <user> joints <joint>            --> joint confidence and real-world position.
-#   S <user> canvas <joint>            --> canvas item representing the joint (dot)
-#   S <user> canvas <jointA>,<jointB>  --> canvas item representing the line between
-#                                          two joints (segment).
-#   S <user> at     <joint>            --> joint position in projective coordinates
-#
-# Canvas items:
-#             What    Attributes                  Tags
-#             ====    ==========                  ====
-#   Joints:   Circle  red, radius, see [setup]    u,<user> p,<user>,<joint>
-#   Segments: Line    green, width=radius         u,<user> l,<user>,<jointA>,<jointB>
-#             ====    ==========                  ====
-
-# Eventflow
-#
-# K (user-new) --> (*) [request-calibration]    <------\
-#                  --> K (calibration-complete) /!ok --/
-#                  --> K (calibration-complete) /ok 
-#                      --> [start-tracking] (*)
-#
-# K (user-exit) --> Kill data structures, kill drawing elements.
-#                   Tracking of the user, if active, continues
-#                   inside the system.
-#
-# K (user-lost) --> Kill data structures, kill drawing elements.
-#                   Tracking is implicitly stopped for the user.
-#
-# K (newframe) --> [newframe_user]
-#                  per-user: ignore !tracking (See *)
-#                  get/update skeletons and drawings.
-#
-# D (newframe) --> get/update shown depth image.
+# Data structures = Hidden in joints tracker and the canvas adapters.
+# Eventflow = Hidden in the joints tracker.
 
 # # ## ### ##### ######## ############# #####################
 
@@ -71,15 +39,12 @@ proc usage {} {
 }
 
 proc setup {} {
-    global photo radius dotc segc textc
-    set radius 5
-    set dotc red
-    set segc lightblue
+    global photo textc
     set textc green
 
     kinetcl depth create D
-    kinetcl user  create K
-    K set-profile all
+    kinetcl user  create U
+    U set-profile all
 
     set size [dict get [D meta] map res]
     lassign $size w h
@@ -101,13 +66,16 @@ proc setup {} {
     pack .image -side top -expand 1 -fill both
     pack .exit  -side left
 
-    K bind user-new             usernew	   
-    K bind user-exit            userexit   
-    K bind user-lost            userlost   
-    K bind calibration-complete calibration
-
-    K bind newdata              newframe_user
     D bind newdata              newframe_depth
+
+    kinetcl joints          create J U ; # (J)oints tracking U.
+    kinetcl canvas joints   create CJ .image D J ; # draw joints
+    kinetcl canvas skeleton create CS .image D J ; # draw lines
+
+    # Center of mass, for label.
+    J bind user-create  usernew
+    J bind user-move    usermove
+    J bind user-destroy userdestroy
 
     bind all <q> ::exit
 
@@ -162,221 +130,45 @@ proc newframe_depth {args} {
 
 proc usernew {event obj details} {
     dict with details {} ; # user
-    puts "$event $user"
-    K request-calibration $user 0
-    return
-}
 
-proc userexit {event obj details} {
-    global S
-    dict with details {} ; # user
-    puts "$event $user"
-    catch { dict unset S $user }
-    .image delete u,$user
-    puts "delete u,$user = ([.image find withtag u,$user])"
-    return
-}
+    set at [lrange [lindex [D world2projective [U centerof $user]] 0] 0 1]
 
-proc userlost {event obj details} {
-    global S
-    dict with details {} ; # user
-    puts "$event $user"
-    catch { dict unset S $user }
-    .image delete u,$user
-    puts "delete u,$user = ([.image find withtag u,$user])"
-    return
-}
+    set label [make-text .image {*}$at \
+		   -anchor nw \
+		   -font {Helvetica 20} \
+		   -tags [list t,$user u,$user]]
 
-# # ## ### ##### ######## ############# #####################
-
-proc calibration {event obj details} {
-    dict with details {} ; # user, status
-    puts "$event $user : $status"
-    if {$status eq "ok"} {
-	K start-tracking $user
-    } else {
-	K request-calibration $user 0
-    }
-    return
-}
-
-# # ## ### ##### ######## ############# #####################
-
-proc newframe_user {args} {
-    puts "$args"
-    foreach user [K users] {
-	labeluser $user
-	skeletonfor $user
-    }
-    return
-}
-
-proc skeletonfor {user} {
-    global S
-    if {![K is-tracking $user]} return
-    puts "\tupdate $user"
-    #puts @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    #memory validate on
-    dict set S $user joints [K get-skeleton $user]
-    draw $user
-    #memory validate off
-    return
-}
-
-proc labeluser {user} {
-    global S
-    set at [lrange [lindex [D world2projective [K centerof $user]] 0] 0 1]
-    if {![info exists S] || ![dict exists $S $user canvas label]} {
-	set label [make-text .image {*}$at \
-		       -anchor nw \
-		       -font {Helvetica 20} \
-		       -tags [list t,$user u,$user]]
-	dict set S $user canvas label $label
-    }
     .image itemconfigure t,$user -text [getlabel $user]
+    return
+}
+
+proc usermove {event obj details} {
+    dict with details {} ; # user
+
+    set at [lrange [lindex [D world2projective [U centerof $user]] 0] 0 1]
+
     place-text .image t,$user {*}$at
     return
 }
 
+proc userdestroy {event obj details} {
+    dict with details {} ; # user
+    .image delete t,$user
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
 proc getlabel {user} {
     set text "User $user"
-    if {[K is-tracking $user]} {
+    if {[U is-tracking $user]} {
 	append text " tracking"
-    } elseif {[K is-calibrated $user]} {
+    } elseif {[U is-calibrated $user]} {
 	append text " calibrated"
-    } elseif {[K is-calibrating $user]} {
+    } elseif {[U is-calibrating $user]} {
 	append text " calibrating"
     }
     return $text
-}
-
-proc draw {user} {
-    drawpoints $user
-    drawlines  $user
-}
-
-proc drawpoints {user} {
-    global S
-    array set joint [dict get $S $user joints]
-    catch {
-	array set canvas [dict get $S $user canvas]
-    }
-
-    foreach j [array names joint] {
-	lassign [lindex $joint($j) 0] confidence point
-
-	if {$confidence < 0.5} {
-	    if {[llength [.image find withtag p,$user,$j]]} {
-		puts "\tdrop non-confident $user $j"
-		.image delete p,$user,$j
-		catch { dict unset S $user canvas $j }
-		catch { dict unset S $user at $j }
-	    }
-	} else {
-	    if {![info exists canvas($j)]} {
-		puts "\tadd confident $user $j"
-		set dot [dot .image 0 0 -tags [list p,$user,$j u,$user]]
-		dict set S $user canvas $j $dot
-	    }
-	    #puts ==================================================
-	    #puts "($user $j): W $point"
-	    set p [lindex [D world2projective $point] 0]
-	    dict set S $user at $j $p
-	    #puts "($user $j): S $p"
-	    lassign $p x y z
-	    place-dot .image p,$user,$j $x $y
-	}
-    }
-    return
-}
-
-proc drawlines {user} {
-    global S
-    array set canvas {}
-    catch {
-	array set canvas [dict get $S $user canvas]
-    }
-    array set at {}
-    catch {
-	array set at [dict get $S $user at]
-    }
-
-    # not used: fingertip, wrist, ankle, collars, waist
-    foreach {s e} {
-	left-hand       left-elbow
-	left-elbow      left-shoulder
-	left-shoulder   torso
-	left-shoulder   neck
-
-	left-foot       left-knee
-	left-knee       left-hip
-	left-hip        torso
-
-	right-hand      right-elbow
-	right-elbow     right-shoulder
-	right-shoulder  torso
-	right-shoulder  neck
-
-	right-foot      right-knee
-	right-knee      right-hip
-	right-hip       torso
-
-	head            neck
-	left-hip        right-hip
-    } {
-	if {![info exists canvas($s)] ||
-	    ![info exists canvas($e)]} {
-	    .image delete l,$user,$s,$e
-	    catch { dict unset S $user canvas $s,$e }
-	} else {
-	    lassign $at($s) x0 y0
-	    lassign $at($e) x1 y1
-	    if {![info exists canvas($s,$e)]} {
-		set segment [segment .image $x0 $y0 $x1 $y1 -tags [list l,$user,$s,$e u,$user]]
-		dict set S $user canvas $s,$e $segment
-	    }
-	    place-segment .image l,$user,$s,$e $x0 $y0 $x1 $y1
-	}
-    }
-    return
-}
-
-proc place-dot {c item x y} {
-    global radius
-    set w [expr {$x - $radius}]
-    set n [expr {$y - $radius}]
-    set e [expr {$x + $radius}]
-    set s [expr {$y + $radius}]
-    $c coords $item $w $n $e $s
-    return
-}
-
-proc dot {c x y args} {
-    global radius dotc
-    # Create a circle centered on the chosen location, red filled
-    # with black border.
-    set w [expr {$x - $radius}]
-    set n [expr {$y - $radius}]
-    set e [expr {$x + $radius}]
-    set s [expr {$y + $radius}]
-    return [$c create oval $w $n $e $s \
-		-width   1   \
-		-outline $dotc \
-		-fill    $dotc \
-		{*}$args]
-}
-
-proc place-segment {c item x0 y0 x1 y1} {
-    $c coords $item $x0 $y0 $x1 $y1
-    return
-}
-
-proc segment {c x0 y0 x1 y1 args} {
-    global radius segc
-    return [$c create line $x0 $y0 $x1 $y1 \
-		-width $radius \
-		-fill $segc \
-		{*}$args]
 }
 
 proc place-text {c item x y} {
@@ -390,6 +182,8 @@ proc make-text {c x y args} {
 		-fill $textc -text {} \
 		{*}$args]
 }
+
+# # ## ### ##### ######## ############# #####################
 
 proc record {} {
     kinetcl waitUpdate
