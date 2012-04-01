@@ -1,0 +1,221 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+
+# # ## ### ##### ######## ############# #####################
+
+# Data structures = Hidden in joints tracker and the canvas adapters.
+# Eventflow = Hidden in the joints tracker.
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv]} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    global L X
+
+    array set X {
+	position    {}
+	orientation {}
+	waiting     {}
+    }
+    array set L {
+	position    {X Y Z}
+	orientation {U V W}
+    }
+
+    kinetcl user   create U
+    kinetcl joints create J U ; # (J)oints tracking U.
+
+    U set-profile heads-hands
+
+    J bind joint-create  jointnew
+    J bind joint-move    jointmove
+    J bind joint-destroy jointdestroy
+
+    #J bind user-create  usernew
+    #J bind user-destroy userdestroy
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+## Handle the (dis)appearance of users. The problem for the mouse here
+## is that there are 2 possibilities for a new user appearing, which
+## cannot be readility distinguihsed, yet require different responses
+## from the system.
+
+# (1) OpenNI lost the user and re-aquires it as a new user. We want to
+#     switch the mouse stream over to the new user.
+# (2) A new user truly entered the scene. We wish to keep the mouse
+#     stream with the current user.
+#
+# The best solution I managed to think of so far is to use the fact
+# that under (1) the lost user will cease reporting skeeleton data, or
+# data with low confidence. So, for both left and right hand we record
+# all users currently providing data, with the first in the scene
+# becoming the active point. When a hand is destroyed (== low
+# confidence), the action switches to the next possible hand.
+#
+# Alternatives:
+# - Any hand on any user
+# - Both hands switch, to a user providing both.
+
+proc usernew {event obj details} {
+    dict with details {} ; # --> user
+    return
+}
+
+proc userdestroy {event obj details} {
+    dict with details {} ; # --> user
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc jointnew {event obj details} {
+global X L
+    dict with details {} ; # --> user joint position
+    if {$joint ni {left-hand right-hand}} return
+    set key [list $user $joint]
+
+    if {![info exists X($key)]} {
+	lappend X(waiting) $key
+	SelectStream
+    }
+
+    Dump $position $key
+    return
+}
+
+proc jointmove {event obj details} {
+    dict with details {} ; # user joint position
+    if {$joint ni {left-hand right-hand}} return
+    set key [list $user $joint]
+
+    Dump $position $key
+    return
+}
+
+proc jointdestroy {event obj details} {
+    global X
+    dict with details {} ; # user joint
+
+    if {$joint ni {left-hand right-hand}} return
+    set key [list $user $joint]
+
+    if {![info exists X($key)]} {
+	# Hand not active, just make it unavailable to stream selection.
+	set pos [lsearch -exact $X(waiting) $key]
+	set X(waiting) [lreplace $X(waiting) $pos $pos]
+	return
+    }
+    set X($X($key)) {}
+    unset X($key)
+    SelectStream
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc SelectStream {} {
+    global X
+    if {![llength $X(waiting)] ||
+	(($X(position) ne {}) &&
+	 ($X(orientation) ne {}))} return
+
+    set h [lindex $X(waiting) 0]
+    set X(waiting) [lrange $X(waiting) 1 end]
+
+    # Try to put hands into prefered slots first.
+    lassign $h _ joint
+    if {($joint eq "left-hand") && ($X(position) eq {})} {
+	set X($h) position
+	set X(position) $h
+	return
+    }
+
+    if {($joint eq "right-hand") && ($X(orientation) eq {})} {
+	set X($h) orientation
+	set X(orientation) $h
+	return
+    }
+
+    # Now fill the slots as they are
+
+    if {$X(position) eq {}} {
+	set X($h) position
+	set X(position) $h
+	return
+    }
+
+    if {$X(orientation) eq {}} {
+	set X($h) orientation
+	set X(orientation) $h
+	return
+    }
+
+    return
+}
+
+proc Dump {position key} {
+    global X L
+    if {![info exists X($key)]} return
+
+    puts "@: ======================"
+    foreach value $position label $L($X($key)) {
+	puts "$label: $value"
+    }
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
