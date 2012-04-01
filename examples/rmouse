@@ -7,7 +7,7 @@ package require kinetcl
 
 # # ## ### ##### ######## ############# #####################
 
-# Hands trackers. Mouse-like. Absolute coordinates of both a user's
+# Hands trackers. Mouse-like.  Coordinate _changes_ of both a user's
 # hands are reported for 6DOF manipulation (positions, and rotations).
 
 # # ## ### ##### ######## ############# #####################
@@ -119,7 +119,7 @@ global X L
 	SelectStream
     }
 
-    Dump $position $key
+    Store $position $key
     return
 }
 
@@ -193,14 +193,21 @@ proc SelectStream {} {
     return
 }
 
+proc Store {position key} {
+    global X
+    set X(last,$key) $position
+    return
+}
+
 proc Dump {position key} {
     global X L
     if {![info exists X($key)]} return
 
     puts "@: ======================"
-    foreach value $position label $L($X($key)) {
-	puts "$label: $value"
+    foreach value $position last $X(last,$key) label $L($X($key)) {
+	puts "$label: [expr {$value - $last}]"
     }
+    set X(last,$key) $position
     return
 }
 
