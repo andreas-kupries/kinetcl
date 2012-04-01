@@ -47,6 +47,10 @@ oo::class create ::kinetcl::eventbase {
 	# actual event generation when not observed.
     }
 
+    method generate {event details} {
+	uevent generate [self] $event $details
+    }
+
     # # ## ### ##### ######## #############
     ## Public virtual methods.
     ## Override in subclasses.
