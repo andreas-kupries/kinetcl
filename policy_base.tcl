@@ -36,7 +36,7 @@ proc ::kinetcl::Publish {class component {exclude {}}} {
 }
 
 proc ::kinetcl::Valid {o} {
-    # Check if o is a proper kinetcl object.  If yes, directly access
+    # Check if O is a proper kinetcl object.  If yes, directly access
     # the internal BASE object and have it stash the handle for use by
     # other methods.  These methods are responsible for un-stashing
     # the handle after use.
@@ -58,8 +58,10 @@ proc ::kinetcl::Valid {o} {
 # # ## ### ##### ######## #############
 
 proc ::kinetcl::validate {o} {
-    Valid $o   ; # validate as kinetcl node. Raises error on non-validation.
-    $o @unmark ; # clear C-level information left behind.
+    # First validate as kinetcl node. Raises error on non-validation.
+    # Then clear the C-level information this left behind.
+    Valid $o
+    [info object namespace $o]::BASE @unmark
     return
 }
 
