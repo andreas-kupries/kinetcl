@@ -33,10 +33,11 @@ oo::class create ::kinetcl::joints {
 	    kinetcl validate $user
 	}
 
+	::kinetcl::eventbindings create USER $user
+
 	set myuser      $user
 	set mydata      {}
 	set mythreshold 0.5
-	set mytoken     {}
 	return
     }
 
@@ -87,19 +88,17 @@ oo::class create ::kinetcl::joints {
 
     method bound {} {
 	# If we are observed we have to track users
-	set mytoken {}
-	lappend mytoken [$myuser bind newdata              [mymethod Track]]
-	lappend mytoken [$myuser bind user-new             [mymethod New]]
-	lappend mytoken [$myuser bind user-exit            [mymethod Exit]]
-	lappend mytoken [$myuser bind user-lost            [mymethod Lost]]
-	lappend mytoken [$myuser bind calibration-complete [mymethod Calibration]]
+	USER bind newdata              [mymethod Track]
+	USER bind user-new             [mymethod New]
+	USER bind user-exit            [mymethod Exit]
+	USER bind user-lost            [mymethod Lost]
+	USER bind calibration-complete [mymethod Calibration]
 	return
     }
 
     method unbound {} {
-	# If we are not observed anymore we can stop tracking users.
-	foreach t $mytoken { $myuser unbind $token }
-	set mytoken {}
+	# If we are not observed anymore we must stop tracking users.
+	USER unbind
 	return
     }
 

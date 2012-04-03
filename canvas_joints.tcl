@@ -19,27 +19,26 @@ package require canvas::tag
 # # ## ### ##### ######## ############# #####################
 
 oo::class create ::kinetcl::canvas::joints {
-
     # # ## ### ##### ######## ############# #####################
+
     constructor {canvas depth joints} {
 	kinetcl::validate $depth
 
 	set mycanvas $canvas
 	set mydepth  $depth
-	set myjoints $joints
 	set myloc    {}
 
-	lappend mybindings [$joints bind joint-create  [mymethod JointCreate]]
-	lappend mybindings [$joints bind joint-move    [mymethod JointMove]]
-	lappend mybindings [$joints bind joint-destroy [mymethod JointDestroy]]
+	::kinetcl::eventbindings create JOINTS $joints
+	JOINTS bind joint-create  [mymethod JointCreate]
+	JOINTS bind joint-move    [mymethod JointMove]
+	JOINTS bind joint-destroy [mymethod JointDestroy]
 
 	set mycreatecmd [mymethod DefaultCreate]
 	return
     }
 
     destructor {
-	# Remove the bindings and destroy all items we owned
-	foreach token $mybindings { $myjoint unbind $token }
+	JOINTS unbind
 	$mycanvas delete [self]
 	return
     }
@@ -127,12 +126,10 @@ oo::class create ::kinetcl::canvas::joints {
     #
     ## - The canvas to draw on.
     ## - The depth (map) generator for coordinate conversions
-    ## - The joint tracker delivering us events
-    ## - The bindings set on the joints tracker, for proper destruction.
     ## - Command prefix to generate visual joint representations.
     ## - Joint location, for incremental movement.
 
-    variable mycanvas mydepth myjoints mybindings mycreatecmd myloc
+    variable mycanvas mydepth mycreatecmd myloc
 
     # # ## ### ##### ######## ############# #####################
 }

@@ -53,6 +53,7 @@ critcl::clibraries -lOpenNI
 
 critcl::tsources eventbase.tcl        ; # Core event management and translation of
 critcl::tsources nodeevents.tcl       ; # callbacks to multi-destination events.
+critcl::tsources eventbindings.tcl    ; # Manager for bindings (remember, unbind)
 
 critcl::tsources policy_base.tcl      ; #         /Abstract Class
 critcl::tsources policy_player.tcl    ; # -> base
