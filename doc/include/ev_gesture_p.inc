@@ -1,3 +1,6 @@
+The detail dictionary of this event contains:
+
+[list_begin definitions]
 [def [arg gesture]]
 The name of the gesture whose recognition is in progress.
 
@@ -11,3 +14,4 @@ order.
 [def [arg percent]]
 
 The percentage of the gesture already performed.
+[list_end]

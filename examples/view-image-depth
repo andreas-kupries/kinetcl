@@ -38,9 +38,6 @@ proc setup {} {
     kinetcl image create I
     kinetcl depth create D
 
-    I set-callback-newdata newimage
-    D set-callback-newdata newdepth
-
     set isize [dict get [I meta] map res]
     set dsize [dict get [D meta] map res]
 
@@ -65,6 +62,9 @@ proc setup {} {
     pack .depth .image -side left -in .show
     pack .exit  -side left
 
+    I bind newdata newframe_image
+    D bind newdata newframe_depth
+
     bind all <q> ::exit
 
     update idletasks
@@ -87,7 +87,7 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc newimage {args} {
+proc newframe_image {args} {
     global tracedir iphoto
     set s [clock milliseconds]
 
@@ -103,7 +103,7 @@ proc newimage {args} {
     return
 }
 
-proc newdepth {args} {
+proc newframe_depth {args} {
     global tracedir dphoto sat
     set s [clock milliseconds]
 

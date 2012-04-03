@@ -30,14 +30,15 @@ proc usage {} {
 
 proc setup {} {
     kinetcl user create K
-    K set-callback-user-enter userchange
-    K set-callback-user-exit  userchange
-    K set-callback-user-new   userchange
-    K set-callback-user-lost  userchange
 
-    K set-callback-calibration-start    calibration
-    K set-callback-calibration-complete calibration
-    #K set-callback-calibration-progress calibration
+    K bind user-enter userchange
+    K bind user-exit  userchange
+    K bind user-new   userchange
+    K bind user-lost  userchange
+
+    K bind calibration-start    calibration
+    K bind calibration-complete calibration
+    #K bind calibration-progress calibration
     return
 }
 
@@ -57,7 +58,9 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc calibration {event obj user {status {}}} {
+proc calibration {event obj details} {
+    set status n/a
+    dict with details {} ; # user (status)
     puts "\t$event $user : $status"
     if {$event ne "calibration-complete"} return
     if {$status ne "ok"} {
@@ -68,7 +71,8 @@ proc calibration {event obj user {status {}}} {
     return
 }
 
-proc userchange {event obj user} {
+proc userchange {event obj details} {
+    dict with details {} ; # user
     puts "$event $user"
 
     switch -- $event {

@@ -57,11 +57,12 @@ adjustment during operation of the node, otherwise not.
 
 [list_end]
 
+[list_end]
+
+[include cevents.inc]
+
 [comment ===============================================================]
 [vset NAME [vset CAPEVENT]]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC "[vset CAPEVENT] changes, i.e. reconfiguration of the instance's [vset CAPEVENT] setting."]
+[vset DESC "[vset CAPEVENT] changes, i.e. reconfiguration of the instance's [vset CAPEVENT] setting"]
 [include callback.inc]
-
-[list_end]

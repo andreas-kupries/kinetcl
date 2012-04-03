@@ -9,10 +9,10 @@
 namespace eval ::kinetcl {
     namespace export \
 	audio depth gesture hands image ir player \
-	recorder script user scene \
+	recorder script user scene joints \
 	\
 	estart estop start stop waitUpdate waitOneUpdate \
-	waitAnyUpdate waitNoneUpdate errorstate
+	waitAnyUpdate waitNoneUpdate errorstate validate
 
     namespace ensemble create
 

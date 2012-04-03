@@ -36,7 +36,6 @@ proc setup {} {
     file mkdir $tracedir
 
     kinetcl user create K
-    K set-callback-newdata newframe
 
     # Determine scene size.
     set size {640 480}
@@ -52,6 +51,7 @@ proc setup {} {
     pack .image -side top
     pack .exit  -side left
 
+    K bind newdata newframe_user
     bind all <q> ::exit
 
     update idletasks
@@ -74,7 +74,7 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc newframe {args} {
+proc newframe_user {args} {
     global tracedir photo blank
     set s [clock milliseconds]
 

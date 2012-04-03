@@ -195,8 +195,8 @@ error:
 	    {const XnChar* strPose}
 	    {XnUserID u}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strPose,-1));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
+	    CB_DETAIL ("pose", Tcl_NewStringObj (strPose,-1));
+	    CB_DETAIL ("user", Tcl_NewIntObj (u));
 	}
 
     ::kt_callback pose-exit \
@@ -206,8 +206,8 @@ error:
 	    {const XnChar* strPose}
 	    {XnUserID u}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strPose,-1));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
+	    CB_DETAIL ("pose", Tcl_NewStringObj (strPose,-1));
+	    CB_DETAIL ("user", Tcl_NewIntObj (u));
 	}
 
     ::kt_callback pose-progress \
@@ -218,11 +218,9 @@ error:
 	    {XnUserID u}
 	    {XnPoseDetectionStatus pstatus}
 	} {
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj (strPose,-1));
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewIntObj (u));
-	    Tcl_ListObjAppendElement (interp, cmd,
-				      Tcl_NewStringObj (@stem@_pose_detection_status [pstatus],
-							-1));
+	    CB_DETAIL ("pose",   Tcl_NewStringObj (strPose,-1));
+	    CB_DETAIL ("user",   Tcl_NewIntObj (u));
+	    CB_DETAIL ("status", Tcl_NewStringObj (@stem@_pose_detection_status [pstatus], -1));
 	}
 
     # NOTE

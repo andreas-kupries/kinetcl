@@ -22,6 +22,7 @@ oo::class create ::kinetcl::audio {
 	# Stashes C handle in global data structures
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf AUDIO
 	return
     }
 

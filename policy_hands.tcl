@@ -22,6 +22,7 @@ oo::class create ::kinetcl::hands {
 	HANDS @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf HANDS
 	return
     }
 

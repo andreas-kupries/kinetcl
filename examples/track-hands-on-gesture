@@ -45,17 +45,11 @@ proc setup {} {
     set segc lightblue
     set textc green
 
-    kinetcl hand create K
-    K set-smoothing 0.1
-    K set-callback-hand-create  newhand
-    K set-callback-hand-update  movehand
-    K set-callback-hand-destroy losthand
-
-    kinetcl depth create D
-    D set-callback-newdata newframe_depth
-
+    kinetcl hand    create K
+    kinetcl depth   create D
     kinetcl gesture create G
-    G set-callback-gesture-recognized gesture
+
+    K set-smoothing 0.1
     G add-gesture RaiseHand
 
     set size [dict get [D meta] map res]
@@ -77,6 +71,12 @@ proc setup {} {
     # More buttons: stop/start recording
     pack .image -side top -expand 1 -fill both
     pack .exit  -side left
+
+    K bind hand-create        newhand	
+    K bind hand-update        movehand
+    K bind hand-destroy       losthand
+    D bind newdata            newframe_depth
+    G bind gesture-recognized gesture
 
     bind all <q> ::exit
 
@@ -107,9 +107,10 @@ proc ping {text} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc gesture {event obj which id end} {
-    puts "$event $which ($id) @($end)"
-    K start-tracking $end
+proc gesture {event obj details} {
+    dict with details {} ; # gesture id_position end_position
+    puts "$event $gesture ($id_position) @($end_position)"
+    K start-tracking $end_position
     G remove-gesture RaiseHand
     return
 }
@@ -138,33 +139,36 @@ proc newframe_depth {args} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc newhand {event obj hid location time} {
-    puts "$event $hid @$location"
+proc newhand {event obj details} {
+    dict with details {} ; # hand position time
+    puts "$event $hand @$position"
 
-    set p [lindex [D world2projective $location] 0]
+    set p [lindex [D world2projective $position] 0]
     lassign $p x y z
-    .image delete h,$hid
-    dot .image $x $y -tags [list h,$hid]
+    .image delete h,$hand
+    dot .image $x $y -tags [list h,$hand]
     return
 }
 
-proc losthand {event obj hid time} {
-    puts "$event $hid"
+proc losthand {event obj details} {
+    dict with details {} ; # hand time
+    puts "$event $hand"
 
     # Drop hand.
-    .image delete h,$hid
+    .image delete h,$hand
 
     # Start looking for the gesture to re-aquire the hand.
     G add-gesture RaiseHand
     return
 }
 
-proc movehand {event obj hid location time} {
-    puts "$event $hid @$location"
+proc movehand {event obj details} {
+    dict with details {} ; # hand position time
+    puts "$event $hand @$position"
 
-    set p [lindex [D world2projective $location] 0]
+    set p [lindex [D world2projective $position] 0]
     lassign $p x y z
-    place-dot .image h,$hid $x $y
+    place-dot .image h,$hand $x $y
     return
 }
 

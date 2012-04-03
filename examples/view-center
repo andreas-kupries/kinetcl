@@ -49,13 +49,8 @@ proc setup {} {
     set dotc red
     set textc green
 
-    kinetcl user create K
-    K set-callback-newdata   newframe_user
-    K set-callback-user-exit userexit
-    K set-callback-user-lost userlost
-
+    kinetcl user  create K
     kinetcl depth create D
-    D set-callback-newdata newframe_depth
 
     set size [dict get [D meta] map res]
     lassign $size w h
@@ -76,6 +71,11 @@ proc setup {} {
     # More buttons: stop/start recording
     pack .image -side top -expand 1 -fill both
     pack .exit  -side left
+
+    K bind user-exit userexit   
+    K bind user-lost userlost   
+    K bind newdata   newframe_user
+    D bind newdata   newframe_depth
 
     bind all <q> ::exit
 
@@ -128,7 +128,8 @@ proc newframe_depth {args} {
 
 # # ## ### ##### ######## ############# #####################
 
-proc userexit {event obj user} {
+proc userexit {event obj details} {
+    dict with details {} ; # user
     if {[catch {
 	puts "$event $user"
 	.image delete u,$user
@@ -137,7 +138,8 @@ proc userexit {event obj user} {
     return
 }
 
-proc userlost {event obj user} {
+proc userlost {event obj details} {
+    dict with details {} ; # user
     if {[catch {
 	puts "$event $user"
 	.image delete u,$user

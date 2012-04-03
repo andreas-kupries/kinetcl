@@ -79,25 +79,24 @@ here.
 
 [list_end]
 
+[list_end]
+
+[include cevents.inc]
+
 [comment ===============================================================]
 [vset NAME pose-enter]
-[vset NUM 4]
 [vset EARGS pose]
-[vset DESC {a user entering a pose.}]
+[vset DESC {a user entering a pose}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME pose-exit]
-[vset NUM 4]
 [vset EARGS pose]
-[vset DESC {a user exiting a pose.}]
+[vset DESC {a user exiting a pose}]
 [include callback.inc]
 
 [comment ===============================================================]
 [vset NAME pose-progress]
-[vset NUM 5]
 [vset EARGS posep]
-[vset DESC {the system's progress in the detection of a pose for a user.}]
+[vset DESC {the system's progress in the detection of a pose for a user}]
 [include callback.inc]
-
-[list_end]

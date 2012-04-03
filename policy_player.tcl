@@ -22,6 +22,7 @@ oo::class create ::kinetcl::player {
 	PLAYER @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf PLAYER
 	return
     }
 

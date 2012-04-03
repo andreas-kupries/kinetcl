@@ -22,6 +22,7 @@ oo::class create ::kinetcl::script {
 	SCRIPT @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf SCRIPT
 	return
     }
 

@@ -23,6 +23,7 @@ oo::class create ::kinetcl::depth {
 	DEPTH @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf DEPTH
 	return
     }
 

@@ -51,6 +51,9 @@ critcl::clibraries -lOpenNI
 ## Declare the Tcl layer aggregating the C primitives / classes into
 ## useful commands and hierarchies.
 
+critcl::tsources eventbase.tcl        ; # Core event management and translation of
+critcl::tsources nodeevents.tcl       ; # callbacks to multi-destination events.
+
 critcl::tsources policy_base.tcl      ; #         /Abstract Class
 critcl::tsources policy_player.tcl    ; # -> base
 critcl::tsources policy_recorder.tcl  ; # -> base
@@ -67,6 +70,8 @@ critcl::tsources policy_depth.tcl     ; # -> map -> generator -> base
 critcl::tsources policy_image.tcl     ; # -> map -> generator -> base
 critcl::tsources policy_ir.tcl        ; # -> map -> generator -> base
 critcl::tsources policy_scene.tcl     ; # -> map -> generator -> base
+
+critcl::tsources joints.tcl           ; # Highlevel skeleton/joint tracker with proper events.
 
 critcl::tsources policy.tcl
 

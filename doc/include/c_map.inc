@@ -64,11 +64,12 @@ combination is not supported by the instance.
 
 [para] The result of the method is an empty string.
 
+[list_end]
+
+[include events.inc]
+
 [comment ===============================================================]
 [vset NAME mode]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {mode changes, i.e. reconfiguration of the instance's output mode.}]
+[vset DESC {mode changes, i.e. reconfiguration of the instance's output mode}]
 [include callback.inc]
-
-[list_end]

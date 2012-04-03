@@ -102,11 +102,12 @@ to sensor coordinates.
 results. Each point in both arguments and result is a 3-element list
 containing the point's X-, Y-, and Z-coordinates, in this order.
 
+[list_end]
+
+[include events.inc]
+
 [comment ===============================================================]
 [vset NAME depthfov]
-[vset NUM 2]
 [vset EARGS null]
-[vset DESC {depthfov changes, i.e. reconfiguration of the device's field of view.}]
+[vset DESC {depthfov changes, i.e. reconfiguration of the device's field of view}]
 [include callback.inc]
-
-[list_end]

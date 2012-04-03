@@ -22,6 +22,7 @@ oo::class create ::kinetcl::image {
 	IMAGE @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf IMAGE
 	return
     }
 

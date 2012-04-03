@@ -22,6 +22,7 @@ oo::class create ::kinetcl::gesture {
 	GESTURE @self [self]
 	next
 	BASE @unmark ; # Clear the stash
+	my SetupEventsOf GESTURE
 	return
     }
 

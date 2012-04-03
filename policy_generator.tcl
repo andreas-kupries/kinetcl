@@ -24,6 +24,7 @@ oo::class create ::kinetcl::generator {
 	::kinetcl::Generator create GENERATOR
 	GENERATOR @self [self]
 	next
+	my SetupEventsOf GENERATOR
 	return
     }
 
