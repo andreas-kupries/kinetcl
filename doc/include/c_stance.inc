@@ -16,6 +16,10 @@ See section [sectref {Event Base}].
 [cmd {::kinetcl joints}] (See section [sectref {Joint Events}]) and
 its events for the tracking of users and their skeleton joints.
 
+[para] Multiple instances can trivially share the same joint tracker
+instance, given that the communication from tracker to recognizer is
+by events and bindings.
+
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
@@ -90,7 +94,7 @@ in detail in section [sectref {Stance Recognition Language}].
 
 [list_end]
 
-
+[comment ===============================================================]
 [include events.inc]
 
 [comment ===============================================================]
@@ -105,9 +109,10 @@ in detail in section [sectref {Stance Recognition Language}].
 [vset DESC {a user leaving a recognized stance}]
 [include callback.inc]
 
+[comment ===============================================================]
 [subsection {Stance Recognition Language}]
 
-All gesture recogniton and measurement scripts are executed within a
+All stance recognition and measurement scripts are executed within a
 namespace which provides the commands below:
 
 [list_begin definitions]
