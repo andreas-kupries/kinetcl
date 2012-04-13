@@ -29,6 +29,7 @@
 [section {Event Base}]          [include include/c_events.inc]
 [section {Node Events}]         [include include/c_nevents.inc]
 [section {Joint Events}]        [include include/c_joints.inc]
+[section {Stance Events}]       [include include/c_stance.inc]
 
 [include include/feedback.inc]
 [manpage_end]

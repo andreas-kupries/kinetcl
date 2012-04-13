@@ -6,6 +6,11 @@ providing proper event based tracking of user skeletons.
 overall management of the events it generates.
 See section [sectref {Event Base}].
 
+[para] Instances of the class rely on a (possibly external) instance
+of class [cmd {::kinetcl user}]
+(See section [sectref {User Generator}]) and its events for the basic
+aquisition and tracking of users.
+
 [comment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
 [subsection {Class API}]
 [list_begin definitions]
