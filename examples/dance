@@ -1,0 +1,119 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require kinetcl::canvas::joints
+package require kinetcl::canvas::skeleton
+package require Tk
+package require crimp::tk
+package require crimp
+
+# # ## ### ##### ######## ############# #####################
+
+# Data structures = Hidden in joints tracker and the canvas adapters.
+# Eventflow = Hidden in the joints tracker.
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv]} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    kinetcl depth create  D
+    kinetcl user  create  U
+
+    U set-profile all
+    lassign [dict get [D meta] map res] w h
+    #D destroy - No. We need this for coordinate
+    #            conversion world -> screen also.
+
+    puts "$w x $h"
+
+    canvas      .image \
+	-scrollregion [list 0 0 $w $h] \
+	-width $w -height $h
+    ttk::button .exit -text Exit -command ::exit
+
+    # More buttons: stop/start recording
+    pack .image -side top -expand 1 -fill both
+    pack .exit  -side left
+
+    kinetcl joints          create J U ; # (J)oints tracking U.
+    kinetcl canvas joints   create CJ .image D J ; # draw joints
+    kinetcl canvas skeleton create CS .image D J ; # draw lines
+
+    kinetcl stance create G J
+    #G add left-hand-salute-roman { expr { [vertical_up     left-lower-arm] && [horizontal_left left-upper-arm] } }
+    #G add left-up  { vertical_up     left-lower-arm }
+    G add left-out { horizontal_left left-lower-arm }
+
+    G bind stance-enter stanceenter
+    G bind stance-exit  stanceexit
+
+    bind all <q> ::exit
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc stanceenter {event obj details} {
+    dict with details {} ; # ==> user stance
+    puts "Enter ($user): $stance"
+    return
+}
+
+proc stanceexit {event obj details} {
+    dict with details {} ; # ==> user stance
+    puts "Exit ($user): $stance"
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit

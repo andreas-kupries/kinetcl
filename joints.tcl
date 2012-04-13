@@ -221,7 +221,8 @@ oo::class create ::kinetcl::joints {
 	foreach joint [dict keys [dict get $mydata $user]] {
 	    my generate joint-destroy [dict create user $user joint $joint]
 	}
-	my generate user-destroy [dict create user $user]
+	set udetails [dict create user $user]
+	my generate user-destroy $udetails
 	dict unset mydata $user
 	return
     }

@@ -73,6 +73,7 @@ critcl::tsources policy_ir.tcl        ; # -> map -> generator -> base
 critcl::tsources policy_scene.tcl     ; # -> map -> generator -> base
 
 critcl::tsources joints.tcl           ; # Highlevel skeleton/joint tracker with proper events.
+critcl::tsources stance.tcl           ; # Highlevel stance/posture/body gesture detection.
 
 critcl::tsources policy.tcl
 
