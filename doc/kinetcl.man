@@ -26,6 +26,10 @@
 
 [section Capabilities]          [include include/c_cap.inc]
 
+[section {Event Base}]          [include include/c_events.inc]
+[section {Node Events}]         [include include/c_nevents.inc]
+[section {Joint Events}]        [include include/c_joints.inc]
+
 [include include/feedback.inc]
 [manpage_end]
 
