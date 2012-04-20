@@ -27,18 +27,21 @@ proc main {} {
 # # ## ### ##### ######## ############# #####################
 
 proc cmdline {} {
-    global argv
-    if {[llength $argv]} usage
+    global argv record
+    if {[llength $argv] > 1} usage
+    lassign $argv record
     return
 }
 
 proc usage {} {
     global argv0
-    puts stderr "usage: $argv0"
+    puts stderr "usage: $argv0 ?record?"
     exit 1
 }
 
 proc setup {} {
+    global record
+
     kinetcl depth create  D
     kinetcl user  create  U
 
@@ -64,6 +67,8 @@ proc setup {} {
 
     bind all <q> ::exit
 
+    rec_ui
+
     update idletasks
     return
 }
@@ -79,6 +84,59 @@ proc run {} {
 proc ping {text} {
     puts -nonewline \r$text
     flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+## Manage a recorder
+
+proc rec_ui {} {
+    global record r_label r_state r_chan
+
+    # Recorder available only if file provided
+    if {$record eq {}} return
+
+    kinetcl::eventbindings create R J
+
+    ttk::checkbutton .rec \
+	-textvariable ::r_label \
+	-variable ::r_state \
+	-command ::rec_manage
+    pack .rec  -side right
+
+    set r_state 0   ; # off by default.
+    set r_label (+) ; # labeled for 'start'
+    set r_chan {}   ; # no channel
+    return
+}
+
+proc rec_manage {} {
+    global r_label r_state r_chan record
+
+    if {$r_state} {
+	# Start recording: Open file (append), relabel for stop, set
+	# bindings to get the events to record.
+
+	set r_chan [open $record a]
+	set r_label (-)
+	R bind user-create  ::rec_event
+	R bind user-move    ::rec_event
+	R bind user-destroy ::rec_event
+    } else {
+	# Stop recording: Disconnect events, relabel for start, close
+	# file.
+
+	R unbind
+	set r_label (+)
+	close $r_chan
+    }
+    return
+}
+
+proc rec_event {event obj details} {
+    # Event handler, write to recorder destination file.
+    global r_chan
+    puts $r_chan [list $event $details]
     return
 }
 

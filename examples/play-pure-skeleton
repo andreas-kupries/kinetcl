@@ -1,0 +1,277 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+package require kinetcl::canvas::joints
+package require kinetcl::canvas::skeleton
+package require Tk
+package require crimp::tk
+package require crimp
+
+# # ## ### ##### ######## ############# #####################
+
+# Data structures = Hidden in joints tracker and the canvas adapters.
+# Eventflow = Hidden in the joints tracker.
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv record
+    if {[llength $argv] != 1} usage
+    lassign $argv record
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0 record"
+    exit 1
+}
+
+proc setup {} {
+    global record
+
+    kinetcl depth create D
+    # We create this node only for the ability to convert between
+    # world and screen coordinates. We are not starting this
+    # generator. Oh, and we use its WxH for our canvas.
+    #
+    # // lets see if that works, or if the generator must be active
+    # // for the conversion to be possible.
+
+    lassign [dict get [D meta] map res] w h
+    #D destroy - No. We need this for coordinate
+    #            conversion world -> screen also.
+
+    puts "$w x $h"
+
+    canvas      .image \
+	-scrollregion [list 0 0 $w $h] \
+	-width $w -height $h
+    ttk::button .exit -text Exit -command ::exit
+
+    # More buttons: stop/start recording
+    pack .image -side top -expand 1 -fill both
+    pack .exit  -side left
+
+    # P is a simple ensemble providing the API to the player data
+    kinetcl canvas joints   create CJ .image D P ; # draw joints
+    kinetcl canvas skeleton create CS .image D P ; # draw lines
+
+    bind all <q> ::exit
+
+    play_ui
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    vwait forever ; #while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+## Manage the player.
+#
+## Buttons
+## - first
+## - back
+## - back step 5
+## - back step 1
+## - stop
+## - forw step 1
+## - forw step 5
+## - forw
+## - last
+#
+## TODO: Link player state/activity to button availability.
+
+array set p_invert {
+    user-create  user-destroy
+    user-move    user-move
+    user-destroy user-create
+}
+
+# future - mega widget.
+proc play_ui {} {
+    global record p_data p_at p_max p_timer p_dir p_location
+
+    ttk::button .pfirst -text {(1st)}  -command {::p_back 0}
+    ttk::button .pb     -text {<}      -command {::p_back {}}
+    ttk::button .pb5    -text {<5}     -command {::p_back -5}
+    ttk::button .pb1    -text {<1}     -command {::p_back -1}
+    ttk::button .pstop  -text {Stop}   -command ::p_stop
+    ttk::button .pf1    -text {>1}     -command {::p_forw 1}
+    ttk::button .pf5    -text {>5}     -command {::p_forw 5}
+    ttk::button .pf     -text {>}      -command {::p_forw {}}
+    ttk::button .plast  -text {(last)} -command {::p_forw end}
+
+    pack .plast  -side right
+    pack .pf     -side right
+    pack .pf5    -side right
+    pack .pf1    -side right
+    pack .pstop  -side right
+    pack .pb1    -side right
+    pack .pb5    -side right
+    pack .pb     -side right
+    pack .pfirst -side right
+
+    set c [open $record r]
+    set p_data [split [read $c] \n]
+    close $c
+    set p_at  0
+    set p_max [expr {[llength $p_data] - 1}]
+    set p_timer {}
+    set p_dir {}
+    set p_location {}
+    return
+}
+
+proc p_stop {} {
+    global p_timer
+    catch { after cancel $p_timer }
+    set p_timer {}
+    return
+}
+
+proc p_back {by} {
+    global p_at p_max
+    switch -exact -- $by {
+	1   { p_step 0 [expr {$p_at - 1}] 0 }
+	5   { p_step 1 [expr {$p_at - 5}] }
+	{}  { p_play backward }
+	0   {
+	    p_step 1 0 ; # fast step to goal
+	    p_step 0 0 ; # step in place for final move, if any
+	}
+    }
+}
+
+proc p_forw {by} {
+    global p_at p_max
+    switch -exact -- $by {
+	1   { p_step 0 [expr {$p_at + 1}] }
+	5   { p_step 1 [expr {$p_at + 5}] }
+	{}  { p_play forward }
+	end {
+	    p_step 1 $p_max ; # fast step to goal
+	    p_step 0 $p_max ; # step in place for final move, if any.
+	}
+    }
+}
+
+proc ::tcl::mathfunc::sgn x {expr {($x>0)-($x<0)}}
+
+proc p_step {fast goal} {
+    global p_max p_at p_data p_invert p_location
+
+    set step [expr {sgn($goal - $p_at)}]
+
+    while {$goal != $p_at} {
+	set  new $p_at
+	incr new $step
+
+	if {($new < 0) || ($new > $p_max)} {
+	    p_stop
+	    return
+	}
+
+	lassign [lindex $p_data $new] event details
+	catch {
+	    set p_location [dict get $details position]
+	}
+
+	if {$step < 0} {
+	    # backward, swap user-create/destroy
+	    set event $p_invert($event)
+	    switch -exact -- $event {
+		user-create {
+		    # Fake location details, pull from previous event
+		    dict set details position $p_location
+		}
+		user-destroy {
+		    # Delete location details
+		    dict unset details position
+		}
+	    }
+	}
+
+	# Generate event when
+	#    fast && !user-move
+	# || !fast && (step != 0)
+	# || !fast && user-move
+	#
+	# <=> (fast && !usermove) || (!fast && ((step!= 0) || user-move))
+
+	set move [expr {$event eq "user-move"}]
+	if {
+	    ($fast && !$move) ||
+	    (!$fast && ($move || ($step != 0)))
+	} {
+	    uevent generate J $event $details
+	}
+	set p_at $new
+    }
+    return
+}
+
+proc p_play {direction} {
+    global p_timer p_dir
+
+    if {$p_dir ne $direction} {
+	p_stop
+    } elseif {$p_timer ne {}} {
+	# ignore multiple calls.
+	return
+    }
+
+    set pd_dir  $direction
+    set p_timer [after 100 p_run]
+    return
+}
+
+proc p_run {} {
+    global p_dir
+    set p_timer [after 100 p_run]
+    if {$p_dir eq "forward"} {
+	p_forw 1
+    } else {
+	p_back 1
+    }
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
