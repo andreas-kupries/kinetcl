@@ -255,7 +255,17 @@
 <li class="subsection"><a href="#subsection68">Events</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section22">Bugs, Ideas, Feedback</a></li>
+<li class="section"><a href="#section22">Stance Events</a>
+<ul>
+<li class="subsection"><a href="#subsection69">Class API</a></li>
+<li class="subsection"><a href="#subsection70">Instance API</a></li>
+<li class="subsection"><a href="#subsection71">Events</a></li>
+<li class="subsection"><a href="#subsection72">Stance Recognition Language</a></li>
+<li class="subsection"><a href="#subsection73">Predefined Measurements</a></li>
+<li class="subsection"><a href="#subsection74">Examples</a></li>
+</ul>
+</li>
+<li class="section"><a href="#section23">Bugs, Ideas, Feedback</a></li>
 <li class="section"><a href="#keywords">Keywords</a></li>
 <li class="section"><a href="#category">Category</a></li>
 <li class="section"><a href="#copyright">Copyright</a></li>
@@ -485,6 +495,76 @@
 <li><a href="#215"><i class="arg">instanceCmd</i> <b class="method">get-generator</b></a></li>
 <li><a href="#216"><i class="arg">instanceCmd</i> <b class="method">get-joint</b> <i class="arg">user</i> <i class="arg">joint</i></a></li>
 <li><a href="#217"><i class="arg">instanceCmd</i> <b class="method">get-skeleton</b> <i class="arg">user</i></a></li>
+<li><a href="#218"><b class="cmd">::kinetcl stance</b> <b class="method">new</b> <i class="arg">joints</i></a></li>
+<li><a href="#219"><b class="cmd">::kinetcl stance</b> <b class="method">create</b> <i class="arg">objname</i> <i class="arg">joints</i></a></li>
+<li><a href="#220"><i class="arg">instanceCmd</i> <b class="method">add</b> <i class="arg">name</i> <i class="arg">script</i></a></li>
+<li><a href="#221"><i class="arg">instanceCmd</i> <b class="method">remove</b> <i class="arg">name</i></a></li>
+<li><a href="#222"><i class="arg">instanceCmd</i> <b class="method">measure</b> <i class="arg">name</i> <i class="arg">script</i></a></li>
+<li><a href="#223"><b class="cmd">head</b></a></li>
+<li><a href="#224"><b class="cmd">neck</b></a></li>
+<li><a href="#225"><b class="cmd">torso</b></a></li>
+<li><a href="#226"><b class="cmd">waist</b></a></li>
+<li><a href="#227"><b class="cmd">left-collar</b></a></li>
+<li><a href="#228"><b class="cmd">left-shoulder</b></a></li>
+<li><a href="#229"><b class="cmd">left-elbow</b></a></li>
+<li><a href="#230"><b class="cmd">left-wrist</b></a></li>
+<li><a href="#231"><b class="cmd">left-hand</b></a></li>
+<li><a href="#232"><b class="cmd">left-fingertip</b></a></li>
+<li><a href="#233"><b class="cmd">left-hip</b></a></li>
+<li><a href="#234"><b class="cmd">left-knee</b></a></li>
+<li><a href="#235"><b class="cmd">left-ankle</b></a></li>
+<li><a href="#236"><b class="cmd">left-foot</b></a></li>
+<li><a href="#237"><b class="cmd">right-collar</b></a></li>
+<li><a href="#238"><b class="cmd">right-shoulder</b></a></li>
+<li><a href="#239"><b class="cmd">right-elbow</b></a></li>
+<li><a href="#240"><b class="cmd">right-wrist</b></a></li>
+<li><a href="#241"><b class="cmd">right-hand</b></a></li>
+<li><a href="#242"><b class="cmd">right-fingertip</b></a></li>
+<li><a href="#243"><b class="cmd">right-hip</b></a></li>
+<li><a href="#244"><b class="cmd">right-knee</b></a></li>
+<li><a href="#245"><b class="cmd">right-ankle</b></a></li>
+<li><a href="#246"><b class="cmd">right-foot</b></a></li>
+<li><a href="#247"><b class="cmd">distance</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#248"><b class="cmd">distance_side</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#249"><b class="cmd">distance_height</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#250"><b class="cmd">distance_depth</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#251"><b class="cmd">distance</b> <i class="arg">segment</i></a></li>
+<li><a href="#252"><b class="cmd">distance_side</b> <i class="arg">segment</i></a></li>
+<li><a href="#253"><b class="cmd">distance_height</b> <i class="arg">segment</i></a></li>
+<li><a href="#254"><b class="cmd">distance_depth</b> <i class="arg">segment</i></a></li>
+<li><a href="#255"><b class="cmd">horizontal_side</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#256"><b class="cmd">vertical</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#257"><b class="cmd">horizontal_depth</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#258"><b class="cmd">horizontal_side</b> <i class="arg">segment</i></a></li>
+<li><a href="#259"><b class="cmd">vertical</b> <i class="arg">segment</i></a></li>
+<li><a href="#260"><b class="cmd">horizontal_depth</b> <i class="arg">segment</i></a></li>
+<li><a href="#261"><b class="cmd">horizontal_right</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#262"><b class="cmd">horizontal_left</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#263"><b class="cmd">vertical_up</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#264"><b class="cmd">vertical_down</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#265"><b class="cmd">horizontal_backward</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#266"><b class="cmd">horizontal_forward</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#267"><b class="cmd">horizontal_right</b> <i class="arg">segment</i></a></li>
+<li><a href="#268"><b class="cmd">horizontal_left</b> <i class="arg">segment</i></a></li>
+<li><a href="#269"><b class="cmd">vertical_up</b> <i class="arg">segment</i></a></li>
+<li><a href="#270"><b class="cmd">vertical_down</b> <i class="arg">segment</i></a></li>
+<li><a href="#271"><b class="cmd">horizontal_backward</b> <i class="arg">segment</i></a></li>
+<li><a href="#272"><b class="cmd">horizontal_forward</b> <i class="arg">segment</i></a></li>
+<li><a href="#273"><b class="cmd">right</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#274"><b class="cmd">left</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#275"><b class="cmd">above</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#276"><b class="cmd">below</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#277"><b class="cmd">before</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#278"><b class="cmd">behind</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></li>
+<li><a href="#279"><b class="cmd">right</b> <i class="arg">segment</i></a></li>
+<li><a href="#280"><b class="cmd">left</b> <i class="arg">segment</i></a></li>
+<li><a href="#281"><b class="cmd">above</b> <i class="arg">segment</i></a></li>
+<li><a href="#282"><b class="cmd">below</b> <i class="arg">segment</i></a></li>
+<li><a href="#283"><b class="cmd">before</b> <i class="arg">segment</i></a></li>
+<li><a href="#284"><b class="cmd">behind</b> <i class="arg">segment</i></a></li>
+<li><a href="#285"><b class="cmd">mm</b> <i class="arg">x</i></a></li>
+<li><a href="#286"><b class="cmd">cm</b> <i class="arg">x</i></a></li>
+<li><a href="#287"><b class="cmd">inch</b> <i class="arg">x</i></a></li>
 </ul>
 </div>
 </div>
@@ -3262,6 +3342,10 @@ providing proper event based tracking of user skeletons.</p>
 <p>This class inherits from <b class="cmd">::kinetcl eventbase</b> for the
 overall management of the events it generates.
 See section <span class="sectref"><a href="#section19">Event Base</a></span>.</p>
+<p>Instances of the class rely on a (possibly external) instance
+of class <b class="cmd">::kinetcl user</b>
+(See section <span class="sectref"><a href="#section12">User Generator</a></span>) and its events for the basic
+aquisition and tracking of users.</p>
 <div id="subsection66" class="subsection"><h3><a name="subsection66">Class API</a></h3>
 <dl class="definitions">
 <dt><a name="211"><b class="cmd">::kinetcl joints</b> <b class="method">new</b> <span class="opt">?<i class="arg">user</i>?</span></a></dt>
@@ -3409,7 +3493,335 @@ responsibility to query the state using the appropriate query methods.</p></dd>
 </dl>
 </div>
 </div>
-<div id="section22" class="section"><h2><a name="section22">Bugs, Ideas, Feedback</a></h2>
+<div id="section22" class="section"><h2><a name="section22">Stance Events</a></h2>
+<p>This sections documents the class <b class="cmd">::kinetcl stance</b>, a class
+for the recognition of <i class="term">stances</i>, also known as <i class="term">poses</i> or
+<i class="term">body gestures</i>. Events are generated whenever a user enters or
+leaves a stance.</p>
+<p>This was in general inspired by the concept of
+<a href="http://projects.ict.usc.edu/mxr/faast/">FAAST body gestures</a>
+mentioned at <a href="http://fivedots.coe.psu.ac.th/~ad/jg/nui1610/index.html">http://fivedots.coe.psu.ac.th/~ad/jg/nui1610/index.html</a>.</p>
+<p>This class inherits from <b class="cmd">::kinetcl eventbase</b> for the
+overall management of the events it generates.
+See section <span class="sectref"><a href="#section19">Event Base</a></span>.</p>
+<p>Instances of the class rely on an external instance of class
+<b class="cmd">::kinetcl joints</b> (See section <span class="sectref"><a href="#section21">Joint Events</a></span>) and
+its events for the tracking of users and their skeleton joints.</p>
+<p>Multiple instances can trivially share the same joint tracker
+instance, given that the communication from tracker to recognizer is
+by events and bindings.</p>
+<div id="subsection69" class="subsection"><h3><a name="subsection69">Class API</a></h3>
+<dl class="definitions">
+<dt><a name="218"><b class="cmd">::kinetcl stance</b> <b class="method">new</b> <i class="arg">joints</i></a></dt>
+<dd></dd>
+<dt><a name="219"><b class="cmd">::kinetcl stance</b> <b class="method">create</b> <i class="arg">objname</i> <i class="arg">joints</i></a></dt>
+<dd><p>This command creates a new instance of the class, either automatically
+named (<b class="method">new</b>), or explicitly (<b class="method">create</b>).
+The API provided by the instance, i.e. the set of available methods
+and their semantics is described in the next subsection.</p>
+<p>The <i class="arg">joints</i> argument must be a joint tracking object which
+is API compatible to instances of class <b class="class">::kinetcl joints</b>.</p>
+<p>This tracker is monitored for the creation, movement and
+destruction of users, in response to which the referenced user and its
+joints are run through the stance recognizer.</p></dd>
+</dl>
+</div>
+<div id="subsection70" class="subsection"><h3><a name="subsection70">Instance API</a></h3>
+<dl class="definitions">
+<dt><a name="220"><i class="arg">instanceCmd</i> <b class="method">add</b> <i class="arg">name</i> <i class="arg">script</i></a></dt>
+<dd><p>This method defines a new stance to be recognized by the instance,
+identified by <i class="arg">name</i>. The <i class="arg">script</i> is the recognizer for the
+stance and is invoked whenever a user moved, as this may have caused
+her to either enter or exit the stance.</p>
+<p>The context and commands available to this script are explained
+in detail in section <span class="sectref"><a href="#subsection72">Stance Recognition Language</a></span>.</p>
+<p>The script has to return a boolean value, <b class="const">true</b> if the
+stance is recognized, and <b class="const">false</b> otherwise.</p>
+<p>Events are send whenever this information changes (per-user).</p>
+<p>Note that a user can be in multiple stances at the same time.</p>
+<p>The result of the method is the empty string.</p></dd>
+<dt><a name="221"><i class="arg">instanceCmd</i> <b class="method">remove</b> <i class="arg">name</i></a></dt>
+<dd><p>This method removes the <i class="arg">name</i>d stance from the instance, stopping
+its future recognition.</p>
+<p>The result of the method is the empty string.</p></dd>
+<dt><a name="222"><i class="arg">instanceCmd</i> <b class="method">measure</b> <i class="arg">name</i> <i class="arg">script</i></a></dt>
+<dd><p>This method extends the gesture recognition language used by the
+instance with a <i class="arg">name</i>d measure(ment), a cacheable piece of
+information about a user's skeleton.</p>
+<p>The value of the measure is computed once, per user, by
+invoking the <i class="arg">script</i>. The result of the script is the value of
+the measurement.</p>
+<p>The context and commands available to this script are explained
+in detail in section <span class="sectref"><a href="#subsection72">Stance Recognition Language</a></span>.</p>
+<p>The set of predefined measures is explained in section
+ <span class="sectref"><a href="#subsection73">Predefined Measurements</a></span>.</p>
+<p>The result of the method is the empty string.</p></dd>
+</dl>
+</div>
+<div id="subsection71" class="subsection"><h3><a name="subsection71">Events</a></h3>
+<p>This class supports the events below. These names can be used as the
+<i class="arg">event</i> argument of method <b class="method">bind</b> defined by our super-class
+<b class="class">::kinetcl::base</b>.</p>
+<dl class="definitions">
+<dt><b class="const">stance-enter</b></dt>
+<dd><p>This event is generated in response to a user entering a recognized stance.</p>
+<p>The detail dictionary of this event contains:</p>
+<dl class="definitions">
+<dt><i class="arg">user</i></dt>
+<dd><p>The numerical id of the user the event was generated for.</p></dd>
+<dt><i class="arg">stance</i></dt>
+<dd><p>The name of the stance the event is for.</p></dd>
+</dl>
+<p><em>Note</em> that events are not told the actual state of the
+instance. If this information is required then it is the receiver's
+responsibility to query the state using the appropriate query methods.</p></dd>
+</dl>
+<dl class="definitions">
+<dt><b class="const">stance-exit</b></dt>
+<dd><p>This event is generated in response to a user leaving a recognized stance.</p>
+<p>The detail dictionary of this event contains:</p>
+<dl class="definitions">
+<dt><i class="arg">user</i></dt>
+<dd><p>The numerical id of the user the event was generated for.</p></dd>
+<dt><i class="arg">stance</i></dt>
+<dd><p>The name of the stance the event is for.</p></dd>
+</dl>
+<p><em>Note</em> that events are not told the actual state of the
+instance. If this information is required then it is the receiver's
+responsibility to query the state using the appropriate query methods.</p></dd>
+</dl>
+</div>
+<div id="subsection72" class="subsection"><h3><a name="subsection72">Stance Recognition Language</a></h3>
+<p>All stance recognition and measurement scripts are executed within a
+namespace which provides the commands below:</p>
+<dl class="definitions">
+<dt>Math</dt>
+<dd><p>All of Tcl's builtin math functions and operators.</p></dd>
+<dt>Measurements</dt>
+<dd><p>All named measurements of the instance running the script, as commands
+taking no arguments and returning the value of the measurement.</p></dd>
+<dt>Skeleton</dt>
+<dd><dl class="definitions">
+<dt><a name="223"><b class="cmd">head</b></a></dt>
+<dd></dd>
+<dt><a name="224"><b class="cmd">neck</b></a></dt>
+<dd></dd>
+<dt><a name="225"><b class="cmd">torso</b></a></dt>
+<dd></dd>
+<dt><a name="226"><b class="cmd">waist</b></a></dt>
+<dd></dd>
+<dt><a name="227"><b class="cmd">left-collar</b></a></dt>
+<dd></dd>
+<dt><a name="228"><b class="cmd">left-shoulder</b></a></dt>
+<dd></dd>
+<dt><a name="229"><b class="cmd">left-elbow</b></a></dt>
+<dd></dd>
+<dt><a name="230"><b class="cmd">left-wrist</b></a></dt>
+<dd></dd>
+<dt><a name="231"><b class="cmd">left-hand</b></a></dt>
+<dd></dd>
+<dt><a name="232"><b class="cmd">left-fingertip</b></a></dt>
+<dd></dd>
+<dt><a name="233"><b class="cmd">left-hip</b></a></dt>
+<dd></dd>
+<dt><a name="234"><b class="cmd">left-knee</b></a></dt>
+<dd></dd>
+<dt><a name="235"><b class="cmd">left-ankle</b></a></dt>
+<dd></dd>
+<dt><a name="236"><b class="cmd">left-foot</b></a></dt>
+<dd></dd>
+<dt><a name="237"><b class="cmd">right-collar</b></a></dt>
+<dd></dd>
+<dt><a name="238"><b class="cmd">right-shoulder</b></a></dt>
+<dd></dd>
+<dt><a name="239"><b class="cmd">right-elbow</b></a></dt>
+<dd></dd>
+<dt><a name="240"><b class="cmd">right-wrist</b></a></dt>
+<dd></dd>
+<dt><a name="241"><b class="cmd">right-hand</b></a></dt>
+<dd></dd>
+<dt><a name="242"><b class="cmd">right-fingertip</b></a></dt>
+<dd></dd>
+<dt><a name="243"><b class="cmd">right-hip</b></a></dt>
+<dd></dd>
+<dt><a name="244"><b class="cmd">right-knee</b></a></dt>
+<dd></dd>
+<dt><a name="245"><b class="cmd">right-ankle</b></a></dt>
+<dd></dd>
+<dt><a name="246"><b class="cmd">right-foot</b></a></dt>
+<dd><p>These commands return the location of the named joint in world
+coordinates, for the user the script is invoked for.
+If the joint is not defined for that user, the script is aborted, and
+the gesture's enter/exit state is not changed.</p></dd>
+</dl></dd>
+<dt>Distances</dt>
+<dd><dl class="definitions">
+<dt><a name="247"><b class="cmd">distance</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="248"><b class="cmd">distance_side</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="249"><b class="cmd">distance_height</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="250"><b class="cmd">distance_depth</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd><p>In this form the commands take the names of two joints, determine
+their locations and then compute the euclidean distance between them,
+or the distance along the named axes.</p>
+<p>For the names of the possible joints see the command names
+above.</p>
+<p>The result of the commands is a floating point value, the
+computed distance.</p></dd>
+<dt><a name="251"><b class="cmd">distance</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="252"><b class="cmd">distance_side</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="253"><b class="cmd">distance_height</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="254"><b class="cmd">distance_depth</b> <i class="arg">segment</i></a></dt>
+<dd><p>In this form the commands take the names of a single segment and
+compute it length, either the full euclidean distance between its
+joints, or the length along the named axes.</p>
+<p>The following segments are known:</p>
+<dl class="definitions">
+<dt>left-lower-arm</dt>
+<dd><p>left-hand   -- left-elbow</p></dd>
+<dt>left-upper-arm</dt>
+<dd><p>left-elbow  -- left-shoulder</p></dd>
+<dt>left-lower-leg</dt>
+<dd><p>left-foot   -- left-knee</p></dd>
+<dt>left-upper-leg</dt>
+<dd><p>left-knee   -- left-hip</p></dd>
+<dt>right-lower-arm</dt>
+<dd><p>right-hand  -- right-elbow</p></dd>
+<dt>right-upper-arm</dt>
+<dd><p>right-elbow -- right-shoulder</p></dd>
+<dt>right-lower-leg</dt>
+<dd><p>right-foot  -- right-knee</p></dd>
+<dt>right-upper-leg</dt>
+<dd><p>right-knee  -- right-hip</p></dd>
+</dl></dd>
+</dl></dd>
+<dt>Undirected Axis Alignment</dt>
+<dd><dl class="definitions">
+<dt><a name="255"><b class="cmd">horizontal_side</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="256"><b class="cmd">vertical</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="257"><b class="cmd">horizontal_depth</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="258"><b class="cmd">horizontal_side</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="259"><b class="cmd">vertical</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="260"><b class="cmd">horizontal_depth</b> <i class="arg">segment</i></a></dt>
+<dd><p>The commands take the names of two joints or of one segment (which
+maps to two joints), determine their locations and then check if these
+locations are aligned with the primary axes of the coordinate system.</p>
+<p>The result of the commands is a boolean value, <b class="const">true</b> if
+the relationship holds, and <b class="const">false</b> otherwise.</p></dd>
+</dl></dd>
+<dt>Directed Axis Alignment</dt>
+<dd><dl class="definitions">
+<dt><a name="261"><b class="cmd">horizontal_right</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="262"><b class="cmd">horizontal_left</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="263"><b class="cmd">vertical_up</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="264"><b class="cmd">vertical_down</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="265"><b class="cmd">horizontal_backward</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="266"><b class="cmd">horizontal_forward</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="267"><b class="cmd">horizontal_right</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="268"><b class="cmd">horizontal_left</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="269"><b class="cmd">vertical_up</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="270"><b class="cmd">vertical_down</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="271"><b class="cmd">horizontal_backward</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="272"><b class="cmd">horizontal_forward</b> <i class="arg">segment</i></a></dt>
+<dd><p>The commands take the names of two joints or of one segment (which
+maps to two joints), determine their locations and then check if these
+locations are aligned with the primary axes of the coordinate system,
+and in the described relationship.</p>
+<p>The result of the commands is a boolean value, <b class="const">true</b> if
+the relationship holds, and <b class="const">false</b> otherwise.</p></dd>
+</dl></dd>
+<dt>General Spatial Relationships</dt>
+<dd><dl class="definitions">
+<dt><a name="273"><b class="cmd">right</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="274"><b class="cmd">left</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="275"><b class="cmd">above</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="276"><b class="cmd">below</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="277"><b class="cmd">before</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="278"><b class="cmd">behind</b> <i class="arg">jointa</i> <i class="arg">jointb</i></a></dt>
+<dd></dd>
+<dt><a name="279"><b class="cmd">right</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="280"><b class="cmd">left</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="281"><b class="cmd">above</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="282"><b class="cmd">below</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="283"><b class="cmd">before</b> <i class="arg">segment</i></a></dt>
+<dd></dd>
+<dt><a name="284"><b class="cmd">behind</b> <i class="arg">segment</i></a></dt>
+<dd><p>The commands take the names of two joints or of one segment (which
+maps to two joints), determine their locations and then check if these
+locations are in the described relationship.</p>
+<p>The result of the commands is a boolean value, <b class="const">true</b> if
+the relationship holds, and <b class="const">false</b> otherwise.</p></dd>
+</dl></dd>
+<dt>Unit Conversion</dt>
+<dd><dl class="definitions">
+<dt><a name="285"><b class="cmd">mm</b> <i class="arg">x</i></a></dt>
+<dd></dd>
+<dt><a name="286"><b class="cmd">cm</b> <i class="arg">x</i></a></dt>
+<dd></dd>
+<dt><a name="287"><b class="cmd">inch</b> <i class="arg">x</i></a></dt>
+<dd><p>These command convert floating point values from various units to
+millimeters. The result of the commands are the conversion results.</p></dd>
+</dl></dd>
+</dl>
+</div>
+<div id="subsection73" class="subsection"><h3><a name="subsection73">Predefined Measurements</a></h3>
+<p>All instances of <b class="class">::kinetcl stance</b> know the following
+measurements:</p>
+<dl class="definitions">
+<dt>left-neck-length</dt>
+<dd><p>The distance from left soulder to neck.</p></dd>
+<dt>left-upper-arm-length</dt>
+<dd><p>The distance from left shoulder to left elbow.</p></dd>
+<dt>left-lower-arm-length</dt>
+<dd><p>The distance from left hand to left elbow.</p></dd>
+<dt>right-neck-length</dt>
+<dd><p>The distance from right soulder to neck.</p></dd>
+<dt>right-upper-arm-length</dt>
+<dd><p>The distance from right shoulder to right elbox.</p></dd>
+<dt>right-lower-arm-length</dt>
+<dd><p>The distance from right hand to right elbow.</p></dd>
+<dt>neck-length</dt>
+<dd><p>The minimum of both neck lengths above.</p></dd>
+<dt>upper-arm-length</dt>
+<dd><p>The minimum of both upper arm lengths above.</p></dd>
+<dt>lower-arm-length</dt>
+<dd><p>The minimum of both lower arm lengths above.</p></dd>
+</dl>
+</div>
+<div id="subsection74" class="subsection"><h3><a name="subsection74">Examples</a></h3>
+</div>
+</div>
+<div id="section23" class="section"><h2><a name="section23">Bugs, Ideas, Feedback</a></h2>
 <p>This document, and the package it describes, will undoubtedly contain
 bugs and other problems.
 Please report such at the <a href="http://chiselapp.com/user/andreas_kupries/repository/KineTcl">KineTcl Tracker</a>.

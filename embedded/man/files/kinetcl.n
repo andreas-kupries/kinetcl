@@ -682,6 +682,146 @@ package require \fBkinetcl  ?0.1?\fR
 .sp
 \fIinstanceCmd\fR \fBget-skeleton\fR \fIuser\fR
 .sp
+\fB::kinetcl stance\fR \fBnew\fR \fIjoints\fR
+.sp
+\fB::kinetcl stance\fR \fBcreate\fR \fIobjname\fR \fIjoints\fR
+.sp
+\fIinstanceCmd\fR \fBadd\fR \fIname\fR \fIscript\fR
+.sp
+\fIinstanceCmd\fR \fBremove\fR \fIname\fR
+.sp
+\fIinstanceCmd\fR \fBmeasure\fR \fIname\fR \fIscript\fR
+.sp
+\fBhead\fR
+.sp
+\fBneck\fR
+.sp
+\fBtorso\fR
+.sp
+\fBwaist\fR
+.sp
+\fBleft-collar\fR
+.sp
+\fBleft-shoulder\fR
+.sp
+\fBleft-elbow\fR
+.sp
+\fBleft-wrist\fR
+.sp
+\fBleft-hand\fR
+.sp
+\fBleft-fingertip\fR
+.sp
+\fBleft-hip\fR
+.sp
+\fBleft-knee\fR
+.sp
+\fBleft-ankle\fR
+.sp
+\fBleft-foot\fR
+.sp
+\fBright-collar\fR
+.sp
+\fBright-shoulder\fR
+.sp
+\fBright-elbow\fR
+.sp
+\fBright-wrist\fR
+.sp
+\fBright-hand\fR
+.sp
+\fBright-fingertip\fR
+.sp
+\fBright-hip\fR
+.sp
+\fBright-knee\fR
+.sp
+\fBright-ankle\fR
+.sp
+\fBright-foot\fR
+.sp
+\fBdistance\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBdistance_side\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBdistance_height\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBdistance_depth\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBdistance\fR \fIsegment\fR
+.sp
+\fBdistance_side\fR \fIsegment\fR
+.sp
+\fBdistance_height\fR \fIsegment\fR
+.sp
+\fBdistance_depth\fR \fIsegment\fR
+.sp
+\fBhorizontal_side\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBvertical\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBhorizontal_depth\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBhorizontal_side\fR \fIsegment\fR
+.sp
+\fBvertical\fR \fIsegment\fR
+.sp
+\fBhorizontal_depth\fR \fIsegment\fR
+.sp
+\fBhorizontal_right\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBhorizontal_left\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBvertical_up\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBvertical_down\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBhorizontal_backward\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBhorizontal_forward\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBhorizontal_right\fR \fIsegment\fR
+.sp
+\fBhorizontal_left\fR \fIsegment\fR
+.sp
+\fBvertical_up\fR \fIsegment\fR
+.sp
+\fBvertical_down\fR \fIsegment\fR
+.sp
+\fBhorizontal_backward\fR \fIsegment\fR
+.sp
+\fBhorizontal_forward\fR \fIsegment\fR
+.sp
+\fBright\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBleft\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBabove\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBbelow\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBbefore\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBbehind\fR \fIjointa\fR \fIjointb\fR
+.sp
+\fBright\fR \fIsegment\fR
+.sp
+\fBleft\fR \fIsegment\fR
+.sp
+\fBabove\fR \fIsegment\fR
+.sp
+\fBbelow\fR \fIsegment\fR
+.sp
+\fBbefore\fR \fIsegment\fR
+.sp
+\fBbehind\fR \fIsegment\fR
+.sp
+\fBmm\fR \fIx\fR
+.sp
+\fBcm\fR \fIx\fR
+.sp
+\fBinch\fR \fIx\fR
+.sp
 .BE
 .SH DESCRIPTION
 .PP
@@ -4139,6 +4279,11 @@ providing proper event based tracking of user skeletons.
 This class inherits from \fB::kinetcl eventbase\fR for the
 overall management of the events it generates.
 See section \fBEvent Base\fR.
+.PP
+Instances of the class rely on a (possibly external) instance
+of class \fB::kinetcl user\fR
+(See section \fBUser Generator\fR) and its events for the basic
+aquisition and tracking of users.
 .SS "CLASS API"
 .TP
 \fB::kinetcl joints\fR \fBnew\fR ?\fIuser\fR?
@@ -4317,6 +4462,389 @@ The name of the joint the event was generated for.
 instance. If this information is required then it is the receiver's
 responsibility to query the state using the appropriate query methods.
 .PP
+.SH "STANCE EVENTS"
+This sections documents the class \fB::kinetcl stance\fR, a class
+for the recognition of \fIstances\fR, also known as \fIposes\fR or
+\fIbody gestures\fR. Events are generated whenever a user enters or
+leaves a stance.
+.PP
+This was in general inspired by the concept of
+\fIFAAST body gestures\fR [http://projects.ict.usc.edu/mxr/faast/]
+mentioned at \fIhttp://fivedots.coe.psu.ac.th/~ad/jg/nui1610/index.html\fR.
+.PP
+This class inherits from \fB::kinetcl eventbase\fR for the
+overall management of the events it generates.
+See section \fBEvent Base\fR.
+.PP
+Instances of the class rely on an external instance of class
+\fB::kinetcl joints\fR (See section \fBJoint Events\fR) and
+its events for the tracking of users and their skeleton joints.
+.PP
+Multiple instances can trivially share the same joint tracker
+instance, given that the communication from tracker to recognizer is
+by events and bindings.
+.SS "CLASS API"
+.TP
+\fB::kinetcl stance\fR \fBnew\fR \fIjoints\fR
+.TP
+\fB::kinetcl stance\fR \fBcreate\fR \fIobjname\fR \fIjoints\fR
+This command creates a new instance of the class, either automatically
+named (\fBnew\fR), or explicitly (\fBcreate\fR).
+The API provided by the instance, i.e. the set of available methods
+and their semantics is described in the next subsection.
+.sp
+The \fIjoints\fR argument must be a joint tracking object which
+is API compatible to instances of class \fB::kinetcl joints\fR.
+.sp
+This tracker is monitored for the creation, movement and
+destruction of users, in response to which the referenced user and its
+joints are run through the stance recognizer.
+.PP
+.SS "INSTANCE API"
+.TP
+\fIinstanceCmd\fR \fBadd\fR \fIname\fR \fIscript\fR
+This method defines a new stance to be recognized by the instance,
+identified by \fIname\fR. The \fIscript\fR is the recognizer for the
+stance and is invoked whenever a user moved, as this may have caused
+her to either enter or exit the stance.
+.sp
+The context and commands available to this script are explained
+in detail in section \fBStance Recognition Language\fR.
+.sp
+The script has to return a boolean value, \fBtrue\fR if the
+stance is recognized, and \fBfalse\fR otherwise.
+.sp
+Events are send whenever this information changes (per-user).
+.sp
+Note that a user can be in multiple stances at the same time.
+.sp
+The result of the method is the empty string.
+.TP
+\fIinstanceCmd\fR \fBremove\fR \fIname\fR
+This method removes the \fIname\fRd stance from the instance, stopping
+its future recognition.
+.sp
+The result of the method is the empty string.
+.TP
+\fIinstanceCmd\fR \fBmeasure\fR \fIname\fR \fIscript\fR
+This method extends the gesture recognition language used by the
+instance with a \fIname\fRd measure(ment), a cacheable piece of
+information about a user's skeleton.
+.sp
+The value of the measure is computed once, per user, by
+invoking the \fIscript\fR. The result of the script is the value of
+the measurement.
+.sp
+The context and commands available to this script are explained
+in detail in section \fBStance Recognition Language\fR.
+.sp
+The set of predefined measures is explained in section
+\fBPredefined Measurements\fR.
+.sp
+The result of the method is the empty string.
+.PP
+.SS EVENTS
+This class supports the events below. These names can be used as the
+\fIevent\fR argument of method \fBbind\fR defined by our super-class
+\fB::kinetcl::base\fR.
+.TP
+\fBstance-enter\fR
+This event is generated in response to a user entering a recognized stance.
+.sp
+The detail dictionary of this event contains:
+.RS
+.TP
+\fIuser\fR
+The numerical id of the user the event was generated for.
+.TP
+\fIstance\fR
+The name of the stance the event is for.
+.RE
+.sp
+\fINote\fR that events are not told the actual state of the
+instance. If this information is required then it is the receiver's
+responsibility to query the state using the appropriate query methods.
+.PP
+.TP
+\fBstance-exit\fR
+This event is generated in response to a user leaving a recognized stance.
+.sp
+The detail dictionary of this event contains:
+.RS
+.TP
+\fIuser\fR
+The numerical id of the user the event was generated for.
+.TP
+\fIstance\fR
+The name of the stance the event is for.
+.RE
+.sp
+\fINote\fR that events are not told the actual state of the
+instance. If this information is required then it is the receiver's
+responsibility to query the state using the appropriate query methods.
+.PP
+.SS "STANCE RECOGNITION LANGUAGE"
+All stance recognition and measurement scripts are executed within a
+namespace which provides the commands below:
+.TP
+Math
+All of Tcl's builtin math functions and operators.
+.TP
+Measurements
+All named measurements of the instance running the script, as commands
+taking no arguments and returning the value of the measurement.
+.TP
+Skeleton
+.RS
+.TP
+\fBhead\fR
+.TP
+\fBneck\fR
+.TP
+\fBtorso\fR
+.TP
+\fBwaist\fR
+.TP
+\fBleft-collar\fR
+.TP
+\fBleft-shoulder\fR
+.TP
+\fBleft-elbow\fR
+.TP
+\fBleft-wrist\fR
+.TP
+\fBleft-hand\fR
+.TP
+\fBleft-fingertip\fR
+.TP
+\fBleft-hip\fR
+.TP
+\fBleft-knee\fR
+.TP
+\fBleft-ankle\fR
+.TP
+\fBleft-foot\fR
+.TP
+\fBright-collar\fR
+.TP
+\fBright-shoulder\fR
+.TP
+\fBright-elbow\fR
+.TP
+\fBright-wrist\fR
+.TP
+\fBright-hand\fR
+.TP
+\fBright-fingertip\fR
+.TP
+\fBright-hip\fR
+.TP
+\fBright-knee\fR
+.TP
+\fBright-ankle\fR
+.TP
+\fBright-foot\fR
+These commands return the location of the named joint in world
+coordinates, for the user the script is invoked for.
+If the joint is not defined for that user, the script is aborted, and
+the gesture's enter/exit state is not changed.
+.RE
+.TP
+Distances
+.RS
+.TP
+\fBdistance\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBdistance_side\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBdistance_height\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBdistance_depth\fR \fIjointa\fR \fIjointb\fR
+In this form the commands take the names of two joints, determine
+their locations and then compute the euclidean distance between them,
+or the distance along the named axes.
+.sp
+For the names of the possible joints see the command names
+above.
+.sp
+The result of the commands is a floating point value, the
+computed distance.
+.TP
+\fBdistance\fR \fIsegment\fR
+.TP
+\fBdistance_side\fR \fIsegment\fR
+.TP
+\fBdistance_height\fR \fIsegment\fR
+.TP
+\fBdistance_depth\fR \fIsegment\fR
+In this form the commands take the names of a single segment and
+compute it length, either the full euclidean distance between its
+joints, or the length along the named axes.
+.sp
+The following segments are known:
+.RS
+.TP
+left-lower-arm
+left-hand   -- left-elbow
+.TP
+left-upper-arm
+left-elbow  -- left-shoulder
+.TP
+left-lower-leg
+left-foot   -- left-knee
+.TP
+left-upper-leg
+left-knee   -- left-hip
+.TP
+right-lower-arm
+right-hand  -- right-elbow
+.TP
+right-upper-arm
+right-elbow -- right-shoulder
+.TP
+right-lower-leg
+right-foot  -- right-knee
+.TP
+right-upper-leg
+right-knee  -- right-hip
+.RE
+.RE
+.TP
+Undirected Axis Alignment
+.RS
+.TP
+\fBhorizontal_side\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBvertical\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBhorizontal_depth\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBhorizontal_side\fR \fIsegment\fR
+.TP
+\fBvertical\fR \fIsegment\fR
+.TP
+\fBhorizontal_depth\fR \fIsegment\fR
+The commands take the names of two joints or of one segment (which
+maps to two joints), determine their locations and then check if these
+locations are aligned with the primary axes of the coordinate system.
+.sp
+The result of the commands is a boolean value, \fBtrue\fR if
+the relationship holds, and \fBfalse\fR otherwise.
+.RE
+.TP
+Directed Axis Alignment
+.RS
+.TP
+\fBhorizontal_right\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBhorizontal_left\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBvertical_up\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBvertical_down\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBhorizontal_backward\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBhorizontal_forward\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBhorizontal_right\fR \fIsegment\fR
+.TP
+\fBhorizontal_left\fR \fIsegment\fR
+.TP
+\fBvertical_up\fR \fIsegment\fR
+.TP
+\fBvertical_down\fR \fIsegment\fR
+.TP
+\fBhorizontal_backward\fR \fIsegment\fR
+.TP
+\fBhorizontal_forward\fR \fIsegment\fR
+The commands take the names of two joints or of one segment (which
+maps to two joints), determine their locations and then check if these
+locations are aligned with the primary axes of the coordinate system,
+and in the described relationship.
+.sp
+The result of the commands is a boolean value, \fBtrue\fR if
+the relationship holds, and \fBfalse\fR otherwise.
+.RE
+.TP
+General Spatial Relationships
+.RS
+.TP
+\fBright\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBleft\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBabove\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBbelow\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBbefore\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBbehind\fR \fIjointa\fR \fIjointb\fR
+.TP
+\fBright\fR \fIsegment\fR
+.TP
+\fBleft\fR \fIsegment\fR
+.TP
+\fBabove\fR \fIsegment\fR
+.TP
+\fBbelow\fR \fIsegment\fR
+.TP
+\fBbefore\fR \fIsegment\fR
+.TP
+\fBbehind\fR \fIsegment\fR
+The commands take the names of two joints or of one segment (which
+maps to two joints), determine their locations and then check if these
+locations are in the described relationship.
+.sp
+The result of the commands is a boolean value, \fBtrue\fR if
+the relationship holds, and \fBfalse\fR otherwise.
+.RE
+.TP
+Unit Conversion
+.RS
+.TP
+\fBmm\fR \fIx\fR
+.TP
+\fBcm\fR \fIx\fR
+.TP
+\fBinch\fR \fIx\fR
+These command convert floating point values from various units to
+millimeters. The result of the commands are the conversion results.
+.RE
+.PP
+.SS "PREDEFINED MEASUREMENTS"
+All instances of \fB::kinetcl stance\fR know the following
+measurements:
+.TP
+left-neck-length
+The distance from left soulder to neck.
+.TP
+left-upper-arm-length
+The distance from left shoulder to left elbow.
+.TP
+left-lower-arm-length
+The distance from left hand to left elbow.
+.TP
+right-neck-length
+The distance from right soulder to neck.
+.TP
+right-upper-arm-length
+The distance from right shoulder to right elbox.
+.TP
+right-lower-arm-length
+The distance from right hand to right elbow.
+.TP
+neck-length
+The minimum of both neck lengths above.
+.TP
+upper-arm-length
+The minimum of both upper arm lengths above.
+.TP
+lower-arm-length
+The minimum of both lower arm lengths above.
+.PP
+.SS EXAMPLES
 .SH "BUGS, IDEAS, FEEDBACK"
 This document, and the package it describes, will undoubtedly contain
 bugs and other problems.
