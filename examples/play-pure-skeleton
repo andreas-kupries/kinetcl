@@ -7,8 +7,7 @@ package require kinetcl
 package require kinetcl::canvas::joints
 package require kinetcl::canvas::skeleton
 package require Tk
-package require crimp::tk
-package require crimp
+package require struct::set
 
 # # ## ### ##### ######## ############# #####################
 
@@ -115,19 +114,24 @@ array set p_invert {
 
 # future - mega widget.
 proc play_ui {} {
-    global record p_data p_at p_max p_timer p_dir p_location
+    global record p_state p_states p_joints p_at p_max p_timer p_dir p_location
+
+    ttk::label  .pat -textvariable ::p_atl
 
     ttk::button .pfirst -text {(1st)}  -command {::p_back 0}
-    ttk::button .pb     -text {<}      -command {::p_back {}}
-    ttk::button .pb5    -text {<5}     -command {::p_back -5}
-    ttk::button .pb1    -text {<1}     -command {::p_back -1}
+    ttk::button .pbf    -text {<<}     -command {::p_back 5c}
+    ttk::button .pb     -text {<}      -command {::p_back 1c}
+    ttk::button .pb5    -text {<5}     -command {::p_back 5}
+    ttk::button .pb1    -text {<1}     -command {::p_back 1}
     ttk::button .pstop  -text {Stop}   -command ::p_stop
     ttk::button .pf1    -text {>1}     -command {::p_forw 1}
     ttk::button .pf5    -text {>5}     -command {::p_forw 5}
-    ttk::button .pf     -text {>}      -command {::p_forw {}}
+    ttk::button .pf     -text {>}      -command {::p_forw 1c}
+    ttk::button .pff    -text {>>}     -command {::p_forw 5c}
     ttk::button .plast  -text {(last)} -command {::p_forw end}
 
     pack .plast  -side right
+    pack .pff    -side right
     pack .pf     -side right
     pack .pf5    -side right
     pack .pf1    -side right
@@ -135,16 +139,50 @@ proc play_ui {} {
     pack .pb1    -side right
     pack .pb5    -side right
     pack .pb     -side right
+    pack .pbf    -side right
     pack .pfirst -side right
 
+    pack .pat    -side right
+
     set c [open $record r]
-    set p_data [split [read $c] \n]
+    set events [split [read $c] \n]
     close $c
-    set p_at  0
-    set p_max [expr {[llength $p_data] - 1}]
+
+    # Parse the events and produce a complete timeline of joint
+    # information, and system state.
+    # states).
+    set skel  {} ; # skeleton index
+    set state {} ; # state dictionary: user --> joints
+    set p_joints {}
+    foreach e $events {
+	lassign $e event detail
+	dict with detail {} ; # => user, ?joints?
+	if {[info exists joints]} {
+	    set skel [llength $p_joints]
+	    lappend p_joints $joints
+	    unset joints
+	}
+	if {$skel eq {}} continue
+	switch -exact -- $event {
+	    user-create -
+	    user-move {
+		dict set state $user $skel
+	    }
+	    user-destroy {
+		dict unset state $user
+	    }
+	}
+	lappend p_states $state
+    }
+
+    set p_at    -1
+    set p_state {}
+    set p_max   [expr {[llength $p_states] - 1}]
     set p_timer {}
-    set p_dir {}
-    set p_location {}
+    set p_dir   {}
+    set p_atl /$p_max
+
+    p_jump 0
     return
 }
 
@@ -158,108 +196,181 @@ proc p_stop {} {
 proc p_back {by} {
     global p_at p_max
     switch -exact -- $by {
-	1   { p_step 0 [expr {$p_at - 1}] 0 }
-	5   { p_step 1 [expr {$p_at - 5}] }
-	{}  { p_play backward }
-	0   {
-	    p_step 1 0 ; # fast step to goal
-	    p_step 0 0 ; # step in place for final move, if any
-	}
+	1   { p_step -1 }
+	5   { p_step -5 }
+	1c  { p_play 1 backward }
+	5c  { p_play 5 backward }
+	0   { p_jump 0 }
     }
 }
 
 proc p_forw {by} {
     global p_at p_max
     switch -exact -- $by {
-	1   { p_step 0 [expr {$p_at + 1}] }
-	5   { p_step 1 [expr {$p_at + 5}] }
-	{}  { p_play forward }
-	end {
-	    p_step 1 $p_max ; # fast step to goal
-	    p_step 0 $p_max ; # step in place for final move, if any.
-	}
+	1   { p_step 1 }
+	5   { p_step 5 }
+	1c  { p_play 1 forward }
+	5c  { p_play 5 forward }
+	end { p_jump $p_max }
     }
 }
 
-proc ::tcl::mathfunc::sgn x {expr {($x>0)-($x<0)}}
-
-proc p_step {fast goal} {
-    global p_max p_at p_data p_invert p_location
-
-    set step [expr {sgn($goal - $p_at)}]
-
-    while {$goal != $p_at} {
-	set  new $p_at
-	incr new $step
-
-	if {($new < 0) || ($new > $p_max)} {
-	    p_stop
-	    return
-	}
-
-	lassign [lindex $p_data $new] event details
-	catch {
-	    set p_location [dict get $details position]
-	}
-
-	if {$step < 0} {
-	    # backward, swap user-create/destroy
-	    set event $p_invert($event)
-	    switch -exact -- $event {
-		user-create {
-		    # Fake location details, pull from previous event
-		    dict set details position $p_location
-		}
-		user-destroy {
-		    # Delete location details
-		    dict unset details position
-		}
-	    }
-	}
-
-	# Generate event when
-	#    fast && !user-move
-	# || !fast && (step != 0)
-	# || !fast && user-move
-	#
-	# <=> (fast && !usermove) || (!fast && ((step!= 0) || user-move))
-
-	set move [expr {$event eq "user-move"}]
-	if {
-	    ($fast && !$move) ||
-	    (!$fast && ($move || ($step != 0)))
-	} {
-	    uevent generate J $event $details
-	}
-	set p_at $new
-    }
+proc p_step {{by 1}} {
+    global p_at
+    p_jump [expr {$p_at + $by}]
     return
 }
 
-proc p_play {direction} {
+proc p_jump {new} {
+    global p_at p_max p_states p_state p_atl
+
+    if {($new < 0) || ($new > $p_max)} {
+	p_stop
+	return
+    }
+
+    set newstate [lindex $p_states $new]
+    p_generate $p_state $newstate
+
+    set p_at    $new
+    set p_state $newstate
+
+    set p_atl $p_at/$p_max
+    return
+}
+
+## TODO simplify code below, using struct::set symdiff.
+## TODO Fix joint event issues, using struct::set symdiff.
+##      Currently it may miss creation/destruction of joints
+##      in the transition (confidence changes).
+proc p_generate {olds news} {
+    global p_joints
+
+    array set o $olds
+    array set n $news
+
+    lassign [struct::set intersect3 [array names o] [array names n]] \
+	moved removed added
+
+    foreach u $removed {
+	set udetails [dict create user $u]
+
+	# destroy joints from previous state.
+	foreach {j p} [lindex $p_joints $o($u)] {
+	    set details [dict create user $u joint $j]
+	    uevent generate P joint-destroy $details
+	}
+
+	# Then destroy the user
+	uevent generate P user-destroy $udetails
+    }
+
+    foreach u $moved {
+	set udetails [dict create user $u]
+
+	# Compare joints in the old and new state, for a user which
+	# was kept, and generate the appropriate events.
+	set oj [lindex $p_joints $o($u)]
+	set nj [lindex $p_joints $n($u)]
+
+	lassign [struct::set intersect3 [dict keys $oj] [dict keys $nj]] \
+	    jmoved jremoved jadded
+
+	foreach j $jremoved {
+	    set details [dict create user $u joint $j]
+	    uevent generate P joint-destroy $details
+	}
+
+	foreach j $jmoved {
+	    # Could compare positions further and ignore unchanged
+	    # joints. Doesn't really matter.
+	    set details [dict create user $u joint $j position [dict get $nj $j]]
+	    uevent generate P joint-move $details
+	}
+
+	foreach j $jadded {
+	    set details [dict create user $u joint $j position [dict get $nj $j]]
+	    uevent generate P joint-create $details
+	}
+
+	# Then move the user
+	uevent generate P user-move $udetails
+    }
+
+    foreach u $added {
+	set udetails [dict create user $u]
+
+	# Create user
+	uevent generate P user-create $udetails
+
+	# Then create the joints in the new state
+	foreach {j p} [lindex $p_joints $n($u)] {
+	    set details [dict create user $u joint $j position $p]
+	    uevent generate P joint-create $details
+	}
+    }
+
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc p_play {by direction} {
     global p_timer p_dir
 
     if {$p_dir ne $direction} {
 	p_stop
-    } elseif {$p_timer ne {}} {
+    }
+    if {$p_timer ne {}} {
 	# ignore multiple calls.
 	return
     }
 
-    set pd_dir  $direction
-    set p_timer [after 100 p_run]
+    if {$direction eq "backward"} {
+	set by [expr {- $by}]
+    }
+    set p_dir   $direction
+    set p_timer [after 100 [list p_run $by]]
     return
 }
 
-proc p_run {} {
-    global p_dir
-    set p_timer [after 100 p_run]
-    if {$p_dir eq "forward"} {
-	p_forw 1
-    } else {
-	p_back 1
-    }
+proc p_run {by} {
+    global p_dir p_timer
+    set p_timer [after 100 [info level 0]]
+    p_step $by
     return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+namespace eval P {}
+
+proc P::get-skeleton {user} {
+    global p_location
+    return $p_location($user)
+}
+
+proc P::get-joint {user joint} {
+    global p_location
+    return [dict get $p_location($user) $joint]
+}
+
+proc P::bind {e cmd} {
+    return [uevent bind P $e [list P::Swap $cmd]]
+}
+
+proc P::unbind {token} {
+    uevent unbind $token
+    return
+}
+
+proc P::Swap {cmd t e d} {
+    return [uplevel 1 [linsert $cmd end $e $t $d]]
+}
+
+namespace eval P {
+    namespace export {[a-z]*}
+    namespace ensemble create
 }
 
 # # ## ### ##### ######## ############# #####################
