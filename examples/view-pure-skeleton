@@ -135,7 +135,12 @@ proc rec_manage {} {
 
 proc rec_event {event obj details} {
     # Event handler, write to recorder destination file.
+    # Pull the current joint data if possible.
     global r_chan
+    dict with details {} ; # => user
+    if {$event ne "user-destroy"} {
+	dict set details joints [$obj get-skeleton $user]
+    }
     puts $r_chan [list $event $details]
     return
 }
