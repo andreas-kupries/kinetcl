@@ -343,8 +343,8 @@ proc Debug {} {
     }
     return
 }
-proc Hstarkit {} { return "?destination? ?interpreter? ?config?\n\tGenerate a starkit\n\tdestination = path of result file, default 'kine.kit'\n\tinterpreter = (path) name of tcl shell to use for execution, default 'tclkit'\n\tconfig      = critcl target to use, default is platform specific" }
-proc _starkit {{dst kine.kit} {interp tclkit} {config {}}} {
+proc Hstarkit {} { return "libdir ?destination? ?interpreter? ?config?\n\tGenerate a starkit\n\tdestination = path of result file, default 'kine.kit'\n\tinterpreter = (path) name of tcl shell to use for execution, default 'tclkit'\n\tconfig      = critcl target to use, default is platform specific" }
+proc _starkit {libdir {dst kine.kit} {interp tclkit} {config {}}} {
     package require vfs::mk4
 
     set c [open $dst w]
@@ -352,23 +352,23 @@ proc _starkit {{dst kine.kit} {interp tclkit} {config {}}} {
     puts -nonewline $c "#!/bin/sh\n# -*- tcl -*- \\\nexec $interp \"\$0\" \$\{1+\"\$@\"\}\npackage require starkit\nstarkit::header mk4 -readonly\n\032################################################################################################################################################################"
     close $c
 
-    vfs::mk4::Mount $dst /KIT
-    _install             /KIT/lib $config
-    vfs::unmount         /KIT
+    vfs::mk4::Mount $dst     /KIT
+    file copy -force $libdir /KIT
+    vfs::unmount             /KIT
     +x $dst
 
     puts "Created starkit: $dst"
     return
 }
-proc Hstarpack {} { return "prefix ?destination? ?config?\n\tGenerate a nearly-selfcontained tclkit with kinetcl, i.e. a starpack\n\tprefix      = path of tclkit/basekit runtime to use\n\tdestination = path of result file, default 'kinekit'\n\tconfig      = critcl target to use, default is platform specific" }
-proc _starpack {prefix {dst kinekit} {config {}}} {
+proc Hstarpack {} { return "libdir prefix ?destination? ?config?\n\tGenerate a nearly-selfcontained tclkit with kinetcl, i.e. a starpack\n\tprefix      = path of tclkit/basekit runtime to use\n\tdestination = path of result file, default 'kinekit'\n\tconfig      = critcl target to use, default is platform specific" }
+proc _starpack {libdir prefix {dst kinekit} {config {}}} {
     package require vfs::mk4
 
     file copy -force $prefix $dst
 
-    vfs::mk4::Mount $dst /KIT
-    _install             /KIT/lib $config
-    vfs::unmount         /KIT
+    vfs::mk4::Mount $dst     /KIT
+    file copy -force $libdir /KIT
+    vfs::unmount             /KIT
     +x $dst
 
     puts "Created starpack: $dst"
