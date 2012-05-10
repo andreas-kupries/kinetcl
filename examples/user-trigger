@@ -1,0 +1,96 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+
+# # ## ### ##### ######## ############# #####################
+
+# Data structures = Hidden in joints tracker and the canvas adapters.
+# Eventflow = Hidden in the joints tracker.
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv] > 0} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    kinetcl depth create  D
+    kinetcl user  create  U
+
+    U set-profile all
+    lassign [dict get [D meta] map res] w h
+    #D destroy - No. We need this for coordinate
+    #            conversion world -> screen also.
+
+    puts "$w x $h"
+
+    kinetcl joints create J U ; # (J)oints tracking U.
+
+    J bind user-create  usrevent
+    J bind user-move    usrevent
+    J bind user-destroy usrevent
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+## --- Output of the events. More logic is possible here, like
+## -- Get user location (center of mass, or specific joints, like head)
+## -- and filter by position (like must be nearer than one meter /
+## -- three feet, not too far off to the side, etc.
+
+proc usrevent {event obj details} {
+    # Event handler
+    dict with details {} ; # => user
+    puts "$event $user"
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit

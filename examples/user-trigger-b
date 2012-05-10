@@ -1,0 +1,129 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+# # ## ### ##### ######## ############# #####################
+## Requirements
+
+package require kinetcl
+
+# # ## ### ##### ######## ############# #####################
+
+# Data structures = Hidden in joints tracker and the canvas adapters.
+# Eventflow = Hidden in the joints tracker.
+
+# # ## ### ##### ######## ############# #####################
+
+proc main {} {
+    cmdline
+    setup
+    run
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc cmdline {} {
+    global argv
+    if {[llength $argv] > 0} usage
+    return
+}
+
+proc usage {} {
+    global argv0
+    puts stderr "usage: $argv0"
+    exit 1
+}
+
+proc setup {} {
+    global threshold
+    set    threshold 1500
+    # 1500 mm == 150 cm == 1.5 m Distance for trigger.
+
+    kinetcl depth create  D
+    kinetcl user  create  U
+
+    U set-profile all
+    lassign [dict get [D meta] map res] w h
+    #D destroy - No. We need this for coordinate
+    #            conversion world -> screen also.
+
+    puts "$w x $h"
+
+    kinetcl joints create J U ; # (J)oints tracking U.
+
+    J bind joint-create  usrevent
+    J bind joint-move    usrevent
+    J bind joint-destroy usrevent
+
+    update idletasks
+    return
+}
+
+proc run {} {
+    ping start...
+    kinetcl start
+    ping process...
+    while {1} record
+    return
+}
+
+proc ping {text} {
+    puts -nonewline \r$text
+    flush stdout
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+## --- Output of the events. More logic is possible here, like
+## -- Get user location (center of mass, or specific joints, like head)
+## -- and filter by position (like must be nearer than one meter /
+## -- three feet, not too far off to the side, etc.
+
+proc usrevent {event obj details} {
+    global X threshold
+    # Event handler
+    dict with details {} ; # => user joint ?position?
+
+    # Track only the heads...
+    if {$joint ne "head"} return
+
+    switch -- $event {
+	joint-create {
+	    if {[lindex $position 2] > $threshold} return
+	    set X($user) .
+	    set event user-on
+	}
+	joint-destroy {
+	    if {![info exists X($user)]} return
+	    unset X($user)
+	    set event user-off
+	}
+	joint-move {
+	    if {[lindex $position 2] > $threshold} {
+		if {![info exists X($user)]} return
+		unset X($user)
+		set event user-off
+	    } else {
+		if {[info exists X($user)]} return
+		set X($user) .
+		set event user-on
+	    }
+	}
+    }
+
+    puts "$event $user"
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc record {} {
+    kinetcl waitUpdate
+    kinetcl estop
+    update
+    kinetcl estart
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+main
+exit
