@@ -109,7 +109,7 @@ proc userdestroy {event obj details} {
 # # ## ### ##### ######## ############# #####################
 
 proc jointnew {event obj details} {
-global X L
+    global X L
     dict with details {} ; # --> user joint position
     if {$joint ni {left-hand right-hand}} return
     set key [list $user $joint]

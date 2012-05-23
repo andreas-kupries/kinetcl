@@ -7,8 +7,6 @@ package require kinetcl
 package require kinetcl::canvas::joints
 package require kinetcl::canvas::skeleton
 package require Tk
-package require crimp::tk
-package require crimp
 
 # # ## ### ##### ######## ############# #####################
 
