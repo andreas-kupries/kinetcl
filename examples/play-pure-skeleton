@@ -48,6 +48,8 @@ proc setup {} {
     #
     # // lets see if that works, or if the generator must be active
     # // for the conversion to be possible.
+    # // It works. Still, would be nicer to have a conversion
+    # // independent of a depth generator, at all.
 
     lassign [dict get [D meta] map res] w h
     #D destroy - No. We need this for coordinate
