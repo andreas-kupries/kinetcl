@@ -25,10 +25,36 @@ available in a directory of your choice.
 [para]
 
 [section Requisites]
+
+Before KineTcl can be build and used a number of requisites must be installed. These are:
+
+[list_begin enumerated]
+[enum] The scripting language Tcl.
+       For details see [sectref Tcl].
+[enum] The [package critcl] package (C embedding) for [syscmd Tcl].
+       For details see [sectref CriTcl].
+[enum] The [package crimp] package (image processing) for [syscmd Tcl].
+       For details see [sectref Crimp].
+[enum] The OpenNI framework.
+       For details see [sectref OpenNI].
+[enum] The PrimeSense NITE algorithm package for the OpenNI framework.
+       For details see [sectref NITE].
+[enum] An OpenNI sensor library for your Sensor device.
+       For details see [sectref Sensors].
+[list_end]
+
+This list assumes that the machine where KineTcl is to be installed is
+essentially clean. Of course, if parts of the dependencies listed
+below are already installed the associated steps can be skipped. It is
+still recommended to read them tough, to validate that the
+dependencies they talk about are indeed installed.
+
 [include include/rq_tcl.inc]
 [include include/rq_critcl.inc]
 [include include/rq_crimp.inc]
 [include include/rq_openni.inc]
+[include include/rq_psnite.inc]
+[include include/rq_sensor.inc]
 
 [section {Build & Installation}]
 

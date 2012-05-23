@@ -1,5 +1,5 @@
 
-[subsection {OpenNI / NITE}]
+[subsection {OpenNI}]
 
 KineTcl is, despite its name, not a direct binding to the Kinect
 itself. It actually is a binding to the more general OpenNI
@@ -11,13 +11,36 @@ these APIs can be plugged into.
 main member of the OpenNI organization managing the framework and
 provides plugins for its sensor and various analysis algorithms.
 
-[para] To build KineTcl the OpenNI binaries have to be
-installed. These can be found in the downloads section of the OpenNI
-website at [uri http://www.openni.org/].
 
-[para] Development was done against OpenNI version 1.5.2.21. Note that
-this version has a bug in its headers. To work around this bug the
-headers have to be modified, preferably before installing them.
+[para] The OpenNI binaries must be installed to build and use KineTcl.
+
+[para] These binaries can be found at
+[uri http://www.openni.org/Downloads/OpenNIModules.aspx]
+
+[para] References to the sources of the frameork, should you wish to
+build them by yourself, can be found at
+[uri http://www.openni.org/Downloads.aspx]. When doing so please
+follow their instructions on building the package.  If there are
+problems with their directions please file a bug against the OpenNI
+project, and not KineTcl.
+
+[para] Development was done against the binaries of OpenNI version
+1.5.2.23. After downloading the binaries were installed by unpacking
+the tarball and then running the provided installation script. I.e.:
+
+[example {
+	 bunzip2 < openni-bin-dev-linux-x64-v1.5.2.23.tar.bz2 | tar xf -
+	 cd OpenNI-Bin-Dev-Linux-x64-v1.5.2.23
+	 # !Edit the headers to work around the bug mentioned below.
+	 sudo ./install.sh
+	 # Note the sudo above, this script installs binaries into
+	 # root owned directories.
+}]
+
+[para] Note that version 1.5.2.23 has a bug in its headers.
+
+To work around this bug the provided header files have to be modified,
+[emph before] installing them.
 
 [para] Open the header file [file XnModuleInterface.h] in the editor
 of your choice and look for the declaration of
@@ -38,19 +61,3 @@ Rewrite the end of this declaration to
 
 This removes a conflict between this declaration and its forward
 declaration in the header file [file XnTypes.h].
-
-[para] When actually using a Kinect the OpenNI framework alone is not
-useful. To talk to a Kinect we also have to install the binaries for
-the PrimeSense Sensor inside of the device. These can also be found in
-the downloads section of the OpenNI website. During development
-PrimeSensor version 5.1.0.41 was installed.
-
-[para] Furthermore it is recommended to install the PrimeSense NITE
-binaries, which provide various higher-level analysis
-algorithms. These are again found at the OpenNI website. During
-development NITE version 1.5.2.23 was installed.
-
-[para] For those wishing to understand things on a deeper level the
-sources of OpenNI and of the sensor are available as well, through the
-OpenNI website. Of course. The NITE package however seems to be
-closed.

@@ -118,7 +118,9 @@
 <li class="subsection"><a href="#subsection1">Tcl</a></li>
 <li class="subsection"><a href="#subsection2">CriTcl</a></li>
 <li class="subsection"><a href="#subsection3">Crimp</a></li>
-<li class="subsection"><a href="#subsection4">OpenNI / NITE</a></li>
+<li class="subsection"><a href="#subsection4">OpenNI</a></li>
+<li class="subsection"><a href="#subsection5">NITE</a></li>
+<li class="subsection"><a href="#subsection6">Sensors</a></li>
 </ul>
 </li>
 <li class="section"><a href="#section3">Build &amp; Installation</a></li>
@@ -152,26 +154,57 @@ not done already. Here we assume that the sources are already
 available in a directory of your choice.</p>
 </div>
 <div id="section2" class="section"><h2><a name="section2">Requisites</a></h2>
+<p>Before KineTcl can be build and used a number of requisites must be installed. These are:</p>
+<ol class="enumerated">
+<li><p>The scripting language Tcl.
+       For details see <span class="sectref"><a href="#subsection1">Tcl</a></span>.</p></li>
+<li><p>The <b class="package">critcl</b> package (C embedding) for <b class="syscmd">Tcl</b>.
+       For details see <span class="sectref"><a href="#subsection2">CriTcl</a></span>.</p></li>
+<li><p>The <b class="package">crimp</b> package (image processing) for <b class="syscmd">Tcl</b>.
+       For details see <span class="sectref"><a href="#subsection3">Crimp</a></span>.</p></li>
+<li><p>The OpenNI framework.
+       For details see <span class="sectref"><a href="#subsection4">OpenNI</a></span>.</p></li>
+<li><p>The PrimeSense NITE algorithm package for the OpenNI framework.
+       For details see <span class="sectref"><a href="#subsection5">NITE</a></span>.</p></li>
+<li><p>An OpenNI sensor library for your Sensor device.
+       For details see <span class="sectref"><a href="#subsection6">Sensors</a></span>.</p></li>
+</ol>
+<p>This list assumes that the machine where KineTcl is to be installed is
+essentially clean. Of course, if parts of the dependencies listed
+below are already installed the associated steps can be skipped. It is
+still recommended to read them tough, to validate that the
+dependencies they talk about are indeed installed.</p>
 <div id="subsection1" class="subsection"><h3><a name="subsection1">Tcl</a></h3>
-<p>A working Tcl installation is needed, however as we are building a Tcl
-package that should be pretty much obvious, and I will not belabor the
+<p>As we are building a Tcl package that should be pretty much obvious
+that a working Tcl installation is needed, and I will not belabor the
 point.</p>
-<p>Use whatever you are comfortable with, as long as it provides
-Tcl 8.5, or higher, and Tk 8.5 or higher.</p>
-<p>An easy way to get an installation of a recent Tcl 8.5 and the
-mentioned packages, which I recommend, is to download and install
-<a href="http://www.activestate.com">ActiveState's</a>
-<a href="http://www.activestate.com/activetcl">ActiveTcl</a> for your platform.
-Follow the link for ActiveTcl to find it.</p>
-<p>After the installation of ActiveTcl 8.5 in a directory of your
-choice run the command</p>
+<p>Out of the many use whatever you are comfortable with, as long
+as it provides Tcl 8.5, or higher, and Tk 8.5 or higher.</p>
+<p>This may a Tcl installation provided by your operating system
+distribution, from a distribution-independent vendor, or built by
+yurself.</p>
+<p>Myself, I used <a href="http://www.activestate.com">ActiveState's</a>
+ActiveTcl 8.5 distribution during development of the binding, as I am
+most familiar with it.</p>
+<p><em>(Disclosure: I, Andreas Kupries, work for ActiveState, maintaining ActiveTcl and TclDevKit for them).</em></p>
+<p>This distribution can be found at
+<a href="http://www.activestate.com/activetcl">http://www.activestate.com/activetcl</a>. Retrieve the archive of
+ActiveTcl 8.5 for your platform and install it as directed by
+ActiveState.</p>
+<p>Assuming that ActiveTcl got installed I usually run the command</p>
 <pre class="example">
     teacup update
 </pre>
-<p>This will install a lot more packages than found in the distribution
-alone.
-(Disclosure: I, Andreas Kupries, work for ActiveState, maintaining
-ActiveTcl and TclDevKit).</p>
+<p>to install all packages ActiveState provides, and the kitchensink, as
+the distribution itself usually contains only the ost important set of
+packages. This ensures that the dependencies for <span class="sectref"><a href="#subsection2">CriTcl</a></span>,
+<span class="sectref"><a href="#subsection3">Crimp</a></span>, and KineTcl are all present, and more.</p>
+<p>If that is not your liking you have to read the sections 
+for <span class="sectref"><a href="#subsection2">CriTcl</a></span>, <span class="sectref"><a href="#subsection3">Crimp</a></span>, and KineTcl to determine the
+exact set of packages required, and install only these using</p>
+<pre class="example">
+    teacup install $packagename
+</pre>
 <p>For those wishing to build Tcl/Tk on their own, their sources
 can be found at</p>
 <dl class="definitions">
@@ -182,32 +215,50 @@ can be found at</p>
 </dl>
 </div>
 <div id="subsection2" class="subsection"><h3><a name="subsection2">CriTcl</a></h3>
-<p>The tool <a href="http://jcw.github.com/critcl">critcl</a> is required to
-build KineTcl, either as an application found in the PATH, or as a Tcl
-package available to the <b class="cmd">tclsh</b> used to run KineTcl's
-<span class="sectref"><a href="#section3">Build &amp; Installation</a></span> process.</p>
-<p>The not-yet-released version 3.1 is required, or higher, and
-       the utility package <b class="package">critcl::class</b>. This is currently
-       only available on the <b class="const">dev31</b> branch of the critcl
-       repository at github linked to in the previous paragraph.</p>
+<p>To build both <span class="sectref"><a href="#subsection3">Crimp</a></span>, and KineTcl the tool <b class="syscmd">critcl</b> is
+required.</p>
+<p>Both Crimp's and KineTcl's build systems accept it either as an
+application found in the PATH, or as a Tcl package available to the
+<b class="syscmd">tclsh</b> used to run their build &amp; installation processes.</p>
+<p>While <span class="sectref"><a href="#subsection3">Crimp</a></span> just requires version 3 or higher KineTcl
+itself <em>must</em> have version 3.1, which is currently not released
+yet and only found in CriTcl's github repository.</p>
+<p>This github repository can be found at
+<a href="http://jcw.github.com/critcl">http://jcw.github.com/critcl</a>.</p>
+<p>The relevant repository branch is <em>dev31</em>.
+Do not try to use the master branch.</p>
 <p>Please make sure to use at least commit [fe814d4977], or
 later.</p>
-<p>The link for critcl goes to its official website which explains how to
-get the sources, and how to install them. Note that the starkit at the
-site is <em>not</em> useable, as it provides only critcl 3, nor the
-utility package we need.</p>
+<p>At the above url is also an explanation on how to build and
+install CriTcl, including a list of its dependencies.</p>
+<p>Its instructions will not be repeated here. If there are
+problems with their directions please file a bug against the critcl
+project, and not KineTcl.</p>
+<p>Please note that the starkit and starpack provided at the site
+are <em>not</em> useable, as they provide only critcl v3, not 3.1.</p>
 </div>
 <div id="subsection3" class="subsection"><h3><a name="subsection3">Crimp</a></h3>
-<p>The image processing package
-<a href="http://chiselapp.com/user/andreas_kupries/repository/crimp/home">CRIMP</a>
-is required to build and use KineTcl.</p>
-<p>Note that the currently released version of crimp does not have
-       all the operations used by KineTcl. Please make sure to use at
-       least commit [795374375f], or later.</p>
-<p>The link for crimp goes to its official website which explains how to
-get the sources and how to install them.</p>
+<p>To build and use KineTcl the image processing package <b class="package">crimp</b>
+is required.</p>
+<p>This package must be available to the <b class="syscmd">tclsh</b> used to
+run KineTcl's build &amp; installation process, and the <b class="syscmd">tclsh</b>
+used to run scripts requiring KineTcl.</p>
+<p>KineTcl <em>must</em> have access to revision [795374375f]
+of Crimp fossil reository, or later. Earlier revisions do not provide
+all the operations used by KineTcl.</p>
+<p>This fossil repository can be found at
+<a href="http://chiselapp.com/user/andreas_kupries/repository/crimp/home">http://chiselapp.com/user/andreas_kupries/repository/crimp/home</a>.</p>
+<p>The relevant repository branch is <em>trunk</em>.</p>
+<p>Crimp has a build and installation guide much like this one for
+KineTcl, which can be found at the above site and explains how to
+retrieve its sources and build the package, which dependencies are
+required, etc. The direct link to this guide is
+<a href="http://chiselapp.com/user/andreas_kupries/repository/crimp/doc/tip/embedded/www/doc/files/crimp_installer.html">http://chiselapp.com/user/andreas_kupries/repository/crimp/doc/tip/embedded/www/doc/files/crimp_installer.html</a></p>
+<p>Its instructions will not be repeated here. If there are
+problems with their directions please file a bug against the crimp
+project, and not KineTcl.</p>
 </div>
-<div id="subsection4" class="subsection"><h3><a name="subsection4">OpenNI / NITE</a></h3>
+<div id="subsection4" class="subsection"><h3><a name="subsection4">OpenNI</a></h3>
 <p>KineTcl is, despite its name, not a direct binding to the Kinect
 itself. It actually is a binding to the more general OpenNI
 framework. This framework provides a set of generic APIs for sensors,
@@ -216,12 +267,29 @@ these APIs can be plugged into.</p>
 <p>PrimeSense, the maker of the 3D sensor found in the Kinect is a
 main member of the OpenNI organization managing the framework and
 provides plugins for its sensor and various analysis algorithms.</p>
-<p>To build KineTcl the OpenNI binaries have to be
-installed. These can be found in the downloads section of the OpenNI
-website at <a href="http://www.openni.org/">http://www.openni.org/</a>.</p>
-<p>Development was done against OpenNI version 1.5.2.21. Note that
-this version has a bug in its headers. To work around this bug the
-headers have to be modified, preferably before installing them.</p>
+<p>The OpenNI binaries must be installed to build and use KineTcl.</p>
+<p>These binaries can be found at
+<a href="http://www.openni.org/Downloads/OpenNIModules.aspx">http://www.openni.org/Downloads/OpenNIModules.aspx</a></p>
+<p>References to the sources of the frameork, should you wish to
+build them by yourself, can be found at
+<a href="http://www.openni.org/Downloads.aspx">http://www.openni.org/Downloads.aspx</a>. When doing so please
+follow their instructions on building the package.  If there are
+problems with their directions please file a bug against the OpenNI
+project, and not KineTcl.</p>
+<p>Development was done against the binaries of OpenNI version
+1.5.2.23. After downloading the binaries were installed by unpacking
+the tarball and then running the provided installation script. I.e.:</p>
+<pre class="example">
+	 bunzip2 &lt; openni-bin-dev-linux-x64-v1.5.2.23.tar.bz2 | tar xf -
+	 cd OpenNI-Bin-Dev-Linux-x64-v1.5.2.23
+	 # !Edit the headers to work around the bug mentioned below.
+	 sudo ./install.sh
+	 # Note the sudo above, this script installs binaries into
+	 # root owned directories.
+</pre>
+<p>Note that version 1.5.2.23 has a bug in its headers.
+To work around this bug the provided header files have to be modified,
+<em>before</em> installing them.</p>
 <p>Open the header file &quot;<b class="file">XnModuleInterface.h</b>&quot; in the editor
 of your choice and look for the declaration of</p>
 <pre class="example">
@@ -237,19 +305,58 @@ of your choice and look for the declaration of</p>
 </pre>
 <p>This removes a conflict between this declaration and its forward
 declaration in the header file &quot;<b class="file">XnTypes.h</b>&quot;.</p>
-<p>When actually using a Kinect the OpenNI framework alone is not
-useful. To talk to a Kinect we also have to install the binaries for
-the PrimeSense Sensor inside of the device. These can also be found in
-the downloads section of the OpenNI website. During development
-PrimeSensor version 5.1.0.41 was installed.</p>
-<p>Furthermore it is recommended to install the PrimeSense NITE
-binaries, which provide various higher-level analysis
-algorithms. These are again found at the OpenNI website. During
-development NITE version 1.5.2.23 was installed.</p>
-<p>For those wishing to understand things on a deeper level the
-sources of OpenNI and of the sensor are available as well, through the
-OpenNI website. Of course. The NITE package however seems to be
-closed.</p>
+</div>
+<div id="subsection5" class="subsection"><h3><a name="subsection5">NITE</a></h3>
+<p>OpenNI (the organization) recommends to install the PrimeSense
+NITE binaries, which provide various higher-level analysis
+algorithms.</p>
+<p>These binaries can be found at
+<a href="http://www.openni.org/Downloads/OpenNIModules.aspx">http://www.openni.org/Downloads/OpenNIModules.aspx</a></p>
+<p>In contrast to the OpenNI framework itself NITE seems to be
+closed-source, and no references to a source repository are available.</p>
+<p>During development NITE version 1.5.2.21 was installed.
+After downloading the binaries were installed by unpacking the
+tarball and then running the provided installation script. I.e.:</p>
+<pre class="example">
+	 bunzip2 &lt; nite-bin-linux-x64-v1.5.2.21.tar.bz2 | tar xf -
+	 cd NITE-Bin-Dev-Linux-x64-v1.5.2.21
+	 sudo ./install.sh
+	 # Note the sudo above, this script installs binaries into
+	 # root owned directories.
+</pre>
+</div>
+<div id="subsection6" class="subsection"><h3><a name="subsection6">Sensors</a></h3>
+<p>When actually using a Kinect the OpenNI framework alone is not enough.</p>
+<p>We have to install the drivers for our sensor device as well.</p>
+<p>Please note that the Sensor driver binaries available at
+<a href="http://www.openni.org/Downloads.aspx">http://www.openni.org/Downloads.aspx</a> are only generic to devices
+using PrimeSense's sensor and are <em>not</em> adapted to specific
+devices like MS Kinect. <em>Do not install these</em>, but whatever is
+available for your specific device.</p>
+<p>For MS Kinect the sources of the specific sensor driver are
+found at <a href="https://github.com/avin2/SensorKinect">https://github.com/avin2/SensorKinect</a>.</p>
+<p>This repository also contain prebuilt binaries for various
+platforms, which were used during development of the binding. Should
+you wish to build the sensor driver by yourself, please follow their
+instructions on building the package.  If there are problems with
+their directions please file a bug against the SensorKinect project,
+and not KineTcl.</p>
+<p>Development was done against the binaries of SensorKinect
+version 5.1.0.25. After downloading the binaries were installed by
+unpacking the tarball and then running the provided installation
+script. I.e.:</p>
+<pre class="example">
+	 bunzip2 &lt; SensorKinect091-Bin-Linux64-v5.1.0.25.tar.bz2 | tar xf -
+	 cd SensorKinect091-Bin-Linux64-v5.1.0.25
+	 sudo ./install.sh
+	 # Note the sudo above, this script installs binaries into
+	 # root owned directories.
+</pre>
+<p>On a specific note, one of the files installed is
+&quot;<b class="file">Install/55-primesense-usb.rules</b>&quot;
+which is placed into &quot;<b class="file">/etc/udev/rules.d</b>&quot;.</p>
+<p>This file contains the udev rules which enable access to the
+usb sensor devices by non-root users.</p>
 </div>
 </div>
 <div id="section3" class="section"><h2><a name="section3">Build &amp; Installation</a></h2>
