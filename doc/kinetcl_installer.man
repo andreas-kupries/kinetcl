@@ -46,7 +46,7 @@ Before KineTcl can be build and used a number of requisites must be installed. T
 This list assumes that the machine where KineTcl is to be installed is
 essentially clean. Of course, if parts of the dependencies listed
 below are already installed the associated steps can be skipped. It is
-still recommended to read them tough, to validate that the
+still recommended to read their sections though, to validate that the
 dependencies they talk about are indeed installed.
 
 [include include/rq_tcl.inc]

@@ -17,6 +17,13 @@ all the operations used by KineTcl.
 
 [para] The relevant repository branch is [emph trunk].
 
+[para] [emph Note:] While the ActiveState TEApot repository provides
+all crimp packages for installation, this is not enough for building
+KineTcl, only running it later. The header files required to build
+KineTcl are not provided by the packages in the TEApot. This is why
+Crimp's sources have to be retrieved from its fossil repository and
+build locally.
+
 [para] Crimp has a build and installation guide much like this one for
 KineTcl, which can be found at the above site and explains how to
 retrieve its sources and build the package, which dependencies are

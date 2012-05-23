@@ -42,6 +42,17 @@ exact set of packages required, and install only these using
     teacup install $packagename
 }]
 
+[para] Both [syscmd teacup] commands above assume that ActiveState's
+TEApot repository at [uri http://teapot.activestate.com] is in the
+list of repositories accessible to [syscmd teacup]. This is automatically
+ensured for the ActiveTcl distribution. Others may have to run
+
+[example {
+    teacup archive add http://teapot.activestate.com
+}]
+
+to make this happen.
+
 [para] For those wishing to build Tcl/Tk on their own, their sources
 can be found at
 

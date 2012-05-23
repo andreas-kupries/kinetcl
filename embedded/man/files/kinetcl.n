@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/home/aku/Projects/KineTcl/kinetcl/embedded/man/files/kinetcl.n' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/net/nas/data/andreask/Dev/Kinetcl/kinetcl/embedded/man/files/kinetcl.n' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2012 Andreas Kupries
 '\" Copyright (c) 2012 Documentation, Andreas Kupries
 '\"
@@ -1005,7 +1005,6 @@ map
 .IP \(bu
 script
 .RE
-.IP
 or an integer number. The latter is used for unknown custom types
 OpenNI has no name for.
 .TP
@@ -1054,7 +1053,6 @@ event. See the sections named \fBEvents\fR, at all the classes
 supporting one or more events.
 .RE
 .RE
-.IP
 Each event supported by a specific node class is explained in the
 documentation of that class.
 .TP
@@ -1361,7 +1359,6 @@ resolution in pixels, in this order.
 The max depth the node is able to generate. An integer number.
 This is the same value as returned by method \fBmax-depth\fR.
 .RE
-.IP
 Notes:
 .sp
 Depth maps are in pixel format \fBgrey16\fR.
@@ -1522,7 +1519,6 @@ value is a 2-element list containing the horizontal and vertical
 resolution in pixels, in this order.
 .RE
 .RE
-.IP
 Notes:
 .sp
 Image maps are usually in pixel format \fBrgb24\fR.
@@ -1867,7 +1863,6 @@ value is a 2-element list containing the horizontal and vertical
 resolution in pixels, in this order.
 .RE
 .RE
-.IP
 Notes:
 .sp
 Scene segmentations are in pixel format \fBgrey16\fR.

@@ -172,7 +172,7 @@ available in a directory of your choice.</p>
 <p>This list assumes that the machine where KineTcl is to be installed is
 essentially clean. Of course, if parts of the dependencies listed
 below are already installed the associated steps can be skipped. It is
-still recommended to read them tough, to validate that the
+still recommended to read their sections though, to validate that the
 dependencies they talk about are indeed installed.</p>
 <div id="subsection1" class="subsection"><h3><a name="subsection1">Tcl</a></h3>
 <p>As we are building a Tcl package that should be pretty much obvious
@@ -205,6 +205,14 @@ exact set of packages required, and install only these using</p>
 <pre class="example">
     teacup install $packagename
 </pre>
+<p>Both <b class="syscmd">teacup</b> commands above assume that ActiveState's
+TEApot repository at <a href="http://teapot.activestate.com">http://teapot.activestate.com</a> is in the
+list of repositories accessible to <b class="syscmd">teacup</b>. This is automatically
+ensured for the ActiveTcl distribution. Others may have to run</p>
+<pre class="example">
+    teacup archive add http://teapot.activestate.com
+</pre>
+<p>to make this happen.</p>
 <p>For those wishing to build Tcl/Tk on their own, their sources
 can be found at</p>
 <dl class="definitions">
@@ -249,6 +257,12 @@ all the operations used by KineTcl.</p>
 <p>This fossil repository can be found at
 <a href="http://chiselapp.com/user/andreas_kupries/repository/crimp/home">http://chiselapp.com/user/andreas_kupries/repository/crimp/home</a>.</p>
 <p>The relevant repository branch is <em>trunk</em>.</p>
+<p><em>Note:</em> While the ActiveState TEApot repository provides
+all crimp packages for installation, this is not enough for building
+KineTcl, only running it later. The header files required to build
+KineTcl are not provided by the packages in the TEApot. This is why
+Crimp's sources have to be retrieved from its fossil repository and
+build locally.</p>
 <p>Crimp has a build and installation guide much like this one for
 KineTcl, which can be found at the above site and explains how to
 retrieve its sources and build the package, which dependencies are
