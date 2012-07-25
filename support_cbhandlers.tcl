@@ -232,12 +232,10 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	static void
 	@stem@_callback_@@cname@@_free (Kinetcl_Event* evPtr)
 	{
-	    @stem@_callback_@@cname@@_EVENT* e = \
-		(@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
+	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
 	    
 	    /* Destroy this event, here we deal with the internal allocated parts */
 	    @@edestructor@@
-	    return 1;
 	}
 
 	static void
@@ -272,8 +270,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	@stem@_callback_@@cname@@_delete (Tcl_Event* evPtr, ClientData clientData)
 	{
 	    @instancetype@ instance = (@instancetype@) clientData;
-	    @stem@_callback_@@cname@@_EVENT* e = \
-		(@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
+	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
 
 	    /* Keep events not issued by Kinetcl */
 	    if (e->event.event.proc != @stem@_callback_@@cname@@_tcl_handler) {
