@@ -23,9 +23,9 @@ proc kt_3callback {name consfunction destfunction
     set cnamec [kt_cbcname $namec]
 
     # Define the raw callback processing.
-    uplevel 1 [list kt_cbhandler $name $namea $cnamea $signaturea $bodya]
-    uplevel 1 [list kt_cbhandler $name $nameb $cnameb $signatureb $bodyb]
-    uplevel 1 [list kt_cbhandler $name $namec $cnamec $signaturec $bodyc]
+    kt_cbhandler $name $namea $cnamea $signaturea $bodya
+    kt_cbhandler $name $nameb $cnameb $signatureb $bodyb
+    kt_cbhandler $name $namec $cnamec $signaturec $bodyc
 
     lappend map @@name@@          $name
     lappend map @@cname@@         $cname
@@ -41,228 +41,223 @@ proc kt_3callback {name consfunction destfunction
     lappend map @@cnamec@@        $cnamec
     lappend map @@namec@@         $namec
 
-    uplevel 1 [string map $map {
-	field XnCallbackHandle callback@@cname@@ {Handle for @@name@@ callbacks}
+    # The command@@...@@ structures used later are defined by
+    # kt_cbhandler above.
 
-	# The command@@...@@ structures comes from kt_cbhandler.
+    insvariable XnCallbackHandle callback$cname "
+	Handle for $name callbacks
+    " [string map $map {
+	instance->callback@@cname@@ = NULL;
+    }] [string map $map {
+	@stem@_callback_@@cnamea@@_unset (instance, 1);
+	@stem@_callback_@@cnameb@@_unset (instance, 1);
+	@stem@_callback_@@cnamec@@_unset (instance, 1);
+    }]
 
-	constructor {
-	    instance->callback@@cname@@ = NULL;
+    method set-callback-$namea {cmdprefix/2} [string map $map {
+	if (objc != 3) {
+	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
+	    return TCL_ERROR;
+	}
+
+	return @stem@_callback_@@cnamea@@_set (instance, objv [2]);
+    }]
+
+    method unset-callback-$namea {} [string map $map {
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_OK;
+	}
+
+	@stem@_callback_@@cnamea@@_unset (instance, 1);
+	return TCL_ERROR;
+    }]
+
+    method set-callback-$nameb {cmdprefix/2} [string map $map {
+	if (objc != 3) {
+	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
+	    return TCL_ERROR;
+	}
+
+	return @stem@_callback_@@cnameb@@_set (instance, objv [2]);
+    }]
+
+    method unset-callback-$nameb {} [string map $map {
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_OK;
+	}
+
+	@stem@_callback_@@cnameb@@_unset (instance, 1);
+	return TCL_ERROR;
+    }]
+
+    method set-callback-$namec {cmdprefix/2} [string map $map {
+	if (objc != 3) {
+	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
+	    return TCL_ERROR;
+	}
+
+	return @stem@_callback_@@cnamec@@_set (instance, objv [2]);
+    }]
+
+    method unset-callback-$namec {} [string map $map {
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_OK;
+	}
+
+	@stem@_callback_@@cnamec@@_unset (instance, 1);
+	return TCL_ERROR;
+    }]
+
+    support [string map $map {
+	static void
+	@stem@_callback_@@cnamea@@_unset (@instancetype@ instance, int dev)
+	{
+	    /* Single callback handle for 2 callbacks */
+	    if (!instance->callback@@cname@@) return;
+	    if (!instance->command@@cnamea@@) return;
+
+	    Tcl_DecrRefCount (instance->command@@cnamea@@);
 	    instance->command@@cnamea@@ = NULL;
+
+	    /* Keep C callback if other Tcl callbacks still active */
+	    if (instance->command@@cnameb@@) return;
+	    if (instance->command@@cnamec@@) return;
+
+	    @@destfunction@@ (instance->handle, instance->callback@@cname@@);
+	    instance->callback@@cname@@ = NULL;
+
+	    if (!dev) return;
+	    Tcl_DeleteEvents (@stem@_callback_@@cnamea@@_delete, (ClientData) instance);
+	}
+
+	static void
+	@stem@_callback_@@cnameb@@_unset (@instancetype@ instance, int dev)
+	{
+	    /* Single callback handle for 2 callbacks */
+	    if (!instance->callback@@cname@@) return;
+	    if (!instance->command@@cnameb@@) return;
+
+	    Tcl_DecrRefCount (instance->command@@cnameb@@);
 	    instance->command@@cnameb@@ = NULL;
+
+	    /* Keep C callback if other Tcl callback still active */
+	    if (instance->command@@cnamea@@) return;
+	    if (instance->command@@cnamec@@) return;
+
+	    @@destfunction@@ (instance->handle, instance->callback@@cname@@);
+	    instance->callback@@cname@@ = NULL;
+
+	    if (!dev) return;
+	    Tcl_DeleteEvents (@stem@_callback_@@cnameb@@_delete, (ClientData) instance);
+	}
+
+	static void
+	@stem@_callback_@@cnamec@@_unset (@instancetype@ instance, int dev)
+	{
+	    /* Single callback handle for 2 callbacks */
+	    if (!instance->callback@@cname@@) return;
+	    if (!instance->command@@cnamec@@) return;
+
+	    Tcl_DecrRefCount (instance->command@@cnamec@@);
 	    instance->command@@cnamec@@ = NULL;
+
+	    /* Keep C callback if other Tcl callback still active */
+	    if (instance->command@@cnamea@@) return;
+	    if (instance->command@@cnameb@@) return;
+
+	    @@destfunction@@ (instance->handle, instance->callback@@cname@@);
+	    instance->callback@@cname@@ = NULL;
+
+	    if (!dev) return;
+	    Tcl_DeleteEvents (@stem@_callback_@@cnamec@@_delete, (ClientData) instance);
 	}
 
-	destructor {
-	    @stem@_callback_@@cnamea@@_unset (instance, 1);
-	    @stem@_callback_@@cnameb@@_unset (instance, 1);
-	    @stem@_callback_@@cnamec@@_unset (instance, 1);
+
+	static int
+	@stem@_callback_@@cnamea@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
+	{
+	    Tcl_Obj* cmd;
+
+	    if (!instance->callback@@cname@@) {
+		Tcl_Interp* interp = instance->interp;
+		XnCallbackHandle callback;
+		XnStatus s;
+
+		s = @@consfunction@@ (instance->handle,
+				      @stem@_callback_@@cnamea@@_handler,
+				      @stem@_callback_@@cnameb@@_handler,
+				      @stem@_callback_@@cnamec@@_handler,
+				      instance,
+				      &callback);
+		CHECK_STATUS_RETURN;
+
+		instance->callback@@cname@@ = callback;
+	    }
+
+	    @stem@_callback_@@cnamea@@_unset (instance, 0);
+	    instance->command@@cnamea@@ = cmdprefix;
+	    Tcl_IncrRefCount (cmdprefix);
+	    return TCL_OK;
 	}
 
-	mdef set-callback-@@namea@@ { /* Syntax: <instance> set-callback-@@namea@@ <cmdprefix> */
-	    if (objc != 3) {
-		Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
-		return TCL_ERROR;
+	static int
+	@stem@_callback_@@cnameb@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
+	{
+	    Tcl_Obj* cmd;
+
+	    if (!instance->callback@@cname@@) {
+		Tcl_Interp* interp = instance->interp;
+		XnCallbackHandle callback;
+		XnStatus s;
+
+		s = @@consfunction@@ (instance->handle,
+				      @stem@_callback_@@cnamea@@_handler,
+				      @stem@_callback_@@cnameb@@_handler,
+				      @stem@_callback_@@cnamec@@_handler,
+				      instance,
+				      &callback);
+		CHECK_STATUS_RETURN;
+
+		instance->callback@@cname@@ = callback;
 	    }
 
-	    return @stem@_callback_@@cnamea@@_set (instance, objv [2]);
+	    @stem@_callback_@@cnameb@@_unset (instance, 0);
+	    instance->command@@cnameb@@ = cmdprefix;
+	    Tcl_IncrRefCount (cmdprefix);
+	    return TCL_OK;
 	}
 
-	mdef unset-callback-@@namea@@ { /* Syntax: <instance> unset-callback-@@namea@@ */
-	    if (objc != 2) {
-		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
+	static int
+	@stem@_callback_@@cnamec@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
+	{
+	    Tcl_Obj* cmd;
+
+	    if (!instance->callback@@cname@@) {
+		Tcl_Interp* interp = instance->interp;
+		XnCallbackHandle callback;
+		XnStatus s;
+
+		s = @@consfunction@@ (instance->handle,
+				      @stem@_callback_@@cnamea@@_handler,
+				      @stem@_callback_@@cnameb@@_handler,
+				      @stem@_callback_@@cnamec@@_handler,
+				      instance,
+				      &callback);
+		CHECK_STATUS_RETURN;
+
+		instance->callback@@cname@@ = callback;
 	    }
 
-	    @stem@_callback_@@cnamea@@_unset (instance, 1);
-	    return TCL_ERROR;
-	}
-
-	mdef set-callback-@@nameb@@ { /* Syntax: <instance> set-callback-@@nameb@@ <cmdprefix> */
-	    if (objc != 3) {
-		Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
-		return TCL_ERROR;
-	    }
-
-	    return @stem@_callback_@@cnameb@@_set (instance, objv [2]);
-	}
-
-	mdef unset-callback-@@nameb@@ { /* Syntax: <instance> unset-callback-@@nameb@@ */
-	    if (objc != 2) {
-		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
-	    }
-
-	    @stem@_callback_@@cnameb@@_unset (instance, 1);
-	    return TCL_ERROR;
-	}
-
-	mdef set-callback-@@namec@@ { /* Syntax: <instance> set-callback-@@namec@@ <cmdprefix> */
-	    if (objc != 3) {
-		Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
-		return TCL_ERROR;
-	    }
-
-	    return @stem@_callback_@@cnamec@@_set (instance, objv [2]);
-	}
-
-	mdef unset-callback-@@namec@@ { /* Syntax: <instance> unset-callback-@@namec@@ */
-	    if (objc != 2) {
-		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
-	    }
-
-	    @stem@_callback_@@cnamec@@_unset (instance, 1);
-	    return TCL_ERROR;
-	}
-
-	support {
-	    static void
-	    @stem@_callback_@@cnamea@@_unset (@instancetype@ instance, int dev)
-	    {
-		/* Single callback handle for 2 callbacks */
-		if (!instance->callback@@cname@@) return;
-                if (!instance->command@@cnamea@@) return;
-
-		Tcl_DecrRefCount (instance->command@@cnamea@@);
-		instance->command@@cnamea@@ = NULL;
-
-		/* Keep C callback if other Tcl callbacks still active */
-		if (instance->command@@cnameb@@) return;
-		if (instance->command@@cnamec@@) return;
-
-		@@destfunction@@ (instance->handle, instance->callback@@cname@@);
-		instance->callback@@cname@@ = NULL;
-
-		if (!dev) return;
-		Tcl_DeleteEvents (@stem@_callback_@@cnamea@@_delete, (ClientData) instance);
-	    }
-
-	    static void
-	    @stem@_callback_@@cnameb@@_unset (@instancetype@ instance, int dev)
-	    {
-		/* Single callback handle for 2 callbacks */
-		if (!instance->callback@@cname@@) return;
-                if (!instance->command@@cnameb@@) return;
-
-		Tcl_DecrRefCount (instance->command@@cnameb@@);
-		instance->command@@cnameb@@ = NULL;
-
-		/* Keep C callback if other Tcl callback still active */
-		if (instance->command@@cnamea@@) return;
-		if (instance->command@@cnamec@@) return;
-
-		@@destfunction@@ (instance->handle, instance->callback@@cname@@);
-		instance->callback@@cname@@ = NULL;
-
-		if (!dev) return;
-		Tcl_DeleteEvents (@stem@_callback_@@cnameb@@_delete, (ClientData) instance);
-	    }
-
-	    static void
-	    @stem@_callback_@@cnamec@@_unset (@instancetype@ instance, int dev)
-	    {
-		/* Single callback handle for 2 callbacks */
-		if (!instance->callback@@cname@@) return;
-                if (!instance->command@@cnamec@@) return;
-
-		Tcl_DecrRefCount (instance->command@@cnamec@@);
-		instance->command@@cnamec@@ = NULL;
-
-		/* Keep C callback if other Tcl callback still active */
-		if (instance->command@@cnamea@@) return;
-		if (instance->command@@cnameb@@) return;
-
-		@@destfunction@@ (instance->handle, instance->callback@@cname@@);
-		instance->callback@@cname@@ = NULL;
-
-		if (!dev) return;
-		Tcl_DeleteEvents (@stem@_callback_@@cnamec@@_delete, (ClientData) instance);
-	    }
-
-
-	    static int
-	    @stem@_callback_@@cnamea@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
-	    {
-		Tcl_Obj* cmd;
-
-		if (!instance->callback@@cname@@) {
-		    Tcl_Interp* interp = instance->interp;
-		    XnCallbackHandle callback;
-		    XnStatus s;
-
-		    s = @@consfunction@@ (instance->handle,
-					  @stem@_callback_@@cnamea@@_handler,
-					  @stem@_callback_@@cnameb@@_handler,
-					  @stem@_callback_@@cnamec@@_handler,
-					  instance,
-					  &callback);
-		    CHECK_STATUS_RETURN;
-
-		    instance->callback@@cname@@ = callback;
-		}
-
-		@stem@_callback_@@cnamea@@_unset (instance, 0);
-		instance->command@@cnamea@@ = cmdprefix;
-		Tcl_IncrRefCount (cmdprefix);
-		return TCL_OK;
-	    }
-
-	    static int
-	    @stem@_callback_@@cnameb@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
-	    {
-		Tcl_Obj* cmd;
-
-		if (!instance->callback@@cname@@) {
-		    Tcl_Interp* interp = instance->interp;
-		    XnCallbackHandle callback;
-		    XnStatus s;
-
-		    s = @@consfunction@@ (instance->handle,
-					  @stem@_callback_@@cnamea@@_handler,
-					  @stem@_callback_@@cnameb@@_handler,
-					  @stem@_callback_@@cnamec@@_handler,
-					  instance,
-					  &callback);
-		    CHECK_STATUS_RETURN;
-
-		    instance->callback@@cname@@ = callback;
-		}
-
-		@stem@_callback_@@cnameb@@_unset (instance, 0);
-		instance->command@@cnameb@@ = cmdprefix;
-		Tcl_IncrRefCount (cmdprefix);
-		return TCL_OK;
-	    }
-
-	    static int
-	    @stem@_callback_@@cnamec@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
-	    {
-		Tcl_Obj* cmd;
-
-		if (!instance->callback@@cname@@) {
-		    Tcl_Interp* interp = instance->interp;
-		    XnCallbackHandle callback;
-		    XnStatus s;
-
-		    s = @@consfunction@@ (instance->handle,
-					  @stem@_callback_@@cnamea@@_handler,
-					  @stem@_callback_@@cnameb@@_handler,
-					  @stem@_callback_@@cnamec@@_handler,
-					  instance,
-					  &callback);
-		    CHECK_STATUS_RETURN;
-
-		    instance->callback@@cname@@ = callback;
-		}
-
-		@stem@_callback_@@cnamec@@_unset (instance, 0);
-		instance->command@@cnamec@@ = cmdprefix;
-		Tcl_IncrRefCount (cmdprefix);
-		return TCL_OK;
-	    }
+	    @stem@_callback_@@cnamec@@_unset (instance, 0);
+	    instance->command@@cnamec@@ = cmdprefix;
+	    Tcl_IncrRefCount (cmdprefix);
+	    return TCL_OK;
 	}
     }]
+    return
 }
 
 # # ## ### ##### ######## #############
