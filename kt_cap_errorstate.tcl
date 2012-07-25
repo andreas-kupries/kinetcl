@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapErrorState {
 
     # # ## ### ##### ######## #############
 
-    mdef error-state { /* Syntax: <instance> error-state */
+    method error-state {} {
 	XnStatus s;
 
 	if (objc != 2) {

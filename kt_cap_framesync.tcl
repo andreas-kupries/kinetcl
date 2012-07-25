@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapFramesync {
 
     # # ## ### ##### ######## #############
 
-    mdef can-sync-with { /* Syntax: <instance> can-sync <other-node> */
+    method can-sync-with {node} {
 	XnNodeHandle other;
 	XnBool supported;
 
@@ -26,7 +26,7 @@ critcl::class def ::kinetcl::CapFramesync {
 	return TCL_OK;
     }
 
-    mdef start-sync-with { /* Syntax: <instance> start-sync-with <other-node> */
+    method start-sync-with {node} {
 	XnStatus s;
 	XnNodeHandle other;
 
@@ -44,7 +44,7 @@ critcl::class def ::kinetcl::CapFramesync {
 	return TCL_OK;
     }
 
-    mdef stop-sync-with { /* Syntax: <instance> stop-sync-with <other-node> */
+    method stop-sync-with {node} {
 	XnStatus s;
 	XnNodeHandle other;
 
@@ -62,7 +62,7 @@ critcl::class def ::kinetcl::CapFramesync {
 	return TCL_OK;
     }
 
-    mdef synced-with { /* Syntax: <instance> synced-with <other-node> */
+    method synced-with {node} {
 	XnNodeHandle other;
 	XnBool as;
 

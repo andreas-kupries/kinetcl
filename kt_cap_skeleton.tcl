@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
     # # ## ### ##### ######## #############
 
-    mdef need-pose { /* Syntax: <instance> need-pose */
+    method need-pose {} {
 	int need;
 
 	if (objc != 2) {
@@ -27,7 +27,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     # we do not know the length we would have pre-allocate either,
     # should the library try to fill the string.
 
-    mdef is-profile-available { /* Syntax: <instance> is-profile-available <profile> */
+    method is-profile-available {profile} {
 	int available, profile;
 
 	if (objc != 3) {
@@ -47,7 +47,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef available-profiles { /* Syntax: <instance> available-profiles */
+    method available-profiles {} {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
 
@@ -69,7 +69,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef all-profiles { /* Syntax: <instance> available-profiles */
+    method all-profiles {} {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
 
@@ -89,7 +89,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef set-profile { /* Syntax: <instance> set-profile <profile> */
+    method set-profile {profile} {
 	int available, profile;
 	XnStatus s;
 
@@ -110,7 +110,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef set-smoothing { /* Syntax: <instance> set-smoothing <factor> */
+    method set-smoothing {factor} {
 	double factor;
 	XnStatus s;
 
@@ -129,7 +129,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef start-tracking { /* Syntax: <instance> start-tracking <id> */
+    method start-tracking {id} {
 	int id;
 	XnStatus s;
 
@@ -148,7 +148,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef stop-tracking { /* Syntax: <instance> stop-tracking <id> */
+    method stop-tracking {id} {
 	int id;
 	XnStatus s;
 
@@ -167,7 +167,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef reset-tracking { /* Syntax: <instance> reset-tracking <id> */
+    method reset-tracking {id} {
 	int id;
 	XnStatus s;
 
@@ -186,7 +186,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef is-tracking { /* Syntax: <instance> is-tracking <id> */
+    method is-tracking {id} {
 	int id;
 	XnBool tracking;
 
@@ -205,7 +205,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef is-calibrated { /* Syntax: <instance> is-calibrated <id> */
+    method is-calibrated {id} {
 	int id;
 	XnBool calibrated;
 
@@ -224,7 +224,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef is-calibrating { /* Syntax: <instance> is-calibrating <id> */
+    method is-calibrating {id} {
 	int id;
 	XnBool calibrating;
 
@@ -243,7 +243,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef request-calibration { /* Syntax: <instance> request-calibration <id> <force> */
+    method request-calibration {id force} {
 	int id, force;
 	XnStatus s;
 
@@ -266,7 +266,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef abort-calibration { /* Syntax: <instance> abort-calibration <id> */
+    method abort-calibration {id} {
 	int id;
 	XnStatus s;
 
@@ -288,7 +288,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     # XXX The higher level wrapper handles vfs, by routing through a
     # XXX temp file when needed.
 
-    mdef save-calibration-file { /* Syntax: <instance> save-calibration-file <id> <path> */
+    method save-calibration-file {id path} {
 	int id;
 	XnStatus s;
 
@@ -308,7 +308,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef load-calibration-file { /* Syntax: <instance> load-calibration-file <id> <path> */
+    method load-calibration-file {id path} {
 	int id;
 	XnStatus s;
 
@@ -328,7 +328,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef save-calibration-slot { /* Syntax: <instance> save-calibration <id> <slot> */
+    method save-calibration-slot {id slot} {
 	int id, slot;
 	XnStatus s;
 
@@ -351,7 +351,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef load-calibration-slot { /* Syntax: <instance> load-calibration-slot <id> <slot> */
+    method load-calibration-slot {id slot} {
 	int id, slot;
 	XnStatus s;
 
@@ -374,7 +374,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef clear-calibration-slot { /* Syntax: <instance> clear-calibration-slot <slot> */
+    method clear-calibration-slot {slot} {
 	int slot;
 	XnStatus s;
 
@@ -393,7 +393,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef is-calibration-slot { /* Syntax: <instance> is-calibration-slot <slot> */
+    method is-calibration-slot {slot} {
 	int slot, used;
 
 	if (objc != 4) {
@@ -411,7 +411,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef is-joint-available { /* Syntax: <instance> is-joint-available <joint> */
+    method is-joint-available {joint} {
 	int available, joint;
 
 	if (objc != 3) {
@@ -431,7 +431,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef is-joint-active { /* Syntax: <instance> is-joint-active <joint> */
+    method is-joint-active {joint} {
 	int active, joint;
 
 	if (objc != 3) {
@@ -451,7 +451,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef set-joint-active { /* Syntax: <instance> set-joint-active <joint> <active> */
+    method set-joint-active {joint active} {
 	int active, joint;
 	XnStatus s;
 
@@ -477,7 +477,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef active-joints { /* Syntax: <instance> active-joints */
+    method active-joints {} {
 	XnStatus s;
 	XnUInt16 n;
 	XnSkeletonJoint j [XN_SKEL_RIGHT_FOOT+1];
@@ -501,7 +501,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef get-joint { /* Syntax: <instance> get-joint <user> <joint> */
+    method get-joint {user joint} {
 	Tcl_Obj* result;
 	int userid, joint;
 
@@ -529,7 +529,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef get-skeleton { /* Syntax: <instance> get-skeleton <user> */
+    method get-skeleton {user} {
 	Tcl_Obj* result;
 	int userid;
 

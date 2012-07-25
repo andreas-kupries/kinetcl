@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Scene {
 
     # # ## ### ##### ######## #############
 
-    mdef map { /* Syntax: <instance> map */
+    method map {} {
 	crimp_image* image;
 	XnSceneMetaData* meta;
 
@@ -49,7 +49,7 @@ critcl::class def ::kinetcl::Scene {
 	return TCL_OK;
     }
 
-    mdef meta { /* Syntax: <instance> meta */
+    method meta {} {
 	XnSceneMetaData* meta;
 
 	if (objc != 2) {
@@ -66,7 +66,7 @@ critcl::class def ::kinetcl::Scene {
 	return TCL_OK;
     }
 
-    mdef floor { /* Syntax: <instance> floor */
+    method floor {} {
 	XnPlane3D floor;
 	XnStatus s;
 	Tcl_Obj* res;

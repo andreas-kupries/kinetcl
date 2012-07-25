@@ -14,7 +14,7 @@ critcl::class def ::kinetcl::Player {
     }
 
     # # ## ### ##### ######## #############
-    mdef speed { /* Syntax: <instance> speed ?speed? */
+    method speed {?speed?} {
 	XnStatus s;
 	double speed;
 
@@ -39,7 +39,7 @@ critcl::class def ::kinetcl::Player {
 	return TCL_ERROR;
     }
 
-    mdef repeat { /* Syntax: <instance> repeat bool */
+    method repeat {bool/2} {
 	XnStatus s;
 	int repeat;
 
@@ -58,7 +58,7 @@ critcl::class def ::kinetcl::Player {
 	return TCL_OK;
     }
 
-    mdef eof { /* Syntax: <instance> eof */
+    method eof {} {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -68,7 +68,7 @@ critcl::class def ::kinetcl::Player {
 	return TCL_OK;
     }
 
-    mdef format { /* Syntax: <instance> format */
+    method format {} {
 	Tcl_Obj* format;
 
 	if (objc != 2) {
@@ -81,7 +81,7 @@ critcl::class def ::kinetcl::Player {
 	return TCL_OK;
     }
 
-    mdef next { /* Syntax: <instance> next */
+    method next {} {
 	XnStatus s;
 
 	if (objc != 2) {

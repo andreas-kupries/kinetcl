@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Depth {
 
     # # ## ### ##### ######## #############
 
-    mdef max-depth { /* Syntax: <instance> max-depth */
+    method max-depth {} {
 	XnDepthPixel depth;
 
 	if (objc != 2) {
@@ -33,7 +33,7 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    mdef fov { /* Syntax: <instance> fov */
+    method fov {} {
 	Tcl_Obj* rfov [2];
 	XnFieldOfView fov;
 	XnStatus s;
@@ -53,7 +53,7 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    mdef meta { /* Syntax: <instance> meta */
+    method meta {} {
 	XnDepthMetaData* meta;
 
 	if (objc != 2) {
@@ -70,7 +70,7 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    mdef map { /* Syntax: <instance> map */
+    method map {} {
 	crimp_image* image;
 	XnDepthMetaData* meta;
 
@@ -104,7 +104,7 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    mdef projective2world { /* Syntax: <instance> 2world point... */
+    method projective2world {point...} {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;
@@ -149,7 +149,7 @@ critcl::class def ::kinetcl::Depth {
 	return res;
     }
 
-    mdef world2projective { /* Syntax: <instance> 2projective point... */
+    method world2projective {point...} {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;

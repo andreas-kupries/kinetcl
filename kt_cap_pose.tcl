@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 
     # # ## ### ##### ######## #############
 
-    mdef is-supported { /* Syntax: <instance> isSupported <pose> */
+    method is-supported {pose} {
 	int supported;
 
 	if (objc != 3) {
@@ -22,7 +22,7 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 	return TCL_OK;
     }
 
-    mdef poses { /* Syntax: <instance> poses */
+    method poses {} {
 	XnStatus s;
 	int lc;
 	Tcl_Obj** lv = NULL;
@@ -75,7 +75,7 @@ error:
 	return TCL_ERROR;
     }
 
-    mdef start-detection { /* Syntax: <instance> startDetection <id> <pose> */
+    method start-detection {id pose} {
 	int id;
 	XnStatus s;
 
@@ -95,7 +95,7 @@ error:
 	return TCL_OK;
     }
 
-    mdef stop-detection { /* Syntax: <instance> stopDetection <id> <pose> */
+    method stop-detection {id pose} {
 	int id;
 	XnStatus s;
 
@@ -115,7 +115,7 @@ error:
 	return TCL_OK;
     }
 
-    mdef stop-all-detection { /* Syntax: <instance> stopDetection <id> */
+    method stop-all-detection {id} {
 	int id;
 	XnStatus s;
 
@@ -134,7 +134,7 @@ error:
 	return TCL_OK;
     }
 
-    mdef status { /* Syntax: <instance> status <id> <pose> */
+    method status {id pose} {
 	int id;
 	XnStatus s;
 	XnUInt64 timestamp;

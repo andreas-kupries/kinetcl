@@ -14,7 +14,8 @@ critcl::class def ::kinetcl::User {
     }
 
     # # ## ### ##### ######## #############
-    mdef count { /* Syntax: <instance> count */
+
+    method count {} {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -25,7 +26,8 @@ critcl::class def ::kinetcl::User {
     }
 
     # # ## ### ##### ######## #############
-    mdef users { /* Syntax: <instance> users */
+
+    method users {} {
 
 	int i, res = TCL_OK;
 	XnUInt16  n;
@@ -63,7 +65,8 @@ critcl::class def ::kinetcl::User {
     }
 
     # # ## ### ##### ######## #############
-    mdef centerof { /* Syntax: <instance> centerof <id> */
+
+    method centerof {id} {
 	int id;
 	XnStatus s;
 	XnPoint3D p;
@@ -87,7 +90,7 @@ critcl::class def ::kinetcl::User {
 
     # # ## ### ##### ######## #############
 
-    mdef pixelsof { /* Syntax: <instance> pixelsof <id> */
+    method pixelsof {id} {
 	int id;
 	XnStatus s;
 	crimp_image* image;

@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 
     # # ## ### ##### ######## #############
 
-    mdef supports-view { /* Syntax: <instance> supports-view <other-node> */
+    method supports-view {node} {
 	XnNodeHandle other;
 	XnBool supported;
 
@@ -26,7 +26,7 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 	return TCL_OK;
     }
 
-    mdef set-view { /* Syntax: <instance> set-view <other-node> */
+    method set-view {node} {
 	XnStatus s;
 	XnNodeHandle other;
 
@@ -44,7 +44,7 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 	return TCL_OK;
     }
 
-    mdef reset-view { /* Syntax: <instance> reset-view */
+    method reset-view {} {
 	XnStatus s;
 
 	if (objc != 2) {
@@ -57,7 +57,7 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 	return TCL_OK;
     }
 
-    mdef using-view { /* Syntax: <instance> using-view <other-node> */
+    method using-view {node} {
 	XnNodeHandle other;
 	XnBool as;
 

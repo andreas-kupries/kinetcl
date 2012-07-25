@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapCropping {
 
     # # ## ### ##### ######## #############
 
-    mdef crop { /* Syntax: <instance> crop ?x y w h? */
+    method crop {?x y w h?} {
 	XnStatus s;
 	XnCropping c;
 
@@ -58,7 +58,7 @@ critcl::class def ::kinetcl::CapCropping {
 	return TCL_ERROR;
     }
 
-    mdef uncrop { /* Syntax: <instance> uncrop */
+    method uncrop {} {
 	XnStatus s;
 	XnCropping c;
 

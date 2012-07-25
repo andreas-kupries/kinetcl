@@ -6,7 +6,8 @@ critcl::class def ::kinetcl::Map {
     ::kt_abstract_class
 
     # # ## ### ##### ######## #############
-    mdef bytes-per-pixel { /* Syntax: <instance> bytes_pixel */
+
+    method bytes-per-pixel {} {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -16,7 +17,7 @@ critcl::class def ::kinetcl::Map {
 	return TCL_OK;
     }
 
-    mdef modes { /* Syntax: <instance> modes */
+    method modes {} {
 	XnStatus s;
 	int lc;
 	Tcl_Obj** lv = NULL;
@@ -56,13 +57,13 @@ critcl::class def ::kinetcl::Map {
 	}
 
 	return TCL_OK;
-error:
+    error:
 	ckfree ((char*) modes);
 	return TCL_ERROR;
     }
 
     # # ## ### ##### ######## #############
-    mdef mode { /* Syntax: <instance> mode ?xres yres fps? */
+    method mode {?xres yres fps?} {
 	XnStatus        s;
 	XnMapOutputMode mode;
 

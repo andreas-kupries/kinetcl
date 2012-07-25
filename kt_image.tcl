@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Image {
 
     # # ## ### ##### ######## #############
 
-    mdef formats { /* Syntax: <instance> formats */
+    method formats {} {
 	int i, lc;
 	Tcl_Obj* lv [kinetcl_NUM_PIXELFORMATS];
 
@@ -37,7 +37,7 @@ critcl::class def ::kinetcl::Image {
 	return TCL_OK;
     }
 
-    mdef format { /* Syntax: <instance> format ?format? */
+    method format {?format?} {
 	XnStatus        s;
 	XnPixelFormat  	f;
 
@@ -72,7 +72,7 @@ critcl::class def ::kinetcl::Image {
 	return TCL_ERROR;
     }
 
-    mdef meta { /* Syntax: <instance> meta */
+    method meta {} {
 	XnImageMetaData* meta;
 
 	if (objc != 2) {
@@ -89,7 +89,7 @@ critcl::class def ::kinetcl::Image {
 	return TCL_OK;
     }
 
-    mdef map { /* Syntax: <instance> map */
+    method map {} {
 	crimp_image* image;
 	XnImageMetaData* meta;
 

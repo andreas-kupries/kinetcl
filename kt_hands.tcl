@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Hands {
 
     # # ## ### ##### ######## #############
 
-    mdef set-smoothing { /* Syntax: <instance> set-smoothing <factor> */
+    method set-smoothing {factor} {
 	double factor;
 	XnStatus s;
 
@@ -34,7 +34,7 @@ critcl::class def ::kinetcl::Hands {
 	return TCL_OK;
     }
 
-    mdef start-tracking { /* Syntax: <instance> start-tracking <point> */
+    method start-tracking {point} {
 	XnPoint3D p;
 	XnStatus s;
 	int pc;
@@ -56,7 +56,7 @@ critcl::class def ::kinetcl::Hands {
 	return TCL_OK;
     }
 
-    mdef stop-tracking { /* Syntax: <instance> stop-tracking <id> */
+    method stop-tracking {id} {
 	int id;
 	XnStatus s;
 
@@ -75,7 +75,7 @@ critcl::class def ::kinetcl::Hands {
 	return TCL_OK;
     }
 
-    mdef stop-tracking-all { /* Syntax: <instance> stop-tracking-all */
+    method stop-tracking-all {} {
 	XnStatus s;
 
 	if (objc != 2) {

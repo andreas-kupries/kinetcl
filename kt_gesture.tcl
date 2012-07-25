@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Gesture {
 
     # # ## ### ##### ######## #############
 
-    mdef add-gesture { /* Syntax: <instance> add-gesture <str> ?<box>? */
+    method add-gesture {gesture ?box?} {
 	XnBoundingBox3D box;
 	XnBoundingBox3D* thebox;
 	XnStatus s;
@@ -54,7 +54,7 @@ critcl::class def ::kinetcl::Gesture {
 	return TCL_OK;
     }
 
-    mdef remove-gesture { /* Syntax: <instance> remove-gesture <str> */
+    method remove-gesture {gesture} {
 	XnStatus s;
 
 	if (objc != 3) {
@@ -69,7 +69,7 @@ critcl::class def ::kinetcl::Gesture {
     }
 
 
-    mdef is-gesture { /* Syntax: <instance> is-gesture <str> */
+    method is-gesture {gesture} {
 	int id;
 	XnStatus s;
 
@@ -84,7 +84,7 @@ critcl::class def ::kinetcl::Gesture {
 	return TCL_OK;
     }
 
-    mdef gesture-has-progress { /* Syntax: <instance> gesture-has-progress <str> */
+    method gesture-has-progress {gesture} {
 	int id;
 	XnStatus s;
 
@@ -99,7 +99,7 @@ critcl::class def ::kinetcl::Gesture {
 	return TCL_OK;
     }
 
-    mdef all-gestures { /* Syntax: <instance> all-gestures */
+    method all-gestures {} {
 	int i, res = TCL_OK;
 	XnUInt16  n;
 	XnChar** gesture;
@@ -142,7 +142,7 @@ critcl::class def ::kinetcl::Gesture {
 	return res;
     }
 
-    mdef active-gestures { /* Syntax: <instance> active-gestures */
+    method active-gestures {} {
 	int i, res = TCL_OK;
 	XnUInt16  n;
 	XnChar** gesture;

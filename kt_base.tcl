@@ -3,21 +3,24 @@
 
 critcl::class def ::kinetcl::Base {
     # # ## ### ##### ######## #############
-    ::kt_abstract_class {
+    ::kt_abstract_class {} {}
+
+    insvariable Tcl_Obj* capnames {
+	Fixed list of possible capabilities
+    } {
 	instance->capnames = ComputeMethodList (@stem@_tcl_capability_names);
 	Tcl_IncrRefCount (instance->capnames);
     } {
 	Tcl_DecrRefCount (instance->capnames);
     }
 
-    field Tcl_Obj* capnames {Fixed list of possible capabilities}
-
     # # ## ### ##### ######## #############
     ## Methods managing the OpenNI handle from the Tcl level, and
     ## other specialities.
 
-    mdef @mark { /* Internal method, no argument checking. */
-	/* Save the OpenNI handle in the shared kinetcl context.
+    method @mark {} {
+	/* Internal method, no argument checking.
+	 * Save the OpenNI handle in the shared kinetcl context.
 	 * -- This is done (implicitly) during construction, so that the C-level
 	 *    base classes can find the handle/node they are to use.
 	 * -- This is also done (explicitly through here) by 'Valid',
@@ -27,8 +30,9 @@ critcl::class def ::kinetcl::Base {
 	return TCL_OK;
     }
 
-    mdef @unmark { /* Internal method, no argument checking. */
-	/* Remove the OpenNI handle from the shared stash.
+    method @unmark {} {
+	/* Internal method, no argument checking.
+	 * Remove the OpenNI handle from the shared stash.
 	 * IOW clean the state up.
 	 */
 	instance->context->mark = NULL;
@@ -36,7 +40,7 @@ critcl::class def ::kinetcl::Base {
     }
 
     # # ## ### ##### ######## #############
-    mdef is-capable-of { /* Syntax: <instance> is-capable-of capName */
+    method is-capable-of {capName/2} {
 	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
 
 	XnBool supported;
@@ -62,7 +66,7 @@ critcl::class def ::kinetcl::Base {
 	return TCL_OK;
     }
 
-    mdef capabilities { /* Syntax: <instance> capabilities */
+    method capabilities {} {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -72,12 +76,12 @@ critcl::class def ::kinetcl::Base {
 	return TCL_OK;
     }
 
-    mdef node-name { /* Syntax: <instance> ni-name */
+    method node-name {} {
 	Tcl_SetObjResult (interp, Tcl_NewStringObj (xnGetNodeName (instance->handle),-1));
 	return TCL_OK;
     }
 
-    mdef node-info { /* Syntax: <instance> node-info */
+    method node-info {} {
 	XnNodeInfo*                        ni = xnGetNodeInfo (instance->handle);
 	const XnProductionNodeDescription* d  = xnNodeInfoGetDescription (ni);
 	Tcl_Obj* vv [4];

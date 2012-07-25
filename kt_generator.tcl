@@ -10,7 +10,7 @@ critcl::class def ::kinetcl::Generator {
     # # ## ### ##### ######## #############
     ## Control and query data generation
 
-    mdef start { /* Syntax: <instance> start */
+    method start {} {
 	XnStatus s;
 
 	if (objc != 2) {
@@ -24,7 +24,7 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    mdef stop { /* Syntax: <instance> stop */
+    method stop {} {
 	XnStatus s;
 
 	if (objc != 2) {
@@ -38,7 +38,7 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    mdef active { /* Syntax: <instance> active */
+    method active {} {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -51,7 +51,7 @@ critcl::class def ::kinetcl::Generator {
     # # ## ### ##### ######## #############
     ## Wait for data, check if waiting would not block
 
-    mdef update { /* Syntax: <instance> update */
+    method update {} {
 	XnStatus s;
 
 	if (objc != 2) {
@@ -65,7 +65,7 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    mdef hasNew { /* Syntax: <instance> new */
+    method hasNew {} {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -80,7 +80,7 @@ critcl::class def ::kinetcl::Generator {
     ## Query data attributes (is it new?, frame id, timestamp)
     ## Note: Data size and data itself are not accessible here, but only is derived classes.
 
-    mdef isNew { /* Syntax: <instance> isNew */
+    method isNew {} {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
 	    return TCL_ERROR;
@@ -90,7 +90,7 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    mdef frame { /* Syntax: <instance> frame */
+    method frame {} {
 	XnUInt32 frame;
 
 	if (objc != 2) {
@@ -108,7 +108,7 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    mdef time { /* Syntax: <instance> time */
+    method time {} {
 	XnUInt64 timestamp;
 
 	if (objc != 2) {

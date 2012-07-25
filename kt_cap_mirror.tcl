@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapMirror {
 
     # # ## ### ##### ######## #############
 
-    mdef mirror { /* Syntax: <instance> mirror ?<bool>? */
+    method mirror {?bool?} {
 	if (objc == 2) { /* Syntax: <instance> mirror */
 	    XnBool m = xnIsMirrored (instance->handle);
 

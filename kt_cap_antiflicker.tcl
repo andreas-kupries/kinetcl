@@ -7,7 +7,7 @@ critcl::class def ::kinetcl::CapAntiflicker {
 
     # # ## ### ##### ######## #############
 
-    mdef frequency { /* Syntax: <instance> frequency ?f|off? */
+    method frequency {?f|off?} {
 	if (objc == 2) { /* Syntax: <instance> frequency */
 	    Tcl_Obj* res;
 	    XnPowerLineFrequency f = xnGetPowerLineFrequency (instance->handle);
