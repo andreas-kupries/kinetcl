@@ -13,13 +13,21 @@
 # # ## ### ##### ######## #############
 
 proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb signatureb bodyb} {
+    # The additional offsets (3 and 1 == \n\n\n, \n) are added because
+    # of the way we are formatting the calls of this procedure with
+    # continuation lines between the first four arguments and after
+    # the first body.
+    critcl::at::caller
+    critcl::at::incrt \n\n\n        $signaturea  ; set aloc [critcl::at::get*]
+    critcl::at::incrt \n     $bodya $signatureb  ; set bloc [critcl::at::get]
+
     set cname  [kt_cbcname $name]
     set cnamea [kt_cbcname $namea]
     set cnameb [kt_cbcname $nameb]
 
     # Define the raw callback processing.
-    kt_cbhandler $name $namea $cnamea $signaturea $bodya
-    kt_cbhandler $name $nameb $cnameb $signatureb $bodyb
+    kt_cbhandler $name $namea $cnamea $signaturea $aloc$bodya
+    kt_cbhandler $name $nameb $cnameb $signatureb $bloc$bodyb
 
     lappend map @@name@@          $name
     lappend map @@cname@@         $cname

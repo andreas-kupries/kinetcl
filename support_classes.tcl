@@ -1,6 +1,10 @@
 ## -*- tcl -*-
 # # ## ### ##### ######## #############
 
+## ATTENTION. This file contains '# line' directives for embedded C
+## code, with hardwired line numbers. Please check and edit these
+## directives for correctness after editing this file.
+
 ## This file defines helper commands used at build-time within the C
 ## code generation. These commands are not available at runtime, and
 ## shouldn't be. They are similar to the Publish and MixCapabilities
@@ -9,9 +13,6 @@
 ## Here we provide setup of common constructions found in and shared
 ## by the C classes. Common instance variables, their construction,
 ## etc.
-
-## ATTENTION: This file contains embedded '# line; directives. After
-## editing this file make sure to edit and correct their line numbers.
 
 # # ## ### ##### ######## #############
 
@@ -147,7 +148,7 @@ proc kt_node_class {construction {destruction {}}} {
 	XnNodeHandle h; /* The player's object handle */
 
 	@@construction@@
-	# line 151 "support_classes.tcl"
+	# line 152 "support_classes.tcl"
 	CHECK_STATUS_GOTO;
 
 	/* Fill our structure */
@@ -157,7 +158,7 @@ proc kt_node_class {construction {destruction {}}} {
 	instance->context->mark = h;
     }] [string map $map {
 	@@destruction@@
-	# line 161 "support_classes.tcl"
+	# line 162 "support_classes.tcl"
 	xnProductionNodeRelease (instance->handle);
     }]
 

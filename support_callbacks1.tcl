@@ -11,10 +11,17 @@
 # # ## ### ##### ######## #############
 
 proc kt_callback {name consfunction destfunction signature body {mode all} {detail {}}} {
+    # The additional offset (3 == \n\n\n) gets added because of the
+    # way we are formatting the calls of this procedure, with
+    # continuation lines between the first four arguments.
+    critcl::at::caller
+    critcl::at::incrt \n\n\n $signature
+    set bloc [critcl::at::get*]
+
     set cname [kt_cbcname $name]
 
     # Define the raw callback processing.
-    kt_cbhandler $name $name $cname $signature $body $mode
+    kt_cbhandler $name $name $cname $signature $bloc$body $mode
 
     if {$detail ne {}} {
 	set detail " \"$detail\","
