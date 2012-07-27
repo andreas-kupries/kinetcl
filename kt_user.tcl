@@ -107,7 +107,7 @@ critcl::class def ::kinetcl::User {
 	s = xnGetUserPixels (instance->handle, id, meta);
 	/* CHECK_STATUS_RETURN, inlined, to free the meta data */
 	if (s != XN_STATUS_OK) {
-	    xnFreeImageMetaData (meta);
+	    xnFreeSceneMetaData (meta);
 	    Tcl_AppendResult (interp, xnGetStatusString (s), NULL);
 	    return TCL_ERROR;
 	}
@@ -128,7 +128,7 @@ critcl::class def ::kinetcl::User {
 	memcpy (image->pixel, meta->pData,
 		meta->pMap->pOutput->nDataSize);
 
-	xnFreeDepthMetaData (meta);
+	xnFreeSceneMetaData (meta);
 
 	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
 	return TCL_OK;
