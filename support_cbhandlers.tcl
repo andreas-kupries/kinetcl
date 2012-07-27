@@ -223,14 +223,13 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
         ## event to be processed later.
 
 	support {
-	    static int
+	    static void
 	    @stem@_callback_@@cname@@_free (Kinetcl_Event* evPtr)
 	    {
                 @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
              
                 /* Destroy this event, here we deal with the internal allocated parts */
                 @@edestructor@@
-                return 1;
             }
 
 	    static void
@@ -247,7 +246,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
                 e->instance = instance;
                 @@eencode@@
 
-		if (kinetcl_locked (instance->context, e)) return;
+		if (kinetcl_locked (instance->context, (Kinetcl_Event*) e)) return;
 
                 Tcl_ThreadQueueEvent(instance->owner, (Tcl_Event *) e, TCL_QUEUE_TAIL);
                 Tcl_ThreadAlert     (instance->owner);

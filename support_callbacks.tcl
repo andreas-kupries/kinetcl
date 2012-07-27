@@ -11,6 +11,7 @@
 # # ## ### ##### ######## #############
 
 critcl::ccode {
+#include <string.h>
 #include <pthread.h>
     static void
     kinetcl_invoke_callback (Tcl_Interp* interp, Tcl_Obj* cmd)
@@ -34,7 +35,7 @@ critcl::ccode {
     }
 
     static char*
-    kinetcl_strdup (char* s)
+    kinetcl_strdup (const char* s)
     {
 	int n = strlen (s) + 1;
 	char* r = ckalloc (n);

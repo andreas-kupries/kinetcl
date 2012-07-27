@@ -212,7 +212,7 @@ critcl::class def ::kinetcl::Base {
 	};
 
 	static Tcl_Obj*
-	kinetcl_convert_3d (XnVector3D* vec)
+	kinetcl_convert_3d (const XnVector3D* vec)
 	{
 	    Tcl_Obj* coords [3];
 
