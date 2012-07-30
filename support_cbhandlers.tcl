@@ -262,7 +262,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	    e->instance = instance;
 	    @@eencode@@
 # line 265 "support_cbhandlers.tcl"
-	    if (kinetcl_locked (instance->context, e)) return;
+	    if (kinetcl_locked (instance->context, (Kinetcl_Event*) e)) return;
 
 	    Tcl_ThreadQueueEvent(instance->owner, (Tcl_Event *) e, TCL_QUEUE_TAIL);
 	    Tcl_ThreadAlert     (instance->owner);

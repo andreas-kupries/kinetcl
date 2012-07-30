@@ -108,7 +108,7 @@ critcl::class def ::kinetcl::Depth {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;
-	Tcl_Obj** lv;
+	Tcl_Obj* const* lv;
 	Tcl_Obj *p, *rv;
 	Tcl_Obj** pv;
 	XnPoint3D* aprojective;
@@ -153,7 +153,7 @@ critcl::class def ::kinetcl::Depth {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;
-	Tcl_Obj** lv;
+	Tcl_Obj* const* lv;
 	Tcl_Obj *p, *rv;
 	Tcl_Obj** pv;
 	XnPoint3D* aworld;

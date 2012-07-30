@@ -163,7 +163,7 @@ critcl::ccode {
 	locked = c->eventLock;
 	if (locked) {
 	    /* Defer the event */
-	    evPtr->event.nextPtr = c->eventDefered;
+	    evPtr->event.nextPtr = (Tcl_Event*) c->eventDefered;
 	    c->eventDefered = evPtr;
 	}
 	Tcl_MutexUnlock (&c->eventLockMutex);
@@ -172,7 +172,7 @@ critcl::ccode {
 
     static int
     kinetcl_cap_integer_rw (XnNodeHandle handle, char* cap,
-			    Tcl_Interp* interp, int objc, Tcl_Obj** objv)
+			    Tcl_Interp* interp, int objc, Tcl_Obj* const* objv)
     {
 	if (objc == 2) { /* Syntax: <instance> .capname. */
 	    XnStatus s;
@@ -205,7 +205,7 @@ critcl::ccode {
 
     static int
     kinetcl_cap_integer_range (XnNodeHandle handle, char* cap,
-			       Tcl_Interp* interp, int objc, Tcl_Obj** objv)
+			       Tcl_Interp* interp, int objc, Tcl_Obj* const* objv)
     {
 	XnStatus s;
 	XnInt32 vmin, vmax, vstep, vdefault;
