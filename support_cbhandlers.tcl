@@ -334,4 +334,113 @@ proc kt_cb_event_oni {map} {
 }
 
 # # ## ### ##### ######## ############# #####################
+
+proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
+    # - callback:	Overall C name of the callback (group) /OpenNI
+    # - name:		Tcl name of the individual callback (command) /Tcl
+    # - cname:		C name of the individual callback (command) /Tcl
+    #                   we generate functions for.
+    # - allnames:	List of all commands in the group
+    # - cons:           OpenNI registration function for the callback group
+    # - dest:           OpenNI unregister function for the callback group
+    # - detail:         Additional arguments for registration function.
+
+    if {$detail ne {}} {
+	set detail " \"$detail\","
+    }
+
+    # For callback group containing more than one callback we have to
+    # generate additional guard code for construction and deletion of
+    # the C callback handling the group.
+    set first 1
+    set anti  {}
+    foreach c $allnames {
+	lappend handlers "@stem@_callback_${c}_handler"
+	if {$c eq $cname} continue
+	if {$first} {
+	    lappend anti "[critcl::at::here!]/* Keep C callback if other Tcl callbacks still active */"
+	    set first 0
+	}
+	lappend anti "[critcl::at::here!]if (instance->command${c}) return;"
+    }
+
+    lappend map @@callback@@     $callback
+    lappend map @@cname@@        $cname
+    lappend map @@handlers@@     [join $handlers ,]
+    lappend map @@antiguard@@    [join $anti "\n\t\t"]
+    lappend map @@consfunction@@ $cons
+    lappend map @@destfunction@@ $dest
+    lappend map @@detail@@       $detail
+
+    method set-callback-$name {cmdprefix} [string map $map {
+	if (objc != 3) {
+	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
+	    return TCL_ERROR;
+	}
+
+	return @stem@_callback_@@cname@@_set (instance, objv [2]);
+    }]
+
+    method unset-callback-$name {} [string map $map {
+	if (objc != 2) {
+	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	    return TCL_OK;
+	}
+
+	@stem@_callback_@@cname@@_unset (instance, 1);
+	return TCL_ERROR;
+    }]
+   
+    # The command@@...@@ variable(s) used below are defined by calls
+    # of kt_cb_handler above.
+
+    support [string map $map {
+	static void
+	@stem@_callback_@@cname@@_unset (@instancetype@ instance, int dev)
+	{
+	    /* Single callback handle for 2 callbacks */
+	    if (!instance->callback@@callback@@) return;
+	    if (!instance->command@@cname@@) return;
+
+	    Tcl_DecrRefCount (instance->command@@cname@@);
+	    instance->command@@cname@@ = NULL;
+
+	    @@antiguard@@
+# line 410 "support_cbhandlers.tcl"
+	    @@destfunction@@ (instance->handle,@@detail@@ instance->callback@@callback@@);
+	    instance->callback@@callback@@ = NULL;
+
+	    if (!dev) return;
+	    Tcl_DeleteEvents (@stem@_callback_@@cname@@_delete, (ClientData) instance);
+	}
+
+	static int
+	@stem@_callback_@@cname@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
+	{
+	    Tcl_Obj* cmd;
+
+	    if (!instance->callback@@callback@@) {
+		Tcl_Interp* interp = instance->interp;
+		XnCallbackHandle callback;
+		XnStatus s;
+
+		s = @@consfunction@@ (instance->handle,@@detail@@
+				      @@handlers@@,
+				      instance,
+				      &callback);
+		CHECK_STATUS_RETURN;
+
+		instance->callback@@callback@@ = callback;
+	    }
+
+	    @stem@_callback_@@cname@@_unset (instance, 0);
+	    instance->command@@cname@@ = cmdprefix;
+	    Tcl_IncrRefCount (cmdprefix);
+	    return TCL_OK;
+	}
+    }]
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
 return
