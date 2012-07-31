@@ -96,43 +96,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
     }]
 
     if {$mode ne "all"} {
-	insvariable int queued$cname "
-	    Flag, true when at least one '$name' event is queued.
-	" [string map $map {
-	    /* Initialize the queue flag for collapsed '@@name@@' events.*/
-	    instance->queued@@cname@@ = 0;
-	}]
-	
-	insvariable Tcl_Mutex mutex$cname "
-	    Mutex controlling access to the '$name'-flag.
-	" [string map $map {
-	    /* Initialize the mutex for collapsed '@@name@@' events.*/
-	    instance->mutex@@cname@@  = 0;
-	}] [string map $map {
-	    /* Destroy mutex with instance */
-	    Tcl_MutexFinalize (&instance->mutex@@cname@@);
-	}]
-
-	support [string map $map {
-	    static int
-	    @stem@_callback_@@cname@@_queued (@instancetype@ instance) {
-		int queued;
-		Tcl_MutexLock (&instance->mutex@@cname@@);
-		queued = instance->queued@@cname@@;
-		if (!queued) {
-		    instance->queued@@cname@@ = 1;
-		}
-		Tcl_MutexUnlock (&instance->mutex@@cname@@);
-		return queued;
-	    }
-
-	    static void
-	    @stem@_callback_@@cname@@_dequeue (@instancetype@ instance) {
-		Tcl_MutexLock (&instance->mutex@@cname@@);
-		instance->queued@@cname@@ = 0;
-		Tcl_MutexUnlock (&instance->mutex@@cname@@);
-	    }
-	}]
+	kt_cb_queue_management $name $cname
     }
 
     # # ## ### ##### ######## ############# #####################
@@ -307,6 +271,53 @@ proc kt_cb_common_core {} {
 	    /* instance->owner is a plain id, nothing to release. */
 	}
     }
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc kt_cb_queue_management {name cname} {
+    lappend map @@name@@  $name
+    lappend map @@cname@@ $cname
+
+    insvariable int queued$cname "
+	    Flag, true when at least one '$name' event is queued.
+	" [string map $map {
+	    /* Initialize the queue flag for collapsed '@@name@@' events.*/
+	    instance->queued@@cname@@ = 0;
+	}]
+    
+    insvariable Tcl_Mutex mutex$cname "
+	    Mutex controlling access to the '$name'-flag.
+	" [string map $map {
+	    /* Initialize the mutex for collapsed '@@name@@' events.*/
+	    instance->mutex@@cname@@  = 0;
+	}] [string map $map {
+	    /* Destroy mutex with instance */
+	    Tcl_MutexFinalize (&instance->mutex@@cname@@);
+	}]
+
+    support [string map $map {
+	static int
+	@stem@_callback_@@cname@@_queued (@instancetype@ instance) {
+	    int queued;
+	    Tcl_MutexLock (&instance->mutex@@cname@@);
+	    queued = instance->queued@@cname@@;
+	    if (!queued) {
+		instance->queued@@cname@@ = 1;
+	    }
+	    Tcl_MutexUnlock (&instance->mutex@@cname@@);
+	    return queued;
+	}
+
+	static void
+	@stem@_callback_@@cname@@_dequeue (@instancetype@ instance) {
+	    Tcl_MutexLock (&instance->mutex@@cname@@);
+	    instance->queued@@cname@@ = 0;
+	    Tcl_MutexUnlock (&instance->mutex@@cname@@);
+	}
+    }]
+
     return
 }
 
