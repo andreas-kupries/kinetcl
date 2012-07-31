@@ -214,10 +214,12 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	    interp = instance->interp;
 
 	    details = Tcl_NewDictObj ();
-	    { @@body@@ }
-# line 219 "support_cbhandlers.tcl"
-	    @@edestructor@@
+	    {
+		@@body@@
+	    }
 # line 221 "support_cbhandlers.tcl"
+	    @@edestructor@@
+# line 223 "support_cbhandlers.tcl"
 
 	    cmd = Tcl_DuplicateObj (instance->command@@cname@@);
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
