@@ -52,11 +52,11 @@ proc kt_callback {name consfunction destfunction signature body {mode all} {deta
 	mdef unset-callback-@@name@@ { /* Syntax: <instance> unset-callback-@@name@@ */
 	    if (objc != 2) {
 		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
+		return TCL_ERROR;
 	    }
 
 	    @stem@_callback_@@cname@@_unset (instance, 1);
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	support {

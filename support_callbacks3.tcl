@@ -71,11 +71,11 @@ proc kt_3callback {name consfunction destfunction
 	mdef unset-callback-@@namea@@ { /* Syntax: <instance> unset-callback-@@namea@@ */
 	    if (objc != 2) {
 		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
+		return TCL_ERROR;
 	    }
 
 	    @stem@_callback_@@cnamea@@_unset (instance, 1);
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	mdef set-callback-@@nameb@@ { /* Syntax: <instance> set-callback-@@nameb@@ <cmdprefix> */
@@ -90,11 +90,11 @@ proc kt_3callback {name consfunction destfunction
 	mdef unset-callback-@@nameb@@ { /* Syntax: <instance> unset-callback-@@nameb@@ */
 	    if (objc != 2) {
 		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
+		return TCL_ERROR;
 	    }
 
 	    @stem@_callback_@@cnameb@@_unset (instance, 1);
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	mdef set-callback-@@namec@@ { /* Syntax: <instance> set-callback-@@namec@@ <cmdprefix> */
@@ -109,11 +109,11 @@ proc kt_3callback {name consfunction destfunction
 	mdef unset-callback-@@namec@@ { /* Syntax: <instance> unset-callback-@@namec@@ */
 	    if (objc != 2) {
 		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
+		return TCL_ERROR;
 	    }
 
 	    @stem@_callback_@@cnamec@@_unset (instance, 1);
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	support {

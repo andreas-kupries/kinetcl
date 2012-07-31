@@ -60,11 +60,11 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	mdef unset-callback-@@namea@@ { /* Syntax: <instance> unset-callback-@@namea@@ */
 	    if (objc != 2) {
 		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
+		return TCL_ERROR;
 	    }
 
 	    @stem@_callback_@@cnamea@@_unset (instance, 1);
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	mdef set-callback-@@nameb@@ { /* Syntax: <instance> set-callback-@@nameb@@ <cmdprefix> */
@@ -79,11 +79,11 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
 	mdef unset-callback-@@nameb@@ { /* Syntax: <instance> unset-callback-@@nameb@@ */
 	    if (objc != 2) {
 		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_OK;
+		return TCL_ERROR;
 	    }
 
 	    @stem@_callback_@@cnameb@@_unset (instance, 1);
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	support {
