@@ -222,11 +222,11 @@ critcl::ccode {
 	CHECK_STATUS_RETURN;
 
 	res = Tcl_NewDictObj ();
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("min",-1), Tcl_NewIntObj (vmin));
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("max",-1), Tcl_NewIntObj (vmax));
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("step",-1), Tcl_NewIntObj (vstep));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("min",-1),     Tcl_NewIntObj (vmin));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("max",-1),     Tcl_NewIntObj (vmax));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("step",-1),    Tcl_NewIntObj (vstep));
 	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("default",-1), Tcl_NewIntObj (vdefault));
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("auto",-1), Tcl_NewIntObj (hasAuto));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("auto",-1),    Tcl_NewIntObj (hasAuto));
 
 	Tcl_SetObjResult (interp, res);
 	return TCL_OK;
