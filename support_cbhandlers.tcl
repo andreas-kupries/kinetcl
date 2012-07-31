@@ -101,72 +101,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 
     kt_cb_event_types $map
     kt_cb_event_tcl   $map
-
-    # # ## ### ##### ######## ############# #####################
-    ## Callback handler function invoked by OpenNI. It does
-    ## nothing more than setting up and enqueueing the call as
-    ## event to be processed later.
-
-    support [string map $map {
-	static void
-	@stem@_callback_@@cname@@_free (Kinetcl_Event* evPtr)
-	{
-	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
-	    
-	    /* Destroy this event, here we deal with the internal allocated parts */
-	    @@edestructor@@
-# line 119 "support_cbhandlers.tcl"
-	}
-
-	static void
-	@stem@_callback_@@cname@@_handler (@@signature@@)
-	{
-	    @instancetype@ instance = (@instancetype@) clientData;
-	    @stem@_callback_@@cname@@_EVENT* e;
-
-	    @@eeqguard@@
-# line 129 "support_cbhandlers.tcl"
-	    e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
-	    e->event.event.proc = @stem@_callback_@@cname@@_tcl_handler;
-	    e->event.delproc    = @stem@_callback_@@cname@@_free;
-	    e->instance = instance;
-	    @@eencode@@
-# line 135 "support_cbhandlers.tcl"
-	    if (kinetcl_locked (instance->context, (Kinetcl_Event*) e)) return;
-
-	    Tcl_ThreadQueueEvent(instance->owner, (Tcl_Event *) e, TCL_QUEUE_TAIL);
-	    Tcl_ThreadAlert     (instance->owner);
-	}
-    }]
-
-    # # ## ### ##### ######## ############# #####################
-    ## Handler invoked by Tcl_DeleteEvents (see instance destructor)
-    ## Filters out Kinetcl events of the instance and marks them for destruction.
-    ## nothing more than setting up and enqueueing the call as
-    ## event to be processed later.
-
-    support [string map $map {
-	static int
-	@stem@_callback_@@cname@@_delete (Tcl_Event* evPtr, ClientData clientData)
-	{
-	    @instancetype@ instance = (@instancetype@) clientData;
-	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
-
-	    /* Keep events not issued by Kinetcl */
-	    if (e->event.event.proc != @stem@_callback_@@cname@@_tcl_handler) {
-		return 0;
-	    }
-	    /* Keep events not issued by the instance about to be destroyed */
-	    if (e->instance != instance) {
-		return 0;
-	    }
-
-	    @@edqguard@@
-# line 166 "support_cbhandlers.tcl"
-	    @stem@_callback_@@cname@@_free ((Kinetcl_Event*) e);
-	    return 1;
-	}
-    }]
+    kt_cb_event_oni   $map
 
     # # ## ### ##### ######## ############# #####################
     return
@@ -260,7 +195,7 @@ proc kt_cb_event_types {map} {
 	    @instancetype@ instance;
 	    /* ----------------------------------------------------------------- */
 	    @@esignature@@
-# line 264 "support_cbhandlers.tcl"
+# line 199 "support_cbhandlers.tcl"
 	    /* ----------------------------------------------------------------- */
 	} @stem@_callback_@@cname@@_EVENT;
     }]
@@ -280,7 +215,7 @@ proc kt_cb_event_tcl {map} {
 	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
 	    @instancetype@ instance;
 	    @@evardef@@
-# line 284 "support_cbhandlers.tcl"
+# line 219 "support_cbhandlers.tcl"
 	    Tcl_Obj* cmd;
 	    Tcl_Obj* details;
 	    Tcl_Interp* interp;
@@ -292,7 +227,7 @@ proc kt_cb_event_tcl {map} {
 	    if (!(mask & TCL_FILE_EVENTS)) { return 0; }
 	    instance = e->instance;
 	    @@edqguard@@
-# line 296 "support_cbhandlers.tcl"
+# line 231 "support_cbhandlers.tcl"
 	    /* Drop event '@@name@@' if no handler set. But also
 	    * signal it as processed to get rid of it in the
 	    * queue too. Note: This should not be necessary,
@@ -301,21 +236,21 @@ proc kt_cb_event_tcl {map} {
 	    */
 	    if (!instance->command@@cname@@) {
 		@@edestructor@@
-# line 305 "support_cbhandlers.tcl"
+# line 240 "support_cbhandlers.tcl"
 		return 1;
 	    }
 
 	    /* Decode event structure into local variables. */
 	    @@edecode@@
-# line 311 "support_cbhandlers.tcl"
+# line 246 "support_cbhandlers.tcl"
 	    interp = instance->interp;
 
 	    details = Tcl_NewDictObj ();
 	    {
 	      @@body@@ }
-# line 317 "support_cbhandlers.tcl"
+# line 252 "support_cbhandlers.tcl"
 	    @@edestructor@@
-# line 318 "support_cbhandlers.tcl"
+# line 254 "support_cbhandlers.tcl"
 	    cmd = Tcl_DuplicateObj (instance->command@@cname@@);
 	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
 	    Tcl_ListObjAppendElement (interp, cmd, instance->self);
@@ -328,6 +263,73 @@ proc kt_cb_event_tcl {map} {
 	    return 1;
 	}
     }]
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+## (1) Callback handler function invoked by OpenNI. It does
+## nothing more than setting up and enqueueing the call as
+## event to be processed later.
+#
+## (2) Handler invoked by Tcl_DeleteEvents (see instance destructor)
+## Filters out Kinetcl events of the instance and marks them for destruction.
+## nothing more than setting up and enqueueing the call as
+## event to be processed later.
+
+proc kt_cb_event_oni {map} {
+    support [string map $map {
+	static void
+	@stem@_callback_@@cname@@_free (Kinetcl_Event* evPtr)
+	{
+	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
+	    
+	    /* Destroy this event, here we deal with the internal allocated parts */
+	    @@edestructor@@
+# line 289 "support_cbhandlers.tcl"
+	}
+
+	static void
+	@stem@_callback_@@cname@@_handler (@@signature@@)
+	{
+	    @instancetype@ instance = (@instancetype@) clientData;
+	    @stem@_callback_@@cname@@_EVENT* e;
+
+	    @@eeqguard@@
+# line 299 "support_cbhandlers.tcl"
+	    e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
+	    e->event.event.proc = @stem@_callback_@@cname@@_tcl_handler;
+	    e->event.delproc    = @stem@_callback_@@cname@@_free;
+	    e->instance = instance;
+	    @@eencode@@
+# line 305 "support_cbhandlers.tcl"
+	    if (kinetcl_locked (instance->context, (Kinetcl_Event*) e)) return;
+
+	    Tcl_ThreadQueueEvent(instance->owner, (Tcl_Event *) e, TCL_QUEUE_TAIL);
+	    Tcl_ThreadAlert     (instance->owner);
+	}
+
+	static int
+	@stem@_callback_@@cname@@_delete (Tcl_Event* evPtr, ClientData clientData)
+	{
+	    @instancetype@ instance = (@instancetype@) clientData;
+	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
+
+	    /* Keep events not issued by Kinetcl */
+	    if (e->event.event.proc != @stem@_callback_@@cname@@_tcl_handler) {
+		return 0;
+	    }
+	    /* Keep events not issued by the instance about to be destroyed */
+	    if (e->instance != instance) {
+		return 0;
+	    }
+
+	    @@edqguard@@
+# line 328 "support_cbhandlers.tcl"
+	    @stem@_callback_@@cname@@_free ((Kinetcl_Event*) evPtr);
+	    return 1;
+	}
+    }]
+
     return
 }
 
