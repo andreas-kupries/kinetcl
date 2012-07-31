@@ -99,20 +99,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	kt_cb_queue_management $name $cname
     }
 
-    # # ## ### ##### ######## ############# #####################
-    support [string map $map {
-	/* Tcl Event Structure for '@@name@@'.
-	* The 'clientData
-	*/
-	typedef struct @stem@_callback_@@cname@@_EVENT {
-	    Kinetcl_Event event;
-	    @instancetype@ instance;
-	    /* ----------------------------------------------------------------- */
-	    @@esignature@@
-# line 170 "support_cbhandlers.tcl"
-	    /* ----------------------------------------------------------------- */
-	} @stem@_callback_@@cname@@_EVENT;
-    }]
+    kt_cb_event_types $map
 
     # # ## ### ##### ######## ############# #####################
     ## Kinetcl callback handler. Invoked from the event queue of
@@ -318,6 +305,27 @@ proc kt_cb_queue_management {name cname} {
 	}
     }]
 
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+
+proc kt_cb_event_types {map} {
+    # Find a way to computationally specify the embedded line directives below.
+
+    support [string map $map {
+	/* Tcl Event Structure for '@@name@@'.
+	 * The 'clientData
+	 */
+	typedef struct @stem@_callback_@@cname@@_EVENT {
+	    Kinetcl_Event event;
+	    @instancetype@ instance;
+	    /* ----------------------------------------------------------------- */
+	    @@esignature@@
+# line 200 "support_cbhandlers.tcl"
+	    /* ----------------------------------------------------------------- */
+	} @stem@_callback_@@cname@@_EVENT;
+    }]
     return
 }
 
