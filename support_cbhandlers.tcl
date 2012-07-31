@@ -15,7 +15,7 @@
 
 # # ## ### ##### ######## ############# #####################
 
-proc kt_cbcname {name} {
+proc kt_cb_cname {name} {
     #puts |$name|
     regsub -all -- {[^a-zA-Z0-9_]} $name {[scan {\0} %c]} cname
     #puts |$cname|
@@ -24,7 +24,7 @@ proc kt_cbcname {name} {
     return [string totitle $cname]
 }
 
-proc kt_cbhandler {group name cname signature body {mode all}} {
+proc kt_cb_handler {group name cname signature body {mode all}} {
     set esignature [list {XnNodeHandle h} {*}$signature]
     set fsignature [list {XnNodeHandle h} {*}$signature {void* clientData}]
 
@@ -384,11 +384,11 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
     method unset-callback-$name {} [string map $map {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_OK;
+	    return TCL_ERROR;
 	}
 
 	@stem@_callback_@@cname@@_unset (instance, 1);
-	return TCL_ERROR;
+	return TCL_OK;
     }]
    
     # The command@@...@@ variable(s) used below are defined by calls
