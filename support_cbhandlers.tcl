@@ -82,28 +82,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	lappend map @@edqguard@@ ""
     }
 
-    # # ## ### ##### ######## ############# #####################
-    ## This code is fully run only once. At the second time the
-    ## duplicate field will error out, and the catch simply lets us
-    ## proceed, knowing, implicitly, that the fields and mgmt are
-    ## present.
-    catch {
-	insvariable Tcl_Interp* interp {
-	    Interpreter for all callback handlers
-	} {
-	    instance->interp = interp;
-	} {
-	    /* instance->interp is a non-owned copy, nothing to release */
-	}
-
-	insvariable Tcl_ThreadId owner  {
-	    Thread owning the instance
-	} {
-	    instance->owner  = Tcl_GetCurrentThread ();
-	} {
-	    /* instance->owner is a plain id, nothing allocated */
-	}
-    }
+    kt_cb_common_core
 
     # # ## ### ##### ######## ############# #####################
     ## Event deletion on destruction is handled by the higher-level _unset functions.
@@ -301,6 +280,33 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
     }]
 
     # # ## ### ##### ######## ############# #####################
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+## This code is fully run only once. At the second time the
+## duplicate field will error out, and the catch simply lets
+## us proceed, knowing, implicitly, that the fields and mgmt are
+## present.
+
+proc kt_cb_common_core {} {
+    catch {
+	insvariable Tcl_Interp* interp {
+	    Interpreter for all callback handlers
+	} {
+	    instance->interp = interp;
+	} {
+	    /* instance->interp is a non-owned copy, nothing to release */
+	}
+
+	insvariable Tcl_ThreadId owner  {
+	    Thread owning the instance
+	} {
+	    instance->owner  = Tcl_GetCurrentThread ();
+	} {
+	    /* instance->owner is a plain id, nothing to release. */
+	}
+    }
     return
 }
 
