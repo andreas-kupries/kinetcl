@@ -100,69 +100,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
     }
 
     kt_cb_event_types $map
-
-    # # ## ### ##### ######## ############# #####################
-    ## Kinetcl callback handler. Invoked from the event queue of
-    ## the owning thread. The events are set up by the raw
-    ## handler, see the next function.
-
-    support [string map $map {
-	static int
-	@stem@_callback_@@cname@@_tcl_handler (Tcl_Event* evPtr, int mask)
-	{
-	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
-	    @instancetype@ instance;
-	    @@evardef@@
-# line 187 "support_cbhandlers.tcl"
-	    Tcl_Obj* cmd;
-	    Tcl_Obj* details;
-	    Tcl_Interp* interp;
-	    /* ASSERT (h == instance->handle) ? */
-
-	    /* Treating kinetcl's callbacks like fileevents, not
-	    * processing them when not allowed by the core.
-	    */
-	    if (!(mask & TCL_FILE_EVENTS)) { return 0; }
-	    instance = e->instance;
-	    @@edqguard@@
-# line 199 "support_cbhandlers.tcl"
-	    /* Drop event '@@name@@' if no handler set. But also
-	    * signal it as processed to get rid of it in the
-	    * queue too. Note: This should not be necessary,
-	    * given that the higher _unset functions drop all
-	    * unprocessed events from the queue.
-	    */
-	    if (!instance->command@@cname@@) {
-		@@edestructor@@
-# line 208 "support_cbhandlers.tcl"
-		return 1;
-	    }
-
-	    /* Decode event structure into local variables. */
-	    @@edecode@@
-# line 214 "support_cbhandlers.tcl"
-	    interp = instance->interp;
-
-	    details = Tcl_NewDictObj ();
-	    {
-		@@body@@
-	    }
-# line 221 "support_cbhandlers.tcl"
-	    @@edestructor@@
-# line 223 "support_cbhandlers.tcl"
-
-	    cmd = Tcl_DuplicateObj (instance->command@@cname@@);
-	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
-	    Tcl_ListObjAppendElement (interp, cmd, instance->self);
-	    Tcl_ListObjAppendElement (interp, cmd, details);
-
-	    /* Invoke "{*}$cmdprefix $self @@name@@ ..." */
-	    kinetcl_invoke_callback (interp, cmd);
-
-	    /* Signal that event was processed */
-	    return 1;
-	}
-    }]
+    kt_cb_event_tcl   $map
 
     # # ## ### ##### ######## ############# #####################
     ## Callback handler function invoked by OpenNI. It does
@@ -177,7 +115,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	    
 	    /* Destroy this event, here we deal with the internal allocated parts */
 	    @@edestructor@@
-# line 249 "support_cbhandlers.tcl"
+# line 119 "support_cbhandlers.tcl"
 	}
 
 	static void
@@ -187,13 +125,13 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	    @stem@_callback_@@cname@@_EVENT* e;
 
 	    @@eeqguard@@
-# line 259 "support_cbhandlers.tcl"
+# line 129 "support_cbhandlers.tcl"
 	    e = (@stem@_callback_@@cname@@_EVENT*) ckalloc (sizeof (@stem@_callback_@@cname@@_EVENT));
 	    e->event.event.proc = @stem@_callback_@@cname@@_tcl_handler;
 	    e->event.delproc    = @stem@_callback_@@cname@@_free;
 	    e->instance = instance;
 	    @@eencode@@
-# line 265 "support_cbhandlers.tcl"
+# line 135 "support_cbhandlers.tcl"
 	    if (kinetcl_locked (instance->context, (Kinetcl_Event*) e)) return;
 
 	    Tcl_ThreadQueueEvent(instance->owner, (Tcl_Event *) e, TCL_QUEUE_TAIL);
@@ -224,7 +162,7 @@ proc kt_cbhandler {group name cname signature body {mode all}} {
 	    }
 
 	    @@edqguard@@
-# line 296 "support_cbhandlers.tcl"
+# line 166 "support_cbhandlers.tcl"
 	    @stem@_callback_@@cname@@_free ((Kinetcl_Event*) e);
 	    return 1;
 	}
@@ -322,9 +260,73 @@ proc kt_cb_event_types {map} {
 	    @instancetype@ instance;
 	    /* ----------------------------------------------------------------- */
 	    @@esignature@@
-# line 200 "support_cbhandlers.tcl"
+# line 264 "support_cbhandlers.tcl"
 	    /* ----------------------------------------------------------------- */
 	} @stem@_callback_@@cname@@_EVENT;
+    }]
+    return
+}
+
+# # ## ### ##### ######## ############# #####################
+## Kinetcl callback handler. Invoked from the event queue of
+## the owning thread. The events are set up by the raw
+## handler, see the next function.
+
+proc kt_cb_event_tcl {map} {
+    support [string map $map {
+	static int
+	@stem@_callback_@@cname@@_tcl_handler (Tcl_Event* evPtr, int mask)
+	{
+	    @stem@_callback_@@cname@@_EVENT* e = (@stem@_callback_@@cname@@_EVENT*) evPtr;
+	    @instancetype@ instance;
+	    @@evardef@@
+# line 284 "support_cbhandlers.tcl"
+	    Tcl_Obj* cmd;
+	    Tcl_Obj* details;
+	    Tcl_Interp* interp;
+	    /* ASSERT (h == instance->handle) ? */
+
+	    /* we are treating kinetcl's callbacks like fileevents,
+	     * not processing them when not allowed by the core.
+	     */
+	    if (!(mask & TCL_FILE_EVENTS)) { return 0; }
+	    instance = e->instance;
+	    @@edqguard@@
+# line 296 "support_cbhandlers.tcl"
+	    /* Drop event '@@name@@' if no handler set. But also
+	    * signal it as processed to get rid of it in the
+	    * queue too. Note: This should not be necessary,
+	    * given that the higher _unset functions drop all
+	    * unprocessed events from the queue.
+	    */
+	    if (!instance->command@@cname@@) {
+		@@edestructor@@
+# line 305 "support_cbhandlers.tcl"
+		return 1;
+	    }
+
+	    /* Decode event structure into local variables. */
+	    @@edecode@@
+# line 311 "support_cbhandlers.tcl"
+	    interp = instance->interp;
+
+	    details = Tcl_NewDictObj ();
+	    {
+	      @@body@@ }
+# line 317 "support_cbhandlers.tcl"
+	    @@edestructor@@
+# line 318 "support_cbhandlers.tcl"
+	    cmd = Tcl_DuplicateObj (instance->command@@cname@@);
+	    Tcl_ListObjAppendElement (interp, cmd, Tcl_NewStringObj ("@@name@@", -1));
+	    Tcl_ListObjAppendElement (interp, cmd, instance->self);
+	    Tcl_ListObjAppendElement (interp, cmd, details);
+
+	    /* Invoke "{*}$cmdprefix $self @@name@@ ..." */
+	    kinetcl_invoke_callback (interp, cmd);
+
+	    /* Signal to caller that the event has been processed */
+	    return 1;
+	}
     }]
     return
 }
