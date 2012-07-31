@@ -75,17 +75,17 @@ proc kt_3callback {name consfunction destfunction
     method unset-callback-$namea {} [string map $map {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_OK;
+	    return TCL_ERROR;
 	}
 
 	@stem@_callback_@@cnamea@@_unset (instance, 1);
-	return TCL_ERROR;
+	return TCL_OK;
     }]
 
     method set-callback-$nameb {cmdprefix/2} [string map $map {
 	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	return @stem@_callback_@@cnameb@@_set (instance, objv [2]);
@@ -94,17 +94,17 @@ proc kt_3callback {name consfunction destfunction
     method unset-callback-$nameb {} [string map $map {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_OK;
+	    return TCL_ERROR;
 	}
 
 	@stem@_callback_@@cnameb@@_unset (instance, 1);
-	return TCL_ERROR;
+	return TCL_OK;
     }]
 
     method set-callback-$namec {cmdprefix/2} [string map $map {
 	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	return @stem@_callback_@@cnamec@@_set (instance, objv [2]);
@@ -113,11 +113,11 @@ proc kt_3callback {name consfunction destfunction
     method unset-callback-$namec {} [string map $map {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_OK;
+	    return TCL_ERROR;
 	}
 
 	@stem@_callback_@@cnamec@@_unset (instance, 1);
-	return TCL_ERROR;
+	return TCL_OK;
     }]
 
     support [string map $map {

@@ -47,7 +47,7 @@ proc kt_callback {name consfunction destfunction signature body {mode all} {deta
     method set-callback-$name {cmdprefix/2} [string map $map {
 	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "cmd...");
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	return @stem@_callback_@@cname@@_set (instance, objv [2]);
@@ -56,11 +56,11 @@ proc kt_callback {name consfunction destfunction signature body {mode all} {deta
     method unset-callback-$name {} [string map $map {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_OK;
+	    return TCL_ERROR;
 	}
 
 	@stem@_callback_@@cname@@_unset (instance, 1);
-	return TCL_ERROR;
+	return TCL_OK;
     }]
 
     support [string map $map {

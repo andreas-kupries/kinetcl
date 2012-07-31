@@ -65,17 +65,17 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
     method unset-callback-$namea {} [string map $map {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_OK;
+	    return TCL_ERROR;
 	}
 
 	@stem@_callback_@@cnamea@@_unset (instance, 1);
-	return TCL_ERROR;
+	return TCL_OK;
     }]
 
     method set-callback-$nameb {cmdprefix/2} [string map $map {
 	if (objc != 3) {
 	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
-	    return TCL_ERROR;
+	    return TCL_OK;
 	}
 
 	return @stem@_callback_@@cnameb@@_set (instance, objv [2]);
@@ -84,11 +84,11 @@ proc kt_2callback {name consfunction destfunction namea signaturea bodya nameb s
     method unset-callback-$nameb {} [string map $map {
 	if (objc != 2) {
 	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_OK;
+	    return TCL_ERROR;
 	}
 
 	@stem@_callback_@@cnameb@@_unset (instance, 1);
-	return TCL_ERROR;
+	return TCL_OK;
     }]
 
     support [string map $map {
