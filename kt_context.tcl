@@ -39,15 +39,18 @@ critcl::ccode {
 #define CB_DETAIL(s,o) Tcl_DictObjPut (interp, details, Tcl_NewStringObj (s, sizeof(s)), o)
 
 	/* Common event fields for kinetcl callback events. Tcl's
-	 * information, plus a pointer to an event-specific cleanup
-	 * function, to enable cleanup without knowing anything of
-	 * internals of the event to be deleted.
+	 * information, plus a pointer to a package- and event-specific
+	 * cleanup function. It enables cleanup without knowing anything
+	 * about the internals of the event to be deleted.
 	 */
 
-	typedef struct Kinetcl_Event {
-	    Tcl_Event event;
-	    void (*delproc) (struct Kinetcl_Event* evPtr);
-	} Kinetcl_Event;
+	typedef struct Kinetcl_Event Kinetcl_Event;
+	typedef void (*Kinetcl_EventDeleteProc) (Kinetcl_Event* evPtr);
+
+	struct Kinetcl_Event {
+	    Tcl_Event               event;
+	    Kinetcl_EventDeleteProc delproc;
+	};
 }
 
 # # ## ### ##### ######## #############
