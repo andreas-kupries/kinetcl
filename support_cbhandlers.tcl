@@ -221,7 +221,7 @@ proc kt_cb_event_tcl {map} {
 	    Tcl_Interp* interp;
 	    /* ASSERT (h == instance->handle) ? */
 
-	    /* we are treating kinetcl's callbacks like fileevents,
+	    /* We are treating kinetcl's callbacks like fileevents,
 	     * not processing them when not allowed by the core.
 	     */
 	    if (!(mask & TCL_FILE_EVENTS)) { return 0; }
@@ -357,17 +357,18 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
     foreach c $allnames {
 	lappend handlers "@stem@_callback_${c}_handler"
 	if {$c eq $cname} continue
+	# Group contains more than one callback.
 	if {$first} {
-	    lappend anti "[critcl::at::here!]/* Keep C callback if other Tcl callbacks still active */"
+	    lappend anti "\t    /* Keep C callback if other the Tcl callbacks in the group are still active */"
 	    set first 0
 	}
-	lappend anti "[critcl::at::here!]if (instance->command${c}) return;"
+	lappend anti "[critcl::at::here!]\t    if (instance->command${c}) goto del_events;"
     }
 
     lappend map @@callback@@     $callback
     lappend map @@cname@@        $cname
-    lappend map @@handlers@@     [join $handlers ,]
-    lappend map @@antiguard@@    [join $anti "\n\t\t"]
+    lappend map @@handlers@@     [join $handlers ",\n\t\t\t\t      "]
+    lappend map @@antiguard@@    [join $anti \n]
     lappend map @@consfunction@@ $cons
     lappend map @@destfunction@@ $dest
     lappend map @@detail@@       $detail
@@ -396,9 +397,8 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
 
     support [string map $map {
 	static void
-	@stem@_callback_@@cname@@_unset (@instancetype@ instance, int dev)
+	@stem@_callback_@@cname@@_unset (@instancetype@ instance, int del_events)
 	{
-	    /* Single callback handle for 2 callbacks */
 	    if (!instance->callback@@callback@@) return;
 	    if (!instance->command@@cname@@) return;
 
@@ -410,14 +410,15 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
 	    @@destfunction@@ (instance->handle,@@detail@@ instance->callback@@callback@@);
 	    instance->callback@@callback@@ = NULL;
 
-	    if (!dev) return;
+	del_events:
+	    if (!del_events) return;
 	    Tcl_DeleteEvents (@stem@_callback_@@cname@@_delete, (ClientData) instance);
 	}
 
 	static int
 	@stem@_callback_@@cname@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
 	{
-	    Tcl_Obj* cmd;
+	    @stem@_callback_@@cname@@_unset (instance, 0);
 
 	    if (!instance->callback@@callback@@) {
 		Tcl_Interp* interp = instance->interp;
@@ -426,6 +427,7 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
 
 		s = @@consfunction@@ (instance->handle,@@detail@@
 				      @@handlers@@,
+# line 431 "support_cbhandlers.tcl"
 				      instance,
 				      &callback);
 		CHECK_STATUS_RETURN;
@@ -433,7 +435,6 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
 		instance->callback@@callback@@ = callback;
 	    }
 
-	    @stem@_callback_@@cname@@_unset (instance, 0);
 	    instance->command@@cname@@ = cmdprefix;
 	    Tcl_IncrRefCount (cmdprefix);
 	    return TCL_OK;
