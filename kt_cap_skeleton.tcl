@@ -1,28 +1,6 @@
 # # ## ### ##### ######## #############
 ## Capability Class
 
-# # ## ### ##### ######## #############
-## Custom argument types for conversion of skeleton profile names and
-## joint names to the ids used by OpenNI.
-
-critcl::argtype KJointProfile {
-    if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_profile,
-			     "profile", 0, &@A) != TCL_OK) {
-	return TCL_ERROR;
-    }
-    @A ++; /* Convert from Tcl's 0-indexed value to OpenNI's 1-indexing. */
-} int int
-
-critcl::argtype KJoint {
-    if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_joint,
-			     "joint", 0, &@A) != TCL_OK) {
-	return TCL_ERROR;
-    }
-    @A ++; /* Convert from Tcl's 0-indexed value to OpenNI's 1-indexing. */
-} int int
-
-# # ## ### ##### ######## #############
-
 critcl::class def ::kinetcl::CapUserSkeleton {
     # # ## ### ##### ######## #############
     ::kt_abstract_class

@@ -87,6 +87,7 @@ critcl::api import crimp::core 0
 
 critcl::source support.tcl ; # Build-time helper commands.
 
+critcl::source kt_custom.tcl    ; # Custom argument and result types for cproc
 critcl::source kt_context.tcl   ; # Per-interp package information,
 #                                 # shared to all classes and instances.
 

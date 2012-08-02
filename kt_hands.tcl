@@ -1,14 +1,5 @@
 
 # # ## ### ##### ######## #############
-## Custom argument type for 3d points.
-
-critcl::argtype XnPoint3D {
-    if (kinetcl_convert_to3d (interp, @@, &@A) != TCL_OK) {
-	return TCL_ERROR;
-    }
-}
-
-# # ## ### ##### ######## #############
 ## Hands Generator
 
 critcl::class def ::kinetcl::Hands {
