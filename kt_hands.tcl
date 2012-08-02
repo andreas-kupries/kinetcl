@@ -15,18 +15,8 @@ critcl::class def ::kinetcl::Hands {
 
     # # ## ### ##### ######## #############
 
-    method set-smoothing {factor} {
-	double factor;
+    method set-smoothing proc {double factor} ok {
 	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "factor");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetDoubleFromObj (interp, objv[2], &factor) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	s = xnSetTrackingSmoothing (instance->handle, factor);
 	CHECK_STATUS_RETURN;
@@ -34,19 +24,14 @@ critcl::class def ::kinetcl::Hands {
 	return TCL_OK;
     }
 
-    method start-tracking {point} {
+    method start-tracking proc {Tcl_Obj* point} ok {
 	XnPoint3D p;
 	XnStatus s;
 	int pc;
 	Tcl_Obj** pv;
 	double px, py, pz;
 
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "point");
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_convert_to3d (interp, objv [2], &p) != TCL_OK) {
+	if (kinetcl_convert_to3d (interp, point, &p) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -56,18 +41,8 @@ critcl::class def ::kinetcl::Hands {
 	return TCL_OK;
     }
 
-    method stop-tracking {id} {
-	int id;
+    method stop-tracking proc {int id} ok {
 	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	s = xnStopTracking (instance->handle, id);
 	CHECK_STATUS_RETURN;
@@ -75,13 +50,8 @@ critcl::class def ::kinetcl::Hands {
 	return TCL_OK;
     }
 
-    method stop-tracking-all {} {
+    method stop-tracking-all proc {} ok {
 	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnStopTrackingAll (instance->handle);
 	CHECK_STATUS_RETURN;

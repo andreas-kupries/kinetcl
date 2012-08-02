@@ -208,7 +208,7 @@ critcl::ccode {
 
     static int
     kinetcl_cap_integer_range (XnNodeHandle handle, char* cap,
-			       Tcl_Interp* interp, int objc, Tcl_Obj* const* objv)
+			       Tcl_Interp* interp)
     {
 	XnStatus s;
 	XnInt32 vmin, vmax, vstep, vdefault;

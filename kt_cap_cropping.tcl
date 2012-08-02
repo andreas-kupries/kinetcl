@@ -6,8 +6,9 @@ critcl::class def ::kinetcl::CapCropping {
     ::kt_abstract_class
 
     # # ## ### ##### ######## #############
+    ## TODO: policy level classes for capabilities!
 
-    method crop {?x y w h?} {
+    method crop command {objv[2,3,4,5] == ?x y w h?} {
 	XnStatus s;
 	XnCropping c;
 

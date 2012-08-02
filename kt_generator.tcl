@@ -3,20 +3,13 @@
 
 critcl::class def ::kinetcl::Generator {
     # # ## ### ##### ######## #############
-    ::kt_abstract_class {
-    } {
-    }
+    ::kt_abstract_class
 
     # # ## ### ##### ######## #############
     ## Control and query data generation
 
-    method start {} {
+    method start proc {} ok {
 	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnStartGenerating (instance->handle);
 	CHECK_STATUS_RETURN;
@@ -24,13 +17,8 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    method stop {} {
+    method stop proc {} ok {
 	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnStopGenerating (instance->handle);
 	CHECK_STATUS_RETURN;
@@ -38,26 +26,15 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    method active {} {
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnIsGenerating (instance->handle)));
-	return TCL_OK;
+    method active proc {} bool {
+	return xnIsGenerating (instance->handle);
     }
 
     # # ## ### ##### ######## #############
     ## Wait for data, check if waiting would not block
 
-    method update {} {
+    method update proc {} ok {
 	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnWaitAndUpdateData (instance->handle);
 	CHECK_STATUS_RETURN;
@@ -65,38 +42,21 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    method hasNew {} {
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
+    method hasNew proc {} bool {
 	/* XXX FUTURE: May pull and return timestamp of such new data */
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnIsNewDataAvailable (instance->handle, NULL)));
-	return TCL_OK;
+	return xnIsNewDataAvailable (instance->handle, NULL);
     }
 
     # # ## ### ##### ######## #############
     ## Query data attributes (is it new?, frame id, timestamp)
     ## Note: Data size and data itself are not accessible here, but only is derived classes.
 
-    method isNew {} {
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnIsDataNew (instance->handle)));
-	return TCL_OK;
+    method proc isNew {} bool {
+	return xnIsDataNew (instance->handle);
     }
 
-    method frame {} {
+    method frame proc {} ok {
 	XnUInt32 frame;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	frame = xnGetFrameID (instance->handle);
 	if (frame == ((XnUInt32) -1)) {
@@ -108,13 +68,8 @@ critcl::class def ::kinetcl::Generator {
 	return TCL_OK;
     }
 
-    method time {} {
+    method time proc {} ok {
 	XnUInt64 timestamp;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	timestamp = xnGetTimestamp (instance->handle);
 	if (timestamp == ((XnUInt64) -1)) {

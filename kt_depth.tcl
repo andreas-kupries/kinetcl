@@ -15,13 +15,8 @@ critcl::class def ::kinetcl::Depth {
 
     # # ## ### ##### ######## #############
 
-    method max-depth {} {
+    method max-depth proc {} ok {
 	XnDepthPixel depth;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	depth = xnGetDeviceMaxDepth (instance->handle);
 	if (depth == ((XnDepthPixel) -1)) {
@@ -33,15 +28,10 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    method fov {} {
+    method fov proc {} ok {
 	Tcl_Obj* rfov [2];
 	XnFieldOfView fov;
 	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnGetDepthFieldOfView (instance->handle, &fov);
 	CHECK_STATUS_RETURN;
@@ -53,13 +43,8 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    method meta {} {
+    method meta proc {} ok {
 	XnDepthMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateDepthMetaData ();
 
@@ -70,14 +55,9 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    method map {} {
+    method map proc {} ok {
 	crimp_image* image;
 	XnDepthMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateDepthMetaData ();
 	xnGetDepthMetaData (instance->handle, meta);
@@ -104,6 +84,7 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
+    # TODO this and next, as command...
     method projective2world {point...} {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;

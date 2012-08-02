@@ -6,8 +6,9 @@ critcl::class def ::kinetcl::CapAntiflicker {
     ::kt_abstract_class
 
     # # ## ### ##### ######## #############
+    ## TODO: policy level classes for capabilities!
 
-    method frequency {?f|off?} {
+    method frequency command {objev[2] == ?f|off?} {
 	if (objc == 2) { /* Syntax: <instance> frequency */
 	    Tcl_Obj* res;
 	    XnPowerLineFrequency f = xnGetPowerLineFrequency (instance->handle);

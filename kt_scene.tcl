@@ -15,14 +15,9 @@ critcl::class def ::kinetcl::Scene {
 
     # # ## ### ##### ######## #############
 
-    method map {} {
+    method map proc {} ok {
 	crimp_image* image;
 	XnSceneMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateSceneMetaData ();
 	xnGetSceneMetaData (instance->handle, meta);
@@ -49,13 +44,8 @@ critcl::class def ::kinetcl::Scene {
 	return TCL_OK;
     }
 
-    method meta {} {
+    method meta proc {} ok {
 	XnSceneMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateSceneMetaData ();
 
@@ -66,15 +56,10 @@ critcl::class def ::kinetcl::Scene {
 	return TCL_OK;
     }
 
-    method floor {} {
+    method floor proc {} ok {
 	XnPlane3D floor;
 	XnStatus s;
 	Tcl_Obj* res;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnGetFloor (instance->handle, &floor);
 	CHECK_STATUS_RETURN;

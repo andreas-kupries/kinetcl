@@ -7,31 +7,15 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 
     # # ## ### ##### ######## #############
 
-    method is-supported {pose} {
-	int supported;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "pose");
-	    return TCL_ERROR;
-	}
-
-	supported = xnIsPoseSupported (instance->handle,
-				       Tcl_GetString (objv[3]));
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (supported));
-	return TCL_OK;
+    method is-supported proc {char* pose} bool {
+	return xnIsPoseSupported (instance->handle, pose);
     }
 
-    method poses {} {
+    method poses proc {} ok {
 	XnStatus s;
 	int lc;
 	Tcl_Obj** lv = NULL;
 	XnChar** poses;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	lc = xnGetNumberOfPoses (instance->handle);
 	if (lc) {
@@ -75,58 +59,26 @@ error:
 	return TCL_ERROR;
     }
 
-    method start-detection {id pose} {
-	int id;
+    method start-detection proc {int id char* pose} ok {
 	XnStatus s;
 
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user pose");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStartPoseDetection (instance->handle,
-				  Tcl_GetString (objv[3]), id);
+	s = xnStartPoseDetection (instance->handle, pose, id);
 	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
     }
 
-    method stop-detection {id pose} {
-	int id;
+    method stop-detection proc {int id char* pose} ok {
 	XnStatus s;
 
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user pose");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStopSinglePoseDetection (instance->handle, id,
-				       Tcl_GetString (objv[3]));
+	s = xnStopSinglePoseDetection (instance->handle, id, pose);
 	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
     }
 
-    method stop-all-detection {id} {
-	int id;
+    method stop-all-detection proc {int id} ok {
 	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	s = xnStopPoseDetection (instance->handle, id);
 	CHECK_STATUS_RETURN;
@@ -134,25 +86,14 @@ error:
 	return TCL_OK;
     }
 
-    method status {id pose} {
-	int id;
+    method status proc {int id char* pose} ok {
 	XnStatus s;
 	XnUInt64 timestamp;
 	XnPoseDetectionStatus pstatus;
 	XnPoseDetectionState  pstate;
 	Tcl_Obj* pv [3];
 
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user pose");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnGetPoseStatus (instance->handle, id, 
-			     Tcl_GetString (objv[3]),
+	s = xnGetPoseStatus (instance->handle, id, pose,
 			     &timestamp, &pstatus, &pstate);
 	CHECK_STATUS_RETURN;
 

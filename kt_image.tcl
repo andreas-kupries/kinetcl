@@ -15,14 +15,9 @@ critcl::class def ::kinetcl::Image {
 
     # # ## ### ##### ######## #############
 
-    method formats {} {
+    method formats proc {} ok {
 	int i, lc;
 	Tcl_Obj* lv [kinetcl_NUM_PIXELFORMATS];
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	for (lc = 0, i = 0;
 	     i < kinetcl_NUM_PIXELFORMATS;
@@ -37,48 +32,40 @@ critcl::class def ::kinetcl::Image {
 	return TCL_OK;
     }
 
-    method format {?format?} {
-	XnStatus        s;
-	XnPixelFormat  	f;
+    method @format? proc {} ok {
+	XnStatus      s;
+	XnPixelFormat f;
 
-	if (objc == 2) { /* Syntax: <instance> format */
-	    f = xnGetPixelFormat (instance->handle);
-	    if (f == (XnPixelFormat) -1) {
-		Tcl_AppendResult (interp, "Inheritance error: Not an image generator", NULL);
-		return TCL_ERROR;
-	    }
-
-	    /* array is 0-indexed, pixelformat f is 1-indexed */
-	    Tcl_SetObjResult (interp, Tcl_NewStringObj (kinetcl_pixelformat [f-1],-1));
-	    return TCL_OK;
-	}
-
-	if (objc == 5) { /* Syntax: <instance> format <format> */
-	    int pf;
-	    if (Tcl_GetIndexFromObj (interp, objv[2], 
-				     kinetcl_pixelformat,
-				     "pixelformat", 0, &pf) != TCL_OK) {
-		return TCL_ERROR;
-	    }
-
-	    /* pf is 0-indexed, pixelformats are 1-indexed */
-	    s = xnSetPixelFormat (instance->handle, pf+1);
-	    CHECK_STATUS_RETURN;
-
-	    return TCL_OK;
-	}
-
-	Tcl_WrongNumArgs (interp, 2, objv, "?format?");
-	return TCL_ERROR;
-    }
-
-    method meta {} {
-	XnImageMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
+	f = xnGetPixelFormat (instance->handle);
+	if (f == (XnPixelFormat) -1) {
+	    Tcl_AppendResult (interp, "Inheritance error: Not an image generator", NULL);
 	    return TCL_ERROR;
 	}
+
+	/* array is 0-indexed, pixelformat f is 1-indexed */
+	Tcl_SetObjResult (interp, Tcl_NewStringObj (kinetcl_pixelformat [f-1],-1));
+	return TCL_OK;
+    }
+
+    method @format: proc {Tcl_Obj* format} ok {
+	XnStatus s;
+	int      pf;
+
+	if (Tcl_GetIndexFromObj (interp, format, 
+				 kinetcl_pixelformat,
+				 "pixelformat", 0, &pf) != TCL_OK) {
+	    return TCL_ERROR;
+	}
+
+	/* pf is 0-indexed, pixelformats are 1-indexed */
+	s = xnSetPixelFormat (instance->handle, pf+1);
+	CHECK_STATUS_RETURN;
+
+	return TCL_OK;
+    }
+
+    method meta proc {} ok {
+	XnImageMetaData* meta;
 
 	meta = xnAllocateImageMetaData ();
 
@@ -89,14 +76,9 @@ critcl::class def ::kinetcl::Image {
 	return TCL_OK;
     }
 
-    method map {} {
+    method map proc {} ok {
 	crimp_image* image;
 	XnImageMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateImageMetaData ();
 	xnGetImageMetaData (instance->handle, meta);

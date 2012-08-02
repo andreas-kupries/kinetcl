@@ -7,16 +7,11 @@ critcl::class def ::kinetcl::CapFramesync {
 
     # # ## ### ##### ######## #############
 
-    method can-sync-with {node} {
+    method can-sync-with proc {Tcl_Obj* node} ok {
 	XnNodeHandle other;
 	XnBool supported;
 
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "node");
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_validate (interp, objv [2], &other) != TCL_OK) {
+	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -26,16 +21,11 @@ critcl::class def ::kinetcl::CapFramesync {
 	return TCL_OK;
     }
 
-    method start-sync-with {node} {
+    method start-sync-with proc {Tcl_Obj* node} ok {
 	XnStatus s;
 	XnNodeHandle other;
 
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "node");
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_validate (interp, objv [2], &other) != TCL_OK) {
+	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -44,16 +34,11 @@ critcl::class def ::kinetcl::CapFramesync {
 	return TCL_OK;
     }
 
-    method stop-sync-with {node} {
+    method stop-sync-with proc {Tcl_Obj* node} ok {
 	XnStatus s;
 	XnNodeHandle other;
 
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "node");
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_validate (interp, objv [2], &other) != TCL_OK) {
+	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -62,16 +47,11 @@ critcl::class def ::kinetcl::CapFramesync {
 	return TCL_OK;
     }
 
-    method synced-with {node} {
+    method synced-with proc {Tcl_Obj* node} ok {
 	XnNodeHandle other;
 	XnBool as;
 
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "node");
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_validate (interp, objv [2], &other) != TCL_OK) {
+	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 

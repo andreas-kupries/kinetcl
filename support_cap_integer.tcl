@@ -19,12 +19,14 @@ proc kt_cap_integer {capname nicapname} {
     # # ## ### ##### ######## #############
     kt_abstract_class
 
-    method $capname {?value?} [string map $map {
+    method $capname command {
+	objv[2] = value, optional
+    } [string map $map {
 	return kinetcl_cap_integer_rw (instance->handle, "@@nicapname@@", interp, objc, objv);
     }]
 
-    method ${capname}-range {}  [string map $map {
-	return kinetcl_cap_integer_range (instance->handle, "@@nicapname@@", interp, objc, objv);
+    method ${capname}-range proc {} ok [string map $map {
+	return kinetcl_cap_integer_range (instance->handle, "@@nicapname@@", interp);
     }]
 
     kt_callback $capname \

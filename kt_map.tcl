@@ -7,26 +7,15 @@ critcl::class def ::kinetcl::Map {
 
     # # ## ### ##### ######## #############
 
-    method bytes-per-pixel {} {
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnGetBytesPerPixel (instance->handle)));
-	return TCL_OK;
+    method bytes-per-pixel proc {} int {
+	return xnGetBytesPerPixel (instance->handle);
     }
 
-    method modes {} {
+    method modes proc {} ok {
 	XnStatus s;
 	int lc;
 	Tcl_Obj** lv = NULL;
 	XnMapOutputMode* modes;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	lc = xnGetSupportedMapOutputModesCount (instance->handle);
 	if (lc) {
@@ -63,43 +52,35 @@ critcl::class def ::kinetcl::Map {
     }
 
     # # ## ### ##### ######## #############
-    method mode {?xres yres fps?} {
+
+    method @mode? proc {} ok {
+	XnStatus        s;
+	XnMapOutputMode mode;
+	Tcl_Obj* mv [3];
+
+	s = xnGetMapOutputMode (instance->handle, &mode);
+	CHECK_STATUS_RETURN;
+
+	mv [0] = Tcl_NewIntObj (mode.nXRes);
+	mv [1] = Tcl_NewIntObj (mode.nYRes);
+	mv [2] = Tcl_NewIntObj (mode.nFPS);
+
+	Tcl_SetObjResult (interp, Tcl_NewListObj (3, mv));
+	return TCL_OK;
+    }
+
+    method @mode: {int xres int yres int fps} ok {
 	XnStatus        s;
 	XnMapOutputMode mode;
 
-	if (objc == 2) { /* Syntax: <instance> mode */
-	    Tcl_Obj* mv [3];
+	mode.nXRes = xres;
+	mode.nYRes = yres;
+	mode.nFPS  = fps;
 
-	    s = xnGetMapOutputMode (instance->handle, &mode);
-	    CHECK_STATUS_RETURN;
+	s = xnSetMapOutputMode (instance->handle, &mode);
+	CHECK_STATUS_RETURN;
 
-	    mv [0] = Tcl_NewIntObj (mode.nXRes);
-	    mv [1] = Tcl_NewIntObj (mode.nYRes);
-	    mv [2] = Tcl_NewIntObj (mode.nFPS);
-
-	    Tcl_SetObjResult (interp, Tcl_NewListObj (3, mv));
-	    return TCL_OK;
-	}
-
-	if (objc == 5) { /* Syntax: <instance> mode xres yres fps */
-	    if (Tcl_GetIntFromObj (interp, objv [2], &mode.nXRes) != TCL_OK) {
-		return TCL_ERROR;
-	    }
-	    if (Tcl_GetIntFromObj (interp, objv [3], &mode.nYRes) != TCL_OK) {
-		return TCL_ERROR;
-	    }
-	    if (Tcl_GetIntFromObj (interp, objv [4], &mode.nFPS) != TCL_OK) {
-		return TCL_ERROR;
-	    }
-
-	    s = xnSetMapOutputMode (instance->handle, &mode);
-	    CHECK_STATUS_RETURN;
-
-	    return TCL_OK;
-	}
-
-	Tcl_WrongNumArgs (interp, 2, objv, "?xres yres fps?");
-	return TCL_ERROR;
+	return TCL_OK;
     }
 
     # # ## ### ##### ######## #############

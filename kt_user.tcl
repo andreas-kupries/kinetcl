@@ -15,20 +15,13 @@ critcl::class def ::kinetcl::User {
 
     # # ## ### ##### ######## #############
 
-    method count {} {
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnGetNumberOfUsers (instance->handle)));
-	return TCL_OK;
+    method count proc {} int {
+	return xnGetNumberOfUsers (instance->handle);
     }
 
     # # ## ### ##### ######## #############
 
-    method users {} {
-
+    method users proc {} ok {
 	int i, res = TCL_OK;
 	XnUInt16  n;
 	XnUserID* id;
@@ -66,20 +59,10 @@ critcl::class def ::kinetcl::User {
 
     # # ## ### ##### ######## #############
 
-    method centerof {id} {
-	int id;
+    method centerof proc {int id} ok {
 	XnStatus s;
 	XnPoint3D p;
 	Tcl_Obj* coord [3];
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	s = xnGetUserCoM (instance->handle, id, &p);
 	CHECK_STATUS_RETURN;
@@ -90,20 +73,10 @@ critcl::class def ::kinetcl::User {
 
     # # ## ### ##### ######## #############
 
-    method pixelsof {id} {
-	int id;
+    method pixelsof proc {int id} ok {
 	XnStatus s;
 	crimp_image* image;
 	XnSceneMetaData* meta;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateSceneMetaData ();
 

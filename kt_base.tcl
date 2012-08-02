@@ -3,7 +3,7 @@
 
 critcl::class def ::kinetcl::Base {
     # # ## ### ##### ######## #############
-    ::kt_abstract_class {} {}
+    ::kt_abstract_class
 
     insvariable Tcl_Obj* capnames {
 	Fixed list of possible capabilities
@@ -18,7 +18,7 @@ critcl::class def ::kinetcl::Base {
     ## Methods managing the OpenNI handle from the Tcl level, and
     ## other specialities.
 
-    method @mark {} {
+    method @mark proc {} void {
 	/* Internal method, no argument checking.
 	 * Save the OpenNI handle in the shared kinetcl context.
 	 * -- This is done (implicitly) during construction, so that the C-level
@@ -27,34 +27,27 @@ critcl::class def ::kinetcl::Base {
 	 *    for methods which take another node as argument.
 	 */
 	instance->context->mark = instance->handle;
-	return TCL_OK;
     }
 
-    method @unmark {} {
+    method @unmark proc {} void {
 	/* Internal method, no argument checking.
 	 * Remove the OpenNI handle from the shared stash.
 	 * IOW clean the state up.
 	 */
 	instance->context->mark = NULL;
-	return TCL_OK;
     }
 
     # # ## ### ##### ######## #############
-    method is-capable-of {capName/2} {
+    method is-capable-of proc {char* cap} ok {
 	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
 
 	XnBool supported;
 	const char* capName;
-	int cap;
+	int id;
 
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "capName");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[2], 
+	if (Tcl_GetIndexFromObj (interp, cap, 
 				 @stem@_tcl_capability_names,
-				 "capability", 0, &cap) != TCL_OK) {
+				 "capability", 0, &id) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 
@@ -66,22 +59,15 @@ critcl::class def ::kinetcl::Base {
 	return TCL_OK;
     }
 
-    method capabilities {} {
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, instance->capnames);
-	return TCL_OK;
+    method capabilities proc {} Tcl_Obj* {
+	return instance->capnames;
     }
 
-    method node-name {} {
-	Tcl_SetObjResult (interp, Tcl_NewStringObj (xnGetNodeName (instance->handle),-1));
-	return TCL_OK;
+    method node-name proc {} vstring {
+	return xnGetNodeName (instance->handle);
     }
 
-    method node-info {} {
+    method node-info proc {} Tcl_Obj* {
 	XnNodeInfo*                        ni = xnGetNodeInfo (instance->handle);
 	const XnProductionNodeDescription* d  = xnNodeInfoGetDescription (ni);
 	Tcl_Obj* vv [4];
@@ -105,10 +91,10 @@ critcl::class def ::kinetcl::Base {
 	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("create",-1),
 			Tcl_NewStringObj (xnNodeInfoGetCreationInfo (ni), -1));
 
-	/* ni is owned by the system, do not release - xnNodeInfoFree (ni);
+	/* Note that 'ni' is owned by the system.
+	 * Do not release it - No xnNodeInfoFree (ni);
 	 */
-	Tcl_SetObjResult (interp, res);
-	return TCL_OK;
+	return res;
     }
 
     # # ## ### ##### ######## #############

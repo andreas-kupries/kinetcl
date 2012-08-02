@@ -27,6 +27,16 @@ oo::class create ::kinetcl::map {
 	return
     }
 
+    method mode {{xres {}} {yres {}} {fps {}}} {
+	set n [llength [info level 0]]
+	if {$n == 5} {
+	    MAP @mode: $xres $yres $fps
+	} elseif {$n != 2} {
+	    return -code error "wrong\#args: ?xres yres fps?"
+	}
+	MAP @mode?
+    }
+
     kinetcl::Publish ::kinetcl::Map MAP
 }
 

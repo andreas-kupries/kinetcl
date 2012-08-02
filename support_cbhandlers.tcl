@@ -373,23 +373,12 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
     lappend map @@destfunction@@ $dest
     lappend map @@detail@@       $detail
 
-    method set-callback-$name {cmdprefix} [string map $map {
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "cmdprefix");
-	    return TCL_ERROR;
-	}
-
-	return @stem@_callback_@@cname@@_set (instance, objv [2]);
+    method set-callback-$name {Tcl_Obj* cmdprefix} proc [string map $map {
+	return @stem@_callback_@@cname@@_set (instance, cmdprefix);
     }]
 
-    method unset-callback-$name {} [string map $map {
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
+    method unset-callback-$name {} void [string map $map {
 	@stem@_callback_@@cname@@_unset (instance, 1);
-	return TCL_OK;
     }]
    
     # The command@@...@@ variable(s) used below are defined by calls
@@ -406,7 +395,7 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
 	    instance->command@@cname@@ = NULL;
 
 	    @@antiguard@@
-# line 410 "support_cbhandlers.tcl"
+# line 399 "support_cbhandlers.tcl"
 	    @@destfunction@@ (instance->handle,@@detail@@ instance->callback@@callback@@);
 	    instance->callback@@callback@@ = NULL;
 
@@ -427,7 +416,7 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
 
 		s = @@consfunction@@ (instance->handle,@@detail@@
 				      @@handlers@@,
-# line 431 "support_cbhandlers.tcl"
+# line 420 "support_cbhandlers.tcl"
 				      instance,
 				      &callback);
 		CHECK_STATUS_RETURN;

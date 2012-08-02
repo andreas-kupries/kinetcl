@@ -26,6 +26,13 @@ oo::class create ::kinetcl::image {
 	return
     }
 
+    method format {{format {}}} {
+	if {[llength [info level 0]] == 3} {
+	    IMAGE @format: $format
+	}
+	IMAGE @format?
+    }
+
     kinetcl::Publish ::kinetcl::Image IMAGE
 }
 
