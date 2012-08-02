@@ -1,6 +1,28 @@
 # # ## ### ##### ######## #############
 ## Capability Class
 
+# # ## ### ##### ######## #############
+## Custom argument types for conversion of skeleton profile names and
+## joint names to the ids used by OpenNI.
+
+critcl::argtype KJointProfile {
+    if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_profile,
+			     "profile", 0, &@A) != TCL_OK) {
+	return TCL_ERROR;
+    }
+    @A ++; /* Convert from Tcl's 0-indexed value to OpenNI's 1-indexing. */
+} int int
+
+critcl::argtype KJoint {
+    if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_joint,
+			     "joint", 0, &@A) != TCL_OK) {
+	return TCL_ERROR;
+    }
+    @A ++; /* Convert from Tcl's 0-indexed value to OpenNI's 1-indexing. */
+} int int
+
+# # ## ### ##### ######## #############
+
 critcl::class def ::kinetcl::CapUserSkeleton {
     # # ## ### ##### ######## #############
     ::kt_abstract_class
@@ -17,19 +39,8 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     # we do not know the length we would have pre-allocate either,
     # should the library try to fill the string.
 
-    method is-profile-available proc {Tcl_Obj* profile} ok {
-	int available, id;
-
-	if (Tcl_GetIndexFromObj (interp, profile, 
-				 @stem@_skeleton_profile,
-				 "profile", 0, &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	available = xnIsProfileAvailable (instance->handle, id+1);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (available));
-	return TCL_OK;
+    method is-profile-available proc {KJointProfile profile} bool {
+	return xnIsProfileAvailable (instance->handle, profile);
     }
 
     method available-profiles proc {} ok {
@@ -64,19 +75,11 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    method set-profile proc {Tcl_Obj* profile} ok {
-	int available, id;
+    method set-profile proc {KJointProfile profile} ok {
 	XnStatus s;
 
-	if (Tcl_GetIndexFromObj (interp, profile, 
-				 @stem@_skeleton_profile,
-				 "profile", 0, &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSetSkeletonProfile (instance->handle, profile+1);
+	s = xnSetSkeletonProfile (instance->handle, profile);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -112,7 +115,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
 	s = xnResetSkeleton (instance->handle, id);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -133,7 +135,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
 	s = xnRequestSkeletonCalibration (instance->handle, id, force);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -142,7 +143,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
 	s = xnAbortSkeletonCalibration (instance->handle, id);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -154,7 +154,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
 	s = xnSaveSkeletonCalibrationDataToFile (instance->handle, id, path);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -163,7 +162,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
 	s = xnLoadSkeletonCalibrationDataFromFile (instance->handle, id, path);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -172,7 +170,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
 	s = xnSaveSkeletonCalibrationData (instance->handle, id, slot);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -181,7 +178,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
 	s = xnLoadSkeletonCalibrationData (instance->handle, id, slot);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
@@ -198,47 +194,18 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return xnClearSkeletonCalibrationData (instance->handle, slot);
     }
 
-    method is-joint-available proc {Tcl_Obj* joint} ok {
-	int available, jointid;
-
-	if (Tcl_GetIndexFromObj (interp, joint, 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &jointid) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	available = xnIsJointAvailable (instance->handle, jointid+1);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (available));
-	return TCL_OK;
+    method is-joint-available proc {KJoint joint} bool {
+	return xnIsJointAvailable (instance->handle, joint);
     }
 
-    method is-joint-active proc {Tcl_Obj* joint} ok {
-	int active, jointid;
-
-	if (Tcl_GetIndexFromObj (interp, joint, 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &jointid) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	active = xnIsJointActive (instance->handle, jointid+1);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (active));
-	return TCL_OK;
+    method is-joint-active proc {KJoint joint} bool {
+	return xnIsJointActive (instance->handle, joint);
     }
 
-    method set-joint-active proc {Tcl_Obj* joint bool active} ok {
-	int active, jointid;
+    method set-joint-active proc {KJoint joint bool active} ok {
 	XnStatus s;
 
-	if (Tcl_GetIndexFromObj (interp, joint, 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &jointid) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSetJointActive (instance->handle, jointid+1, active);
+	s = xnSetJointActive (instance->handle, joint, active);
 	CHECK_STATUS_RETURN;
 
 	Tcl_SetObjResult (interp, Tcl_NewIntObj (active));
@@ -269,35 +236,12 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    method get-joint proc {int userid Tcl_Obj* joint} ok {
-	Tcl_Obj* result;
-	int jointid;
-
-	if (Tcl_GetIndexFromObj (interp, joint, 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &jointid) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	result = @stem@_get_joint (interp, instance, userid, jointid);
-	if (!result) {
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, result);
-	return TCL_OK;
+    method get-joint proc {int user KJoint joint} Tcl_Obj* {
+	return @stem@_get_joint (interp, instance, user, joint);
     }
 
-    method get-skeleton proc {int userid} ok {
-	Tcl_Obj* result;
-
-	result = @stem@_get_skeleton (interp, instance, userid);
-	if (!result) {
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, result);
-	return TCL_OK;
+    method get-skeleton proc {int user} Tcl_Obj* {
+	return @stem@_get_skeleton (interp, instance, user);
     }
 
     # Partial joint information.
