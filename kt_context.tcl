@@ -237,6 +237,14 @@ critcl::ccode {
 }
 
 # # ## ### ##### ######## #############
+## Custom argument type for cprocs and cproc-like methods.
+## Conversion of Tcl_Obj* to XnNodeHandle.
+
+critcl::argtype XnNodeHandle {
+    if (kinetcl_validate(ip, @@, &@A) != TCL_OK) return TCL_ERROR;
+}
+
+# # ## ### ##### ######## #############
 
 critcl::cproc ::kinetcl::estart {Tcl_Interp* interp} ok {
     kinetcl_unlock (interp);

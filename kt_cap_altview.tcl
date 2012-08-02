@@ -7,27 +7,12 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 
     # # ## ### ##### ######## #############
 
-    method supports-view proc {Tcl_Obj* node} ok {
-	XnNodeHandle other;
-	XnBool supported;
-
-	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	supported = xnIsViewPointSupported (instance->handle, other);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (supported));
-	return TCL_OK;
+    method supports-view proc {XnNodeHandle other} bool {
+	return xnIsViewPointSupported (instance->handle, other);
     }
 
-    method set-view proc {Tcl_Obj* node} ok {
+    method set-view proc {XnNodeHandle other} ok {
 	XnStatus s;
-	XnNodeHandle other;
-
-	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	s = xnSetViewPoint (instance->handle, other);
 	CHECK_STATUS_RETURN;
@@ -42,18 +27,8 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 	return TCL_OK;
     }
 
-    method using-view proc {Tcl_Obj* node} ok {
-	XnNodeHandle other;
-	XnBool as;
-
-	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	as = xnIsViewPointAs (instance->handle, other);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (as));
-	return TCL_OK;
+    method using-view proc {XnNodeHandle other} bool {
+	return xnIsViewPointAs (instance->handle, other);
     }
 
     # # ## ### ##### ######## #############

@@ -7,58 +7,28 @@ critcl::class def ::kinetcl::CapFramesync {
 
     # # ## ### ##### ######## #############
 
-    method can-sync-with proc {Tcl_Obj* node} ok {
-	XnNodeHandle other;
-	XnBool supported;
-
-	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	supported = xnCanFrameSyncWith (instance->handle, other);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (supported));
-	return TCL_OK;
+    method can-sync-with proc {XnNodeHandle other} bool {
+	return xnCanFrameSyncWith (instance->handle, other);
     }
 
-    method start-sync-with proc {Tcl_Obj* node} ok {
+    method start-sync-with proc {XnNodeHandle other} ok {
 	XnStatus s;
-	XnNodeHandle other;
-
-	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	s = xnFrameSyncWith (instance->handle, other);
 	CHECK_STATUS_RETURN;
 	return TCL_OK;
     }
 
-    method stop-sync-with proc {Tcl_Obj* node} ok {
+    method stop-sync-with proc {XnNodeHandle other} ok {
 	XnStatus s;
-	XnNodeHandle other;
-
-	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
-	    return TCL_ERROR;
-	}
 
 	s = xnStopFrameSyncWith (instance->handle, other);
 	CHECK_STATUS_RETURN;
 	return TCL_OK;
     }
 
-    method synced-with proc {Tcl_Obj* node} ok {
-	XnNodeHandle other;
-	XnBool as;
-
-	if (kinetcl_validate (interp, node, &other) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	as = xnIsFrameSyncedWith (instance->handle, other);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (as));
-	return TCL_OK;
+    method synced-with proc {XnNodeHandle other} bool {
+	return xnIsFrameSyncedWith (instance->handle, other);
     }
 
     # # ## ### ##### ######## #############
