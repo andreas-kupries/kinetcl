@@ -40,30 +40,12 @@ critcl::class def ::kinetcl::Generator {
 	return xnIsDataNew (instance->handle);
     }
 
-    method frame proc {} ok {
-	XnUInt32 frame;
-
-	frame = xnGetFrameID (instance->handle);
-	if (frame == ((XnUInt32) -1)) {
-	    Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (frame));
-	return TCL_OK;
+    method frame proc {} KFrame {
+	return xnGetFrameID (instance->handle);
     }
 
-    method time proc {} ok {
-	XnUInt64 timestamp;
-
-	timestamp = xnGetTimestamp (instance->handle);
-	if (timestamp == ((XnUInt64) -1)) {
-	    Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewWideIntObj (timestamp));
-	return TCL_OK;
+    method time proc {} KTimestamp {
+	return xnGetTimestamp (instance->handle);
     }
 
     # # ## ### ##### ######## #############

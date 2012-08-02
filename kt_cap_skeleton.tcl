@@ -137,11 +137,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	Tcl_Obj*       jn [XN_SKEL_RIGHT_FOOT+1];
 	int k;
 
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
 	n = XN_SKEL_RIGHT_FOOT+1;
 	s = xnEnumerateActiveJoints (instance->handle, j, &n);
 	CHECK_STATUS_RETURN;

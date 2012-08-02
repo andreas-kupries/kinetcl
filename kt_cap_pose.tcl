@@ -11,10 +11,11 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 	return xnIsPoseSupported (instance->handle, pose);
     }
 
-    method poses proc {} ok {
+    method poses proc {} Tcl_Obj* {
 	XnStatus s;
 	int lc;
 	Tcl_Obj** lv = NULL;
+	Tcl_Obj* result = NULL;
 	XnChar** poses;
 
 	lc = xnGetNumberOfPoses (instance->handle);
@@ -23,7 +24,7 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 
 	    poses = (XnChar**) ckalloc (lc * sizeof (XnChar*));
 	    for (i=0; i < lc; i++) {
-		/* Pray that this is enough space. Not about overwriting,
+		/* Pray that this is enough space. This not about overwriting,
 		 * we are using the limited call, but about truncation of
 		 * long pose names
 		 */
@@ -42,48 +43,36 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 	    }
 
 	    for (i=0; i < n; i++) {
-	       ckfree (poses [i]);
+	        ckfree (poses [i]);
 	    }
 	    ckfree ((char*) poses);
 	}
 
-	Tcl_SetObjResult (interp, Tcl_NewListObj (lc, lv));
+	result = Tcl_NewListObj (lc, lv);
 
 	if (lc) {
 	    ckfree ((char*) lv);
 	}
 
-	return TCL_OK;
+	return result;
 error:
+	for (i=0; i < n; i++) {
+	    ckfree (poses [i]);
+	}
 	ckfree ((char*) poses);
-	return TCL_ERROR;
+	return 0;
     }
 
-    method start-detection proc {int id char* pose} ok {
-	XnStatus s;
-
-	s = xnStartPoseDetection (instance->handle, pose, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start-detection proc {int id char* pose} XnStatus {
+	return xnStartPoseDetection (instance->handle, pose, id);
     }
 
-    method stop-detection proc {int id char* pose} ok {
-	XnStatus s;
-
-	s = xnStopSinglePoseDetection (instance->handle, id, pose);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-detection proc {int id char* pose} XnStatus {
+	return xnStopSinglePoseDetection (instance->handle, id, pose);
     }
 
-    method stop-all-detection proc {int id} ok {
-	XnStatus s;
-
-	s = xnStopPoseDetection (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-all-detection proc {int id} XnStatus {
+	return xnStopPoseDetection (instance->handle, id);
     }
 
     method status proc {int id char* pose} ok {

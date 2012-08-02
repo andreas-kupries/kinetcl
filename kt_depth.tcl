@@ -15,17 +15,8 @@ critcl::class def ::kinetcl::Depth {
 
     # # ## ### ##### ######## #############
 
-    method max-depth proc {} ok {
-	XnDepthPixel depth;
-
-	depth = xnGetDeviceMaxDepth (instance->handle);
-	if (depth == ((XnDepthPixel) -1)) {
-	    Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (depth));
-	return TCL_OK;
+    method max-depth proc {} XnDepthPixel {
+	return xnGetDeviceMaxDepth (instance->handle);
     }
 
     method fov proc {} ok {
@@ -45,16 +36,17 @@ critcl::class def ::kinetcl::Depth {
 
     # Possible to make the meta data an instance variable to reduce
     # memory churn?
-    method meta proc {} ok {
+    method meta proc {} Tcl_Obj* {
 	XnDepthMetaData* meta;
+	Tcl_Obj* result;
 
 	meta = xnAllocateDepthMetaData ();
 
 	xnGetDepthMetaData (instance->handle, meta);
-	Tcl_SetObjResult (interp, kinetcl_convert_depth_metadata (meta));
+	result = kinetcl_convert_depth_metadata (meta);
 
 	xnFreeDepthMetaData (meta);
-	return TCL_OK;
+	return result;
     }
 
     method map proc {} Tcl_Obj* {
@@ -86,7 +78,9 @@ critcl::class def ::kinetcl::Depth {
     }
 
     # TODO this and next, as command...
-    method projective2world command {point...} {
+    method projective2world command {
+	objv[2]... = point...
+    } {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;
@@ -131,7 +125,9 @@ critcl::class def ::kinetcl::Depth {
 	return res;
     }
 
-    method world2projective command {point...} {
+    method world2projective command {
+	objv[2]... = point...
+    } {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;

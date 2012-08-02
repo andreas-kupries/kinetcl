@@ -19,6 +19,70 @@ critcl::resulttype XnStatus {
 }
 
 # # ## ### ##### ######## #############
+## depth pixel value, with special casing for bad handles.
+
+critcl::resulttype XnDepthPixel {
+    if (rv == ((XnDepthPixel) -1)) {
+	Tcl_AppendResult (interp, "Inheritance error: Not a depth generator", NULL);
+	return TCL_ERROR;
+    }
+    Tcl_SetObjResult (interp, Tcl_NewIntObj (rv));
+    return TCL_OK;
+}
+
+# # ## ### ##### ######## #############
+## frame id, with special casing for bad handles.
+
+critcl::resulttype KFrame {
+    if (rv == ((XnUInt32) -1)) {
+	Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
+	return TCL_ERROR;
+    }
+
+    Tcl_SetObjResult (interp, Tcl_NewIntObj (rv));
+    return TCL_OK;
+} XnUInt32
+
+# # ## ### ##### ######## #############
+## timestamp, with special casing for bad handles.
+
+critcl::resulttype KTimestamp {
+    if (rv == ((XnUInt64) -1)) {
+	Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
+	return TCL_ERROR;
+    }
+
+    Tcl_SetObjResult (interp, Tcl_NewWideIntObj (rv));
+    return TCL_OK;
+} XnUInt64
+
+
+# # ## ### ##### ######## #############
+## pixel format, with special casing for bad handles.
+## The string array kinetcl_pixelformat is defined in
+## kt_image.tcl
+
+critcl::resulttype XnPixelFormat {
+    if (rv == (XnPixelFormat) -1) {
+	Tcl_AppendResult (interp, "Inheritance error: Not an image generator", NULL);
+	return TCL_ERROR;
+    }
+    /* ATTENTION: The array is 0-indexed, wheras the pixelformat 'rv' is 1-indexed */
+    Tcl_SetObjResult (interp, Tcl_NewStringObj (kinetcl_pixelformat [rv-1],-1));
+    return TCL_OK;
+}
+
+# kinetcl_pixelformat is defined in kt_image.tcl
+critcl::argtype XnPixelFormat {
+    if (Tcl_GetIndexFromObj (interp, @@, 
+			     kinetcl_pixelformat,
+			     "pixelformat", 0, &@A) != TCL_OK) {
+	return TCL_ERROR;
+    }
+    @A ++; /* Convert from Tcl's 0-indexed value to OpenNI's 1-indexing. */
+} int int
+
+# # ## ### ##### ######## #############
 ## Convert between between object commands (handles) in Tcl_Obj* and
 ## OpenNI XnNodeHandle's.
 
@@ -36,6 +100,15 @@ critcl::argtype XnPoint3D {
 }
 
 # # ## ### ##### ######## #############
+## Convert Tcl_Obj* (2-element list, 3D point elements) to a 3D bounding box.
+
+critcl::argtype XnBoundingBox3D {
+    if (kinetcl_convert_2bbox (interp, @@, &@A) != TCL_OK) {
+	return TCL_ERROR;
+    }
+}
+
+# # ## ### ##### ######## #############
 
 # TODO: Move the various arrays of strings out of class definitions
 # into the global package namespace ?! Maybe define special objtypes
@@ -43,6 +116,7 @@ critcl::argtype XnPoint3D {
 
 # # ## ### ##### ######## #############
 ## Joint profile names to OpenNI numeric ids.
+## String array defined in kt_cap_skeleton.tcl
 
 critcl::argtype KJointProfile {
     if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_profile,
@@ -54,6 +128,7 @@ critcl::argtype KJointProfile {
 
 # # ## ### ##### ######## #############
 ## Joint names to OpenNI numeric ids.
+## String array defined in kt_cap_skeleton.tcl
 
 critcl::argtype KJoint {
     if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_joint,
@@ -62,6 +137,29 @@ critcl::argtype KJoint {
     }
     @A ++; /* Convert from Tcl's 0-indexed value to OpenNI's 1-indexing. */
 } int int
+
+
+# # ## ### ##### ######## #############
+## Capability names, Tcl to OpenNI.
+## The arrays 
+##     @stem@_tcl_capability_names
+## and @stem@_oni_capability_names
+## are currently defined in "kt_base.tcl".
+## Move to separate file and more global ?
+
+critcl::argtype KCapability {
+    /* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
+    int id;
+    if (Tcl_GetIndexFromObj (interp, @@, 
+			     @stem@_tcl_capability_names,
+			     "capability", 0, &id) != TCL_OK) {
+	return TCL_ERROR;
+    }
+
+    /* Translate Tcl to C/OpenNI */
+    @A = @stem@_oni_capability_names [id];
+} char* {const char*}
+
 
 # # ## ### ##### ######## #############
 return
