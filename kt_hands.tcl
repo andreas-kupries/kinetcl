@@ -1,5 +1,14 @@
 
 # # ## ### ##### ######## #############
+## Custom argument type for 3d points.
+
+critcl::argtype XnPoint3D {
+    if (kinetcl_convert_to3d (interp, @@, &@A) != TCL_OK) {
+	return TCL_ERROR;
+    }
+}
+
+# # ## ### ##### ######## #############
 ## Hands Generator
 
 critcl::class def ::kinetcl::Hands {
@@ -15,48 +24,20 @@ critcl::class def ::kinetcl::Hands {
 
     # # ## ### ##### ######## #############
 
-    method set-smoothing proc {double factor} ok {
-	XnStatus s;
-
-	s = xnSetTrackingSmoothing (instance->handle, factor);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method set-smoothing proc {double factor} XnStatus {
+	return xnSetTrackingSmoothing (instance->handle, factor);
     }
 
-    method start-tracking proc {Tcl_Obj* point} ok {
-	XnPoint3D p;
-	XnStatus s;
-	int pc;
-	Tcl_Obj** pv;
-	double px, py, pz;
-
-	if (kinetcl_convert_to3d (interp, point, &p) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStartTracking (instance->handle, &p);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start-tracking proc {XnPoint3D point} XnStatus {
+	return xnStartTracking (instance->handle, &point);
     }
 
-    method stop-tracking proc {int id} ok {
-	XnStatus s;
-
-	s = xnStopTracking (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-tracking proc {int id} XnStatus {
+	return xnStopTracking (instance->handle, id);
     }
 
-    method stop-tracking-all proc {} ok {
-	XnStatus s;
-
-	s = xnStopTrackingAll (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-tracking-all proc {} XnStatus {
+	return xnStopTrackingAll (instance->handle);
     }
 
     # # ## ### ##### ######## #############

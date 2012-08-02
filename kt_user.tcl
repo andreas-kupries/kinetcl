@@ -28,11 +28,6 @@ critcl::class def ::kinetcl::User {
 	XnStatus  s;
 	Tcl_Obj*  ulist;
 
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
 	n = xnGetNumberOfUsers (instance->handle);
 	id = (XnUserID*) ckalloc (n * sizeof (XnUserID));
 

@@ -8,22 +8,12 @@ critcl::class def ::kinetcl::Generator {
     # # ## ### ##### ######## #############
     ## Control and query data generation
 
-    method start proc {} ok {
-	XnStatus s;
-
-	s = xnStartGenerating (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start proc {} XnStatus {
+	return xnStartGenerating (instance->handle);
     }
 
-    method stop proc {} ok {
-	XnStatus s;
-
-	s = xnStopGenerating (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop proc {} XnStatus {
+	return xnStopGenerating (instance->handle);
     }
 
     method active proc {} bool {
@@ -33,13 +23,8 @@ critcl::class def ::kinetcl::Generator {
     # # ## ### ##### ######## #############
     ## Wait for data, check if waiting would not block
 
-    method update proc {} ok {
-	XnStatus s;
-
-	s = xnWaitAndUpdateData (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method update proc {} XnStatus {
+	return xnWaitAndUpdateData (instance->handle);
     }
 
     method hasNew proc {} bool {

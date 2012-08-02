@@ -19,40 +19,26 @@ critcl::class def ::kinetcl::Player {
 	return xnGetPlaybackSpeed (instance->handle);
     }
 
-    method @speed: proc {double speed} ok {
-	XnStatus s;
-
-	s = xnSetPlaybackSpeed (instance->handle, speed);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method @speed: proc {double speed} XnStatus {
+	return xnSetPlaybackSpeed (instance->handle, speed);
     }
 
     # # ## ### ##### ######## #############
 
-    method repeat proc {bool repeat} ok {
-	XnStatus s;
-
-	s = xnSetPlayerRepeat (instance->handle, repeat);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method repeat proc {bool repeat} XnStatus {
+	return xnSetPlayerRepeat (instance->handle, repeat);
     }
 
     method eof proc {} bool {
 	return xnIsPlayerAtEOF (instance->handle);
     }
 
-    method format proc {} vstring{
+    method format proc {} vstring {
 	return xnGetPlayerSupportedFormat (instance->handle);
     }
 
-    method next proc {} ok {
-	XnStatus s;
-
-	s = xnPlayerReadNext (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method next proc {} XnStatus {
+	return xnPlayerReadNext (instance->handle);
     }
 
     # XXX enumerate player nodes

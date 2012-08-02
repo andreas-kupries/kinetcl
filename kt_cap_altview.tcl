@@ -11,20 +11,12 @@ critcl::class def ::kinetcl::CapAlternativeViewpoint {
 	return xnIsViewPointSupported (instance->handle, other);
     }
 
-    method set-view proc {XnNodeHandle other} ok {
-	XnStatus s;
-
-	s = xnSetViewPoint (instance->handle, other);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method set-view proc {XnNodeHandle other} XnStatus {
+	return xnSetViewPoint (instance->handle, other);
     }
 
-    method reset-view proc {} ok {
-	XnStatus s;
-
-	s = xnResetViewPoint (instance->handle);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method reset-view proc {} XnStatus {
+	return xnResetViewPoint (instance->handle);
     }
 
     method using-view proc {XnNodeHandle other} bool {

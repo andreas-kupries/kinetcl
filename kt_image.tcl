@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Image {
 
     # # ## ### ##### ######## #############
 
-    method formats proc {} ok {
+    method formats proc {} Tcl_Obj* {
 	int i, lc;
 	Tcl_Obj* lv [kinetcl_NUM_PIXELFORMATS];
 
@@ -28,8 +28,7 @@ critcl::class def ::kinetcl::Image {
 	   lc++;
        }
 
-	Tcl_SetObjResult (interp, Tcl_NewListObj (lc, lv));
-	return TCL_OK;
+	return Tcl_NewListObj (lc, lv);
     }
 
     method @format? proc {} ok {

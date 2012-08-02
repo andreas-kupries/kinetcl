@@ -11,20 +11,12 @@ critcl::class def ::kinetcl::CapFramesync {
 	return xnCanFrameSyncWith (instance->handle, other);
     }
 
-    method start-sync-with proc {XnNodeHandle other} ok {
-	XnStatus s;
-
-	s = xnFrameSyncWith (instance->handle, other);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method start-sync-with proc {XnNodeHandle other} XnStatus {
+	return xnFrameSyncWith (instance->handle, other);
     }
 
-    method stop-sync-with proc {XnNodeHandle other} ok {
-	XnStatus s;
-
-	s = xnStopFrameSyncWith (instance->handle, other);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method stop-sync-with proc {XnNodeHandle other} XnStatus {
+	return xnStopFrameSyncWith (instance->handle, other);
     }
 
     method synced-with proc {XnNodeHandle other} bool {
