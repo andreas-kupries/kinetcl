@@ -2,7 +2,7 @@
 # # ## ### ##### ######## #############
 
 ## This file defines a TclOO class 'base' wrapping around the C level
-## class 'Base' and its associated. The code here glues the C pieces
+## class 'Base' and its associates. The code here glues the C pieces
 ## together into a whole.
 
 ## It additionally provides some shared helper commands.
@@ -86,9 +86,8 @@ oo::class create ::kinetcl::base {
     constructor {} {
 	next
 
-	# Pulls C handle out of stash,
-	::kinetcl::Base create BASE
-	BASE @self [self]
+	::kinetcl::Base create BASE ;# Uses the OpenNI handle stored in the stash
+	BASE @self [self]           ;# Declare wrapper as the object for events.
 	my SetupEventsOf BASE
 
 	# Check the handle for capabilities, create their C instances,
