@@ -36,21 +36,31 @@ proc ::kinetcl::Publish {class component {exclude {}}} {
 }
 
 proc ::kinetcl::Valid {o} {
+    # ATTENTION: This procedure is used by the C-level
+    # See function kinetcl_validate(), file kt_context.tcl).
+
     # Check if O is a proper kinetcl object.  If yes, directly access
     # the internal BASE object and have it stash the handle for use by
     # other methods.  These methods are responsible for un-stashing
     # the handle after use.
 
+    # Our database is a namespace-global dictionary used as a set (of
+    # its keys).  Its content is managed by the kinetcl::base class
+    # constructor and destructor.  See marker [KV].
+
     variable known
     set cmd [uplevel 1 [list namespace which -command $o]]
 
-    if {![dict exists $known  $cmd]} {
+    if {![dict exists $known $cmd]} {
 	return -code error -errorcode {KINETCL INVALID INSTANCE} \
 	    "Expected kinetcl instance, got \"$o\""
     }
 
     # Directly access the instance internals to put the object's
-    # OpenNI handle into the standard shared location.
+    # OpenNI handle into the standard shared location. This part is
+    # for use by the C-level kinetcl_validate() calling out to us, to
+    # allow not just validation, but conversion.
+
     [info object namespace $o]::BASE @mark
     return
 }
@@ -91,14 +101,14 @@ oo::class create ::kinetcl::base {
 	    I$class @self [self]
 	}
 
-	# Remember the instance for validation
+	# [KV] Remember the instance for validation --> See kinetcl::Valid.
 	variable ::kinetcl::known
 	dict set known [self] .
 	return
     }
 
     destructor {
-	# Remove the instance from the validation database.
+	# [KV] Drop the instance from validation --> See kinetcl::Valid.
 	variable ::kinetcl::known
 	dict unset known [self]
 	return

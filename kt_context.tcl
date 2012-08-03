@@ -103,6 +103,9 @@ critcl::iassoc::def kinetcl_context {} {
 ## to implement.  Automatically cleans up the stash through which the
 ## handle is communicated to us. Nothing the caller has to bother
 ## with.
+##
+## ATTENTION: The relevant Tcl procedure, "kinetcl::Valid", is defined
+## in "policy_base.tcl"
 
 critcl::ccode {
     static int
