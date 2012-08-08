@@ -38,7 +38,7 @@ critcl::class def ::kinetcl::Base {
     }
 
     # # ## ### ##### ######## #############
-    method is-capable-of proc {char* cap} ok {
+    method is-capable-of proc {Tcl_Obj* cap} ok {
 	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
 
 	XnBool supported;
@@ -52,7 +52,7 @@ critcl::class def ::kinetcl::Base {
 	}
 
 	/* Translate Tcl to C/OpenNI */
-	capName = @stem@_oni_capability_names [cap];
+	capName = @stem@_oni_capability_names [id];
 
 	supported = xnIsCapabilitySupported (instance->handle, capName);
 	Tcl_SetObjResult (interp, Tcl_NewIntObj (supported));

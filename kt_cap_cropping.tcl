@@ -59,14 +59,9 @@ critcl::class def ::kinetcl::CapCropping {
 	return TCL_ERROR;
     }
 
-    method uncrop {} {
+    method uncrop proc {} ok {
 	XnStatus s;
 	XnCropping c;
-
-	if (objc != 2) { /* Syntax: <instance> crop */
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	c.bEnabled = 0;
 	c.nXOffset = 0;

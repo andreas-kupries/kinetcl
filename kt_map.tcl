@@ -69,7 +69,7 @@ critcl::class def ::kinetcl::Map {
 	return TCL_OK;
     }
 
-    method @mode: {int xres int yres int fps} ok {
+    method @mode: proc {int xres int yres int fps} ok {
 	XnStatus        s;
 	XnMapOutputMode mode;
 

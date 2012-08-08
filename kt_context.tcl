@@ -215,12 +215,6 @@ critcl::ccode {
 	XnBool hasAuto;
 	Tcl_Obj* res;
 
-	/* Syntax: <instance> .capname.-range */
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
 	s = xnGetGeneralIntRange (handle, cap, &vmin, &vmax, &vstep, &vdefault, &hasAuto);
 	CHECK_STATUS_RETURN;
 

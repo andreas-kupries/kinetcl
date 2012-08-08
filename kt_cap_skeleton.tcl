@@ -65,7 +65,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     }
 
     method set-profile proc {Tcl_Obj* profile} ok {
-	int available, id;
+	int id;
 	XnStatus s;
 
 	if (Tcl_GetIndexFromObj (interp, profile, 
@@ -74,7 +74,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    return TCL_ERROR;
 	}
 
-	s = xnSetSkeletonProfile (instance->handle, profile+1);
+	s = xnSetSkeletonProfile (instance->handle, id+1);
 	CHECK_STATUS_RETURN;
 
 	return TCL_OK;
@@ -229,7 +229,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     }
 
     method set-joint-active proc {Tcl_Obj* joint bool active} ok {
-	int active, jointid;
+	int jointid;
 	XnStatus s;
 
 	if (Tcl_GetIndexFromObj (interp, joint, 
@@ -251,11 +251,6 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	XnSkeletonJoint j [XN_SKEL_RIGHT_FOOT+1];
 	Tcl_Obj*       jn [XN_SKEL_RIGHT_FOOT+1];
 	int k;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	n = XN_SKEL_RIGHT_FOOT+1;
 	s = xnEnumerateActiveJoints (instance->handle, j, &n);

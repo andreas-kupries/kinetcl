@@ -26,7 +26,6 @@ critcl::class def ::kinetcl::Gesture {
 
     method @add-gesture2 proc {char* gesture Tcl_Obj* box} ok {
 	XnBoundingBox3D thebox;
-	XnStatus s;
 	int lc;
 	Tcl_Obj** lv;
 	XnStatus s;
@@ -87,11 +86,6 @@ critcl::class def ::kinetcl::Gesture {
 	XnStatus  s;
 	Tcl_Obj*  glist;
 
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
 	n = xnGetNumberOfAvailableGestures (instance->handle);
 	gesture = (XnChar**) ckalloc (n * sizeof (XnChar*));
 
@@ -129,11 +123,6 @@ critcl::class def ::kinetcl::Gesture {
 	XnChar** gesture;
 	XnStatus  s;
 	Tcl_Obj*  glist;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	n = xnGetNumberOfAvailableGestures (instance->handle);
 	gesture = (XnChar**) ckalloc (n * sizeof (XnChar*));

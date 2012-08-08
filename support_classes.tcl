@@ -86,11 +86,10 @@ proc kt_class_common {} {
 	Tcl_IncrRefCount (instance->self);
     }
 
-    method @self {obj/2} {
+    method @self proc {Tcl_Obj* obj} void {
 	Tcl_DecrRefCount (instance->self);
-	instance->self = objv [2];
+	instance->self = obj;
 	Tcl_IncrRefCount (instance->self);
-	return TCL_OK;
     }
 
     # # ## ### ##### ######## #############

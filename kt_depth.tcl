@@ -85,7 +85,7 @@ critcl::class def ::kinetcl::Depth {
     }
 
     # TODO this and next, as command...
-    method projective2world {point...} {
+    method projective2world command {point...} {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;
@@ -130,7 +130,7 @@ critcl::class def ::kinetcl::Depth {
 	return res;
     }
 
-    method world2projective {point...} {
+    method world2projective command {point...} {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;
