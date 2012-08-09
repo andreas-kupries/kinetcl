@@ -43,7 +43,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return xnIsProfileAvailable (instance->handle, profile);
     }
 
-    method available-profiles proc {} ok {
+    method available-profiles proc {} Tcl_Obj* {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
 
@@ -56,11 +56,10 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    pc ++;
 	}
 
-	Tcl_SetObjResult (interp, Tcl_NewListObj (pc, pv));
-	return TCL_OK;
+	return Tcl_NewListObj (pc, pv);
     }
 
-    method all-profiles proc {} ok {
+    method all-profiles proc {} Tcl_Obj* {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
 
@@ -71,51 +70,27 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    pc ++;
 	}
 
-	Tcl_SetObjResult (interp, Tcl_NewListObj (pc, pv));
-	return TCL_OK;
+	return Tcl_NewListObj (pc, pv);
     }
 
-    method set-profile proc {KJointProfile profile} ok {
-	XnStatus s;
-
-	s = xnSetSkeletonProfile (instance->handle, profile);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method set-profile proc {KJointProfile profile} XnStatus {
+	return xnSetSkeletonProfile (instance->handle, profile);
     }
 
-    method set-smoothing proc {double factor} ok {
-	XnStatus s;
-
-	s = xnSetSkeletonSmoothing (instance->handle, factor);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method set-smoothing proc {double factor} XnStatus {
+	return xnSetSkeletonSmoothing (instance->handle, factor);
     }
 
-    method start-tracking proc {int id} ok {
-	XnStatus s;
-
-	s = xnStartSkeletonTracking (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start-tracking proc {int id} XnStatus {
+	return xnStartSkeletonTracking (instance->handle, id);
     }
 
-    method stop-tracking proc {int id} ok {
-	XnStatus s;
-
-	s = xnStopSkeletonTracking (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-tracking proc {int id} XnStatus {
+	return xnStopSkeletonTracking (instance->handle, id);
     }
 
-    method reset-tracking proc {int id} ok {
-	XnStatus s;
-
-	s = xnResetSkeleton (instance->handle, id);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method reset-tracking proc {int id} XnStatus {
+	return xnResetSkeleton (instance->handle, id);
     }
 
     method is-tracking proc {int id} bool {
@@ -130,64 +105,35 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return xnIsSkeletonCalibrating (instance->handle, id);
     }
 
-    method request-calibration proc {int id bool force} ok {
-	XnStatus s;
-
-	s = xnRequestSkeletonCalibration (instance->handle, id, force);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method request-calibration proc {int id bool force} XnStatus {
+	return xnRequestSkeletonCalibration (instance->handle, id, force);
     }
 
-    method abort-calibration proc {int id} ok {
-	XnStatus s;
-
-	s = xnAbortSkeletonCalibration (instance->handle, id);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method abort-calibration proc {int id} XnStatus {
+	return xnAbortSkeletonCalibration (instance->handle, id);
     }
 
     # XXX The higher level wrapper handles vfs, by routing through a
     # XXX temp file when needed.
 
-    method save-calibration-file proc {int id char* path} ok {
-	XnStatus s;
-
-	s = xnSaveSkeletonCalibrationDataToFile (instance->handle, id, path);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method save-calibration-file proc {int id char* path} XnStatus {
+	return xnSaveSkeletonCalibrationDataToFile (instance->handle, id, path);
     }
 
-    method load-calibration-file proc {int id char* path} ok {
-	XnStatus s;
-
-	s = xnLoadSkeletonCalibrationDataFromFile (instance->handle, id, path);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method load-calibration-file proc {int id char* path} XnStatus {
+	return xnLoadSkeletonCalibrationDataFromFile (instance->handle, id, path);
     }
 
-    method save-calibration-slot proc {int id int slot} ok {
-	XnStatus s;
-
-	s = xnSaveSkeletonCalibrationData (instance->handle, id, slot);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method save-calibration-slot proc {int id int slot} XnStatus {
+	return xnSaveSkeletonCalibrationData (instance->handle, id, slot);
     }
 
-    method load-calibration-slot proc {int id int slot} ok {
-	XnStatus s;
-
-	s = xnLoadSkeletonCalibrationData (instance->handle, id, slot);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    method load-calibration-slot proc {int id int slot} XnStatus {
+	return xnLoadSkeletonCalibrationData (instance->handle, id, slot);
     }
 
-    method clear-calibration-slot proc {int slot} ok {
-	XnStatus s;
-
-	s = xnClearSkeletonCalibrationData (instance->handle, slot);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method clear-calibration-slot proc {int slot} XnStatus {
+	return xnClearSkeletonCalibrationData (instance->handle, slot);
     }
 
     method is-calibration-slot proc {int slot} bool {
@@ -202,14 +148,8 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return xnIsJointActive (instance->handle, joint);
     }
 
-    method set-joint-active proc {KJoint joint bool active} ok {
-	XnStatus s;
-
-	s = xnSetJointActive (instance->handle, joint, active);
-	CHECK_STATUS_RETURN;
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (active));
-	return TCL_OK;
+    method set-joint-active proc {KJoint joint bool active} XnStatus {
+	return xnSetJointActive (instance->handle, joint, active);
     }
 
     method active-joints proc {} ok {

@@ -15,13 +15,8 @@ critcl::class def ::kinetcl::Gesture {
 
     # # ## ### ##### ######## #############
 
-    method @add-gesture1 proc {char* gesture} ok {
-	XnStatus s;
-
-	s = xnAddGesture (instance->handle, gesture, NULL);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method @add-gesture1 proc {char* gesture} XnStatus {
+	return xnAddGesture (instance->handle, gesture, NULL);
     }
 
     method @add-gesture2 proc {char* gesture Tcl_Obj* box} ok {
@@ -47,36 +42,20 @@ critcl::class def ::kinetcl::Gesture {
 
 	s = xnAddGesture (instance->handle, gesture, &thebox);
 	CHECK_STATUS_RETURN;
-
 	return TCL_OK;
     }
 
-    method remove-gesture proc {char* gesture} ok {
-	XnStatus s;
-
-	s = xnRemoveGesture (instance->handle, gesture);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method remove-gesture proc {char* gesture} XnStatus {
+	return xnRemoveGesture (instance->handle, gesture);
     }
 
 
-    method is-gesture proc {char* gesture} ok {
-	XnStatus s;
-
-	s = xnIsGestureAvailable (instance->handle, gesture);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method is-gesture proc {char* gesture} XnStatus {
+	return xnIsGestureAvailable (instance->handle, gesture);
     }
 
-    method gesture-has-progress proc {char* gesture} ok {
-	XnStatus s;
-
-	s = xnIsGestureProgressSupported (instance->handle, gesture);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method gesture-has-progress proc {char* gesture} XnStatus {
+	return xnIsGestureProgressSupported (instance->handle, gesture);
     }
 
     method all-gestures proc {} ok {

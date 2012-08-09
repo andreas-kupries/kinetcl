@@ -238,6 +238,14 @@ critcl::argtype XnNodeHandle {
     if (kinetcl_validate(ip, @@, &@A) != TCL_OK) return TCL_ERROR;
 }
 
+critcl::resulttype XnStatus {
+    if (rv != XN_STATUS_OK) {
+	Tcl_AppendResult (ip, xnGetStatusString (rv), NULL);
+	return TCL_ERROR;
+    }
+    return TCL_OK;
+}
+
 # # ## ### ##### ######## #############
 
 critcl::cproc ::kinetcl::estart {Tcl_Interp* interp} ok {

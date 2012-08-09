@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Scene {
 
     # # ## ### ##### ######## #############
 
-    method map proc {} ok {
+    method map proc {} Tcl_Obj* {
 	crimp_image* image;
 	XnSceneMetaData* meta;
 
@@ -40,8 +40,7 @@ critcl::class def ::kinetcl::Scene {
 
 	xnFreeSceneMetaData (meta);
 
-	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
-	return TCL_OK;
+	return crimp_new_image_obj (image);
     }
 
     method meta proc {} ok {
