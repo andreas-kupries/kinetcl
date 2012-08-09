@@ -74,6 +74,7 @@ critcl::tsources policy_scene.tcl     ; # -> map -> generator -> base
 
 critcl::tsources policy_cap_mirror.tcl      ; # capability wrapper
 critcl::tsources policy_cap_antiflicker.tcl ; # capability wrapper
+critcl::tsources policy_cap_cropping.tcl    ; # capability wrapper
 
 critcl::tsources joints.tcl           ; # Highlevel skeleton/joint tracker with proper events.
 critcl::tsources stance.tcl           ; # Highlevel stance/posture/body gesture detection.
