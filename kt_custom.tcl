@@ -83,6 +83,36 @@ critcl::argtype XnPixelFormat {
 } int int
 
 # # ## ### ##### ######## #############
+## power line frequency, mainly numeric, with third bool value, and bad handles.
+
+critcl::resulttype XnPowerLineFrequency {
+    if (rv == ((XnPowerLineFrequency) -1)) {
+	Tcl_AppendResult (ip, "Antiflicker not supported", NULL);
+	return TCL_ERROR;
+    }
+    if (!rv) {
+	Tcl_SetObjResult (ip, Tcl_NewStringObj ("off",-1));
+    } else {
+	Tcl_SetObjResult (ip, Tcl_NewIntObj (rv));
+    }
+    return TCL_OK;
+}
+
+critcl::argtype XnPowerLineFrequency {
+    if (0 == strcmp ("off", Tcl_GetString (@@))) {
+	@A = 0;
+    } else if (Tcl_GetIntFromObj (ip, @@, &@A) != TCL_OK) {
+	return TCL_ERROR;
+    }
+    if (@A && (@A != 50) && (@A != 60)) {
+	char buf [20];
+	sprintf (buf, "%d", @A);
+	Tcl_AppendResult (ip, "Bad frequency ", buf, ", expected 50, 60, or off", NULL);
+	return TCL_ERROR;
+    }
+} int XnPowerLineFrequency
+
+# # ## ### ##### ######## #############
 ## Convert between between object commands (handles) in Tcl_Obj* and
 ## OpenNI XnNodeHandle's.
 
