@@ -373,11 +373,11 @@ proc kt_cb_methods {callback name cname allnames cons dest {detail {}}} {
     lappend map @@destfunction@@ $dest
     lappend map @@detail@@       $detail
 
-    method set-callback-$name {Tcl_Obj* cmdprefix} proc [string map $map {
+    method set-callback-$name proc {Tcl_Obj* cmdprefix} ok [string map $map {
 	return @stem@_callback_@@cname@@_set (instance, cmdprefix);
     }]
 
-    method unset-callback-$name {} void [string map $map {
+    method unset-callback-$name proc {} void [string map $map {
 	@stem@_callback_@@cname@@_unset (instance, 1);
     }]
    

@@ -227,7 +227,10 @@ critcl::class def ::kinetcl::Base {
 	static int
 	kinetcl_convert_2bbox (Tcl_Interp* interp, Tcl_Obj* ibox, XnBoundingBox3D* box)
 	{
-	    if (Tcl_ListObjGetElements (interp, box, &lc, &lv) != TCL_OK) {
+	    int       lc;
+	    Tcl_Obj** lv;
+
+	    if (Tcl_ListObjGetElements (interp, ibox, &lc, &lv) != TCL_OK) {
 		return TCL_ERROR;
 	    } else if (lc != 2) {
 		Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
@@ -238,7 +241,7 @@ critcl::class def ::kinetcl::Base {
 		return TCL_ERROR;
 	    }
 
-	    if (kinetcl_convert_to3d (interp, lv [1], &ibox->RightTopFar) != TCL_OK) {
+	    if (kinetcl_convert_to3d (interp, lv [1], &box->RightTopFar) != TCL_OK) {
 		return TCL_ERROR;
 	    }
 

@@ -20,7 +20,7 @@ critcl::class def ::kinetcl::Gesture {
     }
 
     # TODO: cproc reference argument types.
-    method @add-gesture2 proc {char* gesture XnBoundingBox box} XnStatus {
+    method @add-gesture2 proc {char* gesture XnBoundingBox3D box} XnStatus {
 	return xnAddGesture (instance->handle, gesture, &box);
     }
 

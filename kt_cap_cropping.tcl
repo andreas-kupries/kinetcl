@@ -19,6 +19,8 @@ critcl::class def ::kinetcl::CapCroppingC {
     }
 
     method @crop? proc {} ok {
+	XnStatus s;
+	XnCropping c;
 	Tcl_Obj* cv[5];
 
 	s = xnGetCropping (instance->handle, &c);

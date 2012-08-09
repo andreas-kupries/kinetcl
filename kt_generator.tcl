@@ -36,7 +36,7 @@ critcl::class def ::kinetcl::Generator {
     ## Query data attributes (is it new?, frame id, timestamp)
     ## Note: Data size and data itself are not accessible here, but only is derived classes.
 
-    method proc isNew {} bool {
+    method isNew proc {} bool {
 	return xnIsDataNew (instance->handle);
     }
 

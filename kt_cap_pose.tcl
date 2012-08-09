@@ -13,15 +13,13 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 
     method poses proc {} Tcl_Obj* {
 	XnStatus s;
-	int lc;
+	int i, n, lc;
 	Tcl_Obj** lv = NULL;
 	Tcl_Obj* result = NULL;
 	XnChar** poses;
 
 	lc = xnGetNumberOfPoses (instance->handle);
 	if (lc) {
-	    int i, n;
-
 	    poses = (XnChar**) ckalloc (lc * sizeof (XnChar*));
 	    for (i=0; i < lc; i++) {
 		/* Pray that this is enough space. This not about overwriting,
