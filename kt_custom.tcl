@@ -12,7 +12,7 @@
 
 critcl::resulttype XnStatus {
     if (rv != XN_STATUS_OK) {
-	Tcl_AppendResult (ip, xnGetStatusString (rv), NULL);
+	Tcl_AppendResult (interp, xnGetStatusString (rv), NULL);
 	return TCL_ERROR;
     }
     return TCL_OK;
@@ -23,10 +23,10 @@ critcl::resulttype XnStatus {
 
 critcl::resulttype XnDepthPixel {
     if (rv == ((XnDepthPixel) -1)) {
-	Tcl_AppendResult (ip, "Inheritance error: Not a depth generator", NULL);
+	Tcl_AppendResult (interp, "Inheritance error: Not a depth generator", NULL);
 	return TCL_ERROR;
     }
-    Tcl_SetObjResult (ip, Tcl_NewIntObj (rv));
+    Tcl_SetObjResult (interp, Tcl_NewIntObj (rv));
     return TCL_OK;
 }
 
@@ -35,11 +35,11 @@ critcl::resulttype XnDepthPixel {
 
 critcl::resulttype KFrame {
     if (rv == ((XnUInt32) -1)) {
-	Tcl_AppendResult (ip, "Inheritance error: Not a generator", NULL);
+	Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
 	return TCL_ERROR;
     }
 
-    Tcl_SetObjResult (ip, Tcl_NewIntObj (rv));
+    Tcl_SetObjResult (interp, Tcl_NewIntObj (rv));
     return TCL_OK;
 } XnUInt32
 
@@ -48,11 +48,11 @@ critcl::resulttype KFrame {
 
 critcl::resulttype KTimestamp {
     if (rv == ((XnUInt64) -1)) {
-	Tcl_AppendResult (ip, "Inheritance error: Not a generator", NULL);
+	Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
 	return TCL_ERROR;
     }
 
-    Tcl_SetObjResult (ip, Tcl_NewWideIntObj (rv));
+    Tcl_SetObjResult (interp, Tcl_NewWideIntObj (rv));
     return TCL_OK;
 } XnUInt64
 
@@ -64,17 +64,17 @@ critcl::resulttype KTimestamp {
 
 critcl::resulttype XnPixelFormat {
     if (rv == (XnPixelFormat) -1) {
-	Tcl_AppendResult (ip, "Inheritance error: Not an image generator", NULL);
+	Tcl_AppendResult (interp, "Inheritance error: Not an image generator", NULL);
 	return TCL_ERROR;
     }
     /* ATTENTION: The array is 0-indexed, wheras the pixelformat 'rv' is 1-indexed */
-    Tcl_SetObjResult (ip, Tcl_NewStringObj (kinetcl_pixelformat [rv-1],-1));
+    Tcl_SetObjResult (interp, Tcl_NewStringObj (kinetcl_pixelformat [rv-1],-1));
     return TCL_OK;
 }
 
 # kinetcl_pixelformat is defined in kt_image.tcl
 critcl::argtype XnPixelFormat {
-    if (Tcl_GetIndexFromObj (ip, @@, 
+    if (Tcl_GetIndexFromObj (interp, @@, 
 			     kinetcl_pixelformat,
 			     "pixelformat", 0, &@A) != TCL_OK) {
 	return TCL_ERROR;
@@ -87,13 +87,13 @@ critcl::argtype XnPixelFormat {
 
 critcl::resulttype XnPowerLineFrequency {
     if (rv == ((XnPowerLineFrequency) -1)) {
-	Tcl_AppendResult (ip, "Antiflicker not supported", NULL);
+	Tcl_AppendResult (interp, "Antiflicker not supported", NULL);
 	return TCL_ERROR;
     }
     if (!rv) {
-	Tcl_SetObjResult (ip, Tcl_NewStringObj ("off",-1));
+	Tcl_SetObjResult (interp, Tcl_NewStringObj ("off",-1));
     } else {
-	Tcl_SetObjResult (ip, Tcl_NewIntObj (rv));
+	Tcl_SetObjResult (interp, Tcl_NewIntObj (rv));
     }
     return TCL_OK;
 }
@@ -101,13 +101,13 @@ critcl::resulttype XnPowerLineFrequency {
 critcl::argtype XnPowerLineFrequency {
     if (0 == strcmp ("off", Tcl_GetString (@@))) {
 	@A = 0;
-    } else if (Tcl_GetIntFromObj (ip, @@, &@A) != TCL_OK) {
+    } else if (Tcl_GetIntFromObj (interp, @@, &@A) != TCL_OK) {
 	return TCL_ERROR;
     }
     if (@A && (@A != 50) && (@A != 60)) {
 	char buf [20];
 	sprintf (buf, "%d", @A);
-	Tcl_AppendResult (ip, "Bad frequency ", buf, ", expected 50, 60, or off", NULL);
+	Tcl_AppendResult (interp, "Bad frequency ", buf, ", expected 50, 60, or off", NULL);
 	return TCL_ERROR;
     }
 } int XnPowerLineFrequency
@@ -117,14 +117,14 @@ critcl::argtype XnPowerLineFrequency {
 ## OpenNI XnNodeHandle's.
 
 critcl::argtype XnNodeHandle {
-    if (kinetcl_validate(ip, @@, &@A) != TCL_OK) return TCL_ERROR;
+    if (kinetcl_validate(interp, @@, &@A) != TCL_OK) return TCL_ERROR;
 }
 
 # # ## ### ##### ######## #############
 ## Convert Tcl_Obj* (3-element list, double elements) to a 3D point.
 
 critcl::argtype XnPoint3D {
-    if (kinetcl_convert_to3d (ip, @@, &@A) != TCL_OK) {
+    if (kinetcl_convert_to3d (interp, @@, &@A) != TCL_OK) {
 	return TCL_ERROR;
     }
 }
@@ -133,7 +133,7 @@ critcl::argtype XnPoint3D {
 ## Convert Tcl_Obj* (2-element list, 3D point elements) to a 3D bounding box.
 
 critcl::argtype XnBoundingBox3D {
-    if (kinetcl_convert_2bbox (ip, @@, &@A) != TCL_OK) {
+    if (kinetcl_convert_2bbox (interp, @@, &@A) != TCL_OK) {
 	return TCL_ERROR;
     }
 }
@@ -149,7 +149,7 @@ critcl::argtype XnBoundingBox3D {
 ## String array defined in kt_cap_skeleton.tcl
 
 critcl::argtype KJointProfile {
-    if (Tcl_GetIndexFromObj (ip, @@, @stem@_skeleton_profile,
+    if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_profile,
 			     "profile", 0, &@A) != TCL_OK) {
 	return TCL_ERROR;
     }
@@ -161,7 +161,7 @@ critcl::argtype KJointProfile {
 ## String array defined in kt_cap_skeleton.tcl
 
 critcl::argtype KJoint {
-    if (Tcl_GetIndexFromObj (ip, @@, @stem@_skeleton_joint,
+    if (Tcl_GetIndexFromObj (interp, @@, @stem@_skeleton_joint,
 			     "joint", 0, &@A) != TCL_OK) {
 	return TCL_ERROR;
     }
@@ -180,7 +180,7 @@ critcl::argtype KJoint {
 critcl::argtype KCapability {
     /* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
     int id;
-    if (Tcl_GetIndexFromObj (ip, @@, 
+    if (Tcl_GetIndexFromObj (interp, @@, 
 			     @stem@_tcl_capability_names,
 			     "capability", 0, &id) != TCL_OK) {
 	return TCL_ERROR;

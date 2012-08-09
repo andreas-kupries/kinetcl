@@ -46,7 +46,7 @@ critcl::class def ::kinetcl::Base {
 	return instance->capnames;
     }
 
-    method node-name proc {} vstring {
+    method node-name proc {} {const char*} {
 	return xnGetNodeName (instance->handle);
     }
 

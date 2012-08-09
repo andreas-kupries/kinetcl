@@ -33,7 +33,7 @@ critcl::class def ::kinetcl::Player {
 	return xnIsPlayerAtEOF (instance->handle);
     }
 
-    method format proc {} vstring {
+    method format proc {} {const char*} {
 	return xnGetPlayerSupportedFormat (instance->handle);
     }
 
