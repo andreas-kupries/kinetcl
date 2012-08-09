@@ -41,6 +41,7 @@ oo::class create ::kinetcl::CapMirror {
     kinetcl::Publish ::kinetcl::CapMirrorC CAP
     forward methods CAP methods
     forward @self   CAP @self
+    export  @self ;# Doesn't fit the pattern of method names exported by default
 
     # # ## ### ##### ######## #############
 }

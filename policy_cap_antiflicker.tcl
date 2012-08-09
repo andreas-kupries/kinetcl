@@ -39,6 +39,7 @@ oo::class create ::kinetcl::CapAntiflicker {
     kinetcl::Publish ::kinetcl::CapAntiflickerC CAP
     forward methods CAP methods
     forward @self   CAP @self
+    export  @self ;# Doesn't fit the pattern of method names exported by default
 
     # # ## ### ##### ######## #############
 }
