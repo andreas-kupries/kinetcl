@@ -8,7 +8,9 @@ critcl::class def ::kinetcl::CapMirror {
     # # ## ### ##### ######## #############
     ## TODO: policy level classes for capabilities!
 
-    method mirror command {objv[2] = ?bool?} {
+    method mirror command {
+	objv[2] = ?bool?
+    } {
 	if (objc == 2) { /* Syntax: <instance> mirror */
 	    XnBool m = xnIsMirrored (instance->handle);
 

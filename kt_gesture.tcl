@@ -19,36 +19,14 @@ critcl::class def ::kinetcl::Gesture {
 	return xnAddGesture (instance->handle, gesture, NULL);
     }
 
-    method @add-gesture2 proc {char* gesture Tcl_Obj* box} ok {
-	XnBoundingBox3D thebox;
-	int lc;
-	Tcl_Obj** lv;
-	XnStatus s;
-
-	if (Tcl_ListObjGetElements (interp, box, &lc, &lv) != TCL_OK) {
-	    return TCL_ERROR;
-	} else if (lc != 2) {
-	    Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_convert_to3d (interp, lv [0], &thebox.LeftBottomNear) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_convert_to3d (interp, lv [1], &thebox.RightTopFar) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnAddGesture (instance->handle, gesture, &thebox);
-	CHECK_STATUS_RETURN;
-	return TCL_OK;
+    # TODO: cproc reference argument types.
+    method @add-gesture2 proc {char* gesture XnBoundingBox3D box} XnStatus {
+	return xnAddGesture (instance->handle, gesture, &box);
     }
 
     method remove-gesture proc {char* gesture} XnStatus {
 	return xnRemoveGesture (instance->handle, gesture);
     }
-
 
     method is-gesture proc {char* gesture} XnStatus {
 	return xnIsGestureAvailable (instance->handle, gesture);

@@ -38,25 +38,8 @@ critcl::class def ::kinetcl::Base {
     }
 
     # # ## ### ##### ######## #############
-    method is-capable-of proc {Tcl_Obj* cap} ok {
-	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
-
-	XnBool supported;
-	const char* capName;
-	int id;
-
-	if (Tcl_GetIndexFromObj (interp, cap, 
-				 @stem@_tcl_capability_names,
-				 "capability", 0, &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	/* Translate Tcl to C/OpenNI */
-	capName = @stem@_oni_capability_names [id];
-
-	supported = xnIsCapabilitySupported (instance->handle, capName);
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (supported));
-	return TCL_OK;
+    method is-capable-of proc {KCapability cap} bool {
+	return xnIsCapabilitySupported (instance->handle, cap);
     }
 
     method capabilities proc {} Tcl_Obj* {
@@ -102,7 +85,6 @@ critcl::class def ::kinetcl::Base {
     # get int, real, string, general properties - by name
     # locking, transactional changes
     # add/remove needed nodes (dependencies)
-
 
     # # ## ### ##### ######## #############
 
@@ -237,6 +219,30 @@ critcl::class def ::kinetcl::Base {
 		vec->X = x;
 		vec->Y = y;
 		vec->Z = z;
+	    }
+
+	    return TCL_OK;
+	}
+
+	static int
+	kinetcl_convert_2bbox (Tcl_Interp* interp, Tcl_Obj* ibox, XnBoundingBox3D* box)
+	{
+	    int       lc;
+	    Tcl_Obj** lv;
+
+	    if (Tcl_ListObjGetElements (interp, ibox, &lc, &lv) != TCL_OK) {
+		return TCL_ERROR;
+	    } else if (lc != 2) {
+		Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
+		return TCL_ERROR;
+	    }
+
+	    if (kinetcl_convert_to3d (interp, lv [0], &box->LeftBottomNear) != TCL_OK) {
+		return TCL_ERROR;
+	    }
+
+	    if (kinetcl_convert_to3d (interp, lv [1], &box->RightTopFar) != TCL_OK) {
+		return TCL_ERROR;
 	    }
 
 	    return TCL_OK;
