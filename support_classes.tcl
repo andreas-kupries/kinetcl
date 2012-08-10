@@ -87,9 +87,12 @@ proc kt_class_common {} {
     }
 
     method @self proc {Tcl_Obj* obj} void {
-	Tcl_DecrRefCount (instance->self);
+	/* Careful with ordering, in case of obj == old */
+	/* Freeing old first may cause us to loose it inadvertently */
+	Tcl_Obj* old = 	instance->self;
 	instance->self = obj;
-	Tcl_IncrRefCount (instance->self);
+	Tcl_IncrRefCount (obj);
+	Tcl_DecrRefCount (old);
     }
 
     # # ## ### ##### ######## #############
