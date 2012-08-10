@@ -190,6 +190,14 @@ critcl::argtype KCapability {
     @A = (char*) @stem@_oni_capability_names [id];
 } char* {const char*}
 
+# # ## ### ##### ######## #############
+
+critcl::resulttype KTcl_Obj* {
+    if (rv == NULL) { return TCL_ERROR; }
+    Tcl_SetObjResult(interp, rv);
+    /* No refcount adjustment */
+    return TCL_OK;
+} Tcl_Obj*
 
 # # ## ### ##### ######## #############
 return

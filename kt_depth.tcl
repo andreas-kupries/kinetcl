@@ -36,7 +36,7 @@ critcl::class def ::kinetcl::Depth {
 
     # Possible to make the meta data an instance variable to reduce
     # memory churn?
-    method meta proc {} Tcl_Obj* {
+    method meta proc {} KTcl_Obj* {
 	XnDepthMetaData* meta;
 	Tcl_Obj* result;
 
@@ -49,7 +49,7 @@ critcl::class def ::kinetcl::Depth {
 	return result;
     }
 
-    method map proc {} Tcl_Obj* {
+    method map proc {} KTcl_Obj* {
 	crimp_image* image;
 	XnDepthMetaData* meta;
 

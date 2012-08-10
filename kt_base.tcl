@@ -42,7 +42,7 @@ critcl::class def ::kinetcl::Base {
 	return xnIsCapabilitySupported (instance->handle, cap);
     }
 
-    method capabilities proc {} Tcl_Obj* {
+    method capabilities proc {} KTcl_Obj* {
 	return instance->capnames;
     }
 
@@ -50,7 +50,7 @@ critcl::class def ::kinetcl::Base {
 	return xnGetNodeName (instance->handle);
     }
 
-    method node-info proc {} Tcl_Obj* {
+    method node-info proc {} KTcl_Obj* {
 	XnNodeInfo*                        ni = xnGetNodeInfo (instance->handle);
 	const XnProductionNodeDescription* d  = xnNodeInfoGetDescription (ni);
 	Tcl_Obj* vv [4];

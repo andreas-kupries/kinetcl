@@ -11,7 +11,7 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 	return xnIsPoseSupported (instance->handle, pose);
     }
 
-    method poses proc {} Tcl_Obj* {
+    method poses proc {} KTcl_Obj* {
 	XnStatus s;
 	int i, n, lc;
 	Tcl_Obj** lv = NULL;

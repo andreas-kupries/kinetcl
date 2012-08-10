@@ -15,7 +15,7 @@ critcl::class def ::kinetcl::Image {
 
     # # ## ### ##### ######## #############
 
-    method formats proc {} Tcl_Obj* {
+    method formats proc {} KTcl_Obj* {
 	int i, lc;
 	Tcl_Obj* lv [kinetcl_NUM_PIXELFORMATS];
 
@@ -39,7 +39,7 @@ critcl::class def ::kinetcl::Image {
 	return xnSetPixelFormat (instance->handle, format);
     }
 
-    method meta proc {} Tcl_Obj* {
+    method meta proc {} KTcl_Obj* {
 	Tcl_Obj* result;
 	XnImageMetaData* meta;
 

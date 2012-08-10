@@ -21,7 +21,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return xnIsProfileAvailable (instance->handle, profile);
     }
 
-    method available-profiles proc {} Tcl_Obj* {
+    method available-profiles proc {} KTcl_Obj* {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
 
@@ -37,7 +37,7 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return Tcl_NewListObj (pc, pv);
     }
 
-    method all-profiles proc {} Tcl_Obj* {
+    method all-profiles proc {} KTcl_Obj* {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
 
@@ -149,11 +149,11 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    method get-joint proc {int user KJoint joint} Tcl_Obj* {
+    method get-joint proc {int user KJoint joint} KTcl_Obj* {
 	return @stem@_get_joint (interp, instance, user, joint);
     }
 
-    method get-skeleton proc {int user} Tcl_Obj* {
+    method get-skeleton proc {int user} KTcl_Obj* {
 	return @stem@_get_skeleton (interp, instance, user);
     }
 
