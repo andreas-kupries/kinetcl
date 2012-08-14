@@ -15,14 +15,9 @@ critcl::class def ::kinetcl::Scene {
 
     # # ## ### ##### ######## #############
 
-    mdef map { /* Syntax: <instance> map */
+    method map proc {} KTcl_Obj* {
 	crimp_image* image;
 	XnSceneMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateSceneMetaData ();
 	xnGetSceneMetaData (instance->handle, meta);
@@ -45,36 +40,26 @@ critcl::class def ::kinetcl::Scene {
 
 	xnFreeSceneMetaData (meta);
 
-	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
-	return TCL_OK;
+	return crimp_new_image_obj (image);
     }
 
-    mdef meta { /* Syntax: <instance> meta */
+    method meta proc {} KTcl_Obj* {
+	Tcl_Obj* result;
 	XnSceneMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateSceneMetaData ();
 
 	xnGetSceneMetaData (instance->handle, meta);
-	Tcl_SetObjResult (interp, kinetcl_convert_scene_metadata (meta));
+	result = kinetcl_convert_scene_metadata (meta);
 
 	xnFreeSceneMetaData (meta);
-	return TCL_OK;
+	return result;
     }
 
-    mdef floor { /* Syntax: <instance> floor */
+    method floor proc {} ok {
 	XnPlane3D floor;
 	XnStatus s;
 	Tcl_Obj* res;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnGetFloor (instance->handle, &floor);
 	CHECK_STATUS_RETURN;

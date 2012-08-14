@@ -16,25 +16,25 @@ proc kt_cap_integer {capname nicapname} {
     lappend map @@nicapname@@   $nicapname
     lappend map @@capcallback@@ $capname
 
-    uplevel 1 [string map $map {
-	# # ## ### ##### ######## #############
-	kt_abstract_class
+    # # ## ### ##### ######## #############
+    kt_abstract_class
 
-	mdef @@capname@@ { /* <instance> @@capname@@ ?value? */
-	    return kinetcl_cap_integer_rw (instance->handle, "@@nicapname@@", interp, objc, objv);
-	}
-
-	mdef @@capname@@-range { /* <instance> @@capname@@-range */
-	    return kinetcl_cap_integer_range (instance->handle, "@@nicapname@@", interp, objc, objv);
-	}
-
-	kt_callback @@capcallback@@ \
-	    xnRegisterToGeneralIntValueChange \
-	    xnUnregisterFromGeneralIntValueChange \
-	    {} {} all @@nicapname@@
-
-	# # ## ### ##### ######## #############
+    method $capname command {
+	objv[2] = value, optional
+    } [string map $map {
+	return kinetcl_cap_integer_rw (instance->handle, "@@nicapname@@", interp, objc, objv);
     }]
+
+    method ${capname}-range proc {} ok [string map $map {
+	return kinetcl_cap_integer_range (instance->handle, "@@nicapname@@", interp);
+    }]
+
+    kt_callback $capname \
+	xnRegisterToGeneralIntValueChange \
+	xnUnregisterFromGeneralIntValueChange \
+	{} {} all $nicapname
+
+    # # ## ### ##### ######## #############
 }
 
 # # ## ### ##### ######## #############

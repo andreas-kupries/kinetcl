@@ -15,101 +15,33 @@ critcl::class def ::kinetcl::Gesture {
 
     # # ## ### ##### ######## #############
 
-    mdef add-gesture { /* Syntax: <instance> add-gesture <str> ?<box>? */
-	XnBoundingBox3D box;
-	XnBoundingBox3D* thebox;
-	XnStatus s;
-	int lc;
-	Tcl_Obj** lv;
-
-	if ((objc < 3) || (objc > 4)) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "gesture ?box?");
-	    return TCL_ERROR;
-	}
-
-	if (objc == 4) {
-	    if (Tcl_ListObjGetElements (interp, objv[3], &lc, &lv) != TCL_OK) {
-		return TCL_ERROR;
-	    } else if (lc != 2) {
-		Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
-		return TCL_ERROR;
-	    }
-
-	    if (kinetcl_convert_to3d (interp, lv [0], &box.LeftBottomNear) != TCL_OK) {
-		return TCL_ERROR;
-	    }
-
-	    if (kinetcl_convert_to3d (interp, lv [1], &box.RightTopFar) != TCL_OK) {
-		return TCL_ERROR;
-	    }
-
-	    thebox = &box;
-	} else {
-	    thebox = NULL;
-	}
-
-	s = xnAddGesture (instance->handle, Tcl_GetString (objv [2]), thebox);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method @add-gesture1: proc {char* gesture} XnStatus {
+	return xnAddGesture (instance->handle, gesture, NULL);
     }
 
-    mdef remove-gesture { /* Syntax: <instance> remove-gesture <str> */
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "gesture");
-	    return TCL_ERROR;
-	}
-
-	s = xnRemoveGesture (instance->handle, Tcl_GetString (objv [2]));
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    # TODO: cproc reference argument types.
+    method @add-gesture2: proc {char* gesture XnBoundingBox3D box} XnStatus {
+	return xnAddGesture (instance->handle, gesture, &box);
     }
 
-
-    mdef is-gesture { /* Syntax: <instance> is-gesture <str> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "gesture");
-	    return TCL_ERROR;
-	}
-
-	s = xnIsGestureAvailable (instance->handle, Tcl_GetString (objv [2]));
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method remove-gesture proc {char* gesture} XnStatus {
+	return xnRemoveGesture (instance->handle, gesture);
     }
 
-    mdef gesture-has-progress { /* Syntax: <instance> gesture-has-progress <str> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "gesture");
-	    return TCL_ERROR;
-	}
-
-	s = xnIsGestureProgressSupported (instance->handle, Tcl_GetString (objv [2]));
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method is-gesture proc {char* gesture} XnStatus {
+	return xnIsGestureAvailable (instance->handle, gesture);
     }
 
-    mdef all-gestures { /* Syntax: <instance> all-gestures */
+    method gesture-has-progress proc {char* gesture} XnStatus {
+	return xnIsGestureProgressSupported (instance->handle, gesture);
+    }
+
+    method all-gestures proc {} ok {
 	int i, res = TCL_OK;
 	XnUInt16  n;
 	XnChar** gesture;
 	XnStatus  s;
 	Tcl_Obj*  glist;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	n = xnGetNumberOfAvailableGestures (instance->handle);
 	gesture = (XnChar**) ckalloc (n * sizeof (XnChar*));
@@ -142,17 +74,12 @@ critcl::class def ::kinetcl::Gesture {
 	return res;
     }
 
-    mdef active-gestures { /* Syntax: <instance> active-gestures */
+    method active-gestures proc {} ok {
 	int i, res = TCL_OK;
 	XnUInt16  n;
 	XnChar** gesture;
 	XnStatus  s;
 	Tcl_Obj*  glist;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	n = xnGetNumberOfAvailableGestures (instance->handle);
 	gesture = (XnChar**) ckalloc (n * sizeof (XnChar*));

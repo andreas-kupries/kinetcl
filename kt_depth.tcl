@@ -15,33 +15,14 @@ critcl::class def ::kinetcl::Depth {
 
     # # ## ### ##### ######## #############
 
-    mdef max-depth { /* Syntax: <instance> max-depth */
-	XnDepthPixel depth;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	depth = xnGetDeviceMaxDepth (instance->handle);
-	if (depth == ((XnDepthPixel) -1)) {
-	    Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (depth));
-	return TCL_OK;
+    method max-depth proc {} XnDepthPixel {
+	return xnGetDeviceMaxDepth (instance->handle);
     }
 
-    mdef fov { /* Syntax: <instance> fov */
+    method fov proc {} ok {
 	Tcl_Obj* rfov [2];
 	XnFieldOfView fov;
 	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnGetDepthFieldOfView (instance->handle, &fov);
 	CHECK_STATUS_RETURN;
@@ -53,31 +34,24 @@ critcl::class def ::kinetcl::Depth {
 	return TCL_OK;
     }
 
-    mdef meta { /* Syntax: <instance> meta */
+    # Possible to make the meta data an instance variable to reduce
+    # memory churn?
+    method meta proc {} KTcl_Obj* {
 	XnDepthMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
+	Tcl_Obj* result;
 
 	meta = xnAllocateDepthMetaData ();
 
 	xnGetDepthMetaData (instance->handle, meta);
-	Tcl_SetObjResult (interp, kinetcl_convert_depth_metadata (meta));
+	result = kinetcl_convert_depth_metadata (meta);
 
 	xnFreeDepthMetaData (meta);
-	return TCL_OK;
+	return result;
     }
 
-    mdef map { /* Syntax: <instance> map */
+    method map proc {} KTcl_Obj* {
 	crimp_image* image;
 	XnDepthMetaData* meta;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	meta = xnAllocateDepthMetaData ();
 	xnGetDepthMetaData (instance->handle, meta);
@@ -100,11 +74,13 @@ critcl::class def ::kinetcl::Depth {
 
 	xnFreeDepthMetaData (meta);
 
-	Tcl_SetObjResult (interp, crimp_new_image_obj (image));
-	return TCL_OK;
+	return crimp_new_image_obj (image);
     }
 
-    mdef projective2world { /* Syntax: <instance> 2world point... */
+    # TODO this and next, as command...
+    method projective2world command {
+	objv[2]... = point...
+    } {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;
@@ -149,7 +125,9 @@ critcl::class def ::kinetcl::Depth {
 	return res;
     }
 
-    mdef world2projective { /* Syntax: <instance> 2projective point... */
+    method world2projective command {
+	objv[2]... = point...
+    } {
 	XnStatus s;
 	int i, lc, pc, res = TCL_ERROR;
 	double v;

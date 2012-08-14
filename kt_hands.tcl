@@ -15,78 +15,20 @@ critcl::class def ::kinetcl::Hands {
 
     # # ## ### ##### ######## #############
 
-    mdef set-smoothing { /* Syntax: <instance> set-smoothing <factor> */
-	double factor;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "factor");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetDoubleFromObj (interp, objv[2], &factor) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSetTrackingSmoothing (instance->handle, factor);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method set-smoothing proc {double factor} XnStatus {
+	return xnSetTrackingSmoothing (instance->handle, factor);
     }
 
-    mdef start-tracking { /* Syntax: <instance> start-tracking <point> */
-	XnPoint3D p;
-	XnStatus s;
-	int pc;
-	Tcl_Obj** pv;
-	double px, py, pz;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "point");
-	    return TCL_ERROR;
-	}
-
-	if (kinetcl_convert_to3d (interp, objv [2], &p) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStartTracking (instance->handle, &p);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start-tracking proc {XnPoint3D point} XnStatus {
+	return xnStartTracking (instance->handle, &point);
     }
 
-    mdef stop-tracking { /* Syntax: <instance> stop-tracking <id> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStopTracking (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-tracking proc {int id} XnStatus {
+	return xnStopTracking (instance->handle, id);
     }
 
-    mdef stop-tracking-all { /* Syntax: <instance> stop-tracking-all */
-	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	s = xnStopTrackingAll (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-tracking-all proc {} XnStatus {
+	return xnStopTrackingAll (instance->handle);
     }
 
     # # ## ### ##### ######## #############

@@ -7,18 +7,8 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 
     # # ## ### ##### ######## #############
 
-    mdef need-pose { /* Syntax: <instance> need-pose */
-	int need;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	need = xnNeedPoseForSkeletonCalibration (instance->handle);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (need));
-	return TCL_OK;
+    method need-pose proc {} bool {
+	return xnNeedPoseForSkeletonCalibration (instance->handle);
     }
 
     # XXX Bogosity
@@ -27,34 +17,13 @@ critcl::class def ::kinetcl::CapUserSkeleton {
     # we do not know the length we would have pre-allocate either,
     # should the library try to fill the string.
 
-    mdef is-profile-available { /* Syntax: <instance> is-profile-available <profile> */
-	int available, profile;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "profile");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[2], 
-				 @stem@_skeleton_profile,
-				 "profile", 0, &profile) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	available = xnIsProfileAvailable (instance->handle, profile+1);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (available));
-	return TCL_OK;
+    method is-profile-available proc {KJointProfile profile} bool {
+	return xnIsProfileAvailable (instance->handle, profile);
     }
 
-    mdef available-profiles { /* Syntax: <instance> available-profiles */
+    method available-profiles proc {} KTcl_Obj* {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	for (profile = XN_SKEL_PROFILE_NONE, pc = 0;
 	     profile <= XN_SKEL_PROFILE_HEAD_HANDS;
@@ -65,18 +34,12 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    pc ++;
 	}
 
-	Tcl_SetObjResult (interp, Tcl_NewListObj (pc, pv));
-	return TCL_OK;
+	return Tcl_NewListObj (pc, pv);
     }
 
-    mdef all-profiles { /* Syntax: <instance> available-profiles */
+    method all-profiles proc {} KTcl_Obj* {
 	int available, profile, pc;
 	Tcl_Obj* pv [5];
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	for (profile = XN_SKEL_PROFILE_NONE, pc = 0;
 	     profile <= XN_SKEL_PROFILE_HEAD_HANDS;
@@ -85,409 +48,94 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	    pc ++;
 	}
 
-	Tcl_SetObjResult (interp, Tcl_NewListObj (pc, pv));
-	return TCL_OK;
+	return Tcl_NewListObj (pc, pv);
     }
 
-    mdef set-profile { /* Syntax: <instance> set-profile <profile> */
-	int available, profile;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "profile");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[2], 
-				 @stem@_skeleton_profile,
-				 "profile", 0, &profile) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSetSkeletonProfile (instance->handle, profile+1);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method set-profile proc {KJointProfile profile} XnStatus {
+	return xnSetSkeletonProfile (instance->handle, profile);
     }
 
-    mdef set-smoothing { /* Syntax: <instance> set-smoothing <factor> */
-	double factor;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "factor");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetDoubleFromObj (interp, objv[2], &factor) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSetSkeletonSmoothing (instance->handle, factor);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method set-smoothing proc {double factor} XnStatus {
+	return xnSetSkeletonSmoothing (instance->handle, factor);
     }
 
-    mdef start-tracking { /* Syntax: <instance> start-tracking <id> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStartSkeletonTracking (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start-tracking proc {int id} XnStatus {
+	return xnStartSkeletonTracking (instance->handle, id);
     }
 
-    mdef stop-tracking { /* Syntax: <instance> stop-tracking <id> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStopSkeletonTracking (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-tracking proc {int id} XnStatus {
+	return xnStopSkeletonTracking (instance->handle, id);
     }
 
-    mdef reset-tracking { /* Syntax: <instance> reset-tracking <id> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnResetSkeleton (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method reset-tracking proc {int id} XnStatus {
+	return xnResetSkeleton (instance->handle, id);
     }
 
-    mdef is-tracking { /* Syntax: <instance> is-tracking <id> */
-	int id;
-	XnBool tracking;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	tracking = xnIsSkeletonTracking (instance->handle, id);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (tracking));
-	return TCL_OK;
+    method is-tracking proc {int id} bool {
+	return xnIsSkeletonTracking (instance->handle, id);
     }
 
-    mdef is-calibrated { /* Syntax: <instance> is-calibrated <id> */
-	int id;
-	XnBool calibrated;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	calibrated = xnIsSkeletonCalibrated (instance->handle, id);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (calibrated));
-	return TCL_OK;
+    method is-calibrated proc {int id} bool {
+	return xnIsSkeletonCalibrated (instance->handle, id);
     }
 
-    mdef is-calibrating { /* Syntax: <instance> is-calibrating <id> */
-	int id;
-	XnBool calibrating;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	calibrating = xnIsSkeletonCalibrating (instance->handle, id);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (calibrating));
-	return TCL_OK;
+    method is-calibrating proc {int id} bool {
+	return xnIsSkeletonCalibrating (instance->handle, id);
     }
 
-    mdef request-calibration { /* Syntax: <instance> request-calibration <id> <force> */
-	int id, force;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id force");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetBooleanFromObj (interp, objv[3], &force) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnRequestSkeletonCalibration (instance->handle, id, force);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method request-calibration proc {int id bool force} XnStatus {
+	return xnRequestSkeletonCalibration (instance->handle, id, force);
     }
 
-    mdef abort-calibration { /* Syntax: <instance> abort-calibration <id> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnAbortSkeletonCalibration (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method abort-calibration proc {int id} XnStatus {
+	return xnAbortSkeletonCalibration (instance->handle, id);
     }
 
     # XXX The higher level wrapper handles vfs, by routing through a
     # XXX temp file when needed.
 
-    mdef save-calibration-file { /* Syntax: <instance> save-calibration-file <id> <path> */
-	int id;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id path");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSaveSkeletonCalibrationDataToFile (instance->handle, id, 
-						 Tcl_GetString (objv [3]));
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method save-calibration-file proc {int id char* path} XnStatus {
+	return xnSaveSkeletonCalibrationDataToFile (instance->handle, id, path);
     }
 
-    mdef load-calibration-file { /* Syntax: <instance> load-calibration-file <id> <path> */
-	int id;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id path");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnLoadSkeletonCalibrationDataFromFile (instance->handle, id, 
-						   Tcl_GetString (objv [3]));
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method load-calibration-file proc {int id char* path} XnStatus {
+	return xnLoadSkeletonCalibrationDataFromFile (instance->handle, id, path);
     }
 
-    mdef save-calibration-slot { /* Syntax: <instance> save-calibration <id> <slot> */
-	int id, slot;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id slot");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[3], &slot) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSaveSkeletonCalibrationData (instance->handle, id, slot);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method save-calibration-slot proc {int id int slot} XnStatus {
+	return xnSaveSkeletonCalibrationData (instance->handle, id, slot);
     }
 
-    mdef load-calibration-slot { /* Syntax: <instance> load-calibration-slot <id> <slot> */
-	int id, slot;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "id slot");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[3], &slot) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnLoadSkeletonCalibrationData (instance->handle, id, slot);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method load-calibration-slot proc {int id int slot} XnStatus {
+	return xnLoadSkeletonCalibrationData (instance->handle, id, slot);
     }
 
-    mdef clear-calibration-slot { /* Syntax: <instance> clear-calibration-slot <slot> */
-	int slot;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "slot");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &slot) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnClearSkeletonCalibrationData (instance->handle, slot);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method clear-calibration-slot proc {int slot} XnStatus {
+	return xnClearSkeletonCalibrationData (instance->handle, slot);
     }
 
-    mdef is-calibration-slot { /* Syntax: <instance> is-calibration-slot <slot> */
-	int slot, used;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "slot");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &slot) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	used = xnClearSkeletonCalibrationData (instance->handle, slot);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (used));
-	return TCL_OK;
+    method is-calibration-slot proc {int slot} bool {
+	return xnClearSkeletonCalibrationData (instance->handle, slot);
     }
 
-    mdef is-joint-available { /* Syntax: <instance> is-joint-available <joint> */
-	int available, joint;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "joint");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[2], 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &joint) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	available = xnIsJointAvailable (instance->handle, joint+1);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (available));
-	return TCL_OK;
+    method is-joint-available proc {KJoint joint} bool {
+	return xnIsJointAvailable (instance->handle, joint);
     }
 
-    mdef is-joint-active { /* Syntax: <instance> is-joint-active <joint> */
-	int active, joint;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "joint");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[2], 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &joint) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	active = xnIsJointActive (instance->handle, joint+1);
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (active));
-	return TCL_OK;
+    method is-joint-active proc {KJoint joint} bool {
+	return xnIsJointActive (instance->handle, joint);
     }
 
-    mdef set-joint-active { /* Syntax: <instance> set-joint-active <joint> <active> */
-	int active, joint;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "joint active");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[2], 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &joint) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetBooleanFromObj (interp, objv[3], &active) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnSetJointActive (instance->handle, joint+1, active);
-	CHECK_STATUS_RETURN;
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (active));
-	return TCL_OK;
+    method set-joint-active proc {KJoint joint bool active} XnStatus {
+	return xnSetJointActive (instance->handle, joint, active);
     }
 
-    mdef active-joints { /* Syntax: <instance> active-joints */
+    method active-joints proc {} ok {
 	XnStatus s;
 	XnUInt16 n;
 	XnSkeletonJoint j [XN_SKEL_RIGHT_FOOT+1];
 	Tcl_Obj*       jn [XN_SKEL_RIGHT_FOOT+1];
 	int k;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	n = XN_SKEL_RIGHT_FOOT+1;
 	s = xnEnumerateActiveJoints (instance->handle, j, &n);
@@ -501,54 +149,12 @@ critcl::class def ::kinetcl::CapUserSkeleton {
 	return TCL_OK;
     }
 
-    mdef get-joint { /* Syntax: <instance> get-joint <user> <joint> */
-	Tcl_Obj* result;
-	int userid, joint;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user joint");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &userid) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[3], 
-				 @stem@_skeleton_joint,
-				 "joint", 0, &joint) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	result = @stem@_get_joint (interp, instance, userid, joint);
-	if (!result) {
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, result);
-	return TCL_OK;
+    method get-joint proc {int user KJoint joint} KTcl_Obj* {
+	return @stem@_get_joint (interp, instance, user, joint);
     }
 
-    mdef get-skeleton { /* Syntax: <instance> get-skeleton <user> */
-	Tcl_Obj* result;
-	int userid;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &userid) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	result = @stem@_get_skeleton (interp, instance, userid);
-	if (!result) {
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, result);
-	return TCL_OK;
+    method get-skeleton proc {int user} KTcl_Obj* {
+	return @stem@_get_skeleton (interp, instance, user);
     }
 
     # Partial joint information.

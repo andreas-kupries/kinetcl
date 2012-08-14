@@ -26,6 +26,13 @@ oo::class create ::kinetcl::player {
 	return
     }
 
+    method speed {{speed {}}} {
+	if {[llength [info level 0]] == 3} {
+	    PLAYER @speed: $speed
+	}
+	PLAYER @speed?
+    }
+
     kinetcl::Publish ::kinetcl::Player PLAYER
 }
 

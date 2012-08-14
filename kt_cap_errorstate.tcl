@@ -7,13 +7,8 @@ critcl::class def ::kinetcl::CapErrorState {
 
     # # ## ### ##### ######## #############
 
-    mdef error-state { /* Syntax: <instance> error-state */
+    method error-state proc {} ok {
 	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	s = xnGetNodeErrorState (instance->handle);
 	Tcl_AppendResult (interp, xnGetStatusString (s), NULL);

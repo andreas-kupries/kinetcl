@@ -3,127 +3,49 @@
 
 critcl::class def ::kinetcl::Generator {
     # # ## ### ##### ######## #############
-    ::kt_abstract_class {
-    } {
-    }
+    ::kt_abstract_class
 
     # # ## ### ##### ######## #############
     ## Control and query data generation
 
-    mdef start { /* Syntax: <instance> start */
-	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	s = xnStartGenerating (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start proc {} XnStatus {
+	return xnStartGenerating (instance->handle);
     }
 
-    mdef stop { /* Syntax: <instance> stop */
-	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	s = xnStopGenerating (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop proc {} XnStatus {
+	return xnStopGenerating (instance->handle);
     }
 
-    mdef active { /* Syntax: <instance> active */
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnIsGenerating (instance->handle)));
-	return TCL_OK;
+    method active proc {} bool {
+	return xnIsGenerating (instance->handle);
     }
 
     # # ## ### ##### ######## #############
     ## Wait for data, check if waiting would not block
 
-    mdef update { /* Syntax: <instance> update */
-	XnStatus s;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	s = xnWaitAndUpdateData (instance->handle);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method update proc {} XnStatus {
+	return xnWaitAndUpdateData (instance->handle);
     }
 
-    mdef hasNew { /* Syntax: <instance> new */
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
+    method hasNew proc {} bool {
 	/* XXX FUTURE: May pull and return timestamp of such new data */
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnIsNewDataAvailable (instance->handle, NULL)));
-	return TCL_OK;
+	return xnIsNewDataAvailable (instance->handle, NULL);
     }
 
     # # ## ### ##### ######## #############
     ## Query data attributes (is it new?, frame id, timestamp)
     ## Note: Data size and data itself are not accessible here, but only is derived classes.
 
-    mdef isNew { /* Syntax: <instance> isNew */
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (xnIsDataNew (instance->handle)));
-	return TCL_OK;
+    method isNew proc {} bool {
+	return xnIsDataNew (instance->handle);
     }
 
-    mdef frame { /* Syntax: <instance> frame */
-	XnUInt32 frame;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	frame = xnGetFrameID (instance->handle);
-	if (frame == ((XnUInt32) -1)) {
-	    Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (frame));
-	return TCL_OK;
+    method frame proc {} KFrame {
+	return xnGetFrameID (instance->handle);
     }
 
-    mdef time { /* Syntax: <instance> time */
-	XnUInt64 timestamp;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	timestamp = xnGetTimestamp (instance->handle);
-	if (timestamp == ((XnUInt64) -1)) {
-	    Tcl_AppendResult (interp, "Inheritance error: Not a generator", NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, Tcl_NewWideIntObj (timestamp));
-	return TCL_OK;
+    method time proc {} KTimestamp {
+	return xnGetTimestamp (instance->handle);
     }
 
     # # ## ### ##### ######## #############

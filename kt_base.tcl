@@ -3,81 +3,54 @@
 
 critcl::class def ::kinetcl::Base {
     # # ## ### ##### ######## #############
-    ::kt_abstract_class {
+    ::kt_abstract_class
+
+    insvariable Tcl_Obj* capnames {
+	Fixed list of possible capabilities
+    } {
 	instance->capnames = ComputeMethodList (@stem@_tcl_capability_names);
 	Tcl_IncrRefCount (instance->capnames);
     } {
 	Tcl_DecrRefCount (instance->capnames);
     }
 
-    field Tcl_Obj* capnames {Fixed list of possible capabilities}
-
     # # ## ### ##### ######## #############
     ## Methods managing the OpenNI handle from the Tcl level, and
     ## other specialities.
 
-    mdef @mark { /* Internal method, no argument checking. */
-	/* Save the OpenNI handle in the shared kinetcl context.
+    method @mark proc {} void {
+	/* Internal method, no argument checking.
+	 * Save the OpenNI handle in the shared kinetcl context.
 	 * -- This is done (implicitly) during construction, so that the C-level
 	 *    base classes can find the handle/node they are to use.
 	 * -- This is also done (explicitly through here) by 'Valid',
 	 *    for methods which take another node as argument.
 	 */
 	instance->context->mark = instance->handle;
-	return TCL_OK;
     }
 
-    mdef @unmark { /* Internal method, no argument checking. */
-	/* Remove the OpenNI handle from the shared stash.
+    method @unmark proc {} void {
+	/* Internal method, no argument checking.
+	 * Remove the OpenNI handle from the shared stash.
 	 * IOW clean the state up.
 	 */
 	instance->context->mark = NULL;
-	return TCL_OK;
     }
 
     # # ## ### ##### ######## #############
-    mdef is-capable-of { /* Syntax: <instance> is-capable-of capName */
-	/* List of cap names - XnTypes.h, as defines XN_CAPABILITY_xxx */
-
-	XnBool supported;
-	const char* capName;
-	int cap;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "capName");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIndexFromObj (interp, objv[2], 
-				 @stem@_tcl_capability_names,
-				 "capability", 0, &cap) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	/* Translate Tcl to C/OpenNI */
-	capName = @stem@_oni_capability_names [cap];
-
-	supported = xnIsCapabilitySupported (instance->handle, capName);
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (supported));
-	return TCL_OK;
+    method is-capable-of proc {KCapability cap} bool {
+	return xnIsCapabilitySupported (instance->handle, cap);
     }
 
-    mdef capabilities { /* Syntax: <instance> capabilities */
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
-	Tcl_SetObjResult (interp, instance->capnames);
-	return TCL_OK;
+    method capabilities proc {} KTcl_Obj* {
+	return instance->capnames;
     }
 
-    mdef node-name { /* Syntax: <instance> ni-name */
-	Tcl_SetObjResult (interp, Tcl_NewStringObj (xnGetNodeName (instance->handle),-1));
-	return TCL_OK;
+    method node-name proc {} {const char*} {
+	return xnGetNodeName (instance->handle);
     }
 
-    mdef node-info { /* Syntax: <instance> node-info */
+    method node-info proc {} KTcl_Obj* {
 	XnNodeInfo*                        ni = xnGetNodeInfo (instance->handle);
 	const XnProductionNodeDescription* d  = xnNodeInfoGetDescription (ni);
 	Tcl_Obj* vv [4];
@@ -101,10 +74,10 @@ critcl::class def ::kinetcl::Base {
 	Tcl_DictObjPut (interp, res, Tcl_NewStringObj ("create",-1),
 			Tcl_NewStringObj (xnNodeInfoGetCreationInfo (ni), -1));
 
-	/* ni is owned by the system, do not release - xnNodeInfoFree (ni);
+	/* Note that 'ni' is owned by the system.
+	 * Do not release it - No xnNodeInfoFree (ni);
 	 */
-	Tcl_SetObjResult (interp, res);
-	return TCL_OK;
+	return res;
     }
 
     # # ## ### ##### ######## #############
@@ -112,7 +85,6 @@ critcl::class def ::kinetcl::Base {
     # get int, real, string, general properties - by name
     # locking, transactional changes
     # add/remove needed nodes (dependencies)
-
 
     # # ## ### ##### ######## #############
 
@@ -247,6 +219,30 @@ critcl::class def ::kinetcl::Base {
 		vec->X = x;
 		vec->Y = y;
 		vec->Z = z;
+	    }
+
+	    return TCL_OK;
+	}
+
+	static int
+	kinetcl_convert_2bbox (Tcl_Interp* interp, Tcl_Obj* ibox, XnBoundingBox3D* box)
+	{
+	    int       lc;
+	    Tcl_Obj** lv;
+
+	    if (Tcl_ListObjGetElements (interp, ibox, &lc, &lv) != TCL_OK) {
+		return TCL_ERROR;
+	    } else if (lc != 2) {
+		Tcl_AppendResult (interp, "Expected box (2 points)", NULL);
+		return TCL_ERROR;
+	    }
+
+	    if (kinetcl_convert_to3d (interp, lv [0], &box->LeftBottomNear) != TCL_OK) {
+		return TCL_ERROR;
+	    }
+
+	    if (kinetcl_convert_to3d (interp, lv [1], &box->RightTopFar) != TCL_OK) {
+		return TCL_ERROR;
 	    }
 
 	    return TCL_OK;

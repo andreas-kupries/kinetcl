@@ -11,93 +11,32 @@
 # # ## ### ##### ######## #############
 
 proc kt_callback {name consfunction destfunction signature body {mode all} {detail {}}} {
-    set cname [kt_cbcname $name]
+    # The additional offset (3 == \n\n\n) gets added because of the
+    # way we are formatting the calls of this procedure, with
+    # continuation lines between the first four arguments.
+    critcl::at::caller
+    critcl::at::incrt \n\n\n $signature
+    set bloc [critcl::at::get*]
+
+    set cname [kt_cb_cname $name]
 
     # Define the raw callback processing.
-    uplevel 1 [list kt_cbhandler $name $name $cname $signature $body $mode]
-
-    if {$detail ne {}} {
-	set detail " \"$detail\","
-    }
+    kt_cb_handler $name $name $cname $signature $bloc$body $mode
 
     lappend map @@cname@@         $cname 
-    lappend map @@name@@          $name
-    lappend map @@consfunction@@  $consfunction
-    lappend map @@destfunction@@  $destfunction
-    lappend map @@detail@@        $detail
-
-    uplevel 1 [string map $map {
-	field XnCallbackHandle callback@@cname@@ {Handle for @@name@@ callbacks}
-
-	# The command@@...@@ structure comes from kt_cbhandler.
-
-	constructor {
-	    instance->callback@@cname@@ = NULL;
-	    instance->command@@cname@@ = NULL;
-	}
-
-	destructor {
-	    @stem@_callback_@@cname@@_unset (instance, 1);
-	}
-
-	mdef set-callback-@@name@@ { /* Syntax: <instance> set-callback-@@name@@ <cmdprefix> */
-	    if (objc != 3) {
-		Tcl_WrongNumArgs (interp, 2, objv, "cmd...");
-		return TCL_ERROR;
-	    }
-
-	    return @stem@_callback_@@cname@@_set (instance, objv [2]);
-	}
-
-	mdef unset-callback-@@name@@ { /* Syntax: <instance> unset-callback-@@name@@ */
-	    if (objc != 2) {
-		Tcl_WrongNumArgs (interp, 2, objv, NULL);
-		return TCL_ERROR;
-	    }
-
-	    @stem@_callback_@@cname@@_unset (instance, 1);
-	    return TCL_OK;
-	}
-
-	support {
-	    static void
-	    @stem@_callback_@@cname@@_unset (@instancetype@ instance, int dev)
-	    {
-		if (!instance->callback@@cname@@) return;
-
-		@@destfunction@@ (instance->handle,@@detail@@ instance->callback@@cname@@);
-
-		Tcl_DecrRefCount (instance->command@@cname@@);
-		instance->callback@@cname@@ = NULL;
-		instance->command@@cname@@ = NULL;
-
-		if (!dev) return;
-		Tcl_DeleteEvents (@stem@_callback_@@cname@@_delete, (ClientData) instance);
-	    }
-
-	    static int
-	    @stem@_callback_@@cname@@_set (@instancetype@ instance, Tcl_Obj* cmdprefix)
-	    {
-		Tcl_Obj* cmd;
-		XnCallbackHandle callback;
-		XnStatus s;
-		Tcl_Interp* interp = instance->interp;
-
-		s = @@consfunction@@ (instance->handle,@@detail@@
-				      @stem@_callback_@@cname@@_handler,
-				      instance,
-				      &callback);
-		CHECK_STATUS_RETURN;
-
-		@stem@_callback_@@cname@@_unset (instance, 0);
-
-		instance->callback@@cname@@ = callback;
-		instance->command@@cname@@  = cmdprefix;
-		Tcl_IncrRefCount (cmdprefix);
-		return TCL_OK;
-	    }
-	}
+    insvariable XnCallbackHandle callback$cname "
+	Handle for $name callbacks
+    " [string map $map {
+	instance->callback@@cname@@ = NULL;
+    }] [string map $map {
+	@stem@_callback_@@cname@@_unset (instance, 1);
     }]
+
+    kt_cb_methods \
+	$cname $name $cname [list $cname] \
+	$consfunction $destfunction \
+	$detail
+    return
 }
 
 # # ## ### ##### ######## #############

@@ -26,6 +26,14 @@ oo::class create ::kinetcl::gesture {
 	return
     }
 
+    method add-gesture {gesture {box {}}} {
+	if {[llength [info level 0]] == 4} {
+	    GESTURE @add-gesture2: $gesture $box
+	} else {
+	    GESTURE @add-gesture1: $gesture
+	}
+    }
+
     kinetcl::Publish ::kinetcl::Gesture GESTURE
 }
 

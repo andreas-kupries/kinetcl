@@ -1,36 +1,18 @@
 # # ## ### ##### ######## #############
 ## Capability Class
 
-critcl::class def ::kinetcl::CapMirror {
+critcl::class def ::kinetcl::CapMirrorC {
     # # ## ### ##### ######## #############
     ::kt_abstract_class
 
     # # ## ### ##### ######## #############
 
-    mdef mirror { /* Syntax: <instance> mirror ?<bool>? */
-	if (objc == 2) { /* Syntax: <instance> mirror */
-	    XnBool m = xnIsMirrored (instance->handle);
+    method @mirror: proc {bool mirror} XnStatus {
+	return xnSetMirror (instance->handle, mirror);
+    }
 
-	    Tcl_SetObjResult (interp, Tcl_NewIntObj (m));
-	    return TCL_OK;
-	}
-
-	if (objc == 3) { /* Syntax: <instance> mirror bool */
-	    XnStatus s;
-	    int m;
-
-	    if (Tcl_GetBooleanFromObj (interp, objv [2], &m) != TCL_OK) {
-		return TCL_ERROR;
-	    }
-
-	    s = xnSetMirror (instance->handle, m);
-	    CHECK_STATUS_RETURN;
-
-	    return TCL_OK;
-	}
-
-	Tcl_WrongNumArgs (interp, 2, objv, "?bool?");
-	return TCL_ERROR;
+    method @mirror? proc {} bool {
+	return xnIsMirrored (instance->handle);
     }
 
     # # ## ### ##### ######## #############

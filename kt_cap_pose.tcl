@@ -7,39 +7,22 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 
     # # ## ### ##### ######## #############
 
-    mdef is-supported { /* Syntax: <instance> isSupported <pose> */
-	int supported;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "pose");
-	    return TCL_ERROR;
-	}
-
-	supported = xnIsPoseSupported (instance->handle,
-				       Tcl_GetString (objv[3]));
-
-	Tcl_SetObjResult (interp, Tcl_NewIntObj (supported));
-	return TCL_OK;
+    method is-supported proc {char* pose} bool {
+	return xnIsPoseSupported (instance->handle, pose);
     }
 
-    mdef poses { /* Syntax: <instance> poses */
+    method poses proc {} KTcl_Obj* {
 	XnStatus s;
-	int lc;
+	int i, n, lc;
 	Tcl_Obj** lv = NULL;
+	Tcl_Obj* result = NULL;
 	XnChar** poses;
-
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
 
 	lc = xnGetNumberOfPoses (instance->handle);
 	if (lc) {
-	    int i, n;
-
 	    poses = (XnChar**) ckalloc (lc * sizeof (XnChar*));
 	    for (i=0; i < lc; i++) {
-		/* Pray that this is enough space. Not about overwriting,
+		/* Pray that this is enough space. This not about overwriting,
 		 * we are using the limited call, but about truncation of
 		 * long pose names
 		 */
@@ -58,101 +41,46 @@ critcl::class def ::kinetcl::CapUserPoseDetection {
 	    }
 
 	    for (i=0; i < n; i++) {
-	       ckfree (poses [i]);
+	        ckfree (poses [i]);
 	    }
 	    ckfree ((char*) poses);
 	}
 
-	Tcl_SetObjResult (interp, Tcl_NewListObj (lc, lv));
+	result = Tcl_NewListObj (lc, lv);
 
 	if (lc) {
 	    ckfree ((char*) lv);
 	}
 
-	return TCL_OK;
+	return result;
 error:
+	for (i=0; i < n; i++) {
+	    ckfree (poses [i]);
+	}
 	ckfree ((char*) poses);
-	return TCL_ERROR;
+	return 0;
     }
 
-    mdef start-detection { /* Syntax: <instance> startDetection <id> <pose> */
-	int id;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user pose");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStartPoseDetection (instance->handle,
-				  Tcl_GetString (objv[3]), id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method start-detection proc {int id char* pose} XnStatus {
+	return xnStartPoseDetection (instance->handle, pose, id);
     }
 
-    mdef stop-detection { /* Syntax: <instance> stopDetection <id> <pose> */
-	int id;
-	XnStatus s;
-
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user pose");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStopSinglePoseDetection (instance->handle, id,
-				       Tcl_GetString (objv[3]));
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-detection proc {int id char* pose} XnStatus {
+	return xnStopSinglePoseDetection (instance->handle, id, pose);
     }
 
-    mdef stop-all-detection { /* Syntax: <instance> stopDetection <id> */
-	int id;
-	XnStatus s;
-
-	if (objc != 3) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnStopPoseDetection (instance->handle, id);
-	CHECK_STATUS_RETURN;
-
-	return TCL_OK;
+    method stop-all-detection proc {int id} XnStatus {
+	return xnStopPoseDetection (instance->handle, id);
     }
 
-    mdef status { /* Syntax: <instance> status <id> <pose> */
-	int id;
+    method status proc {int id char* pose} ok {
 	XnStatus s;
 	XnUInt64 timestamp;
 	XnPoseDetectionStatus pstatus;
 	XnPoseDetectionState  pstate;
 	Tcl_Obj* pv [3];
 
-	if (objc != 4) {
-	    Tcl_WrongNumArgs (interp, 2, objv, "user pose");
-	    return TCL_ERROR;
-	}
-
-	if (Tcl_GetIntFromObj (interp, objv[2], &id) != TCL_OK) {
-	    return TCL_ERROR;
-	}
-
-	s = xnGetPoseStatus (instance->handle, id, 
-			     Tcl_GetString (objv[3]),
+	s = xnGetPoseStatus (instance->handle, id, pose,
 			     &timestamp, &pstatus, &pstate);
 	CHECK_STATUS_RETURN;
 

@@ -39,15 +39,18 @@ critcl::ccode {
 #define CB_DETAIL(s,o) Tcl_DictObjPut (interp, details, Tcl_NewStringObj (s, sizeof(s)), o)
 
 	/* Common event fields for kinetcl callback events. Tcl's
-	 * information, plus a pointer to an event-specific cleanup
-	 * function, to enable cleanup without knowing anything of
-	 * internals of the event to be deleted.
+	 * information, plus a pointer to a package- and event-specific
+	 * cleanup function. It enables cleanup without knowing anything
+	 * about the internals of the event to be deleted.
 	 */
 
-	typedef struct Kinetcl_Event {
-	    Tcl_Event event;
-	    void (*delproc) (struct Kinetcl_Event* evPtr);
-	} Kinetcl_Event;
+	typedef struct Kinetcl_Event Kinetcl_Event;
+	typedef void (*Kinetcl_EventDeleteProc) (Kinetcl_Event* evPtr);
+
+	struct Kinetcl_Event {
+	    Tcl_Event               event;
+	    Kinetcl_EventDeleteProc delproc;
+	};
 }
 
 # # ## ### ##### ######## #############
@@ -100,6 +103,9 @@ critcl::iassoc::def kinetcl_context {} {
 ## to implement.  Automatically cleans up the stash through which the
 ## handle is communicated to us. Nothing the caller has to bother
 ## with.
+##
+## ATTENTION: The relevant Tcl procedure, "kinetcl::Valid", is defined
+## in "policy_base.tcl"
 
 critcl::ccode {
     static int
@@ -205,28 +211,22 @@ critcl::ccode {
 
     static int
     kinetcl_cap_integer_range (XnNodeHandle handle, char* cap,
-			       Tcl_Interp* interp, int objc, Tcl_Obj* const* objv)
+			       Tcl_Interp* interp)
     {
 	XnStatus s;
 	XnInt32 vmin, vmax, vstep, vdefault;
 	XnBool hasAuto;
 	Tcl_Obj* res;
 
-	/* Syntax: <instance> .capname.-range */
-	if (objc != 2) {
-	    Tcl_WrongNumArgs (interp, 2, objv, NULL);
-	    return TCL_ERROR;
-	}
-
 	s = xnGetGeneralIntRange (handle, cap, &vmin, &vmax, &vstep, &vdefault, &hasAuto);
 	CHECK_STATUS_RETURN;
 
 	res = Tcl_NewDictObj ();
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("min",-1), Tcl_NewIntObj (vmin));
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("max",-1), Tcl_NewIntObj (vmax));
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("step",-1), Tcl_NewIntObj (vstep));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("min",-1),     Tcl_NewIntObj (vmin));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("max",-1),     Tcl_NewIntObj (vmax));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("step",-1),    Tcl_NewIntObj (vstep));
 	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("default",-1), Tcl_NewIntObj (vdefault));
-	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("auto",-1), Tcl_NewIntObj (hasAuto));
+	Tcl_DictObjPut (NULL, res, Tcl_NewStringObj ("auto",-1),    Tcl_NewIntObj (hasAuto));
 
 	Tcl_SetObjResult (interp, res);
 	return TCL_OK;
