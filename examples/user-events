@@ -81,7 +81,13 @@ proc userchange {event obj details} {
 	    K request-calibration $user 0
 	}
 	user-exit {
-	    K stop-tracking $user
+	    # Note: The user may exit while calibration is still
+	    # running, i.e. when tracking hasn't started yet. Easier
+	    # to catch the error here, instead of tracking exactly
+	    # when tracking has started for a specific user.
+	    catch {
+		K stop-tracking $user
+	    }
 	}
     }
     return
