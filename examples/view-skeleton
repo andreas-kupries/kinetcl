@@ -110,6 +110,8 @@ proc newframe_depth {args} {
     global photo
     set s [clock milliseconds]
 
+    ping [set m [D meta]]
+    if {[dict get $m map output size] != 614400} { puts "" }
     set image [D map]
     set frame [D frame]
 

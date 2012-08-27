@@ -35,13 +35,7 @@ critcl::class def ::kinetcl::Scene {
 
 	image = crimp_new_grey16 (meta->pMap->Res.X, meta->pMap->Res.Y);
 
-	/* Assert size equivalence */
-	if ((SZ (image)*crimp_image_area(image)) != meta->pMap->pOutput->nDataSize) {
-	    Tcl_Panic ("raw pixel size mismatch");
-	}
-
-	memcpy (image->pixel, meta->pData,
-		meta->pMap->pOutput->nDataSize);
+	kinetcl_fill_image (image, meta->pData, meta->pMap->pOutput->nDataSize);
 
 	xnFreeSceneMetaData (meta);
 

@@ -231,6 +231,21 @@ critcl::ccode {
 	Tcl_SetObjResult (interp, res);
 	return TCL_OK;
     }
+
+    static void
+    kinetcl_fill_image (crimp_image* image, const char* data, int n)
+    {
+	int expected = SZ (image) * crimp_image_area (image);
+	int copy = (n < expected ? n : expected);
+
+	/* Copy image data */
+	memcpy (image->pixel, data, copy);
+
+	if (copy < expected) {
+	    /* Blank out the remainder if the input is too short */
+	    memset (image->pixel + copy, '\0', expected - copy);
+	}
+    }
 }
 
 # # ## ### ##### ######## #############

@@ -79,6 +79,8 @@ proc newframe_depth {args} {
     global tracedir photo sat
     set s [clock milliseconds]
 
+    ping [set m [K meta]]
+    if {[dict get $m map output size] != 614400} { puts "" }
     set image [K map]
     set frame [K frame]
 

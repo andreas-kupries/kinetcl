@@ -122,12 +122,7 @@ critcl::class def ::kinetcl::Image {
 	    return TCL_ERROR;
 	}
 
-	/* Assert size equivalence */
-	if ((SZ (image)*crimp_image_area(image)) != meta->pMap->pOutput->nDataSize) {
-	    Tcl_Panic ("raw pixel size mismatch");
-	}
-
-	memcpy (image->pixel, meta->pData, meta->pMap->pOutput->nDataSize);
+	kinetcl_fill_image (image, meta->pData, meta->pMap->pOutput->nDataSize);
 
 	xnFreeImageMetaData (meta);
 
