@@ -1,0 +1,29 @@
+#!/usr/bin/env tclsh8.5
+## -*- tcl -*-
+
+# Small script to some other application running when its crashes or
+# exits. Records the runtimes between crashes/exits in a log. Both
+# application and logfile path are specified as command line
+# arguments.
+
+package require Tcl 8.5
+
+if {[llength $argv] != 2} {
+    puts "Usage: $argv0 apppath logpath"
+    exit 1
+}
+
+lassign $argv app logfile
+
+while {1} {
+    set start [clock seconds]
+    catch {
+	exec $app >@ stdout 2>@ stderr
+    }
+    set stop [clock seconds]
+
+    set delta [expr {$stop - $start}]
+    set ch [open $logfile a]
+    puts $ch [list runtime $delta [clock format $start] [clock format $stop]]
+    close $ch
+} 

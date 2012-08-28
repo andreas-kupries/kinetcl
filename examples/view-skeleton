@@ -39,7 +39,7 @@ proc usage {} {
 }
 
 proc setup {} {
-    global photo textc
+    global photo textc dsize
     set textc green
 
     kinetcl depth create D
@@ -50,6 +50,10 @@ proc setup {} {
     lassign $size w h
 
     puts [join $size { x }]
+
+    # compute expected depth image size (2 bytes/pixel).
+    set dsize [expr {$w * $h * 2}]
+
 
     set photo [image create photo]
     crimp write 2tk $photo [crimp blank grey8 $w $h 0]
@@ -107,11 +111,16 @@ proc ping {text} {
 # # ## ### ##### ######## ############# #####################
 
 proc newframe_depth {args} {
-    global photo
+    global photo dsize
     set s [clock milliseconds]
 
-    ping [set m [D meta]]
-    if {[dict get $m map output size] != 614400} { puts "" }
+    #ping [set m [D meta]]
+    if {[dict get $m map output size] != $dsize} {
+	#puts ""
+	# Truncated image. System is in non-recoverable state.
+	# Exit to clear usb/oni status.
+	exit 1
+    }
     set image [D map]
     set frame [D frame]
 
