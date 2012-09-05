@@ -8,17 +8,17 @@
 
 package require Tcl 8.5
 
-if {[llength $argv] != 2} {
-    puts "Usage: $argv0 apppath logpath"
+if {[llength $argv] < 2} {
+    puts "Usage: $argv0 logfile script ?arg...?"
     exit 1
 }
 
-lassign $argv app logfile
+set app [lassign $argv logfile]
 
 while {1} {
     set start [clock seconds]
     catch {
-	exec $app >@ stdout 2>@ stderr
+	exec >@ stdout 2>@ stderr {*}$app
     }
     set stop [clock seconds]
 
