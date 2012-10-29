@@ -1,29 +1,59 @@
 #!/usr/bin/env tclsh8.5
 ## -*- tcl -*-
 
-# Small script to some other application running when its crashes or
-# exits. Records the runtimes between crashes/exits in a log. Both
+# Small script to keep some other application running when its crashes
+# or exits. Records the runtimes between crashes/exits in a log. Both
 # application and logfile path are specified as command line
 # arguments.
 
 package require Tcl 8.5
 
 if {[llength $argv] < 2} {
-    puts "Usage: $argv0 logfile script ?arg...?"
+    puts "Usage: $argv0 timeout logfile script ?arg...?"
     exit 1
 }
 
-set app [lassign $argv logfile]
+set app [lassign $argv seconds logfile]
+
+set milliseconds [expr {1000*$seconds}]
+
+proc stop {} {
+    global pipe seconds
+    exec kill -9 {*}[pid $pipe]
+    log [list timeout $seconds [pid $pipe]]
+    return
+}
+
+proc watch {} {
+    global pipe
+    if {[eof $pipe]} {
+	set ::forexit 1
+	close $pipe
+	return
+    }
+    puts -nonewline [read $pipe] ; # copy to output
+    return    
+}
+
+proc log {text} {
+    global logfile
+    set ch [open $logfile a]
+    puts $ch $text
+    close $ch
+} 
 
 while {1} {
     set start [clock seconds]
-    catch {
-	exec >@ stdout 2>@ stderr {*}$app
-    }
+
+    set pipe [open "|$app |& cat" r]
+    fconfigure $pipe -blocking 0
+    fileevent $pipe readable watch
+
+    # Kill the app after some time.
+    after $milliseconds stop
+    vwait forexit
     set stop [clock seconds]
 
     set delta [expr {$stop - $start}]
-    set ch [open $logfile a]
-    puts $ch [list runtime $delta [clock format $start] [clock format $stop]]
-    close $ch
+    log [list runtime $delta [clock format $start] [clock format $stop]]
 } 
