@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/net/nas/data/andreask/Dev/Kinetcl/kinetcl/embedded/man/files/kinetcl_intro.n' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/home/aku/Projects/KineTcl/kinetcl/embedded/man/files/kinetcl_intro.n' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2012 Andreas Kupries
 '\" Copyright (c) 2012 Documentation, Andreas Kupries
 '\"

@@ -13,7 +13,7 @@ itself [emph must] have version 3.1, which is currently not released
 yet and only found in CriTcl's github repository.
 
 [para] This github repository can be found at
-[uri http://jcw.github.com/critcl].
+[uri http://andreas-kupries.github.com/critcl].
 
 [para] The relevant repository branch is [emph dev31].
 Do not try to use the master branch.
