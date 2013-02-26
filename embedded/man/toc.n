@@ -245,8 +245,11 @@ doc
 \fBkinetcl\fR
 \fIfiles/kinetcl.n\fR: KineTcl - API
 .TP
-\fBkinetcl_sources\fR
-\fIfiles/kinetcl_sources.n\fR: KineTcl - How To Get The Sources
+\fBkinetcl_devguide\fR
+\fIfiles/kinetcl_devguide.n\fR: KineTcl - The Developer's Guide
+.TP
+\fBkinetcl_install_guide\fR
+\fIfiles/kinetcl_installer.n\fR: KineTcl - The Installer's Guide
 .TP
 \fBkinetcl_introduction\fR
 \fIfiles/kinetcl_intro.n\fR: KineTcl - Introduction to KineTcl
@@ -254,8 +257,5 @@ doc
 \fBkinetcl_license\fR
 \fIfiles/license.n\fR: KineTcl - License
 .TP
-\fBkinetcl_devguide\fR
-\fIfiles/kinetcl_devguide.n\fR: KineTcl - The Developer's Guide
-.TP
-\fBkinetcl_install_guide\fR
-\fIfiles/kinetcl_installer.n\fR: KineTcl - The Installer's Guide
+\fBkinetcl_sources\fR
+\fIfiles/kinetcl_sources.n\fR: KineTcl - How To Get The Sources

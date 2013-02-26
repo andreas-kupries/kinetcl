@@ -20,6 +20,7 @@ What are your goals which drove you here ?
 [enum] [term {KineTcl - License}].
 [enum] [term {KineTcl - How To Get The Sources}].
 [enum] [term {KineTcl - The Installer's Guide}].
+[enum] [term {KineTcl - API}]
 [enum] [term {KineTcl - The Developer's Guide}].
 [list_end]
 
