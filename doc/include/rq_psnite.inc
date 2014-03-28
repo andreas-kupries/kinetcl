@@ -7,7 +7,7 @@ algorithms.
 
 [para] For KineTcl we not only recommend but demand installation. It
 is the algorithms in NITE which provide user detection and skeleton
-tracking, i.e. all the interesting hiogher-level features we want.
+tracking, i.e. all the interesting higher-level features we want.
 
 [para] These binaries can be found at
 [uri http://www.openni.org/Downloads/OpenNIModules.aspx]

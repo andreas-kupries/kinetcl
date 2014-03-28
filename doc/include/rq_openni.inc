@@ -2,10 +2,10 @@
 [subsection {OpenNI}]
 
 KineTcl is, despite its name, not a direct binding to the Kinect
-itself. It actually is a binding to the more general OpenNI
-framework. This framework provides a set of generic APIs for sensors,
-processing algorithms, and applications into which anything following
-these APIs can be plugged into.
+itself. It actually is a binding to the more general OpenNI framework
+(version 1). This framework provides a set of generic APIs for
+sensors, processing algorithms, and applications into which anything
+following these APIs can be plugged into.
 
 [para] PrimeSense, the maker of the 3D sensor found in the Kinect is a
 main member of the OpenNI organization managing the framework and
