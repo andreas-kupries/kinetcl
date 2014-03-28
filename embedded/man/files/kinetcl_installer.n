@@ -616,7 +616,7 @@ Its instructions will not be repeated here\&. If there are
 problems with their directions please file a bug against the Kettle
 project, and not KineTcl\&.
 .SH "BUILD & INSTALLATION INSTRUCTIONS"
-.SH "BUILD & INSTALLATION (UNIX)"
+.SS "BUILD & INSTALLATION (UNIX)"
 This section describes the actions required to install KineTcl on Unix
 systems (Linux, BSD, and related, including OS X)\&.
 If you have to install KineTcl on a Windows machine see section
@@ -649,7 +649,7 @@ like
     /path/to/tclsh8\&.5 /path/to/kinetcl/build\&.tcl help
 
 .CE
-.SH "BUILD & INSTALLATION (WINDOWS)"
+.SS "BUILD & INSTALLATION (WINDOWS)"
 This section describes the actions required to install KineTcl on Windows(tm)
 systems\&.
 If you have to install KineTcl on a Unix machine (Linux, BSD, and
