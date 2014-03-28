@@ -1,76 +1,83 @@
 '\"
-'\" Generated from file '/home/aku/Projects/KineTcl/dev/embedded/man/files/kinetcl_installer.n' by tcllib/doctools with format 'nroff'
+'\" Generated from file 'kinetcl_installer\&.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2012 Andreas Kupries
 '\" Copyright (c) 2012 Documentation, Andreas Kupries
 '\"
-'\" The definitions below are for supplemental macros used in Tcl/Tk
-'\" manual entries.
-'\"
-'\" .AP type name in/out ?indent?
-'\"	Start paragraph describing an argument to a library procedure.
-'\"	type is type of argument (int, etc.), in/out is either "in", "out",
-'\"	or "in/out" to describe whether procedure reads or modifies arg,
-'\"	and indent is equivalent to second arg of .IP (shouldn't ever be
-'\"	needed;  use .AS below instead)
-'\"
-'\" .AS ?type? ?name?
-'\"	Give maximum sizes of arguments for setting tab stops.  Type and
-'\"	name are examples of largest possible arguments that will be passed
-'\"	to .AP later.  If args are omitted, default tab stops are used.
-'\"
-'\" .BS
-'\"	Start box enclosure.  From here until next .BE, everything will be
-'\"	enclosed in one large box.
-'\"
-'\" .BE
-'\"	End of box enclosure.
-'\"
-'\" .CS
-'\"	Begin code excerpt.
-'\"
-'\" .CE
-'\"	End code excerpt.
-'\"
-'\" .VS ?version? ?br?
-'\"	Begin vertical sidebar, for use in marking newly-changed parts
-'\"	of man pages.  The first argument is ignored and used for recording
-'\"	the version when the .VS was added, so that the sidebars can be
-'\"	found and removed when they reach a certain age.  If another argument
-'\"	is present, then a line break is forced before starting the sidebar.
-'\"
-'\" .VE
-'\"	End of vertical sidebar.
-'\"
-'\" .DS
-'\"	Begin an indented unfilled display.
-'\"
-'\" .DE
-'\"	End of indented unfilled display.
-'\"
-'\" .SO
-'\"	Start of list of standard options for a Tk widget.  The
-'\"	options follow on successive lines, in four columns separated
-'\"	by tabs.
-'\"
-'\" .SE
-'\"	End of list of standard options for a Tk widget.
-'\"
-'\" .OP cmdName dbName dbClass
-'\"	Start of description of a specific option.  cmdName gives the
-'\"	option's name as specified in the class command, dbName gives
-'\"	the option's name in the option database, and dbClass gives
-'\"	the option's class in the option database.
-'\"
-'\" .UL arg1 arg2
-'\"	Print arg1 underlined, then print arg2 normally.
-'\"
-'\" RCS: @(#) $Id: man.macros,v 1.1 2009/01/30 04:56:47 andreas_kupries Exp $
-'\"
-'\"	# Set up traps and other miscellaneous stuff for Tcl/Tk man pages.
+.TH "kinetcl_install_guide" n 1 doc "KineTcl"
+.\" The -*- nroff -*- definitions below are for supplemental macros used
+.\" in Tcl/Tk manual entries.
+.\"
+.\" .AP type name in/out ?indent?
+.\"	Start paragraph describing an argument to a library procedure.
+.\"	type is type of argument (int, etc.), in/out is either "in", "out",
+.\"	or "in/out" to describe whether procedure reads or modifies arg,
+.\"	and indent is equivalent to second arg of .IP (shouldn't ever be
+.\"	needed;  use .AS below instead)
+.\"
+.\" .AS ?type? ?name?
+.\"	Give maximum sizes of arguments for setting tab stops.  Type and
+.\"	name are examples of largest possible arguments that will be passed
+.\"	to .AP later.  If args are omitted, default tab stops are used.
+.\"
+.\" .BS
+.\"	Start box enclosure.  From here until next .BE, everything will be
+.\"	enclosed in one large box.
+.\"
+.\" .BE
+.\"	End of box enclosure.
+.\"
+.\" .CS
+.\"	Begin code excerpt.
+.\"
+.\" .CE
+.\"	End code excerpt.
+.\"
+.\" .VS ?version? ?br?
+.\"	Begin vertical sidebar, for use in marking newly-changed parts
+.\"	of man pages.  The first argument is ignored and used for recording
+.\"	the version when the .VS was added, so that the sidebars can be
+.\"	found and removed when they reach a certain age.  If another argument
+.\"	is present, then a line break is forced before starting the sidebar.
+.\"
+.\" .VE
+.\"	End of vertical sidebar.
+.\"
+.\" .DS
+.\"	Begin an indented unfilled display.
+.\"
+.\" .DE
+.\"	End of indented unfilled display.
+.\"
+.\" .SO ?manpage?
+.\"	Start of list of standard options for a Tk widget. The manpage
+.\"	argument defines where to look up the standard options; if
+.\"	omitted, defaults to "options". The options follow on successive
+.\"	lines, in three columns separated by tabs.
+.\"
+.\" .SE
+.\"	End of list of standard options for a Tk widget.
+.\"
+.\" .OP cmdName dbName dbClass
+.\"	Start of description of a specific option.  cmdName gives the
+.\"	option's name as specified in the class command, dbName gives
+.\"	the option's name in the option database, and dbClass gives
+.\"	the option's class in the option database.
+.\"
+.\" .UL arg1 arg2
+.\"	Print arg1 underlined, then print arg2 normally.
+.\"
+.\" .QW arg1 ?arg2?
+.\"	Print arg1 in quotes, then arg2 normally (for trailing punctuation).
+.\"
+.\" .PQ arg1 ?arg2?
+.\"	Print an open parenthesis, arg1 in quotes, then arg2 normally
+.\"	(for trailing punctuation) and then a closing parenthesis.
+.\"
+.\"	# Set up traps and other miscellaneous stuff for Tcl/Tk man pages.
 .if t .wh -1.3i ^B
 .nr ^l \n(.l
 .ad b
-'\"	# Start an argument description
+.\"	# Start an argument description
 .de AP
 .ie !"\\$4"" .TP \\$4
 .el \{\
@@ -79,7 +86,7 @@
 .\}
 .ta \\n()Au \\n()Bu
 .ie !"\\$3"" \{\
-\&\\$1	\\fI\\$2\\fP	(\\$3)
+\&\\$1 \\fI\\$2\\fP (\\$3)
 .\".b
 .\}
 .el \{\
@@ -92,7 +99,7 @@
 .\}
 .\}
 ..
-'\"	# define tabbing values for .AP
+.\"	# define tabbing values for .AP
 .de AS
 .nr )A 10n
 .if !"\\$1"" .nr )A \\w'\\$1'u+3n
@@ -102,9 +109,9 @@
 .nr )C \\n()Bu+\\w'(in/out)'u+2n
 ..
 .AS Tcl_Interp Tcl_CreateInterp in/out
-'\"	# BS - start boxed text
-'\"	# ^y = starting y location
-'\"	# ^b = 1
+.\"	# BS - start boxed text
+.\"	# ^y = starting y location
+.\"	# ^b = 1
 .de BS
 .br
 .mk ^y
@@ -114,7 +121,7 @@
 .if n \l'\\n(.lu\(ul'
 .if n .fi
 ..
-'\"	# BE - end boxed text (draw box now)
+.\"	# BE - end boxed text (draw box now)
 .de BE
 .nf
 .ti 0
@@ -134,16 +141,16 @@
 .br
 .nr ^b 0
 ..
-'\"	# VS - start vertical sidebar
-'\"	# ^Y = starting y location
-'\"	# ^v = 1 (for troff;  for nroff this doesn't matter)
+.\"	# VS - start vertical sidebar
+.\"	# ^Y = starting y location
+.\"	# ^v = 1 (for troff;  for nroff this doesn't matter)
 .de VS
 .if !"\\$2"" .br
 .mk ^Y
 .ie n 'mc \s12\(br\s0
 .el .nr ^v 1u
 ..
-'\"	# VE - end of vertical sidebar
+.\"	# VE - end of vertical sidebar
 .de VE
 .ie n 'mc
 .el \{\
@@ -158,9 +165,9 @@
 .\}
 .nr ^v 0
 ..
-'\"	# Special macro to handle page bottom:  finish off current
-'\"	# box/sidebar if in box/sidebar mode, then invoked standard
-'\"	# page bottom macro.
+.\"	# Special macro to handle page bottom:  finish off current
+.\"	# box/sidebar if in box/sidebar mode, then invoked standard
+.\"	# page bottom macro.
 .de ^B
 .ev 2
 'ti 0
@@ -187,34 +194,36 @@
 .mk ^Y
 .\}
 ..
-'\"	# DS - begin display
+.\"	# DS - begin display
 .de DS
 .RS
 .nf
 .sp
 ..
-'\"	# DE - end display
+.\"	# DE - end display
 .de DE
 .fi
 .RE
 .sp
 ..
-'\"	# SO - start of list of standard options
+.\"	# SO - start of list of standard options
 .de SO
+'ie '\\$1'' .ds So \\fBoptions\\fR
+'el .ds So \\fB\\$1\\fR
 .SH "STANDARD OPTIONS"
 .LP
 .nf
-.ta 4c 8c 12c
+.ta 5.5c 11c
 .ft B
 ..
-'\"	# SE - end of list of standard options
+.\"	# SE - end of list of standard options
 .de SE
 .fi
 .ft R
 .LP
-See the \\fBoptions\\fR manual entry for details on the standard options.
+See the \\*(So manual entry for details on the standard options.
 ..
-'\"	# OP - start of full description for a single option
+.\"	# OP - start of full description for a single option
 .de OP
 .LP
 .nf
@@ -225,98 +234,123 @@ Database Class:	\\fB\\$3\\fR
 .fi
 .IP
 ..
-'\"	# CS - begin code excerpt
+.\"	# CS - begin code excerpt
 .de CS
 .RS
 .nf
 .ta .25i .5i .75i 1i
 ..
-'\"	# CE - end code excerpt
+.\"	# CE - end code excerpt
 .de CE
 .fi
 .RE
 ..
+.\"	# UL - underline word
 .de UL
 \\$1\l'|0\(ul'\\$2
 ..
-.TH "kinetcl_install_guide" n 1 doc "KineTcl"
+.\"	# QW - apply quotation marks to word
+.de QW
+.ie '\\*(lq'"' ``\\$1''\\$2
+.\"" fix emacs highlighting
+.el \\*(lq\\$1\\*(rq\\$2
+..
+.\"	# PQ - apply parens and quotation marks to word
+.de PQ
+.ie '\\*(lq'"' (``\\$1''\\$2)\\$3
+.\"" fix emacs highlighting
+.el (\\*(lq\\$1\\*(rq\\$2)\\$3
+..
+.\"	# QR - quoted range
+.de QR
+.ie '\\*(lq'"' ``\\$1''\\-``\\$2''\\$3
+.\"" fix emacs highlighting
+.el \\*(lq\\$1\\*(rq\\-\\*(lq\\$2\\*(rq\\$3
+..
+.\"	# MT - "empty" string
+.de MT
+.QW ""
+..
 .BS
 .SH NAME
 kinetcl_install_guide \- KineTcl - The Installer's Guide
 .SH SYNOPSIS
-package require \fBTcl  8.5\fR
+package require \fBTcl  8\&.5\fR
 .sp
-package require \fBkinetcl  ?0.1?\fR
+package require \fBkinetcl  ?0\&.1?\fR
 .sp
 .BE
 .SH DESCRIPTION
 .PP
 Welcome to KineTcl, a binding of the OpenNI framework providing
-Tcl with access to MS Kinect (tm), and related sensor systems.
+Tcl with access to MS Kinect (tm), and related sensor systems\&.
 .PP
 The audience of this document is anyone wishing to build the
-packages, for either themselves, or others.
+packages, for either themselves, or others\&.
 .PP
 For a developer intending to extend or modify the packages we
 additionally provide
 .IP [1]
-\fIKineTcl - License\fR.
+\fIKineTcl - License\fR\&.
 .IP [2]
-\fIKineTcl - The Developer's Guide\fR.
+\fIKineTcl - The Developer's Guide\fR\&.
 .PP
 .PP
 Please read \fIKineTcl - How To Get The Sources\fR first, if that was
-not done already. Here we assume that the sources are already
-available in a directory of your choice.
+not done already\&. Here we assume that the sources are already
+available in a directory of your choice\&.
 .PP
 .SH REQUISITES
-Before KineTcl can be build and used a number of requisites must be installed. These are:
+Before KineTcl can be build and used a number of requisites must be installed\&. These are:
 .IP [1]
-The scripting language Tcl.
-For details see \fBTcl\fR.
+The scripting language Tcl\&.
+For details see \fBTcl\fR\&.
 .IP [2]
-The \fBcritcl\fR package (C embedding) for \fBTcl\fR.
-For details see \fBCriTcl\fR.
+The \fBcritcl\fR package (C embedding) for \fBTcl\fR\&.
+For details see \fBCriTcl\fR\&.
 .IP [3]
-The \fBcrimp\fR package (image processing) for \fBTcl\fR.
-For details see \fBCrimp\fR.
+The \fBcrimp\fR package (image processing) for \fBTcl\fR\&.
+For details see \fBCrimp\fR\&.
 .IP [4]
-The OpenNI framework.
-For details see \fBOpenNI\fR.
+The OpenNI framework\&.
+For details see \fBOpenNI\fR\&.
 .IP [5]
-The PrimeSense NITE algorithm package for the OpenNI framework.
-For details see \fBNITE\fR.
+The PrimeSense NITE algorithm package for the OpenNI framework\&.
+For details see \fBNITE\fR\&.
 .IP [6]
-An OpenNI sensor library for your Sensor device.
-For details see \fBSensors\fR.
+An OpenNI sensor library for your Sensor device\&.
+For details see \fBSensors\fR\&.
+.IP [7]
+The \fBkettle\fR application (Build tool) for \fBTcl\fR\&.
+For details see \fBKettle\fR\&.
 .PP
 This list assumes that the machine where KineTcl is to be installed is
-essentially clean. Of course, if parts of the dependencies listed
-below are already installed the associated steps can be skipped. It is
+essentially clean\&. Of course, if parts of the dependencies listed
+below are already installed the associated steps can be skipped\&. It is
 still recommended to read their sections though, to validate that the
-dependencies they talk about are indeed installed.
+dependencies they talk about are indeed installed\&.
 .SS TCL
 As we are building a Tcl package that should be pretty much obvious
 that a working Tcl installation is needed, and I will not belabor the
-point.
+point\&.
 .PP
 Out of the many use whatever you are comfortable with, as long
-as it provides Tcl 8.5, or higher, and Tk 8.5 or higher.
+as it provides Tcl 8\&.5, or higher, and Tk 8\&.5 or higher\&.
 .PP
 This may a Tcl installation provided by your operating system
 distribution, from a distribution-independent vendor, or built by
-yurself.
+yurself\&.
 .PP
-Myself, I used \fIActiveState's\fR [http://www.activestate.com]
-ActiveTcl 8.5 distribution during development of the binding, as I am
-most familiar with it.
+Myself, I used \fIActiveState's\fR [http://www\&.activestate\&.com]
+ActiveTcl 8\&.5 distribution during development of the binding, as I am
+most familiar with it\&.
 .PP
-\fI(Disclosure: I, Andreas Kupries, work for ActiveState, maintaining ActiveTcl and TclDevKit for them).\fR
+\fI(Disclosure: I, Andreas Kupries, work for ActiveState, maintaining ActiveTcl and TclDevKit for them)\&.\fR
 .PP
 This distribution can be found at
-\fIhttp://www.activestate.com/activetcl\fR. Retrieve the archive of
-ActiveTcl 8.5 for your platform and install it as directed by
-ActiveState.
+\fIhttp://www\&.activestate\&.com/activetcl\fR\&. Retrieve the archive of
+ActiveTcl 8\&.5 for your platform and install it as directed by
+ActiveState\&.
 .PP
 Assuming that ActiveTcl got installed I usually run the command
 .CS
@@ -327,8 +361,8 @@ Assuming that ActiveTcl got installed I usually run the command
 .CE
 to install all packages ActiveState provides, and the kitchensink, as
 the distribution itself usually contains only the ost important set of
-packages. This ensures that the dependencies for \fBCriTcl\fR,
-\fBCrimp\fR, and KineTcl are all present, and more.
+packages\&. This ensures that the dependencies for \fBCriTcl\fR,
+\fBCrimp\fR, and KineTcl are all present, and more\&.
 .PP
 If that is not your liking you have to read the sections
 for \fBCriTcl\fR, \fBCrimp\fR, and KineTcl to determine the
@@ -341,138 +375,136 @@ exact set of packages required, and install only these using
 .CE
 .PP
 Both \fBteacup\fR commands above assume that ActiveState's
-TEApot repository at \fIhttp://teapot.activestate.com\fR is in the
-list of repositories accessible to \fBteacup\fR. This is automatically
-ensured for the ActiveTcl distribution. Others may have to run
+TEApot repository at \fIhttp://teapot\&.activestate\&.com\fR is in the
+list of repositories accessible to \fBteacup\fR\&. This is automatically
+ensured for the ActiveTcl distribution\&. Others may have to run
 .CS
 
 
-    teacup archive add http://teapot.activestate.com
+    teacup archive add http://teapot\&.activestate\&.com
 
 .CE
-to make this happen.
+to make this happen\&.
 .PP
 For those wishing to build Tcl/Tk on their own, their sources
 can be found at
 .TP
 Tcl
-\fIhttp://core.tcl.tk/tcl/\fR
+\fIhttp://core\&.tcl\&.tk/tcl/\fR
 .TP
 Tk
-\fIhttp://core.tcl.tk/tk/\fR
+\fIhttp://core\&.tcl\&.tk/tk/\fR
 .PP
 .SS CRITCL
 To build both \fBCrimp\fR, and KineTcl the tool \fBcritcl\fR is
-required.
+required\&.
 .PP
 Both Crimp's and KineTcl's build systems accept it either as an
 application found in the PATH, or as a Tcl package available to the
-\fBtclsh\fR used to run their build & installation processes.
+\fBtclsh\fR used to run their build & installation processes\&.
 .PP
 While \fBCrimp\fR just requires version 3 or higher KineTcl
-itself \fImust\fR have version 3.1, which is currently not released
-yet and only found in CriTcl's github repository.
+itself \fImust\fR have version 3\&.1 or higher\&. Either is found in
+CriTcl's github repository\&.
 .PP
 This github repository can be found at
-\fIhttp://andreas-kupries.github.com/critcl\fR.
+\fIhttp://andreas-kupries\&.github\&.com/critcl\fR\&.
 .PP
-The relevant repository branch is \fIdev31\fR.
-Do not try to use the master branch.
+The relevant repository branch is \fImaster\fR\&. Do not try to
+use other branches, these usually contain features, experiments or
+bugfixes in progress, and as such are not stable\&.
 .PP
 Please make sure to use at least commit [fe814d4977], or
-later.
+later\&.
 .PP
 At the above url is also an explanation on how to build and
-install CriTcl, including a list of its dependencies.
+install CriTcl, including a list of its dependencies\&.
 .PP
-Its instructions will not be repeated here. If there are
+Its instructions will not be repeated here\&. If there are
 problems with their directions please file a bug against the critcl
-project, and not KineTcl.
-.PP
-Please note that the starkit and starpack provided at the site
-are \fInot\fR useable, as they provide only critcl v3, not 3.1.
+project, and not KineTcl\&.
 .SS CRIMP
 To build and use KineTcl the image processing package \fBcrimp\fR
-is required.
+is required\&.
 .PP
 This package must be available to the \fBtclsh\fR used to
 run KineTcl's build & installation process, and the \fBtclsh\fR
-used to run scripts requiring KineTcl.
+used to run scripts requiring KineTcl\&.
 .PP
 KineTcl \fImust\fR have access to revision [795374375f]
-of Crimp fossil reository, or later. Earlier revisions do not provide
-all the operations used by KineTcl.
+of Crimp fossil reository, or later\&. Earlier revisions do not provide
+all the operations used by KineTcl\&.
 .PP
 This fossil repository can be found at
-\fIhttp://chiselapp.com/user/andreas_kupries/repository/crimp/home\fR.
+\fIhttp://chiselapp\&.com/user/andreas_kupries/repository/crimp/home\fR\&.
 .PP
-The relevant repository branch is \fItrunk\fR.
+The relevant repository branch is \fItrunk\fR\&.
 .PP
 \fINote:\fR While the ActiveState TEApot repository provides
 all crimp packages for installation, this is not enough for building
-KineTcl, only running it later. The header files required to build
-KineTcl are not provided by the packages in the TEApot. This is why
+KineTcl, only running it later\&. The header files required to build
+KineTcl are not provided by the packages in the TEApot\&. This is why
 Crimp's sources have to be retrieved from its fossil repository and
-build locally.
+build locally\&.
 .PP
 Crimp has a build and installation guide much like this one for
 KineTcl, which can be found at the above site and explains how to
 retrieve its sources and build the package, which dependencies are
-required, etc. The direct link to this guide is
-\fIhttp://chiselapp.com/user/andreas_kupries/repository/crimp/doc/tip/embedded/www/doc/files/crimp_installer.html\fR
+required, etc\&. The direct link to this guide is
+\fIhttp://chiselapp\&.com/user/andreas_kupries/repository/crimp/doc/tip/embedded/www/doc/files/crimp_installer\&.html\fR
 .PP
-Its instructions will not be repeated here. If there are
+Its instructions will not be repeated here\&. If there are
 problems with their directions please file a bug against the crimp
-project, and not KineTcl.
+project, and not KineTcl\&.
 .SS OPENNI
 KineTcl is, despite its name, not a direct binding to the Kinect
-itself. It actually is a binding to the more general OpenNI
-framework. This framework provides a set of generic APIs for sensors,
-processing algorithms, and applications into which anything following
-these APIs can be plugged into.
+itself\&. It actually is a binding to the more general OpenNI framework
+(version 1)\&. This framework provides a set of generic APIs for
+sensors, processing algorithms, and applications into which anything
+following these APIs can be plugged into\&.
 .PP
 PrimeSense, the maker of the 3D sensor found in the Kinect is a
 main member of the OpenNI organization managing the framework and
-provides plugins for its sensor and various analysis algorithms.
+provides plugins for its sensor and various analysis algorithms\&.
 .PP
-The OpenNI binaries must be installed to build and use KineTcl.
+The OpenNI binaries must be installed to build and use KineTcl\&.
 .PP
 These binaries can be found at
-\fIhttp://www.openni.org/Downloads/OpenNIModules.aspx\fR
+\fIhttp://www\&.openni\&.org/Downloads/OpenNIModules\&.aspx\fR
 .PP
 References to the sources of the frameork, should you wish to
 build them by yourself, can be found at
-\fIhttp://www.openni.org/Downloads.aspx\fR. When doing so please
-follow their instructions on building the package.  If there are
+\fIhttp://www\&.openni\&.org/Downloads\&.aspx\fR\&. When doing so please
+follow their instructions on building the package\&.  If there are
 problems with their directions please file a bug against the OpenNI
-project, and not KineTcl.
+project, and not KineTcl\&.
 .PP
 Development was done against the binaries of OpenNI version
-1.5.2.23. After downloading the binaries were installed by unpacking
-the tarball and then running the provided installation script. I.e.:
+1\&.5\&.2\&.23\&. After downloading the binaries were installed by unpacking
+the tarball and then running the provided installation script\&. I\&.e\&.:
 .CS
 
 
-	 bunzip2 < openni-bin-dev-linux-x64-v1.5.2.23.tar.bz2 | tar xf -
-	 cd OpenNI-Bin-Dev-Linux-x64-v1.5.2.23
-	 # !Edit the headers to work around the bug mentioned below.
-	 sudo ./install.sh
+	 bunzip2 < openni-bin-dev-linux-x64-v1\&.5\&.2\&.23\&.tar\&.bz2 | tar xf -
+	 cd OpenNI-Bin-Dev-Linux-x64-v1\&.5\&.2\&.23
+	 # !Edit the headers to work around the bug mentioned below\&.
+	 sudo \&./install\&.sh
 	 # Note the sudo above, this script installs binaries into
-	 # root owned directories.
+	 # root owned directories\&.
 
 .CE
 .PP
-Note that version 1.5.2.23 has a bug in its headers.
+Note that version 1\&.5\&.2\&.23 has a bug in its headers\&.
 To work around this bug the provided header files have to be modified,
-\fIbefore\fR installing them.
+\fIbefore\fR installing them\&.
 .PP
-Open the header file "\fIXnModuleInterface.h\fR" in the editor
+Open the header file "\fIXnModuleInterface\&.h\fR" in the editor
 of your choice and look for the declaration of
 .CS
 
 
      typedef struct XnModuleExportedProductionNodeInterface {
-     	     ...
+     	     \&.\&.\&.
      } XnModuleExportedProductionNodeInterface;
 
 .CE
@@ -481,118 +513,193 @@ Rewrite the end of this declaration to
 
 
      typedef struct XnModuleExportedProductionNodeInterface {
-     	     ...
+     	     \&.\&.\&.
      } ;
 
 .CE
 This removes a conflict between this declaration and its forward
-declaration in the header file "\fIXnTypes.h\fR".
+declaration in the header file "\fIXnTypes\&.h\fR"\&.
 .SS NITE
 .PP
 OpenNI (the organization) recommends to install the PrimeSense
 NITE binaries, which provide various higher-level analysis
-algorithms.
+algorithms\&.
 .PP
-For KineTcl we not only recommend but demand installation. It
+For KineTcl we not only recommend but demand installation\&. It
 is the algorithms in NITE which provide user detection and skeleton
-tracking, i.e. all the interesting hiogher-level features we want.
+tracking, i\&.e\&. all the interesting higher-level features we want\&.
 .PP
 These binaries can be found at
-\fIhttp://www.openni.org/Downloads/OpenNIModules.aspx\fR
+\fIhttp://www\&.openni\&.org/Downloads/OpenNIModules\&.aspx\fR
 .PP
 In contrast to the OpenNI framework itself NITE seems to be
-closed-source, and no references to a source repository are available.
+closed-source, and no references to a source repository are available\&.
 .PP
-During development NITE version 1.5.2.21 was installed.
+During development NITE version 1\&.5\&.2\&.21 was installed\&.
 After downloading the binaries were installed by unpacking the
-tarball and then running the provided installation script. I.e.:
+tarball and then running the provided installation script\&. I\&.e\&.:
 .CS
 
 
-	 bunzip2 < nite-bin-linux-x64-v1.5.2.21.tar.bz2 | tar xf -
-	 cd NITE-Bin-Dev-Linux-x64-v1.5.2.21
-	 sudo ./install.sh
+	 bunzip2 < nite-bin-linux-x64-v1\&.5\&.2\&.21\&.tar\&.bz2 | tar xf -
+	 cd NITE-Bin-Dev-Linux-x64-v1\&.5\&.2\&.21
+	 sudo \&./install\&.sh
 	 # Note the sudo above, this script installs binaries into
-	 # root owned directories.
+	 # root owned directories\&.
 
 .CE
 .SS SENSORS
-When actually using a Kinect the OpenNI framework alone is not enough.
+When actually using a Kinect the OpenNI framework alone is not enough\&.
 .PP
-We have to install the drivers for our sensor device as well.
+We have to install the drivers for our sensor device as well\&.
 .PP
 Please note that the Sensor driver binaries available at
-\fIhttp://www.openni.org/Downloads.aspx\fR are only generic to devices
+\fIhttp://www\&.openni\&.org/Downloads\&.aspx\fR are only generic to devices
 using PrimeSense's sensor and are \fInot\fR adapted to specific
-devices like MS Kinect. \fIDo not install these\fR, but whatever is
-available for your specific device.
+devices like MS Kinect\&. \fIDo not install these\fR, but whatever is
+available for your specific device\&.
 .PP
 For MS Kinect the sources of the specific sensor driver are
-found at \fIhttps://github.com/avin2/SensorKinect\fR.
+found at \fIhttps://github\&.com/avin2/SensorKinect\fR\&.
 .PP
 This repository also contain prebuilt binaries for various
-platforms, which were used during development of the binding. Should
+platforms, which were used during development of the binding\&. Should
 you wish to build the sensor driver by yourself, please follow their
-instructions on building the package.  If there are problems with
+instructions on building the package\&.  If there are problems with
 their directions please file a bug against the SensorKinect project,
-and not KineTcl.
+and not KineTcl\&.
 .PP
 Development was done against the binaries of SensorKinect
-version 5.1.0.25. After downloading the binaries were installed by
+version 5\&.1\&.0\&.25\&. After downloading the binaries were installed by
 unpacking the tarball and then running the provided installation
-script. I.e.:
+script\&. I\&.e\&.:
 .CS
 
 
-	 bunzip2 < SensorKinect091-Bin-Linux64-v5.1.0.25.tar.bz2 | tar xf -
-	 cd SensorKinect091-Bin-Linux64-v5.1.0.25
-	 sudo ./install.sh
+	 bunzip2 < SensorKinect091-Bin-Linux64-v5\&.1\&.0\&.25\&.tar\&.bz2 | tar xf -
+	 cd SensorKinect091-Bin-Linux64-v5\&.1\&.0\&.25
+	 sudo \&./install\&.sh
 	 # Note the sudo above, this script installs binaries into
-	 # root owned directories.
+	 # root owned directories\&.
 
 .CE
 On a specific note, one of the files installed is
-"\fIInstall/55-primesense-usb.rules\fR"
-which is placed into "\fI/etc/udev/rules.d\fR".
+"\fIInstall/55-primesense-usb\&.rules\fR"
+which is placed into "\fI/etc/udev/rules\&.d\fR"\&.
 .PP
 This file contains the udev rules which enable access to the
-usb sensor devices by non-root users.
-.SH "BUILD & INSTALLATION"
+usb sensor devices by non-root users\&.
+.SS KETTLE
+To build KineTcl the tool \fBkettle\fR is required\&.
+.PP
+KineTcl's build system requires it as an application found
+in the PATH\&.
+.PP
+KineTcl requires version 1 or higher\&.
+.PP
+The fossil repository providing releases of this tool (and its
+associated package) can be found at
+\fIhttp://core\&.tcl\&.tk/akupries/kettle\fR\&.
+.PP
+A mirror of the repository can be found at
+\fIhttps://chiselapp\&.com/user/andreas_kupries/repository/Kettle\fR\&.
+.PP
+Use of either releases or of the head of the main branch is
+recommended\&. Usage of branches is strongly discouraged as these are
+used to work on experimental features and bugfixes of the tool\&. As
+such their stability is not guaranteed\&.
+.PP
+At the above url is also an explanation on how to build and
+install Kettle, including a list of its dependencies\&.
+.PP
+Its instructions will not be repeated here\&. If there are
+problems with their directions please file a bug against the Kettle
+project, and not KineTcl\&.
+.SH "BUILD & INSTALLATION INSTRUCTIONS"
+.SH "BUILD & INSTALLATION (UNIX)"
+This section describes the actions required to install KineTcl on Unix
+systems (Linux, BSD, and related, including OS X)\&.
+If you have to install KineTcl on a Windows machine see section
+\fBBuild & Installation (Windows)\fR instead\&.
+.PP
 To install KineTcl simply run
 .CS
 
 
-    /path/to/tclsh8.5 /path/to/kinetcl/build.tcl install
+    /path/to/tclsh8\&.5 /path/to/kinetcl/build\&.tcl install
 
 .CE
-where "\fI/path/to/tclsh8.5\fR" is the tclsh of your Tcl installation, and
-"\fI/path/to/kinetcl\fR" the location of the KineTcl sources on your system.
+where "\fI/path/to/tclsh8\&.5\fR" is the tclsh of your Tcl installation, and
+"\fI/path/to/kinetcl\fR" the location of the KineTcl sources on your system\&.
 .PP
 This builds all packages and then places them in a directory where the
-\fBtclsh8.5\fR will find them.
+\fBtclsh8\&.5\fR will find them\&.
 .PP
-On Windows you can invoke the file "\fIbuild.tcl\fR" with a
-double-click.  This will pop up a small graphical interface for
-entering the destination and performing the installation. This
-handling of a double-click is restricted to Windows only however.
+The build system provides a small GUI for those not comfortable with
+the command line\&.
+This GUI is accessible by invoking "\fIbuild\&.tcl\fR" without any
+arguments\&.
 .PP
-On unix the same GUI is acessible by invoking "\fIbuild.tcl\fR" without
-any arguments.
-.PP
-To get help about the methods of "\fIbuild.tcl\fR", and their complete
-syntax, invoke  "\fIbuild.tcl\fR" with argument \fBhelp\fR, i.e., like
+To get help about the methods of "\fIbuild\&.tcl\fR", and their complete
+syntax, invoke "\fIbuild\&.tcl\fR" with argument \fBhelp\fR, i\&.e\&.,
+like
 .CS
 
 
-    /path/to/tclsh8.5 /path/to/kinetcl/build.tcl help
+    /path/to/tclsh8\&.5 /path/to/kinetcl/build\&.tcl help
+
+.CE
+.SH "BUILD & INSTALLATION (WINDOWS)"
+This section describes the actions required to install KineTcl on Windows(tm)
+systems\&.
+If you have to install KineTcl on a Unix machine (Linux, BSD, and
+related, including OS X) see section
+\fBBuild & Installation (Unix)\fR instead\&.
+.PP
+To install KineTcl simply run
+.CS
+
+
+    /path/to/tclsh8\&.5 /path/to/kettle -f /path/to/kinetcl/build\&.tcl install
+
+.CE
+where "\fI/path/to/tclsh8\&.5\fR" is the tclsh of your Tcl installation,
+"\fI/path/to/kettle\fR" is the installed \fBkettle\fR application,
+and "\fI/path/to/kinetcl\fR" the location of the KineTcl sources on your
+system\&.
+.PP
+This builds all packages and then places them in a directory where the
+\fBtclsh8\&.5\fR will find them\&.
+.PP
+The above is written without assuming any associations from
+extensions (like "\fI\&.tcl\fR") to executables responsible for the file
+with that extension\&.
+Actually, given that "\fIbuild\&.tcl\fR" is technically a
+"\fIkettle\fR"-script, which in turn is a "\fI\&.tcl\fR"-script I am not
+sure if Windows is able to handle such a chain of interpreters\&.
+The command given above simply spells out the entire chain\&.
+.PP
+The build system provides a small GUI for those not comfortable with
+the command line\&.
+This GUI is accessible by invoking "\fIbuild\&.tcl\fR" without any
+arguments from the command line, or by invoking it through a
+double-click on the "\fIbuild\&.tcl\fR" in a file explorer window\&.
+.PP
+To get help about the methods of "\fIbuild\&.tcl\fR", and their complete
+syntax, invoke "\fIbuild\&.tcl\fR" with argument \fBhelp\fR, i\&.e\&.,
+like
+.CS
+
+
+    /path/to/tclsh8\&.5 /path/to/kettle -f /path/to/kinetcl/build\&.tcl help
 
 .CE
 .SH "BUGS, IDEAS, FEEDBACK"
 This document, and the package it describes, will undoubtedly contain
-bugs and other problems.
-Please report such at the \fIKineTcl Tracker\fR [http://chiselapp.com/user/andreas_kupries/repository/KineTcl].
+bugs and other problems\&.
+Please report such at the \fIKineTcl Tracker\fR [http://chiselapp\&.com/user/andreas_kupries/repository/KineTcl]\&.
 Please also report any ideas for enhancements you may have for either
-package and/or documentation.
+package and/or documentation\&.
 .SH KEYWORDS
 3D vision, Kinect, OpenNI, PrimeSense, computer vision, tracking, volume sensor
 .SH CATEGORY

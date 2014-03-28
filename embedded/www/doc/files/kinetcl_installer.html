@@ -92,7 +92,7 @@
     }
 --></style>
 </head>
-<! -- Generated from file '/home/aku/Projects/KineTcl/dev/embedded/www/doc/files/kinetcl_installer.html' by tcllib/doctools with format 'html'
+<! -- Generated from file 'kinetcl_installer.man' by tcllib/doctools with format 'html'
    -->
 <! -- Copyright &copy; 2012 Andreas Kupries   -- Copyright &copy; 2012 Documentation, Andreas Kupries
    -->
@@ -122,10 +122,13 @@
 <li class="subsection"><a href="#subsection4">OpenNI</a></li>
 <li class="subsection"><a href="#subsection5">NITE</a></li>
 <li class="subsection"><a href="#subsection6">Sensors</a></li>
+<li class="subsection"><a href="#subsection7">Kettle</a></li>
 </ul>
 </li>
-<li class="section"><a href="#section3">Build &amp; Installation</a></li>
-<li class="section"><a href="#section4">Bugs, Ideas, Feedback</a></li>
+<li class="section"><a href="#section3">Build &amp; Installation Instructions</a></li>
+<li class="section"><a href="#section4">Build &amp; Installation (Unix)</a></li>
+<li class="section"><a href="#section5">Build &amp; Installation (Windows)</a></li>
+<li class="section"><a href="#section6">Bugs, Ideas, Feedback</a></li>
 <li class="section"><a href="#keywords">Keywords</a></li>
 <li class="section"><a href="#category">Category</a></li>
 <li class="section"><a href="#copyright">Copyright</a></li>
@@ -169,6 +172,8 @@ available in a directory of your choice.</p>
        For details see <span class="sectref"><a href="#subsection5">NITE</a></span>.</p></li>
 <li><p>An OpenNI sensor library for your Sensor device.
        For details see <span class="sectref"><a href="#subsection6">Sensors</a></span>.</p></li>
+<li><p>The <b class="package">kettle</b> application (Build tool) for <b class="syscmd">Tcl</b>.
+       For details see <span class="sectref"><a href="#subsection7">Kettle</a></span>.</p></li>
 </ol>
 <p>This list assumes that the machine where KineTcl is to be installed is
 essentially clean. Of course, if parts of the dependencies listed
@@ -230,12 +235,13 @@ required.</p>
 application found in the PATH, or as a Tcl package available to the
 <b class="syscmd">tclsh</b> used to run their build &amp; installation processes.</p>
 <p>While <span class="sectref"><a href="#subsection3">Crimp</a></span> just requires version 3 or higher KineTcl
-itself <em>must</em> have version 3.1, which is currently not released
-yet and only found in CriTcl's github repository.</p>
+itself <em>must</em> have version 3.1 or higher. Either is found in
+CriTcl's github repository.</p>
 <p>This github repository can be found at
 <a href="http://andreas-kupries.github.com/critcl">http://andreas-kupries.github.com/critcl</a>.</p>
-<p>The relevant repository branch is <em>dev31</em>.
-Do not try to use the master branch.</p>
+<p>The relevant repository branch is <em>master</em>. Do not try to
+use other branches, these usually contain features, experiments or
+bugfixes in progress, and as such are not stable.</p>
 <p>Please make sure to use at least commit [fe814d4977], or
 later.</p>
 <p>At the above url is also an explanation on how to build and
@@ -243,8 +249,6 @@ install CriTcl, including a list of its dependencies.</p>
 <p>Its instructions will not be repeated here. If there are
 problems with their directions please file a bug against the critcl
 project, and not KineTcl.</p>
-<p>Please note that the starkit and starpack provided at the site
-are <em>not</em> useable, as they provide only critcl v3, not 3.1.</p>
 </div>
 <div id="subsection3" class="subsection"><h3><a name="subsection3">Crimp</a></h3>
 <p>To build and use KineTcl the image processing package <b class="package">crimp</b>
@@ -275,10 +279,10 @@ project, and not KineTcl.</p>
 </div>
 <div id="subsection4" class="subsection"><h3><a name="subsection4">OpenNI</a></h3>
 <p>KineTcl is, despite its name, not a direct binding to the Kinect
-itself. It actually is a binding to the more general OpenNI
-framework. This framework provides a set of generic APIs for sensors,
-processing algorithms, and applications into which anything following
-these APIs can be plugged into.</p>
+itself. It actually is a binding to the more general OpenNI framework
+(version 1). This framework provides a set of generic APIs for
+sensors, processing algorithms, and applications into which anything
+following these APIs can be plugged into.</p>
 <p>PrimeSense, the maker of the 3D sensor found in the Kinect is a
 main member of the OpenNI organization managing the framework and
 provides plugins for its sensor and various analysis algorithms.</p>
@@ -327,7 +331,7 @@ NITE binaries, which provide various higher-level analysis
 algorithms.</p>
 <p>For KineTcl we not only recommend but demand installation. It
 is the algorithms in NITE which provide user detection and skeleton
-tracking, i.e. all the interesting hiogher-level features we want.</p>
+tracking, i.e. all the interesting higher-level features we want.</p>
 <p>These binaries can be found at
 <a href="http://www.openni.org/Downloads/OpenNIModules.aspx">http://www.openni.org/Downloads/OpenNIModules.aspx</a></p>
 <p>In contrast to the OpenNI framework itself NITE seems to be
@@ -376,8 +380,34 @@ which is placed into &quot;<b class="file">/etc/udev/rules.d</b>&quot;.</p>
 <p>This file contains the udev rules which enable access to the
 usb sensor devices by non-root users.</p>
 </div>
+<div id="subsection7" class="subsection"><h3><a name="subsection7">Kettle</a></h3>
+<p>To build KineTcl the tool <b class="syscmd">kettle</b> is required.</p>
+<p>KineTcl's build system requires it as an application found
+in the PATH.</p>
+<p>KineTcl requires version 1 or higher.</p>
+<p>The fossil repository providing releases of this tool (and its
+associated package) can be found at
+<a href="http://core.tcl.tk/akupries/kettle">http://core.tcl.tk/akupries/kettle</a>.</p>
+<p>A mirror of the repository can be found at
+<a href="https://chiselapp.com/user/andreas_kupries/repository/Kettle">https://chiselapp.com/user/andreas_kupries/repository/Kettle</a>.</p>
+<p>Use of either releases or of the head of the main branch is
+recommended. Usage of branches is strongly discouraged as these are
+used to work on experimental features and bugfixes of the tool. As
+such their stability is not guaranteed.</p>
+<p>At the above url is also an explanation on how to build and
+install Kettle, including a list of its dependencies.</p>
+<p>Its instructions will not be repeated here. If there are
+problems with their directions please file a bug against the Kettle
+project, and not KineTcl.</p>
 </div>
-<div id="section3" class="section"><h2><a name="section3">Build &amp; Installation</a></h2>
+</div>
+<div id="section3" class="section"><h2><a name="section3">Build &amp; Installation Instructions</a></h2>
+</div>
+<div id="section4" class="section"><h2><a name="section4">Build &amp; Installation (Unix)</a></h2>
+<p>This section describes the actions required to install KineTcl on Unix
+systems (Linux, BSD, and related, including OS X).
+If you have to install KineTcl on a Windows machine see section
+<span class="sectref"><a href="#section5">Build &amp; Installation (Windows)</a></span> instead.</p>
 <p>To install KineTcl simply run</p>
 <pre class="example">
     /path/to/tclsh8.5 /path/to/kinetcl/build.tcl install
@@ -386,19 +416,53 @@ usb sensor devices by non-root users.</p>
 &quot;<b class="file">/path/to/kinetcl</b>&quot; the location of the KineTcl sources on your system.</p>
 <p>This builds all packages and then places them in a directory where the
 <b class="cmd">tclsh8.5</b> will find them.</p>
-<p>On Windows you can invoke the file &quot;<b class="file">build.tcl</b>&quot; with a
-double-click.  This will pop up a small graphical interface for
-entering the destination and performing the installation. This
-handling of a double-click is restricted to Windows only however.</p>
-<p>On unix the same GUI is acessible by invoking &quot;<b class="file">build.tcl</b>&quot; without
-any arguments.</p>
+<p>The build system provides a small GUI for those not comfortable with
+the command line.
+This GUI is accessible by invoking &quot;<b class="file">build.tcl</b>&quot; without any
+arguments.</p>
 <p>To get help about the methods of &quot;<b class="file">build.tcl</b>&quot;, and their complete
-syntax, invoke  &quot;<b class="file">build.tcl</b>&quot; with argument <b class="method">help</b>, i.e., like</p>
+syntax, invoke &quot;<b class="file">build.tcl</b>&quot; with argument <b class="method">help</b>, i.e.,
+like</p>
 <pre class="example">
     /path/to/tclsh8.5 /path/to/kinetcl/build.tcl help
 </pre>
 </div>
-<div id="section4" class="section"><h2><a name="section4">Bugs, Ideas, Feedback</a></h2>
+<div id="section5" class="section"><h2><a name="section5">Build &amp; Installation (Windows)</a></h2>
+<p>This section describes the actions required to install KineTcl on Windows(tm)
+systems.
+If you have to install KineTcl on a Unix machine (Linux, BSD, and
+related, including OS X) see section
+<span class="sectref"><a href="#section4">Build &amp; Installation (Unix)</a></span> instead.</p>
+<p>To install KineTcl simply run</p>
+<pre class="example">
+    /path/to/tclsh8.5 /path/to/kettle -f /path/to/kinetcl/build.tcl install
+</pre>
+<p>where &quot;<b class="file">/path/to/tclsh8.5</b>&quot; is the tclsh of your Tcl installation,
+&quot;<b class="file">/path/to/kettle</b>&quot; is the installed <b class="syscmd">kettle</b> application,
+and &quot;<b class="file">/path/to/kinetcl</b>&quot; the location of the KineTcl sources on your
+system.</p>
+<p>This builds all packages and then places them in a directory where the
+<b class="cmd">tclsh8.5</b> will find them.</p>
+<p>The above is written without assuming any associations from
+extensions (like &quot;<b class="file">.tcl</b>&quot;) to executables responsible for the file
+with that extension.
+Actually, given that &quot;<b class="file">build.tcl</b>&quot; is technically a
+&quot;<b class="file">kettle</b>&quot;-script, which in turn is a &quot;<b class="file">.tcl</b>&quot;-script I am not
+sure if Windows is able to handle such a chain of interpreters.
+The command given above simply spells out the entire chain.</p>
+<p>The build system provides a small GUI for those not comfortable with
+the command line.
+This GUI is accessible by invoking &quot;<b class="file">build.tcl</b>&quot; without any
+arguments from the command line, or by invoking it through a
+double-click on the &quot;<b class="file">build.tcl</b>&quot; in a file explorer window.</p>
+<p>To get help about the methods of &quot;<b class="file">build.tcl</b>&quot;, and their complete
+syntax, invoke &quot;<b class="file">build.tcl</b>&quot; with argument <b class="method">help</b>, i.e.,
+like</p>
+<pre class="example">
+    /path/to/tclsh8.5 /path/to/kettle -f /path/to/kinetcl/build.tcl help
+</pre>
+</div>
+<div id="section6" class="section"><h2><a name="section6">Bugs, Ideas, Feedback</a></h2>
 <p>This document, and the package it describes, will undoubtedly contain
 bugs and other problems.
 Please report such at the <a href="http://chiselapp.com/user/andreas_kupries/repository/KineTcl">KineTcl Tracker</a>.
